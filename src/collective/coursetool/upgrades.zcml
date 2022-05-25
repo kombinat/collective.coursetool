@@ -1,0 +1,10 @@
+<configure xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+  <genericsetup:upgradeStep
+      title="Reload Profile"
+      description=""
+      profile="collective.coursetool:default"
+      source="*"
+      destination="*"
+      handler=".setuphandlers.reload_profile"
+      />
+</configure>

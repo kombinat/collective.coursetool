@@ -1,0 +1,14 @@
+<object name="portal_types">
+  <object meta_type="Dexterity FTI"
+          name="Certificate"
+  />
+  <object meta_type="Dexterity FTI"
+          name="Course"
+  />
+  <object meta_type="Dexterity FTI"
+          name="Exam"
+  />
+  <object meta_type="Dexterity FTI"
+          name="Member"
+  />
+</object>
