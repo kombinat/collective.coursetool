@@ -33,12 +33,12 @@ jobs:
 
       - name: Install package
         run: |
-          make VENV=off install
+          make install
 
       - name: Run Lint
         run: |
-          make VENV=off lint
+          make lint
 
       - name: Run tests
         run: |
-          make VENV=off test-ignore-warnings
+          make test-ignore-warnings
