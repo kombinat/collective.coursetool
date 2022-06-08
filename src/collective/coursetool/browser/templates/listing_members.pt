@@ -1,0 +1,60 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    metal:use-macro="context/@@main_template/macros/master"
+    lang="en"
+    xml:lang="en"
+    i18n:domain="collective.coursetool">
+
+<body>
+    <metal:main fill-slot="main"
+        tal:define="batch view/batch">
+        <h1 class="mb-3" i18n:translate="">Members</h1>
+
+        <form action="./@@listing_members" class="row g-3 mb-3 align-items-end">
+            <div class="col">
+                <label class="form-label" for="floatingSearchableText" i18n:translate="label_filter_textsearch">Suche</label>
+                <input class="form-control" id="floatingSearchableText" name="SearchableText" type="text" value="" tal:attributes="value request/SearchableText|nothing">
+            </div>
+            <div class="col">
+                <input class="btn btn-primary" type="submit" value="Search" i18n:attributes="value label_filter_search">
+            </div>
+        </form>
+
+        <div class="table-responsive">
+        <table id="members" class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Nr</th>
+                    <th>PID</th>
+                    <th>Name</th>
+                    <th>Adresse</th>
+                    <th>Email</th>
+                    <th>Tel.</th>
+                    <th>Mobil.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr tal:repeat="item batch">
+                    <tal:def define="obj item/getObject">
+                    <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)"></td>
+                    <td tal:content="item/id"></td>
+                    <td tal:content="item/Title"></td>
+                    <td tal:content="obj/address_inline"></td>
+                    <td tal:content="obj/email"></td>
+                    <td tal:content="obj/phone"></td>
+                    <td tal:content="obj/mobile_phone"></td>
+                    </tal:def>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div metal:use-macro="context/batch_macros/macros/navigation" />
+
+    </metal:main>
+</body>
+
+</html>

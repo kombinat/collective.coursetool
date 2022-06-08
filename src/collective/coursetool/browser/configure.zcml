@@ -22,4 +22,30 @@
       type="plone"
       />
 
+  <browser:page
+      name="coursetool_portal"
+      for="plone.dexterity.interfaces.IDexterityContainer"
+      template="templates/portal.pt"
+      permission="zope2.View"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+
+      <browser:page
+      name="listing_members"
+      for="*"
+      template="templates/listing_members.pt"
+      class=".views.MembersListing"
+      permission="zope2.View"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+      <browser:page
+      name="import_members"
+      for="plone.dexterity.interfaces.IDexterityContainer"
+      template="templates/import_members.pt"
+      class=".import.ImportMembers"
+      permission="cmf.ManagePortal"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+    />
 </configure>

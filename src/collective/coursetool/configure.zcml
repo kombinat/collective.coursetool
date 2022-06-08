@@ -11,9 +11,8 @@
   <include package="collective.z3cform.datagridfield" />
   <include package="dexterity.membrane" />
 
-  <include package=".browser" />
-
   <include file="permissions.zcml" />
+  <include file="upgrades.zcml" />
 
   <genericsetup:registerProfile
       name="default"
@@ -38,6 +37,24 @@
       name="collective.coursetool-hiddenprofiles"
       />
 
-  <!-- -*- extra stuff goes here -*- -->
+
+  <utility
+      name="coursetool.vocabulary.memberstates"
+      component=".vocabularies.MemberStatesVocabulary"
+      />
+  <utility
+      name="coursetool.vocabulary.memberqualifications"
+      component=".vocabularies.MemberQualificationsVocabulary"
+      />
+  <utility
+      name="coursetool.vocbulary.partnertypes"
+      component=".vocabularies.PartnerTypeVocabularyFactory"
+      />
+  <utility
+      name="coursetool.vocabulary.members"
+      component=".vocabularies.members_vocabulary"
+      />
+
+  <include package=".browser" />
 
 </configure>

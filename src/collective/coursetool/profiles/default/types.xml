@@ -1,14 +1,14 @@
 <object name="portal_types">
   <object meta_type="Dexterity FTI"
-          name="Certificate"
+          name="coursetool.certificate"
   />
   <object meta_type="Dexterity FTI"
-          name="Course"
+          name="coursetool.course"
   />
   <object meta_type="Dexterity FTI"
-          name="Exam"
+          name="coursetool.exam"
   />
   <object meta_type="Dexterity FTI"
-          name="Member"
+          name="coursetool.member"
   />
 </object>

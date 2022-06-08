@@ -1,0 +1,28 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    metal:use-macro="context/@@main_template/macros/master"
+    lang="en"
+    xml:lang="en"
+    i18n:domain="collective.coursetool">
+
+<body>
+    <metal:main fill-slot="main">
+        <h1 class="mb-3" i18n:translate="">Import Members</h1>
+        <p class="mb-3" i18n:translate="">
+            Import Memberdata via Excel file.
+        </p>
+        <form action="./@@import_members" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" i18n:translate>Memberlist as Excel</label>
+                <input class="form-control" type="file" name="import_data">
+            </div>
+            <button type="submit" class="btn btn-primary" i18n:translate="">Import</button>
+        </form>
+
+    </metal:main>
+</body>
+
+</html>

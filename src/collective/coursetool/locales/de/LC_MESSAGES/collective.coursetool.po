@@ -1,288 +1,290 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: 2022-06-08 08:06+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2022-06-08 10:07+0200\n"
+"Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
+"Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: de\n"
+"Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: collective/coursetool/content/member.py:39
 msgid "Address"
-msgstr ""
+msgstr "Straße, Nr."
 
 #: collective/coursetool/content/member.py:40
 msgid "Address2"
-msgstr ""
+msgstr "Adresszusatz"
 
 #: collective/coursetool/content/member.py:91
 msgid "Birthday"
-msgstr ""
+msgstr "Geburtstag"
 
 #: collective/coursetool/content/member.py:60
 msgid "Booking Nr"
-msgstr ""
+msgstr "Buchungsnr."
 
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
 msgid "Certificate"
-msgstr ""
+msgstr "Zertifikat"
 
 #: collective/coursetool/browser/templates/portal.pt:47
 #: collective/coursetool/setuphandlers.py:71
 msgid "Certificates"
-msgstr ""
+msgstr "Zertifikate"
 
 #: collective/coursetool/content/member.py:50
 msgid "City"
-msgstr ""
+msgstr "Ort"
 
 #: collective/coursetool/vocabularies.py:21
 msgid "Complete - not printed"
-msgstr ""
+msgstr "Komplett, nicht gedruckt"
 
 #: collective/coursetool/vocabularies.py:22
 msgid "Complete - printed"
-msgstr ""
+msgstr "Komplett, gedruckt"
 
 #: collective/coursetool/content/member.py:42
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: collective/coursetool/profiles/default/types/coursetool.course.xml
 msgid "Course"
-msgstr ""
+msgstr "Kurs"
 
 #: collective/coursetool/configure.zcml:24
 msgid "Course Management Tool"
-msgstr ""
+msgstr "Kursverwaltung"
 
 #: collective/coursetool/configure.zcml:33
 msgid "Course Management Tool (uninstall)"
-msgstr ""
+msgstr "Kursverwaltung (deinstallation)"
 
 #: collective/coursetool/browser/templates/portal.pt:13
 msgid "Course Tool"
-msgstr ""
+msgstr "Kursverwaltung"
 
 #: collective/coursetool/browser/templates/portal.pt:34
 #: collective/coursetool/setuphandlers.py:53
 msgid "Courses"
-msgstr ""
+msgstr "Kurse"
 
 #: collective/coursetool/content/member.py:18
 msgid "Customer Nr"
-msgstr ""
+msgstr "Kundennr."
 
 #: collective/coursetool/content/member.py:71
 msgid "EMail"
-msgstr ""
+msgstr "E-Mail"
 
 #: collective/coursetool/profiles/default/types/coursetool.exam.xml
 msgid "Exam"
-msgstr ""
+msgstr "Prüfung"
 
 #: collective/coursetool/browser/templates/portal.pt:60
 #: collective/coursetool/setuphandlers.py:62
 msgid "Exams"
-msgstr ""
+msgstr "Prüfungen"
 
 #: collective/coursetool/content/member.py:86
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: collective/coursetool/content/member.py:36
 msgid "Firstname"
-msgstr ""
+msgstr "Vorname"
 
 #: collective/coursetool/content/member.py:28
 msgid "Graduation"
-msgstr ""
+msgstr "Titel"
 
 #: collective/coursetool/browser/templates/import_members.pt:22
 msgid "Import"
-msgstr ""
+msgstr "Importieren"
 
 #: collective/coursetool/browser/templates/import_members.pt:14
 msgid "Import Memberdata via Excel file."
-msgstr ""
+msgstr "Benutzer per Excel Datei importieren."
 
 #: collective/coursetool/browser/templates/import_members.pt:13
 #: collective/coursetool/browser/templates/portal.pt:73
 msgid "Import Members"
-msgstr ""
+msgstr "Benutzer importieren"
 
 #: collective/coursetool/browser/import.py:130
 msgid "Imported members"
-msgstr ""
+msgstr "Importierte Mitglieder"
 
 #: collective/coursetool/content/member.py:65
 msgid "Inactive"
-msgstr ""
+msgstr "Inaktiv"
 
 #: collective/coursetool/content/course.py:33
 msgid "Instructors"
-msgstr ""
+msgstr "Kursleiter"
 
 #: collective/coursetool/content/member.py:55
 msgid "Internet Address"
-msgstr ""
+msgstr "Homepage"
 
 #: collective/coursetool/content/member.py:33
 msgid "Lastname"
-msgstr ""
+msgstr "Nachname"
 
 #: collective/coursetool/browser/templates/portal.pt:51
 msgid "Manage Certificates"
-msgstr ""
+msgstr "Zertifikate verwalten"
 
 #: collective/coursetool/browser/templates/portal.pt:38
 msgid "Manage Courses"
-msgstr ""
+msgstr "Kurse verwalten"
 
 #: collective/coursetool/configure.zcml:24
 msgid "Manage Courses, Lecturers, Students, Exams and Certificates."
-msgstr ""
+msgstr "Kurse, Trainer, Teilnehmer, Prüfungen und Zertifikate."
 
 #: collective/coursetool/browser/templates/portal.pt:64
 msgid "Manage Exams"
-msgstr ""
+msgstr "Prüfungen verwalten"
 
 #: collective/coursetool/browser/templates/portal.pt:25
 msgid "Manage Members"
-msgstr ""
+msgstr "Benutzer verwalten"
 
 #: collective/coursetool/content/course.py:20
 #: collective/coursetool/profiles/default/types/coursetool.member.xml
 msgid "Member"
-msgstr ""
+msgstr "Mitglied"
 
 #: collective/coursetool/browser/templates/listing_members.pt:14
 #: collective/coursetool/browser/templates/portal.pt:21
 #: collective/coursetool/content/course.py:38
 msgid "Members"
-msgstr ""
+msgstr "Mitglieder"
 
 #: collective/coursetool/content/member.py:149
 msgid "Metadata"
-msgstr ""
+msgstr "weitere Informationen"
 
 #: collective/coursetool/content/member.py:81
 msgid "Mobile Phone"
-msgstr ""
+msgstr "Mobiltelefon"
 
 #: collective/coursetool/vocabularies.py:23
 msgid "Not read"
-msgstr ""
+msgstr "nicht Eingelesen"
 
 #: collective/coursetool/content/member.py:134
 msgid "Partnertype"
-msgstr ""
+msgstr "Partnerart"
 
 #: collective/coursetool/content/member.py:107
 msgid "Payed"
-msgstr ""
+msgstr "bezahlt"
 
 #: collective/coursetool/content/member.py:96
 msgid "Personal Saluation"
-msgstr ""
+msgstr "persönliche Anrede"
 
 #: collective/coursetool/content/member.py:76
 msgid "Phone"
-msgstr ""
+msgstr "Telefon"
 
 #: collective/coursetool/content/member.py:120
 msgid "Qualification"
-msgstr ""
+msgstr "Qualifikation"
 
 #: collective/coursetool/vocabularies.py:20
 msgid "Read - no birthday"
-msgstr ""
+msgstr "Eingelesen, kein Geburtsdatum"
 
 #: collective/coursetool/vocabularies.py:19
 msgid "Read - no qualification"
-msgstr ""
+msgstr "Eingelesen, keine Qualifikation"
 
 #: collective/coursetool/vocabularies.py:18
 msgid "Read - qualified"
-msgstr ""
+msgstr "Eingelesen, qualifiziert"
 
 #: collective/coursetool/content/member.py:23
 msgid "Salutation"
-msgstr ""
+msgstr "Anrede"
 
 #: collective/coursetool/content/member.py:102
 msgid "Salutation Letter"
-msgstr ""
+msgstr "Anrede Brief"
 
 #: collective/coursetool/content/member.py:113
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: collective/coursetool/browser/templates/portal.pt:74
 msgid "Upload File"
-msgstr ""
+msgstr "Datei auswählen und hochladen"
 
 #: collective/coursetool/content/member.py:45
 msgid "ZIP Code"
-msgstr ""
+msgstr "PLZ"
 
 #. Default: "Search"
 #: collective/coursetool/browser/templates/listing_members.pt:22
 msgid "label_filter_search"
-msgstr ""
+msgstr "Suche"
 
 #. Default: "Suche"
 #: collective/coursetool/browser/templates/listing_members.pt:18
 msgid "label_filter_textsearch"
-msgstr ""
+msgstr "Volltextsuche"
 
 #: collective/coursetool/vocabularies.py:38
 msgid "quali_a_label"
-msgstr ""
+msgstr "abgelegte Fischerprüfung"
 
 #: collective/coursetool/vocabularies.py:39
 msgid "quali_b1_label"
-msgstr ""
+msgstr "Unterweisung für Jugendliche (<16 Jahre)"
 
 #: collective/coursetool/vocabularies.py:40
 msgid "quali_b2_label"
-msgstr ""
+msgstr "Unterweisung für Menschen mit Behinderung"
 
 #: collective/coursetool/vocabularies.py:41
 msgid "quali_c_label"
-msgstr ""
+msgstr "abgelegte Fischerprüfung in einem anderen Bundesland oder Staat"
 
 #: collective/coursetool/vocabularies.py:42
 msgid "quali_d_label"
-msgstr ""
+msgstr "vergleichbare Ausbildung"
 
 #: collective/coursetool/vocabularies.py:43
 msgid "quali_e_label"
-msgstr ""
+msgstr "als gleichwertig zur Fischerprüfung anerkannte Ausbildung/Bescheid"
 
 #: collective/coursetool/vocabularies.py:44
 msgid "quali_f1_label"
-msgstr ""
+msgstr "Übergangsregelung § 25 Abs. 1 FiVo"
 
 #: collective/coursetool/vocabularies.py:45
 msgid "quali_f2_label"
-msgstr ""
+msgstr "Übergangsregelung § 31a Abs. 1 FiVo"
 
 #: collective/coursetool/vocabularies.py:46
 msgid "quali_g_label"
-msgstr ""
+msgstr "Befähigung zum Aufseher"
 
 #: collective/coursetool/vocabularies.py:47
 msgid "quali_h_label"
-msgstr ""
+msgstr "Befähigung zum Bewirtschafter"
 
 #: collective/coursetool/vocabularies.py:48
 msgid "quali_i_label"
-msgstr ""
+msgstr "Befähigung zur Ausübung der Elektrofischerei"

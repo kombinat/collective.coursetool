@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         meta_type="Dexterity FTI"
-        name="Course"
+        name="coursetool.certificate"
         i18n:domain="collective.coursetool"
 >
   <property name="title"
             i18n:translate=""
-  >Course</property>
+  >Certificate</property>
   <property name="description"
             i18n:translate=""
   />
 
-  <property name="icon_expr">string:clipboard2-check</property>
-  <property name="factory">Course</property>
-  <property name="add_view_expr">string:${folder_url}/++add++Course</property>
+  <property name="icon_expr">string:award</property>
+  <property name="factory">coursetool.certificate</property>
+  <property name="add_view_expr">string:${folder_url}/++add++coursetool.certificate</property>
   <property name="link_target" />
   <property name="immediate_view">view</property>
   <property name="global_allow">True</property>
@@ -24,11 +24,11 @@
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>
-  <property name="klass">collective.coursetool.content.Course</property>
+  <property name="klass">collective.coursetool.content.Certificate</property>
   <property name="behaviors">
     <element value="plone.app.content.interfaces.INameFromTitle" />
   </property>
-  <property name="schema">collective.coursetool.content.ICourseSchema</property>
+  <property name="schema">collective.coursetool.content.ICertificateSchema</property>
   <property name="model_source" />
   <property name="model_file" />
 
@@ -49,7 +49,7 @@
           category="object"
           condition_expr=""
           description=""
-          icon_expr=""
+          icon_expr="string:toolbar-action/view"
           link_target=""
           title="View"
           url_expr="string:${object_url}"
@@ -61,7 +61,7 @@
           category="object"
           condition_expr=""
           description=""
-          icon_expr=""
+          icon_expr="string:toolbar-action/edit"
           link_target=""
           title="Edit"
           url_expr="string:${object_url}/edit"
