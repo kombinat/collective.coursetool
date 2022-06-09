@@ -37,39 +37,43 @@ def post_install(context):
     _base.setLayout("coursetool_portal")
 
     if "members" not in _base:
-        api.content.create(
+        obj = api.content.create(
             container=_base,
             type="Folder",
             id="members",
             title=_("Members"),
         )
+        obj.setLayout("listing_members")
         transaction.commit()
 
     if "courses" not in _base:
-        api.content.create(
+        obj = api.content.create(
             container=_base,
             type="Folder",
             id="courses",
             title=_("Courses"),
         )
+        obj.setLayout("listing_courses")
         transaction.commit()
 
     if "exams" not in _base:
-        api.content.create(
+        obj = api.content.create(
             container=_base,
             type="Folder",
             id="exams",
             title=_("Exams"),
         )
+        obj.setLayout("listing_exams")
         transaction.commit()
 
     if "certificates" not in _base:
-        api.content.create(
+        obj = api.content.create(
             container=_base,
             type="Folder",
             id="certificates",
             title=_("Certificates"),
         )
+        obj.setLayout("listing_certificates")
         transaction.commit()
 
 

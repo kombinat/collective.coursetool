@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-06-08 08:06+0000\n"
+"POT-Creation-Date: 2022-06-09 06:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: collective/coursetool/browser/views.py:64
 #: collective/coursetool/content/member.py:39
 msgid "Address"
 msgstr ""
@@ -30,12 +31,22 @@ msgstr ""
 msgid "Booking Nr"
 msgstr ""
 
+#: collective/coursetool/browser/views.py:90
+msgid "Cert-ID"
+msgstr ""
+
+#: collective/coursetool/content/certificate.py:18
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
 msgid "Certificate"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:47
-#: collective/coursetool/setuphandlers.py:71
+#: collective/coursetool/content/certificate.py:13
+msgid "Certificate ID"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_certificates.pt:15
+#: collective/coursetool/browser/templates/portal.pt:52
+#: collective/coursetool/setuphandlers.py:74
 msgid "Certificates"
 msgstr ""
 
@@ -55,8 +66,13 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
+#: collective/coursetool/content/course.py:57
 #: collective/coursetool/profiles/default/types/coursetool.course.xml
 msgid "Course"
+msgstr ""
+
+#: collective/coursetool/content/course.py:52
+msgid "Course ID"
 msgstr ""
 
 #: collective/coursetool/configure.zcml:24
@@ -67,12 +83,17 @@ msgstr ""
 msgid "Course Management Tool (uninstall)"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:13
+#: collective/coursetool/browser/templates/portal.pt:18
 msgid "Course Tool"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:34
-#: collective/coursetool/setuphandlers.py:53
+#: collective/coursetool/browser/views.py:74
+msgid "Course-ID"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_courses.pt:15
+#: collective/coursetool/browser/templates/portal.pt:39
+#: collective/coursetool/setuphandlers.py:54
 msgid "Courses"
 msgstr ""
 
@@ -80,16 +101,28 @@ msgstr ""
 msgid "Customer Nr"
 msgstr ""
 
+#: collective/coursetool/browser/views.py:65
 #: collective/coursetool/content/member.py:71
 msgid "EMail"
 msgstr ""
 
+#: collective/coursetool/content/course.py:33
+#: collective/coursetool/content/exam.py:17
 #: collective/coursetool/profiles/default/types/coursetool.exam.xml
 msgid "Exam"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:60
-#: collective/coursetool/setuphandlers.py:62
+#: collective/coursetool/content/exam.py:12
+msgid "Exam ID"
+msgstr ""
+
+#: collective/coursetool/browser/views.py:82
+msgid "Exam-ID"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_exams.pt:15
+#: collective/coursetool/browser/templates/portal.pt:65
+#: collective/coursetool/content/course.py:84
 msgid "Exams"
 msgstr ""
 
@@ -114,11 +147,11 @@ msgid "Import Memberdata via Excel file."
 msgstr ""
 
 #: collective/coursetool/browser/templates/import_members.pt:13
-#: collective/coursetool/browser/templates/portal.pt:73
+#: collective/coursetool/browser/templates/portal.pt:78
 msgid "Import Members"
 msgstr ""
 
-#: collective/coursetool/browser/import.py:130
+#: collective/coursetool/browser/import.py:129
 msgid "Imported members"
 msgstr ""
 
@@ -126,7 +159,7 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: collective/coursetool/content/course.py:33
+#: collective/coursetool/content/course.py:62
 msgid "Instructors"
 msgstr ""
 
@@ -138,11 +171,11 @@ msgstr ""
 msgid "Lastname"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:51
+#: collective/coursetool/browser/templates/portal.pt:56
 msgid "Manage Certificates"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:38
+#: collective/coursetool/browser/templates/portal.pt:43
 msgid "Manage Courses"
 msgstr ""
 
@@ -150,11 +183,11 @@ msgstr ""
 msgid "Manage Courses, Lecturers, Students, Exams and Certificates."
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:64
+#: collective/coursetool/browser/templates/portal.pt:69
 msgid "Manage Exams"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:25
+#: collective/coursetool/browser/templates/portal.pt:30
 msgid "Manage Members"
 msgstr ""
 
@@ -163,22 +196,31 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
-#: collective/coursetool/browser/templates/listing_members.pt:14
-#: collective/coursetool/browser/templates/portal.pt:21
-#: collective/coursetool/content/course.py:38
+#: collective/coursetool/browser/templates/listing_members.pt:15
+#: collective/coursetool/browser/templates/portal.pt:26
+#: collective/coursetool/content/course.py:73
 msgid "Members"
 msgstr ""
 
-#: collective/coursetool/content/member.py:149
+#: collective/coursetool/content/member.py:150
 msgid "Metadata"
 msgstr ""
 
+#: collective/coursetool/browser/views.py:67
 #: collective/coursetool/content/member.py:81
 msgid "Mobile Phone"
 msgstr ""
 
+#: collective/coursetool/browser/views.py:63
+msgid "Name"
+msgstr ""
+
 #: collective/coursetool/vocabularies.py:23
 msgid "Not read"
+msgstr ""
+
+#: collective/coursetool/browser/views.py:62
+msgid "PID"
 msgstr ""
 
 #: collective/coursetool/content/member.py:134
@@ -193,6 +235,7 @@ msgstr ""
 msgid "Personal Saluation"
 msgstr ""
 
+#: collective/coursetool/browser/views.py:66
 #: collective/coursetool/content/member.py:76
 msgid "Phone"
 msgstr ""
@@ -225,7 +268,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: collective/coursetool/browser/templates/portal.pt:74
+#: collective/coursetool/browser/templates/portal.pt:79
 msgid "Upload File"
 msgstr ""
 
@@ -234,12 +277,16 @@ msgid "ZIP Code"
 msgstr ""
 
 #. Default: "Search"
-#: collective/coursetool/browser/templates/listing_members.pt:22
+#: collective/coursetool/browser/templates/listing_certificates.pt:23
+#: collective/coursetool/browser/templates/listing_courses.pt:23
+#: collective/coursetool/browser/templates/listing_exams.pt:23
 msgid "label_filter_search"
 msgstr ""
 
 #. Default: "Suche"
-#: collective/coursetool/browser/templates/listing_members.pt:18
+#: collective/coursetool/browser/templates/listing_certificates.pt:19
+#: collective/coursetool/browser/templates/listing_courses.pt:19
+#: collective/coursetool/browser/templates/listing_exams.pt:19
 msgid "label_filter_textsearch"
 msgstr ""
 

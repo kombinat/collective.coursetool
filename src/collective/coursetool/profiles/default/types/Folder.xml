@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="Dexterity FTI"
+        name="Folder"
+        i18n:domain="plone"
+>
+
+  <property name="view_methods"
+            purge="False"
+  >
+    <element value="listing_members" />
+    <element value="listing_courses" />
+    <element value="listing_exams" />
+    <element value="listing_certificates" />
+  </property>
+
+</object>

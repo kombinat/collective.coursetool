@@ -47,7 +47,7 @@
       component=".vocabularies.MemberQualificationsVocabulary"
       />
   <utility
-      name="coursetool.vocbulary.partnertypes"
+      name="coursetool.vocabulary.partnertypes"
       component=".vocabularies.PartnerTypeVocabularyFactory"
       />
   <utility

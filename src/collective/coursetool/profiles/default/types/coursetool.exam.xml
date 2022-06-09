@@ -26,7 +26,7 @@
   <property name="add_permission">cmf.AddPortalContent</property>
   <property name="klass">collective.coursetool.content.Exam</property>
   <property name="behaviors">
-    <element value="plone.app.content.interfaces.INameFromTitle" />
+    <element value="plone.namefromtitle" />
   </property>
   <property name="schema">collective.coursetool.content.IExamSchema</property>
   <property name="model_source" />

@@ -8,6 +8,11 @@
     xml:lang="en"
     i18n:domain="collective.coursetool">
 
+<metal:top fill-slot="top_slot">
+    <tal:def define="dummy python:request.set('disable_plone.leftcolumn', True);
+                    dummy python:request.set('disable_plone.rightcolumn', True)" />
+</metal:top>
+
 <body>
     <metal:main fill-slot="main">
         <h1 class="text-center" i18n:translate="">Course Tool </h1>

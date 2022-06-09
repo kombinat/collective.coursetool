@@ -1,0 +1,38 @@
+<html>
+    <body>
+        <metal:def define-macro="batch_table"
+            tal:define="batch batch|nothing">
+
+            <tal:block tal:condition="batch">
+            <div class="table-responsive">
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th i18n:translate="">Nr</th>
+                        <th tal:repeat="col columns">
+                            <span tal:replace="col/label" />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr tal:repeat="item batch">
+                        <tal:def define="obj item/getObject">
+                        <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)"></td>
+                        <td tal:repeat="col columns">
+                            ${python: col['factory'](obj)}
+                        </td>
+                        </tal:def>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <div metal:use-macro="context/batch_macros/macros/navigation" />
+            </tal:block>
+
+            <tal:block condition="not:batch">
+                <div class="alert alert-warning" i18n:translate="">No items found.</div>
+            </tal:block>
+        </metal:def>
+    </body>
+</html>

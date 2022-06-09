@@ -18,39 +18,39 @@ log = logging.getLogger(__name__)
 
 SCHEMA_MAPPING = {
     # schema name: excel col idx
-    'id': 1,
-    'salutation': 2,
-    'graduation': 3,
-    'lastname': 4,
-    'firstname': 5,
-    'address': 7,
-    'address2': 6,
-    'cty_code': 8,
-    'zip_code': 9,
-    'city': 10,
-    'website': 11,
-    'booking_nr': 12,
-    'inactive': 13,
-    'email': 14,
-    'phone': 15,
-    'mobile_phone': 16,
-    'fax': 17,
-    'birthday': 18,
-    'salutation_letter': 21,
-    'payed': 25,
-    'payed_date': 26,
-    'salutation_personal': 27,
+    "id": 1,
+    "salutation": 2,
+    "graduation": 3,
+    "lastname": 4,
+    "firstname": 5,
+    "address": 7,
+    "address2": 6,
+    "cty_code": 8,
+    "zip_code": 9,
+    "city": 10,
+    "website": 11,
+    "booking_nr": 12,
+    "inactive": 13,
+    "email": 14,
+    "phone": 15,
+    "mobile_phone": 16,
+    "fax": 17,
+    "birthday": 18,
+    "salutation_letter": 21,
+    "payed": 25,
+    "payed_date": 26,
+    "salutation_personal": 27,
 }
 VOCAB_MAPPING = {
-    'state': 31,
-    'qualification': 32,
-    'partner_type': 33,
+    "state": 31,
+    "qualification": 32,
+    "partner_type": 33,
 }
 METADATA_MAPPING = {
-    'created': 19,
-    'modified': 20,
-    'effective': 23,
-    'expired': 24,
+    "created": 19,
+    "modified": 20,
+    "effective": 23,
+    "expired": 24,
 }
 STATE_MAPPING = {
     "Eingelesen mit Befähigung": "read_qualified",
@@ -63,7 +63,6 @@ STATE_MAPPING = {
 
 
 class ImportMembers(BrowserView):
-
     def __call__(self):
         if not self.request.get("import_data"):
             return self.index()

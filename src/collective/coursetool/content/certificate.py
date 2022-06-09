@@ -1,3 +1,4 @@
+from collective.coursetool import _
 from collective.coursetool.interfaces import ICertificate
 from plone.dexterity.content import Container
 from plone.namedfile import field as namedfile
@@ -7,7 +8,16 @@ from zope.interface import implementer
 
 
 class ICertificateSchema(model.Schema):
-    """schema"""
+
+    id = schema.ASCIILine(
+        title=_("Certificate ID"),
+        required=False,
+    )
+
+    title = schema.TextLine(
+        title=_("Certificate"),
+        required=True,
+    )
 
 
 @implementer(ICertificate)

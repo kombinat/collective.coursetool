@@ -2,6 +2,7 @@ from collective.coursetool import _
 from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
+from plone.app.vocabularies.catalog import StaticCatalogVocabulary
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
 from plone.app.z3cform.widget import SelectFieldWidget
 from plone.autoform import directives
@@ -26,7 +27,36 @@ class IMemberId(model.Schema):
     )
 
 
+class IExamId(model.Schema):
+
+    exam_id = schema.Choice(
+        title=_("Exam"),
+        required=True,
+        vocabulary=StaticCatalogVocabulary(
+            {
+                "portal_type": "coursetool.exam",
+                "sort_on": "sortable_title",
+            },
+            title_template="{brain.Title}",
+        ),
+    )
+    directives.widget(
+        "exam_id",
+        SelectFieldWidget,
+    )
+
+
 class ICourseSchema(model.Schema):
+
+    id = schema.ASCIILine(
+        title=_("Course ID"),
+        required=False,
+    )
+
+    title = schema.TextLine(
+        title=_("Course"),
+        required=True,
+    )
 
     instructors = schema.List(
         title=_("Instructors"),
@@ -46,6 +76,15 @@ class ICourseSchema(model.Schema):
     )
     directives.widget(
         "members",
+        DataGridFieldWidgetFactory,
+        allow_reorder=True,
+    )
+
+    exams = schema.List(
+        title=_("Exams"), value_type=DictRow(title="Exam", schema=IExamId)
+    )
+    directives.widget(
+        "exams",
         DataGridFieldWidgetFactory,
         allow_reorder=True,
     )
