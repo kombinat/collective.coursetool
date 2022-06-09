@@ -19,7 +19,7 @@
                         <tal:def define="obj item/getObject">
                         <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)"></td>
                         <td tal:repeat="col columns">
-                            ${python: col['factory'](obj)}
+                            ${python: col.factory(obj)}
                         </td>
                         </tal:def>
                     </tr>
