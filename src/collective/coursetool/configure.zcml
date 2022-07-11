@@ -9,6 +9,7 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package="collective.z3cform.datagridfield" />
+  <include package="collective.behavior.relatedmedia" />
   <include package="dexterity.membrane" />
 
   <include file="permissions.zcml" />
@@ -49,6 +50,10 @@
   <utility
       name="coursetool.vocabulary.partnertypes"
       component=".vocabularies.PartnerTypeVocabularyFactory"
+      />
+  <utility
+      name="coursetool.vocabulary.coursetypes"
+      component=".vocabularies.CourseTypesVocabulary"
       />
   <utility
       name="coursetool.vocabulary.members"

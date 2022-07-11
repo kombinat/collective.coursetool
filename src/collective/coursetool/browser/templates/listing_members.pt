@@ -21,6 +21,7 @@
             </div>
             <div class="col">
                 <input class="btn btn-primary" type="submit" value="Search" i18n:attributes="value label_filter_search">
+                <a class="btn btn-success" href="${context/absolute_url}/++add++coursetool.member" i18n:translate="">Add Member</a>
             </div>
         </form>
 

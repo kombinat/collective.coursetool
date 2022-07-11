@@ -26,7 +26,16 @@
   <property name="add_permission">cmf.AddPortalContent</property>
   <property name="klass">collective.coursetool.content.Course</property>
   <property name="behaviors">
-    <element value="plone.namefromtitle" />
+    <element value="plone.richtext" />
+
+    <!-- relatedmedia -->
+    <element value="collective.behavior.relatedmedia.behavior.IRelatedMedia"/>
+
+    <!-- bda.plone.shop -->
+    <element value="bda.shop.buyable"/>
+    <element value="bda.shop.notificationtext.item" />
+    <element value="bda.shop.notificationtext.global" />
+    <element value="bda.shop.buyableperiod" />
   </property>
   <property name="schema">collective.coursetool.content.ICourseSchema</property>
   <property name="model_source" />

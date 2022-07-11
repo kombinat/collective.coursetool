@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-06-09 06:37+0000\n"
+"POT-Creation-Date: 2022-07-04 07:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,24 +14,40 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: collective/coursetool/browser/views.py:64
-#: collective/coursetool/content/member.py:39
+#: collective/coursetool/browser/templates/listing_courses.pt:24
+msgid "Add Course"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_members.pt:24
+msgid "Add Member"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_course.pt:45
+msgid "Add course to cart"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_course.pt:48
+msgid "Add exam to cart"
+msgstr ""
+
+#: collective/coursetool/browser/views.py:69
+#: collective/coursetool/content/member.py:22
 msgid "Address"
 msgstr ""
 
-#: collective/coursetool/content/member.py:40
+#: collective/coursetool/content/member.py:23
 msgid "Address2"
 msgstr ""
 
-#: collective/coursetool/content/member.py:91
+#: collective/coursetool/content/member.py:34
 msgid "Birthday"
 msgstr ""
 
-#: collective/coursetool/content/member.py:60
+#: collective/coursetool/content/member.py:28
 msgid "Booking Nr"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:90
+#: collective/coursetool/browser/views.py:95
 msgid "Cert-ID"
 msgstr ""
 
@@ -46,11 +62,11 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/listing_certificates.pt:15
 #: collective/coursetool/browser/templates/portal.pt:52
-#: collective/coursetool/setuphandlers.py:74
+#: collective/coursetool/setuphandlers.py:92
 msgid "Certificates"
 msgstr ""
 
-#: collective/coursetool/content/member.py:50
+#: collective/coursetool/content/member.py:26
 msgid "City"
 msgstr ""
 
@@ -62,24 +78,28 @@ msgstr ""
 msgid "Complete - printed"
 msgstr ""
 
-#: collective/coursetool/content/member.py:42
+#: collective/coursetool/content/member.py:24
 msgid "Country"
 msgstr ""
 
-#: collective/coursetool/content/course.py:57
+#: collective/coursetool/content/course.py:58
 #: collective/coursetool/profiles/default/types/coursetool.course.xml
 msgid "Course"
 msgstr ""
 
-#: collective/coursetool/content/course.py:52
+#: collective/coursetool/browser/templates/view_course.pt:35
+msgid "Course Description"
+msgstr ""
+
+#: collective/coursetool/content/course.py:53
 msgid "Course ID"
 msgstr ""
 
-#: collective/coursetool/configure.zcml:24
+#: collective/coursetool/configure.zcml:25
 msgid "Course Management Tool"
 msgstr ""
 
-#: collective/coursetool/configure.zcml:33
+#: collective/coursetool/configure.zcml:34
 msgid "Course Management Tool (uninstall)"
 msgstr ""
 
@@ -87,26 +107,34 @@ msgstr ""
 msgid "Course Tool"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:74
+#: collective/coursetool/content/course.py:87
+msgid "Course duration in hours"
+msgstr ""
+
+#: collective/coursetool/browser/views.py:79
 msgid "Course-ID"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_courses.pt:15
 #: collective/coursetool/browser/templates/portal.pt:39
-#: collective/coursetool/setuphandlers.py:54
+#: collective/coursetool/setuphandlers.py:66
 msgid "Courses"
 msgstr ""
 
-#: collective/coursetool/content/member.py:18
+#: collective/coursetool/content/member.py:17
 msgid "Customer Nr"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:65
-#: collective/coursetool/content/member.py:71
+#: collective/coursetool/content/course.py:86
+msgid "Duration"
+msgstr ""
+
+#: collective/coursetool/browser/views.py:70
+#: collective/coursetool/content/member.py:30
 msgid "EMail"
 msgstr ""
 
-#: collective/coursetool/content/course.py:33
+#: collective/coursetool/content/course.py:34
 #: collective/coursetool/content/exam.py:17
 #: collective/coursetool/profiles/default/types/coursetool.exam.xml
 msgid "Exam"
@@ -116,25 +144,25 @@ msgstr ""
 msgid "Exam ID"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:82
+#: collective/coursetool/browser/views.py:87
 msgid "Exam-ID"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_exams.pt:15
 #: collective/coursetool/browser/templates/portal.pt:65
-#: collective/coursetool/content/course.py:84
+#: collective/coursetool/content/course.py:114
 msgid "Exams"
 msgstr ""
 
-#: collective/coursetool/content/member.py:86
+#: collective/coursetool/content/member.py:33
 msgid "Fax"
 msgstr ""
 
-#: collective/coursetool/content/member.py:36
+#: collective/coursetool/content/member.py:21
 msgid "Firstname"
 msgstr ""
 
-#: collective/coursetool/content/member.py:28
+#: collective/coursetool/content/member.py:19
 msgid "Graduation"
 msgstr ""
 
@@ -155,19 +183,19 @@ msgstr ""
 msgid "Imported members"
 msgstr ""
 
-#: collective/coursetool/content/member.py:65
+#: collective/coursetool/content/member.py:29
 msgid "Inactive"
 msgstr ""
 
-#: collective/coursetool/content/course.py:62
+#: collective/coursetool/content/course.py:92
 msgid "Instructors"
 msgstr ""
 
-#: collective/coursetool/content/member.py:55
+#: collective/coursetool/content/member.py:27
 msgid "Internet Address"
 msgstr ""
 
-#: collective/coursetool/content/member.py:33
+#: collective/coursetool/content/member.py:20
 msgid "Lastname"
 msgstr ""
 
@@ -179,7 +207,7 @@ msgstr ""
 msgid "Manage Courses"
 msgstr ""
 
-#: collective/coursetool/configure.zcml:24
+#: collective/coursetool/configure.zcml:25
 msgid "Manage Courses, Lecturers, Students, Exams and Certificates."
 msgstr ""
 
@@ -191,27 +219,27 @@ msgstr ""
 msgid "Manage Members"
 msgstr ""
 
-#: collective/coursetool/content/course.py:20
+#: collective/coursetool/content/course.py:21
 #: collective/coursetool/profiles/default/types/coursetool.member.xml
 msgid "Member"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_members.pt:15
 #: collective/coursetool/browser/templates/portal.pt:26
-#: collective/coursetool/content/course.py:73
+#: collective/coursetool/content/course.py:103
 msgid "Members"
 msgstr ""
 
-#: collective/coursetool/content/member.py:150
+#: collective/coursetool/content/member.py:80
 msgid "Metadata"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:67
-#: collective/coursetool/content/member.py:81
+#: collective/coursetool/browser/views.py:72
+#: collective/coursetool/content/member.py:32
 msgid "Mobile Phone"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:63
+#: collective/coursetool/browser/views.py:68
 msgid "Name"
 msgstr ""
 
@@ -219,28 +247,28 @@ msgstr ""
 msgid "Not read"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:62
+#: collective/coursetool/browser/views.py:67
 msgid "PID"
 msgstr ""
 
-#: collective/coursetool/content/member.py:134
+#: collective/coursetool/content/member.py:64
 msgid "Partnertype"
 msgstr ""
 
-#: collective/coursetool/content/member.py:107
+#: collective/coursetool/content/member.py:39
 msgid "Payed"
 msgstr ""
 
-#: collective/coursetool/content/member.py:96
+#: collective/coursetool/content/member.py:36
 msgid "Personal Saluation"
 msgstr ""
 
-#: collective/coursetool/browser/views.py:66
-#: collective/coursetool/content/member.py:76
+#: collective/coursetool/browser/views.py:71
+#: collective/coursetool/content/member.py:31
 msgid "Phone"
 msgstr ""
 
-#: collective/coursetool/content/member.py:120
+#: collective/coursetool/content/member.py:49
 msgid "Qualification"
 msgstr ""
 
@@ -256,15 +284,15 @@ msgstr ""
 msgid "Read - qualified"
 msgstr ""
 
-#: collective/coursetool/content/member.py:23
+#: collective/coursetool/content/member.py:18
 msgid "Salutation"
 msgstr ""
 
-#: collective/coursetool/content/member.py:102
+#: collective/coursetool/content/member.py:38
 msgid "Salutation Letter"
 msgstr ""
 
-#: collective/coursetool/content/member.py:113
+#: collective/coursetool/content/member.py:42
 msgid "State"
 msgstr ""
 
@@ -272,8 +300,41 @@ msgstr ""
 msgid "Upload File"
 msgstr ""
 
-#: collective/coursetool/content/member.py:45
+#: collective/coursetool/content/member.py:25
 msgid "ZIP Code"
+msgstr ""
+
+#. Default: "Course: ${title}"
+#: collective/coursetool/browser/templates/view_course.pt:17
+msgid "course_title"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py:63
+msgid "course_type_offline"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py:64
+msgid "course_type_online"
+msgstr ""
+
+#. Default: "End"
+#: collective/coursetool/content/course.py:68
+msgid "label_course_end"
+msgstr ""
+
+#. Default: "Location"
+#: collective/coursetool/content/course.py:73
+msgid "label_course_location"
+msgstr ""
+
+#. Default: "Start"
+#: collective/coursetool/content/course.py:63
+msgid "label_course_start"
+msgstr ""
+
+#. Default: "Type"
+#: collective/coursetool/content/course.py:77
+msgid "label_course_type"
 msgstr ""
 
 #. Default: "Search"

@@ -2,82 +2,85 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.coursetool"
-    >
+    i18n_domain="collective.coursetool">
 
-  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
-  <include
-      package="z3c.jbot"
-      file="meta.zcml"
-      />
-  <browser:jbot
-      directory="overrides"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
+    <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+    <include
+        package="z3c.jbot"
+        file="meta.zcml" />
 
-  <!-- Publish static files -->
-  <plone:static
-      directory="static"
-      name="collective.coursetool"
-      type="plone"
-      />
+    <browser:jbot
+        directory="overrides"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 
-  <browser:page
-      name="coursetool_portal"
-      for="plone.dexterity.interfaces.IDexterityContainer"
-      template="templates/portal.pt"
-      permission="zope2.View"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
+    <!-- Publish static files -->
+    <plone:static
+        directory="static"
+        name="collective.coursetool"
+        type="plone" />
 
-  <browser:page
-      name="coursetool_listing_macros"
-      for="*"
-      template="templates/listing_macros.pt"
-      permission="zope2.View"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
+    <browser:page
+        name="coursetool_portal"
+        for="plone.dexterity.interfaces.IDexterityContainer"
+        template="templates/portal.pt"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 
-  <browser:page
-      name="listing_members"
-      for="*"
-      class=".views.MembersListing"
-      template="templates/listing_members.pt"
-      permission="zope2.View"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
-  <browser:page
-      name="listing_courses"
-      for="*"
-      class=".views.CoursesListing"
-      template="templates/listing_courses.pt"
-      permission="zope2.View"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
-  <browser:page
-      name="listing_exams"
-      for="*"
-      class=".views.ExamsListing"
-      template="templates/listing_exams.pt"
-      permission="zope2.View"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
-  <browser:page
-      name="listing_certificates"
-      for="*"
-      class=".views.CertificatesListing"
-      template="templates/listing_certificates.pt"
-      permission="zope2.View"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
+    <browser:page
+        name="coursetool_listing_macros"
+        for="*"
+        template="templates/listing_macros.pt"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <browser:page
+        name="listing_members"
+        for="*"
+        class=".views.MembersListing"
+        template="templates/listing_members.pt"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <browser:page
+        name="listing_courses"
+        for="*"
+        class=".views.CoursesListing"
+        template="templates/listing_courses.pt"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <browser:page
+        name="listing_exams"
+        for="*"
+        class=".views.ExamsListing"
+        template="templates/listing_exams.pt"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <browser:page
+        name="listing_certificates"
+        for="*"
+        class=".views.CertificatesListing"
+        template="templates/listing_certificates.pt"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 
 
-  <browser:page
-      name="import_members"
-      for="plone.dexterity.interfaces.IDexterityContainer"
-      class=".import.ImportMembers"
-      template="templates/import_members.pt"
-      permission="cmf.ManagePortal"
-      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-      />
+    <browser:page
+        name="import_members"
+        for="plone.dexterity.interfaces.IDexterityContainer"
+        class=".import.ImportMembers"
+        template="templates/import_members.pt"
+        permission="cmf.ManagePortal"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <!-- default content views -->
+    <browser:page
+        name="view"
+        for="collective.coursetool.interfaces.ICourse"
+        template="templates/view_course.pt"
+        class=".views.CourseView"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
 </configure>

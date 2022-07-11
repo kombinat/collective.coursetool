@@ -23,7 +23,7 @@ class IMemberSchema(model.Schema):
     address2 = schema.TextLine(title=_("Address2"), required=False)
     cty_code = schema.TextLine(title=_("Country"), required=False)
     zip_code = schema.TextLine(title=_("ZIP Code"), required=False)
-    city = schema.TextLine(itle=_("City"), required=False)
+    city = schema.TextLine(title=_("City"), required=False)
     website = schema.TextLine(title=_("Internet Address"), required=False)
     booking_nr = schema.TextLine(title=_("Booking Nr"), required=False)
     inactive = schema.Bool(title=_("Inactive"), required=False, default=False)
@@ -47,13 +47,14 @@ class IMemberSchema(model.Schema):
 
     qualification = schema.Tuple(
         title=_("Qualification"),
-        value_type=schema.TextLine(),
+        value_type=schema.Choice(
+            vocabulary="coursetool.vocabulary.memberqualifications",
+        ),
         required=False,
     )
     directives.widget(
         "qualification",
         SelectFieldWidget,
-        vocabulary="coursetool.vocabulary.memberqualifications",
         pattern_options={
             "allowNewItems": "false",
         },
@@ -61,13 +62,14 @@ class IMemberSchema(model.Schema):
 
     partner_type = schema.Tuple(
         title=_("Partnertype"),
-        value_type=schema.TextLine(title="PType"),
+        value_type=schema.Choice(
+            vocabulary="coursetool.vocabulary.partnertypes",
+        ),
         required=False,
     )
     directives.widget(
         "partner_type",
         AjaxSelectFieldWidget,
-        vocabulary="coursetool.vocabulary.partnertypes",
         pattern_options={
             "allowNewItems": "true",
         },

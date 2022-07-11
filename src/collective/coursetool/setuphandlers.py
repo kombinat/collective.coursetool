@@ -4,6 +4,7 @@ from collective.coursetool.config import BASE_FOLDER_TITLE
 from plone import api
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFPlone.interfaces import INonInstallable
+from plone.base.interfaces.constrains import ISelectableConstrainTypes
 from zope.interface import implementer
 
 import transaction
@@ -16,6 +17,14 @@ class HiddenProfiles:
         return [
             "collective.coursetool:uninstall",
         ]
+
+
+def prepare_container(obj, tpl, constraints):
+    obj.setLayout(tpl)
+    constr = ISelectableConstrainTypes(obj)
+    constr.setConstrainTypesMode(1)
+    constr.setLocallyAllowedTypes(constraints)
+    constr.setImmediatelyAddableTypes(constraints)
 
 
 def post_install(context):
@@ -34,7 +43,7 @@ def post_install(context):
         transaction.commit()
 
     _base = portal[BASE_FOLDER_ID]
-    _base.setLayout("coursetool_portal")
+    prepare_container(_base, "coursetool_portal", [])
 
     if "members" not in _base:
         obj = api.content.create(
@@ -43,8 +52,11 @@ def post_install(context):
             id="members",
             title=_("Members"),
         )
-        obj.setLayout("listing_members")
         transaction.commit()
+    else:
+        obj = _base["members"]
+
+    prepare_container(obj, "listing_members", ["coursetool.member", ])
 
     if "courses" not in _base:
         obj = api.content.create(
@@ -53,8 +65,11 @@ def post_install(context):
             id="courses",
             title=_("Courses"),
         )
-        obj.setLayout("listing_courses")
         transaction.commit()
+    else:
+        obj = _base["courses"]
+
+    prepare_container(obj, "listing_courses", ["coursetool.course", ])
 
     if "exams" not in _base:
         obj = api.content.create(
@@ -63,8 +78,11 @@ def post_install(context):
             id="exams",
             title=_("Exams"),
         )
-        obj.setLayout("listing_exams")
         transaction.commit()
+    else:
+        obj = _base["exams"]
+
+    prepare_container(obj, "listing_exams", ["coursetool.exam", ])
 
     if "certificates" not in _base:
         obj = api.content.create(
@@ -73,8 +91,11 @@ def post_install(context):
             id="certificates",
             title=_("Certificates"),
         )
-        obj.setLayout("listing_certificates")
         transaction.commit()
+    else:
+        obj = _base["certificates"]
+
+    prepare_container(obj, "listing_certificates", ["coursetool.certificate", ])
 
 
 def uninstall(context):

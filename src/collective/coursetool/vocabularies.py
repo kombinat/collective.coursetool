@@ -56,6 +56,22 @@ def MemberQualificationsVocabulary(context):
     return SimpleVocabulary(terms)
 
 
+@provider(IVocabularyFactory)
+def CourseTypesVocabulary(context):
+    """Obtains available scales from registry"""
+    types = [
+        ("offline", _("course_type_offline")),
+        ("online", _("course_type_online")),
+    ]
+    terms = []
+    request = getRequest()
+
+    for _s, _title in types:
+        terms.append(SimpleTerm(_s, _s, translate(_title, context=request)))
+
+    return SimpleVocabulary(terms)
+
+
 class PartnerTypeVocabulary(KeywordsVocabulary):
     keyword_index = "partner_type"
 

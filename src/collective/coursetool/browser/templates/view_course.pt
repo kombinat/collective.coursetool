@@ -1,0 +1,64 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    metal:use-macro="context/@@main_template/macros/master"
+    lang="en"
+    xml:lang="en"
+    i18n:domain="collective.coursetool">
+
+<body>
+    <metal:main fill-slot="main">
+
+        <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
+
+        <h1 i18n:translate="course_title">
+            Course: <tal:block i18n:name="title" replace="context/Title" />
+        </h1>
+
+        <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" />
+
+        <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
+            <div class="col"
+                 tal:repeat="info_fld python:['id', 'start', 'end', 'location', 'type', 'duration']">
+                <div class="text-bg-light py-1 px-2"
+                     tal:define="wdgt python:view.w.get(info_fld)"
+                     tal:condition="python:getattr(context, info_fld, None) and wdgt">
+                    <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure wdgt/render" />
+                </div>
+            </div>
+            <div class="col"
+                 tal:define="exam_titles context/get_exams_titles|nothing"
+                 tal:condition="exam_titles">
+                <div class="text-bg-light py-1 px-2"
+                     tal:define="wdgt python:view.w.get('exams')">
+                     <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(exam_titles)" />
+                </div>
+            </div>
+        </div>
+
+        <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
+
+        <section id="section-text">
+            <strong i18n:translate="">Course Description</strong>:
+            <div id="parent-fieldname-text"
+                 tal:condition="python:getattr(context, 'text', None)"
+                 tal:content="structure python:context.text.output_relative_to(view.context)">
+              Text
+            </div>
+        </section>
+
+        <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
+
+        <footer class="d-flex justify-content-between">
+            <div>
+                <a href="#" class="btn btn-sm btn-primary" i18n:translate="">Add course to cart</a>
+            </div>
+            <div tal:condition="context/exams">
+                <a href="#" class="btn btn-sm btn-primary" i18n:translate="">Add exam to cart</a>
+            </div>
+        </footer>
+
+    </metal:main>
+</html>

@@ -12,14 +12,22 @@
                         <th tal:repeat="col columns">
                             <span tal:replace="col/label" />
                         </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr tal:repeat="item batch">
-                        <tal:def define="obj item/getObject">
+                        <tal:def define="obj item/getObject;
+                                         obj_url obj/absolute_url">
                         <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)"></td>
                         <td tal:repeat="col columns">
-                            ${python: col.factory(obj)}
+                            <span tal:replace="structure python: col.factory(obj)" />
+                        </td>
+                        <td class="text-end">
+                            <a href="${obj_url}/@@edit"
+                                ><tal:block replace="structure python:icons.tag('pencil')" /></a>
+                            <a href="${obj_url}/delete_confirmation" class="pat-plone-modal" data-pat-plone-moda='{"actionOptions": {"reloadWindowOnClose": true}}'
+                                ><tal:block replace="structure python:icons.tag('trash')" /></a>
                         </td>
                         </tal:def>
                     </tr>
