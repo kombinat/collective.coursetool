@@ -13,6 +13,22 @@
         directory="overrides"
         layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 
+    <!-- toolbar menu -->
+    <include package="plone.app.contentmenu" />
+
+    <browser:menu
+        id="collective_coursetoolmenu_actions"
+        title="Coursetool menu for the toolbar"
+        class=".menu.CoursetoolMenu"
+        />
+
+    <!-- toolbar menu link -->
+    <adapter for="* *"
+           name="collective.coursetoolmenu"
+           factory=".menu.CoursetoolSubMenuItem"
+           provides="plone.app.contentmenu.interfaces.IContentMenuItem" />
+
+
     <!-- Publish static files -->
     <plone:static
         directory="static"
