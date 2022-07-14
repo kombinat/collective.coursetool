@@ -55,7 +55,23 @@ class CoursetoolMenu(BrowserMenu):
         # simple listing of the coursetool base folder contents
         coursetool_base = api.portal.get()[BASE_FOLDER_ID]
         coursetool_listing = coursetool_base.restrictedTraverse("@@contentlisting")
-        return [{
+
+        portal_link = [{
+            "title": coursetool_base.Title(),
+            "description": coursetool_base.Description(),
+            "action": addTokenToUrl(coursetool_base.absolute_url(), request),
+            "selected": False,
+            "icon": None,
+            "extra": {
+                "id": f"coursetool-view-{coursetool_base.id}",
+                "separator": None,
+                "class": "",
+                "modal": "",
+            },
+            "submenu": None,
+        }, ]
+
+        return portal_link + [{
             "title": item.Title(),
             "description": item.Description(),
             "action": addTokenToUrl(item.getURL(), request),
