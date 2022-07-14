@@ -14,7 +14,7 @@
                     columns view/columns">
         <h1 class="mb-3" i18n:translate="">Members</h1>
 
-        <form action="./@@listing_members" class="row g-3 mb-3 align-items-end" tal:condition="batch">
+        <form action="./@@listing_members" class="row g-3 mb-3 align-items-end">
             <div class="col">
                 <label class="form-label" for="floatingSearchableText" i18n:translate="label_filter_textsearch">Suche</label>
                 <input class="form-control" id="floatingSearchableText" name="SearchableText" type="text" value="" tal:attributes="value request/SearchableText|nothing">
