@@ -24,7 +24,7 @@ class ICoursetoolMenu(IBrowserMenu):
 class CoursetoolSubMenuItem(BrowserSubMenuItem):
     title = _(BASE_FOLDER_TITLE)
     short_title = _(BASE_FOLDER_TITLE)
-    icon = "command"
+    icon = "gear-wide-connected"
     submenuId = "collective_coursetoolmenu_actions"
     order = 60
     permission = "cmf.ManagePortal"
