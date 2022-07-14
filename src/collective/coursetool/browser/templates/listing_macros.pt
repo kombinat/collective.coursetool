@@ -23,7 +23,7 @@
                         <td tal:repeat="col columns">
                             <span tal:replace="structure python: col.factory(obj)" />
                         </td>
-                        <td class="text-end">
+                        <td class="text-end text-nowrap">
                             <a href="${obj_url}/@@edit"
                                 ><tal:block replace="structure python:icons.tag('pencil')" /></a>
                             <a href="${obj_url}/delete_confirmation" class="pat-plone-modal" data-pat-plone-moda='{"actionOptions": {"reloadWindowOnClose": true}}'
