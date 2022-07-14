@@ -20,11 +20,14 @@ class HiddenProfiles:
 
 
 def prepare_container(obj, tpl, constraints):
+    obj.exclude_from_nav = True
     obj.setLayout(tpl)
-    constr = ISelectableConstrainTypes(obj)
-    constr.setConstrainTypesMode(1)
-    constr.setLocallyAllowedTypes(constraints)
-    constr.setImmediatelyAddableTypes(constraints)
+
+    if constraints:
+        constr = ISelectableConstrainTypes(obj)
+        constr.setConstrainTypesMode(1)
+        constr.setLocallyAllowedTypes(constraints)
+        constr.setImmediatelyAddableTypes(constraints)
 
 
 def post_install(context):
@@ -96,6 +99,12 @@ def post_install(context):
         obj = _base["certificates"]
 
     prepare_container(obj, "listing_certificates", ["coursetool.certificate", ])
+
+    # reload portlet import step to correctly apply blacklist
+    context.portal_setup.runImportStepFromProfile(
+        "profile-collective.coursetool:default",
+        "portlets",
+    )
 
 
 def uninstall(context):
