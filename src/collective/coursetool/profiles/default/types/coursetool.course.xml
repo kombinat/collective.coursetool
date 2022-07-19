@@ -31,6 +31,9 @@
     <!-- relatedmedia -->
     <element value="collective.behavior.relatedmedia.behavior.IRelatedMedia"/>
 
+    <!-- lead image -->
+    <element value="plone.leadimage" />
+
     <!-- bda.plone.shop -->
     <element value="bda.shop.buyable"/>
     <element value="bda.shop.notificationtext.item" />
