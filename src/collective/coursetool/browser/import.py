@@ -5,7 +5,6 @@ from datetime import datetime
 from openpyxl import load_workbook
 from plone import api
 from plone.restapi.interfaces import IDeserializeFromJson
-from Products.CMFPlone.utils import _createObjectByType
 from zope.component import getMultiAdapter
 from zope.publisher.browser import BrowserView
 
@@ -62,6 +61,10 @@ STATE_MAPPING = {
 }
 
 
+def no_validation(value):
+    return
+
+
 class ImportMembers(BrowserView):
     def __call__(self):
         if not self.request.get("import_data"):
@@ -75,6 +78,16 @@ class ImportMembers(BrowserView):
 
         schema_names = IMemberSchema.names()
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
+
+        # disable constraints for vocabularies during import
+        for fld in VOCAB_MAPPING.keys():
+            schema_fld = IMemberSchema[fld]
+            if schema_fld._type == tuple:
+                schema_fld.value_type._orig_validate = schema_fld.value_type._validate
+                schema_fld.value_type._validate = no_validation
+            else:
+                schema_fld._orig_validate = schema_fld._validate
+                schema_fld._validate = no_validation
 
         # assume the first row columns are titles
         for num, row in enumerate(ws.iter_rows(min_row=2, values_only=True), 1):
@@ -125,6 +138,16 @@ class ImportMembers(BrowserView):
 
             log.info(f"{num} Imported data for {obj}")
             transaction.commit()
+
+        # reset original constraints
+        for fld in VOCAB_MAPPING.keys():
+            schema_fld = IMemberSchema[fld]
+            if schema_fld._type == tuple:
+                schema_fld.value_type._validate = schema_fld.value_type._orig_validate
+                delattr(schema_fld.value_type, "_orig_validate")
+            else:
+                schema_fld._validate = schema_fld._orig_validate
+                delattr(schema_fld, "_orig_validate")
 
         api.portal.show_message(_("Imported members"), request=self.request)
         return self.index()
