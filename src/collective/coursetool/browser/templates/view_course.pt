@@ -29,11 +29,19 @@
                 </div>
             </div>
             <div class="col"
-                 tal:define="exam_titles context/get_exams_titles|nothing"
-                 tal:condition="exam_titles">
+                    tal:define="voc_labels context/get_exams_titles"
+                    tal:condition="voc_labels">
                 <div class="text-bg-light py-1 px-2"
-                     tal:define="wdgt python:view.w.get('exams')">
-                     <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(exam_titles)" />
+                        tal:define="wdgt python:view.w.get('exams')">
+                        <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(voc_labels)" />
+                </div>
+            </div>
+            <div class="col"
+                    tal:define="voc_labels context/get_instructors_titles"
+                    tal:condition="voc_labels">
+                <div class="text-bg-light py-1 px-2"
+                        tal:define="wdgt python:view.w.get('instructors')">
+                        <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(voc_labels)" />
                 </div>
             </div>
         </div>

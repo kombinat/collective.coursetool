@@ -38,7 +38,7 @@ class CoursetoolSubMenuItem(BrowserSubMenuItem):
         return {
             "id": "collective-coursetoolmenu",
             "disabled": False,
-            "li_class": "",
+            "li_class": "border-top border-bottom my-2 py-2",
         }
 
     def available(self):
