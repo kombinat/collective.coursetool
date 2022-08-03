@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-07-21 07:41+0000\n"
+"POT-Creation-Date: 2022-08-01 10:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "Add Course"
 msgstr ""
 
-#: collective/coursetool/browser/templates/listing_members.pt:24
+#: collective/coursetool/browser/templates/listing_members.pt:27
 msgid "Add Member"
 msgstr ""
 
@@ -39,8 +39,12 @@ msgstr ""
 msgid "Address2"
 msgstr ""
 
-#: collective/coursetool/content/course.py:59
+#: collective/coursetool/content/course.py:50
 msgid "Amount of course lessons (each 45 minutes)"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_members.pt:16
+msgid "Back to Coursetool"
 msgstr ""
 
 #: collective/coursetool/content/member.py:34
@@ -106,7 +110,7 @@ msgstr ""
 msgid "Course Management Tool (uninstall)"
 msgstr ""
 
-#: collective/coursetool/content/course.py:123
+#: collective/coursetool/content/course.py:125
 msgid "Course Members"
 msgstr ""
 
@@ -118,11 +122,11 @@ msgstr ""
 msgid "Course Tool"
 msgstr ""
 
-#: collective/coursetool/content/course.py:58
+#: collective/coursetool/content/course.py:49
 msgid "Course lessons"
 msgstr ""
 
-#: collective/coursetool/content/course.py:62
+#: collective/coursetool/content/course.py:53
 msgid "Course units"
 msgstr ""
 
@@ -168,7 +172,7 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/listing_exams.pt:15
 #: collective/coursetool/browser/templates/portal.pt:65
-#: collective/coursetool/content/course.py:144
+#: collective/coursetool/content/course.py:146
 msgid "Exams"
 msgstr ""
 
@@ -205,11 +209,11 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: collective/coursetool/content/course.py:105
+#: collective/coursetool/content/course.py:107
 msgid "Instructor"
 msgstr ""
 
-#: collective/coursetool/content/course.py:102
+#: collective/coursetool/content/course.py:104
 msgid "Instructors"
 msgstr ""
 
@@ -241,20 +245,20 @@ msgstr ""
 msgid "Manage Members"
 msgstr ""
 
-#: collective/coursetool/content/course.py:92
+#: collective/coursetool/content/course.py:94
 msgid "Mandatory attendance"
 msgstr ""
 
-#: collective/coursetool/content/course.py:87
+#: collective/coursetool/content/course.py:89
 msgid "Maximum member count"
 msgstr ""
 
-#: collective/coursetool/content/course.py:126
+#: collective/coursetool/content/course.py:128
 #: collective/coursetool/profiles/default/types/coursetool.member.xml
 msgid "Member"
 msgstr ""
 
-#: collective/coursetool/browser/templates/listing_members.pt:15
+#: collective/coursetool/browser/templates/listing_members.pt:18
 #: collective/coursetool/browser/templates/portal.pt:26
 #: collective/coursetool/setuphandlers.py:56
 msgid "Members"
@@ -277,7 +281,7 @@ msgstr ""
 msgid "Not read"
 msgstr ""
 
-#: collective/coursetool/content/course.py:69
+#: collective/coursetool/content/course.py:60
 msgid "Occurrences"
 msgstr ""
 
@@ -302,7 +306,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: collective/coursetool/content/course.py:97
+#: collective/coursetool/content/course.py:99
 msgid "Practical experience"
 msgstr ""
 
@@ -342,7 +346,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#: collective/coursetool/content/course.py:65
+#: collective/coursetool/content/course.py:56
 msgid "Times"
 msgstr ""
 
@@ -368,12 +372,12 @@ msgid "course_type_online"
 msgstr ""
 
 #. Default: "Location"
-#: collective/coursetool/content/course.py:83
+#: collective/coursetool/content/course.py:75
 msgid "label_course_location"
 msgstr ""
 
 #. Default: "Type"
-#: collective/coursetool/content/course.py:49
+#: collective/coursetool/content/course.py:79
 msgid "label_course_type"
 msgstr ""
 
