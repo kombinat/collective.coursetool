@@ -19,14 +19,14 @@
     <browser:menu
         id="collective_coursetoolmenu_actions"
         title="Coursetool menu for the toolbar"
-        class=".menu.CoursetoolMenu"
-        />
+        class=".menu.CoursetoolMenu" />
 
     <!-- toolbar menu link -->
-    <adapter for="* *"
-           name="collective.coursetoolmenu"
-           factory=".menu.CoursetoolSubMenuItem"
-           provides="plone.app.contentmenu.interfaces.IContentMenuItem" />
+    <adapter
+        for="* *"
+        name="collective.coursetoolmenu"
+        factory=".menu.CoursetoolSubMenuItem"
+        provides="plone.app.contentmenu.interfaces.IContentMenuItem" />
 
 
     <!-- Publish static files -->
@@ -96,6 +96,22 @@
         for="collective.coursetool.interfaces.ICourse"
         template="templates/view_course.pt"
         class=".views.CourseView"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <browser:page
+        name="view"
+        for="collective.coursetool.interfaces.IExam"
+        template="templates/view_exam.pt"
+        class=".views.ExamView"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+        <browser:page
+        name="view"
+        for="collective.coursetool.interfaces.IMember"
+        template="templates/view_member.pt"
+        class=".views.MemberView"
         permission="zope2.View"
         layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 

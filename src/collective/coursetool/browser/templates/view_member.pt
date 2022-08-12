@@ -1,0 +1,82 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    metal:use-macro="context/@@main_template/macros/master"
+    lang="en"
+    xml:lang="en"
+    i18n:domain="collective.coursetool">
+
+<body>
+    <div class="coursetool-wrapper" metal:fill-slot="main">
+
+        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="view/is_admin">
+            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+            <span i18n:translate="">Back to overview</span>
+        </a>
+
+        <div class="card">
+
+            <div class="card-header">
+                <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
+
+                <h1 i18n:translate="member_title">
+                    Member: <tal:block i18n:name="title" replace="context/Title" />
+                </h1>
+
+                <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" />
+            </div>
+
+            <div class="card-body">
+                <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
+
+                <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
+
+                    <tal:block repeat="widget view/widgets/values">
+                        <div class="col mb-3"
+                             tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+                            <label class="fw-bold" tal:content="widget/label" />
+                            <br />
+                            <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
+                            <div tal:content="structure widget/render" />
+                        </div>
+                    </tal:block>
+                </div>
+
+                <fieldset tal:repeat="group view/groups"
+                        tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
+                    <legend tal:content="group/label" />
+                    <div class="col mb-3" tal:repeat="widget group/widgets/values">
+                        <label class="fw-bold" tal:content="widget/label" />
+                        <br />
+                        <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
+                        <div tal:content="structure widget/render" />
+                    </div>
+                </fieldset>
+
+                <section id="section-text"
+                         tal:condition="python:getattr(context.aq_base, 'text', None)">
+                    <label class="fw-bold" i18n:translate="">Course Description</label>:
+                    <div id="parent-fieldname-text"
+                         tal:content="structure python:context.text.output_relative_to(view.context)">
+                      Text
+                    </div>
+                </section>
+            </div>
+
+            <div class="card-footer">
+                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
+                <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
+                   data-pat-plone-modal='modalSizeClass: modal-xl;'>
+                    Edit
+                </a>
+                <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" i18n:translate="">
+                    Delete
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</html>

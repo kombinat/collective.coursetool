@@ -12,6 +12,12 @@
     <metal:main fill-slot="main"
         tal:define="batch view/batch;
                     columns view/columns">
+
+        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}">
+            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+            <span i18n:translate="">Back to course portal</span>
+        </a>
+
         <h1 class="mb-3" i18n:translate="">Certificates</h1>
 
         <form action="./@@listing_certificates" class="row g-3 mb-3 align-items-end">
@@ -21,6 +27,7 @@
             </div>
             <div class="col">
                 <input class="btn btn-primary" type="submit" value="Search" i18n:attributes="value label_filter_search">
+                <a class="btn btn-success" href="${context/absolute_url}/++add++coursetool.certificate" i18n:translate="">Add Certificate</a>
             </div>
         </form>
 

@@ -4,11 +4,11 @@ from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
 from plone.app.uuid.utils import uuidToCatalogBrain
-from plone.app.vocabularies.catalog import StaticCatalogVocabulary
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
+from plone.supermodel.interfaces import FIELDSETS_KEY
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.interfaces import HIDDEN_MODE
 from z3c.relationfield.schema import RelationChoice
@@ -35,25 +35,9 @@ class ICourseOccurrences(model.Schema):
 
 class ICourseSchema(model.Schema):
 
-    id = schema.ASCIILine(
-        title=_("Course ID"),
-        required=True,
-    )
-
     title = schema.TextLine(
         title=_("Course Title"),
         required=True,
-    )
-
-    lessons = schema.Int(
-        title=_("Course lessons"),
-        description=_("Amount of course lessons (each 45 minutes)")
-    )
-    amount = schema.Int(
-        title=_("Course units"),
-    )
-    time = schema.TextLine(
-        title=_("Times"),
     )
 
     occurrences = schema.List(
@@ -69,6 +53,7 @@ class ICourseSchema(model.Schema):
         DataGridFieldWidgetFactory,
         auto_append=False,
         input_table_css_class="table table-sm",
+        display_table_css_class="table table-sm",
     )
 
     location = schema.TextLine(
@@ -116,7 +101,28 @@ class ICourseSchema(model.Schema):
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
             "selectableTypes": "coursetool.member",
-            "mode": "auto",
+            "mode": "search",
+            "favorites": [],
+            "browseable": False,
+        },
+    )
+
+    exams = RelationList(
+        title=_("Exams"),
+        value_type=RelationChoice(
+            title=_("Exam"),
+            vocabulary='plone.app.vocabularies.Catalog',
+        ),
+        required=False,
+    )
+    directives.widget(
+        "exams",
+        RelatedItemsFieldWidget,
+        vocabulary='plone.app.vocabularies.Catalog',
+        pattern_options={
+            "basePath": f"/Plone/{BASE_FOLDER_ID}/exams",
+            "selectableTypes": "coursetool.exam",
+            "mode": "search",
             "favorites": [],
         },
     )
@@ -137,22 +143,9 @@ class ICourseSchema(model.Schema):
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
             "selectableTypes": "coursetool.member",
-            "mode": "auto",
+            "mode": "search",
             "favorites": [],
         },
-    )
-
-    exams = schema.List(
-        title=_("Exams"),
-        value_type=schema.Choice(
-            vocabulary=StaticCatalogVocabulary(
-                {
-                    "portal_type": "coursetool.exam",
-                    "sort_on": "sortable_title",
-                },
-                title_template="{brain.Title}",
-            ),
-        ),
     )
 
     model.fieldset(
@@ -160,6 +153,22 @@ class ICourseSchema(model.Schema):
         label=_("Course Members"),
         fields=["members", ],
     )
+
+
+# # extra magic to move fields from other behaviors
+# buyable_settings = model.Fieldset(
+#     'default',
+#     fields=['item_net'],
+# )
+# buyable_fieldsets = IBuyableBehavior.getTaggedValue(FIELDSETS_KEY)
+# buyable_fieldsets.append(buyable_settings)
+
+# stock_settings = model.Fieldset(
+#     'default',
+#     fields=["item_available"],
+# )
+# stock_fieldsets = IStockBehavior.getTaggedValue(FIELDSETS_KEY)
+# stock_fieldsets.append(stock_settings)
 
 
 @implementer(ICourse)

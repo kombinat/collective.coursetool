@@ -24,9 +24,9 @@
                             <span tal:replace="structure python: col.factory(obj)" />
                         </td>
                         <td class="text-end text-nowrap">
-                            <a href="${obj_url}/@@edit"
-                                ><tal:block replace="structure python:icons.tag('pencil')" /></a>
-                            <a href="${obj_url}/delete_confirmation" class="pat-plone-modal" data-pat-plone-moda='{"actionOptions": {"reloadWindowOnClose": true}}'
+                            <a href="${obj_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
+                                ><tal:block replace="structure python:icons.tag('pencil')"/></a>
+                            <a href="${obj_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger" data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
                                 ><tal:block replace="structure python:icons.tag('trash')" /></a>
                         </td>
                         </tal:def>

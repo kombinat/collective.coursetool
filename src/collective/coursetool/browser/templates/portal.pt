@@ -24,9 +24,6 @@
                     <img tal:replace="structure python:icons.tag('person', tag_class='card-img-top fs-1 mt-3')" />
                     <div class="card-body text-center">
                         <h5 class="card-title" i18n:translate="">Members</h5>
-                        <p class="card-text">
-                            Available Members
-                        </p>
                         <a href="${context/absolute_url}/members/" class="btn btn-primary" i18n:translate="">Manage Members</a>
                     </div>
                 </div>
@@ -37,23 +34,7 @@
                     <img tal:replace="structure python:icons.tag('clipboard2-check', tag_class='card-img-top fs-1 mt-3')" />
                     <div class="card-body text-center">
                         <h5 class="card-title" i18n:translate="">Courses</h5>
-                        <p class="card-text">
-                            Available Courses
-                        </p>
                         <a href="${context/absolute_url}/courses/" class="btn btn-primary" i18n:translate="">Manage Courses</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('award', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Certificates</h5>
-                        <p class="card-text">
-                            Available Certificates
-                        </p>
-                        <a href="${context/absolute_url}/certificates/" class="btn btn-primary" i18n:translate="">Manage Certificates</a>
                     </div>
                 </div>
             </div>
@@ -63,10 +44,17 @@
                     <img tal:replace="structure python:icons.tag('pencil-square', tag_class='card-img-top fs-1 mt-3')" />
                     <div class="card-body text-center">
                         <h5 class="card-title" i18n:translate="">Exams</h5>
-                        <p class="card-text">
-                            Available Exams
-                        </p>
                         <a href="${context/absolute_url}/exams/" class="btn btn-primary" i18n:translate="">Manage Exams</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <img tal:replace="structure python:icons.tag('award', tag_class='card-img-top fs-1 mt-3')" />
+                    <div class="card-body text-center">
+                        <h5 class="card-title" i18n:translate="">Certificates</h5>
+                        <a href="${context/absolute_url}/certificates/" class="btn btn-primary" i18n:translate="">Manage Certificates</a>
                     </div>
                 </div>
             </div>

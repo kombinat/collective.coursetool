@@ -1,0 +1,18 @@
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    metal:use-macro="context/@@main_template/macros/master"
+    lang="en"
+    xml:lang="en"
+    i18n:domain="collective.coursetool">
+
+<body>
+    <div class="coursetool-wrapper card" metal:fill-slot="main">
+        <div class="card-header" metal:define-slot="header"></div>
+        <div class="card-body" metal:define-slot="body"></div>
+        <div class="card-footer" metal:define-slot="footer"></div>
+    </div>
+</body>
+</html>
