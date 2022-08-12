@@ -35,6 +35,11 @@ class ColumnDefinition(object):
 class ListingBase(BrowserView):
     portal_type = " - "
 
+    def __init__(self, *args):
+        super().__init__(*args)
+        if self.request.get("clear"):
+            self.request.set("SearchableText", "")
+
     @property
     def b_size(self):
         b_size = (
@@ -59,13 +64,14 @@ class ListingBase(BrowserView):
         kwargs.setdefault("orphan", 1)
 
         # filtering
-        if self.request.get("SearchableText"):
+        if self.request.get("SearchableText") and self.request.get("search"):
             kwargs["SearchableText"] = munge_search_term(self.request["SearchableText"])
 
         listing = aq_inner(self.context).restrictedTraverse("@@folderListing", None)
         if listing is None:
             return []
 
+        print(kwargs)
         results = listing(**kwargs)
         return results
 
