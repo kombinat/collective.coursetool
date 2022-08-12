@@ -72,6 +72,15 @@
 
             <div class="card-footer">
                 <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
+                <tal:block condition="view/is_admin">
+                    <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
+                       data-pat-plone-modal='modalSizeClass: modal-xl;'>
+                        Edit
+                    </a>
+                    <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" i18n:translate="">
+                        Delete
+                    </a>
+                </tal:block>
             </div>
 
         </div>
