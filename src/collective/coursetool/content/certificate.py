@@ -8,11 +8,6 @@ from zope.interface import implementer
 
 class ICertificateSchema(model.Schema):
 
-    id = schema.ASCIILine(
-        title=_("Certificate ID"),
-        required=False,
-    )
-
     title = schema.TextLine(
         title=_("Certificate"),
         required=True,
