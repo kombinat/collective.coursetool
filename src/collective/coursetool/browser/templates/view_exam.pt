@@ -43,7 +43,7 @@
                 <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
 
                 <section id="section-text"
-                         tal:condition="python:getattr(context, 'text', None)">
+                         tal:condition="python:getattr(context.aq_base, 'text', None)">
                     <strong i18n:translate="">Course Description</strong>:
                     <div id="parent-fieldname-text"
                          tal:content="structure python:context.text.output_relative_to(view.context)">
