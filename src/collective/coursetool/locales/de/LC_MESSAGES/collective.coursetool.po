@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-08-12 07:50+0000\n"
-"PO-Revision-Date: 2022-08-12 09:50+0200\n"
+"POT-Creation-Date: 2022-08-12 08:10+0000\n"
+"PO-Revision-Date: 2022-08-12 10:11+0200\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -276,9 +276,17 @@ msgstr "Mobiltelefon"
 msgid "Name"
 msgstr "Name"
 
+#: collective/coursetool/browser/templates/listing_macros.pt
+msgid "No items found."
+msgstr "Keine Artikel vorhanden."
+
 #: collective/coursetool/vocabularies.py
 msgid "Not read"
 msgstr "nicht Eingelesen"
+
+#: collective/coursetool/browser/templates/listing_macros.pt
+msgid "Nr"
+msgstr "No."
 
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/content/course.py
@@ -396,19 +404,20 @@ msgstr "Ort"
 msgid "label_course_type"
 msgstr "Art der Teilnahme"
 
+#. Default: "Clear"
+#: collective/coursetool/browser/templates/listing_macros.pt
+msgid "label_filter_clear"
+msgstr "Alles zeigen"
+
 #. Default: "Search"
-#: collective/coursetool/browser/templates/listing_certificates.pt
-#: collective/coursetool/browser/templates/listing_courses.pt
-#: collective/coursetool/browser/templates/listing_exams.pt
+#: collective/coursetool/browser/templates/listing_macros.pt
 msgid "label_filter_search"
 msgstr "Suche"
 
 #. Default: "Suche"
-#: collective/coursetool/browser/templates/listing_certificates.pt
-#: collective/coursetool/browser/templates/listing_courses.pt
-#: collective/coursetool/browser/templates/listing_exams.pt
+#: collective/coursetool/browser/templates/listing_macros.pt
 msgid "label_filter_textsearch"
-msgstr "Volltextsuche"
+msgstr "Stichwortsuche"
 
 #. Default: "Member: ${title}"
 #: collective/coursetool/browser/templates/view_member.pt

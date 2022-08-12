@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-08-12 07:50+0000\n"
+"POT-Creation-Date: 2022-08-12 08:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -274,8 +274,16 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: collective/coursetool/browser/templates/listing_macros.pt
+msgid "No items found."
+msgstr ""
+
 #: collective/coursetool/vocabularies.py
 msgid "Not read"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_macros.pt
+msgid "Nr"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_course.pt
@@ -394,17 +402,18 @@ msgstr ""
 msgid "label_course_type"
 msgstr ""
 
+#. Default: "Clear"
+#: collective/coursetool/browser/templates/listing_macros.pt
+msgid "label_filter_clear"
+msgstr ""
+
 #. Default: "Search"
-#: collective/coursetool/browser/templates/listing_certificates.pt
-#: collective/coursetool/browser/templates/listing_courses.pt
-#: collective/coursetool/browser/templates/listing_exams.pt
+#: collective/coursetool/browser/templates/listing_macros.pt
 msgid "label_filter_search"
 msgstr ""
 
 #. Default: "Suche"
-#: collective/coursetool/browser/templates/listing_certificates.pt
-#: collective/coursetool/browser/templates/listing_courses.pt
-#: collective/coursetool/browser/templates/listing_exams.pt
+#: collective/coursetool/browser/templates/listing_macros.pt
 msgid "label_filter_textsearch"
 msgstr ""
 

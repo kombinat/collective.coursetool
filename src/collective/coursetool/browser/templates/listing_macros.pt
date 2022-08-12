@@ -1,4 +1,4 @@
-<html>
+<html i18n:domain="collective.coursetool">
     <body>
         <metal:def define-macro="filter">
             <form action="${python:context.absolute_url()}" class="row g-3 mb-3 align-items-end">
@@ -8,7 +8,7 @@
                 </div>
                 <div class="col">
                     <input class="btn btn-primary" type="submit" name="search" value="Search" i18n:attributes="value label_filter_search">
-                    <input class="btn btn-primary" type="submit" name="clear" value="Clear" tal:condition="request/SearchableText|nothing" i18n:attributes="value label_filter_clear">
+                    <input class="btn btn-primary" type="submit" name="clear" value="Clear" i18n:attributes="value label_filter_clear" tal:condition="request/SearchableText|nothing">
                     <metal:addbutton define-slot="add-button"></metal:addbutton>
                 </div>
             </form>
