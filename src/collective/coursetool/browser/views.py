@@ -128,3 +128,7 @@ class ExamView(ViewBase):
 
 class MemberView(ViewBase):
     """ """
+
+
+class CertificateView(ViewBase):
+    """ """

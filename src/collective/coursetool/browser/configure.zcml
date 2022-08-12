@@ -107,11 +107,19 @@
         permission="zope2.View"
         layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 
-        <browser:page
+    <browser:page
         name="view"
         for="collective.coursetool.interfaces.IMember"
         template="templates/view_member.pt"
         class=".views.MemberView"
+        permission="zope2.View"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+
+    <browser:page
+        name="view"
+        for="collective.coursetool.interfaces.ICertificate"
+        template="templates/view_certificate.pt"
+        class=".views.CertificateView"
         permission="zope2.View"
         layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 

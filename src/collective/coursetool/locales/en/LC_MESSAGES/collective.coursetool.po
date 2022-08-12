@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-08-12 07:10+0000\n"
+"POT-Creation-Date: 2022-08-12 07:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,9 +45,9 @@ msgstr ""
 msgid "Back to course portal"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
-#: collective/coursetool/browser/templates/view_member.pt
 msgid "Back to overview"
 msgstr ""
 
@@ -62,10 +62,6 @@ msgstr ""
 #: collective/coursetool/content/certificate.py
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
 msgid "Certificate"
-msgstr ""
-
-#: collective/coursetool/content/certificate.py
-msgid "Certificate ID"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
@@ -94,9 +90,9 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
-#: collective/coursetool/browser/templates/view_member.pt
 msgid "Course Description"
 msgstr ""
 
@@ -139,9 +135,21 @@ msgstr ""
 msgid "Customer Nr"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_certificate.pt
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Delete"
+msgstr ""
+
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "EMail"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_certificate.pt
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Edit"
 msgstr ""
 
 #: collective/coursetool/content/course.py
@@ -350,6 +358,11 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "ZIP Code"
+msgstr ""
+
+#. Default: "Certificate: ${title}"
+#: collective/coursetool/browser/templates/view_certificate.pt
+msgid "certificate_title"
 msgstr ""
 
 #. Default: "Course: ${title}"

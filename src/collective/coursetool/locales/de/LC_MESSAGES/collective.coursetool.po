@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-08-12 07:10+0000\n"
-"PO-Revision-Date: 2022-08-12 09:10+0200\n"
+"POT-Creation-Date: 2022-08-12 07:50+0000\n"
+"PO-Revision-Date: 2022-08-12 09:50+0200\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -47,9 +47,9 @@ msgstr "Adresszusatz"
 msgid "Back to course portal"
 msgstr "Zurück zur Kursverwaltung"
 
+#: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
-#: collective/coursetool/browser/templates/view_member.pt
 msgid "Back to overview"
 msgstr "Zurück zur Übersicht"
 
@@ -65,10 +65,6 @@ msgstr "Buchungsnr."
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
 msgid "Certificate"
 msgstr "Zertifikat"
-
-#: collective/coursetool/content/certificate.py
-msgid "Certificate ID"
-msgstr "Zertifikat ID"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
 #: collective/coursetool/browser/templates/portal.pt
@@ -96,9 +92,9 @@ msgstr "Land"
 msgid "Course"
 msgstr "Kurs"
 
+#: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
-#: collective/coursetool/browser/templates/view_member.pt
 msgid "Course Description"
 msgstr "Kursbeschreibung"
 
@@ -141,10 +137,22 @@ msgstr "Kursverwaltung Menü"
 msgid "Customer Nr"
 msgstr "Kundennr."
 
+#: collective/coursetool/browser/templates/view_certificate.pt
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Delete"
+msgstr "Löschen"
+
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "EMail"
 msgstr "E-Mail"
+
+#: collective/coursetool/browser/templates/view_certificate.pt
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Edit"
+msgstr "Bearbeiten"
 
 #: collective/coursetool/content/course.py
 msgid "Endtime"
@@ -353,6 +361,11 @@ msgstr "Benutzername"
 #: collective/coursetool/content/member.py
 msgid "ZIP Code"
 msgstr "PLZ"
+
+#. Default: "Certificate: ${title}"
+#: collective/coursetool/browser/templates/view_certificate.pt
+msgid "certificate_title"
+msgstr "Zertifikat: ${title}"
 
 #. Default: "Course: ${title}"
 #: collective/coursetool/browser/templates/view_course.pt
