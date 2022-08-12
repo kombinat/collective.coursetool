@@ -16,53 +16,107 @@
             <span i18n:translate="">Back to overview</span>
         </a>
 
-        <div class="card">
+        <div class="card"
+             tal:define="courses view/courses; exams view/exams; certificates view/certificates;">
 
             <div class="card-header">
-                <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
-
                 <h1 i18n:translate="member_title">
                     Member: <tal:block i18n:name="title" replace="context/Title" />
                 </h1>
 
-                <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" />
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default" aria-current="true" href="#" i18n:translate="">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="metadata-tab" data-bs-toggle="tab" data-bs-target="#tab-metadata" aria-current="true" href="#" i18n:translate="">Metadata</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses" aria-current="true" href="#">
+                            <span i18n:translate="">Courses</span> <span class="badge text-bg-secondary">${python:len(courses)}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="exams-tab" data-bs-toggle="tab" data-bs-target="#tab-exams" aria-current="true" href="#">
+                            <span i18n:translate="">Exams</span> <span class="badge text-bg-secondary">${python:len(exams)}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="certificates-tab" data-bs-toggle="tab" data-bs-target="#tab-certificates" aria-current="true" href="#">
+                            <span i18n:translate="">Certificates</span> <span class="badge text-bg-secondary">${python:len(exams)}</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-            <div class="card-body">
-                <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
+            <div class="card-body tab-content">
+                <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
+                    <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
 
-                <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
+                        <tal:block repeat="widget view/widgets/values">
+                            <div class="col mb-3"
+                                 tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+                                <label class="fw-bold" tal:content="widget/label" />
+                                <br />
+                                <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
+                                <div tal:content="structure widget/render" />
+                            </div>
+                        </tal:block>
+                    </div>
 
-                    <tal:block repeat="widget view/widgets/values">
-                        <div class="col mb-3"
-                             tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+                    <section id="section-text"
+                             tal:condition="python:getattr(context.aq_base, 'text', None)">
+                        <label class="fw-bold" i18n:translate="">Course Description</label>:
+                        <div id="parent-fieldname-text"
+                             tal:content="structure python:context.text.output_relative_to(view.context)">
+                          Text
+                        </div>
+                    </section>
+                </div>
+
+                <div class="tab-pane fade" id="tab-metadata" role="tabpabel" aria-labelledby="metadata-tab">
+                    <div tal:repeat="group view/groups">
+                        <div class="col mb-3" tal:repeat="widget group/widgets/values">
                             <label class="fw-bold" tal:content="widget/label" />
                             <br />
                             <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
                             <div tal:content="structure widget/render" />
                         </div>
-                    </tal:block>
+                    </div>
                 </div>
 
-                <fieldset tal:repeat="group view/groups"
-                        tal:attributes="id python:''.join((group.prefix, 'groups.', group.__name__)).replace('.', '-')">
-                    <legend tal:content="group/label" />
-                    <div class="col mb-3" tal:repeat="widget group/widgets/values">
-                        <label class="fw-bold" tal:content="widget/label" />
-                        <br />
-                        <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
-                        <div tal:content="structure widget/render" />
-                    </div>
-                </fieldset>
+                <div class="tab-pane fade" id="tab-courses" role="tabpabel" aria-labelledby="courses-tab">
+                    <ul class="list-group">
+                        <li class="list-group-item" tal:repeat="course courses">
+                            <a href="${course/absolute_url}" tal:content="course/title">Coursetitle</a>
+                        </li>
+                    </ul>
+                    <span class="text-muted fs-sm" tal:condition="not:courses" i18n:translate="">
+                        No items found.
+                    </span>
+                </div>
 
-                <section id="section-text"
-                         tal:condition="python:getattr(context.aq_base, 'text', None)">
-                    <label class="fw-bold" i18n:translate="">Course Description</label>:
-                    <div id="parent-fieldname-text"
-                         tal:content="structure python:context.text.output_relative_to(view.context)">
-                      Text
-                    </div>
-                </section>
+                <div class="tab-pane fade" id="tab-exams" role="tabpabel" aria-labelledby="exams-tab">
+                    <ul class="list-group">
+                        <li class="list-group-item" tal:repeat="exam exams">
+                            <a href="${exam/absolute_url}" tal:content="exam/title">Examtitle</a>
+                        </li>
+                    </ul>
+                    <span class="text-muted fs-sm" tal:condition="not:exams" i18n:translate="">
+                        No items found.
+                    </span>
+                </div>
+
+                <div class="tab-pane fade" id="tab-certificates" role="tabpabel" aria-labelledby="certificates-tab">
+                    <ul class="list-group">
+                        <li class="list-group-item" tal:repeat="certificate certificates">
+                            <a href="${certificate/absolute_url}" tal:content="certificate/title">Certificatetitle</a>
+                        </li>
+                    </ul>
+                    <span class="text-muted fs-sm" tal:condition="not:certificates" i18n:translate="">
+                        No items found.
+                    </span>
+                </div>
             </div>
 
             <div class="card-footer">

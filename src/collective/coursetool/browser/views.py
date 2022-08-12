@@ -127,14 +127,47 @@ class ViewBase(DefaultView):
 class CourseView(ViewBase):
     """ """
 
+    def members(self):
+        return [
+            r.to_object
+            for r in api.relation.get(source=self.context, relationship="members")
+        ]
+
 
 class ExamView(ViewBase):
     """ """
 
+    def members(self):
+        return [
+            r.to_object
+            for r in api.relation.get(source=self.context, relationship="members")
+        ]
+
 
 class MemberView(ViewBase):
     """ """
+    def backrefs(self, key):
+        return [
+            r.from_object
+            for r in api.relation.get(target=self.context, relationship="members")
+            if r.from_object.portal_type == key
+        ]
+
+    def courses(self):
+        return self.backrefs("coursetool.course")
+
+    def exams(self):
+        return self.backrefs("coursetool.exam")
+
+    def certificates(self):
+        return self.backrefs("coursetool.certificate")
 
 
 class CertificateView(ViewBase):
     """ """
+
+    def members(self):
+        return [
+            r.to_object
+            for r in api.relation.get(source=self.context, relationship="members")
+        ]

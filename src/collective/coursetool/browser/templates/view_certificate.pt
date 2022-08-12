@@ -9,9 +9,10 @@
     i18n:domain="collective.coursetool">
 
 <body>
-    <div class="coursetool-wrapper" metal:fill-slot="main">
+    <div class="coursetool-wrapper" metal:fill-slot="main"
+         tal:define="is_admin view/is_admin; members view/members">
 
-        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="view/is_admin">
+        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
             <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
             <span i18n:translate="">Back to overview</span>
         </a>
@@ -19,31 +20,50 @@
         <div class="card">
 
             <div class="card-header">
-                <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" />
-
                 <h1 i18n:translate="certificate_title">
                     Certificate: <tal:block i18n:name="title" replace="context/Title" />
                 </h1>
 
-                <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" />
+                <ul class="nav nav-tabs card-header-tabs" tal:condition="is_admin">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default" aria-current="true" href="#" i18n:translate="">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="members-tab" data-bs-toggle="tab" data-bs-target="#tab-members" aria-current="true" href="#">
+                            <span i18n:translate="">Members</span> <span class="badge text-bg-secondary">${python:len(members)}</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-            <div class="card-body">
-                <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
+            <div class="card-body tab-content">
+                <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
+                    <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
 
-                <section id="section-text"
-                         tal:condition="python:getattr(context.aq_base, 'text', None)">
-                    <strong i18n:translate="">Course Description</strong>:
-                    <div id="parent-fieldname-text"
-                         tal:content="structure python:context.text.output_relative_to(view.context)">
-                      Text
-                    </div>
-                </section>
+                    <section id="section-text"
+                             tal:condition="python:getattr(context.aq_base, 'text', None)">
+                        <strong i18n:translate="">Course Description</strong>:
+                        <div id="parent-fieldname-text"
+                             tal:content="structure python:context.text.output_relative_to(view.context)">
+                          Text
+                        </div>
+                    </section>
+                </div>
+                <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item" tal:repeat="member members">
+                            <a href="${member/absolute_url}" tal:content="member/title">Coursetitle</a>
+                        </li>
+                    </ol>
+                    <span class="text-muted fs-sm" tal:condition="not:members" i18n:translate="">
+                        No items found.
+                    </span>
+                </div>
             </div>
 
             <div class="card-footer">
-                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
-                <tal:block condition="view/is_admin">
+                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:is_admin" />
+                <tal:block condition="is_admin">
                     <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
                        data-pat-plone-modal='modalSizeClass: modal-xl;'>
                         Edit

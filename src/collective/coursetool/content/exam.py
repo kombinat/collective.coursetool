@@ -49,7 +49,7 @@ class IExamSchema(model.Schema):
 
     model.fieldset(
         "members",
-        label=_("Course Members"),
+        label=_("Exam Members"),
         fields=["members", ],
     )
 

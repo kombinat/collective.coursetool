@@ -3,6 +3,7 @@ from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
+from plone import api
 from plone.app.uuid.utils import uuidToCatalogBrain
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
@@ -175,14 +176,14 @@ class ICourseSchema(model.Schema):
 class Course(Container):
     """object"""
 
-    def get_exams_titles(self):
+    def get_exams(self):
         return [
-            uuidToCatalogBrain(exam).Title
-            for exam in ICourseSchema(self).exams
+            r.to_object
+            for r in api.relation.get(source=self, relationship="exams")
         ]
 
-    def get_instructors_titles(self):
+    def get_instructors(self):
         return [
-            m.to_object.Title()
-            for m in ICourseSchema(self).instructors
+            r.to_object
+            for r in api.relation.get(source=self, relationship="instructors")
         ]
