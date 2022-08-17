@@ -4,19 +4,18 @@ from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
-from plone.app.uuid.utils import uuidToCatalogBrain
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
-from plone.supermodel.interfaces import FIELDSETS_KEY
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
-from z3c.form.interfaces import HIDDEN_MODE
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.interface import implementer
 from zope.interface import Interface
+
+import dateparser
 
 
 class ICourseOccurrences(model.Schema):
@@ -187,3 +186,17 @@ class Course(Container):
             r.to_object
             for r in api.relation.get(source=self, relationship="instructors")
         ]
+
+    # indexer helpers for start/end date
+
+    def start(self):
+        occ = self.occurrences
+        if not occ:
+            return
+        return dateparser.parse(f"{occ[0]['start_date']}T{occ[0]['start_time']}")
+
+    def end(self):
+        occ = self.occurrences
+        if not occ:
+            return
+        return dateparser.parse(f"{occ[-1]['start_date']}T{occ[-1]['end_time']}")
