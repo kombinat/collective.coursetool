@@ -1,12 +1,13 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.config import BASE_FOLDER_TITLE
+from collective.coursetool.interfaces import ICourseToolBaseFolder
 from plone import api
 from plone.app.upgrade.utils import loadMigrationProfile
 from Products.CMFPlone.interfaces import INonInstallable
 from plone.base.interfaces.constrains import ISelectableConstrainTypes
 from zope.interface import implementer
-
+from zope.interface import alsoProvides
 import transaction
 
 
@@ -46,6 +47,7 @@ def post_install(context):
         transaction.commit()
 
     _base = portal[BASE_FOLDER_ID]
+    alsoProvides(_base, ICourseToolBaseFolder)
     prepare_container(_base, "coursetool_portal", [])
 
     if "members" not in _base:
