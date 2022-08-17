@@ -123,4 +123,18 @@
         permission="zope2.View"
         layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
 
+    <!-- user registration override -->
+    <browser:page
+        name="register"
+        for="plone.app.layout.navigation.interfaces.INavigationRoot"
+        class=".registration.Registration"
+        permission="zope.Public"
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />
+        />
+
+    <utility
+        name="coursetool.member.adder"
+        factory=".registration.CourseToolMemberAdder"
+        />
+
 </configure>

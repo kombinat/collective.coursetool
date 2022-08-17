@@ -1,25 +1,36 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IMember
-from plone import api
-from plone.app.z3cform.widget import AjaxSelectFieldWidget
+from dexterity.membrane.behavior.user import MembraneUserProperties
+from dexterity.membrane.content.member import IEmail
+from plone.app.z3cform.widget import AjaxSelectFieldWidget, DateFieldWidget, DateWidget
 from plone.app.z3cform.widget import SelectFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
+from plone.namedfile import field as namedfile
 from plone.supermodel import model
 from zope import schema
+from zope.component import adapter
 from zope.interface import implementer
 
 
-class IMemberSchema(model.Schema):
+class IRegistrationSchema(IEmail):
+    first_name = schema.TextLine(title=_("Firstname"))
+    last_name = schema.TextLine(title=_("Lastname"))
+
+    username = schema.TextLine(
+        title=_("Username"),
+        description=_("Provide a username if Email is not used as login"),
+        required=False,
+    )
+
+
+class IMemberSchema(IRegistrationSchema):
     """schema"""
 
     id = schema.TextLine(title=_("Customer Nr"), required=True)
     salutation = schema.TextLine(title=_("Salutation"), required=False)
     graduation = schema.TextLine(title=_("Graduation"), required=False)
-    last_name = schema.TextLine(title=_("Lastname"))
-    first_name = schema.TextLine(title=_("Firstname"))
-    username = schema.TextLine(title=_("Username"), required=False)
     address = schema.TextLine(title=_("Address"), required=False)
     address2 = schema.TextLine(title=_("Address2"), required=False)
     cty_code = schema.TextLine(title=_("Country"), required=False)
@@ -28,16 +39,24 @@ class IMemberSchema(model.Schema):
     website = schema.TextLine(title=_("Internet Address"), required=False)
     booking_nr = schema.TextLine(title=_("Booking Nr"), required=False)
     inactive = schema.Bool(title=_("Inactive"), required=False, default=False)
-    email = schema.TextLine(title=_("EMail"), required=False)
     phone = schema.TextLine(title=_("Phone"), required=False)
     mobile_phone = schema.TextLine(title=_("Mobile Phone"), required=False)
     fax = schema.TextLine(title=_("Fax"), required=False)
     birthday = schema.Date(title=_("Birthday"), required=False)
+    directives.widget(
+        "birthday", DateFieldWidget,
+        _formater_length="long",
+    )
+
     salutation_personal = schema.Bool(
         title=_("Personal Saluation"), required=False, default=False
     )
     salutation_letter = schema.TextLine(title=_("Salutation Letter"), required=False)
     payed = schema.Bool(title=_("Payed"), required=False, default=False)
+    picture = namedfile.NamedBlobImage(
+        title=_("User Image"),
+        required=False,
+    )
 
     state = schema.Choice(
         title=_("State"),
@@ -85,6 +104,7 @@ class IMemberSchema(model.Schema):
             "state",
             "qualification",
             "partner_type",
+            "username",
         ],
     )
 
@@ -96,8 +116,8 @@ class Member(Container):
     @property
     def title(self):
         title_parts = [
-            self.lastname,
-            self.firstname,
+            self.last_name or self.lastname,
+            self.first_name or self.firstname,
         ]
 
         return " ".join([p for p in title_parts if p])
@@ -105,6 +125,9 @@ class Member(Container):
     @title.setter
     def title(self, value):
         pass
+
+    def get_full_name(self):
+        return self.title
 
     def get_address(self):
         return [
@@ -120,3 +143,13 @@ class Member(Container):
     @property
     def address_inline(self):
         return ", ".join(self.get_address())
+
+
+@adapter(IMember)
+class UserProperties(MembraneUserProperties):
+
+    property_map = dict(
+        email='email',
+        first_name='first_name',
+        last_name='last_name',
+    )

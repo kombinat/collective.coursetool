@@ -1,6 +1,4 @@
 """Module where all interfaces, events and exceptions live."""
-
-from zope import schema
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
@@ -27,3 +25,7 @@ class ICertificate(Interface):
 
 class ICourseToolSettings(Interface):
     """registry settings"""
+
+
+class ICourseToolBaseFolder(Interface):
+    """ marker for courstool base portal """

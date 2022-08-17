@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-08-12 08:10+0000\n"
+"POT-Creation-Date: 2022-08-12 09:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,9 +64,13 @@ msgstr ""
 msgid "Certificate"
 msgstr ""
 
+#: collective/coursetool/content/certificate.py
+msgid "Certificate Members"
+msgstr ""
+
 #: collective/coursetool/browser/templates/listing_certificates.pt
 #: collective/coursetool/browser/templates/portal.pt
-#: collective/coursetool/setuphandlers.py
+#: collective/coursetool/browser/templates/view_member.pt
 msgid "Certificates"
 msgstr ""
 
@@ -104,6 +108,7 @@ msgstr ""
 msgid "Course Management Tool (uninstall)"
 msgstr ""
 
+#: collective/coursetool/content/certificate.py
 #: collective/coursetool/content/course.py
 #: collective/coursetool/content/exam.py
 msgid "Course Members"
@@ -123,7 +128,7 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/listing_courses.pt
 #: collective/coursetool/browser/templates/portal.pt
-#: collective/coursetool/setuphandlers.py
+#: collective/coursetool/browser/templates/view_member.pt
 msgid "Courses"
 msgstr ""
 
@@ -162,13 +167,17 @@ msgstr ""
 msgid "Exam"
 msgstr ""
 
+#: collective/coursetool/content/exam.py
+msgid "Exam Members"
+msgstr ""
+
 #: collective/coursetool/browser/views.py collective/coursetool/content/exam.py
 msgid "Exam date"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_exams.pt
 #: collective/coursetool/browser/templates/portal.pt
-#: collective/coursetool/content/course.py
+#: collective/coursetool/browser/templates/view_member.pt
 msgid "Exams"
 msgstr ""
 
@@ -203,6 +212,12 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Inactive"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_certificate.pt
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Information"
 msgstr ""
 
 #: collective/coursetool/content/course.py
@@ -249,18 +264,19 @@ msgstr ""
 msgid "Maximum member count"
 msgstr ""
 
+#: collective/coursetool/content/certificate.py
 #: collective/coursetool/content/course.py
 #: collective/coursetool/content/exam.py
-#: collective/coursetool/profiles/default/types/coursetool.member.xml
 msgid "Member"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_members.pt
 #: collective/coursetool/browser/templates/portal.pt
-#: collective/coursetool/setuphandlers.py
+#: collective/coursetool/browser/templates/view_certificate.pt
 msgid "Members"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_member.pt
 #: collective/coursetool/content/member.py
 msgid "Metadata"
 msgstr ""
@@ -275,6 +291,8 @@ msgid "Name"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_macros.pt
+#: collective/coursetool/browser/templates/view_certificate.pt
+#: collective/coursetool/browser/templates/view_course.pt
 msgid "No items found."
 msgstr ""
 
@@ -314,6 +332,10 @@ msgstr ""
 
 #: collective/coursetool/content/course.py
 msgid "Practical experience"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Provide a username if Email is not used as login"
 msgstr ""
 
 #: collective/coursetool/content/member.py
