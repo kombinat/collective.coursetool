@@ -2,8 +2,9 @@ from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IMember
 from dexterity.membrane.behavior.user import MembraneUserProperties
-from dexterity.membrane.content.member import IEmail
-from plone.app.z3cform.widget import AjaxSelectFieldWidget, DateFieldWidget, DateWidget
+from plone.app.users.schema import IRegisterSchema
+from plone.app.z3cform.widget import AjaxSelectFieldWidget
+from plone.app.z3cform.widget import DateFieldWidget
 from plone.app.z3cform.widget import SelectFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
@@ -12,20 +13,17 @@ from plone.supermodel import model
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
+from zope.interface import Interface
 
 
-class IRegistrationSchema(IEmail):
+class IRegistration(IRegisterSchema):
     first_name = schema.TextLine(title=_("Firstname"))
     last_name = schema.TextLine(title=_("Lastname"))
-
-    username = schema.TextLine(
-        title=_("Username"),
-        description=_("Provide a username if Email is not used as login"),
-        required=False,
-    )
+    email = schema.TextLine(title=_("Email"))
 
 
-class IMemberSchema(IRegistrationSchema):
+
+class IMemberSchema(model.Schema):
     """schema"""
 
     id = schema.TextLine(title=_("Customer Nr"), required=True)
@@ -33,15 +31,17 @@ class IMemberSchema(IRegistrationSchema):
     graduation = schema.TextLine(title=_("Graduation"), required=False)
     address = schema.TextLine(title=_("Address"), required=False)
     address2 = schema.TextLine(title=_("Address2"), required=False)
-    cty_code = schema.TextLine(title=_("Country"), required=False)
     zip_code = schema.TextLine(title=_("ZIP Code"), required=False)
     city = schema.TextLine(title=_("City"), required=False)
+    cty_code = schema.TextLine(title=_("Country"), required=False)
+
     website = schema.TextLine(title=_("Internet Address"), required=False)
     booking_nr = schema.TextLine(title=_("Booking Nr"), required=False)
     inactive = schema.Bool(title=_("Inactive"), required=False, default=False)
     phone = schema.TextLine(title=_("Phone"), required=False)
     mobile_phone = schema.TextLine(title=_("Mobile Phone"), required=False)
     fax = schema.TextLine(title=_("Fax"), required=False)
+
     birthday = schema.Date(title=_("Birthday"), required=False)
     directives.widget(
         "birthday", DateFieldWidget,
@@ -104,7 +104,6 @@ class IMemberSchema(IRegistrationSchema):
             "state",
             "qualification",
             "partner_type",
-            "username",
         ],
     )
 

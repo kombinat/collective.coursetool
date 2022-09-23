@@ -126,7 +126,7 @@
     <!-- user registration override -->
     <browser:page
         name="register"
-        for="plone.app.layout.navigation.interfaces.INavigationRoot"
+        for="collective.coursetool.interfaces.ICourseToolBaseFolder"
         class=".registration.Registration"
         permission="zope.Public"
         layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer" />

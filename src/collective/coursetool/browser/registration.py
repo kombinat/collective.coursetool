@@ -1,26 +1,25 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
-from collective.coursetool.content.member import IRegistrationSchema
+from collective.coursetool.content.member import IRegistration
 from dexterity.membrane.behavior.settings import IDexterityMembraneSettings
 from plone import api
 from plone.app.users.browser.register import RegistrationForm
-from plone.app.users.schema import IRegisterSchema
+from plone.app.users.utils import uuid_userid_generator
+from plone.autoform import directives
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces.utilities import IUserAdder
 from Products.membrane.utils import getCurrentUserAdder
 from Products.statusmessages.interfaces import IStatusMessage
-from zope.globalrequest import getRequest
+from ZODB.POSException import ConflictError
+from zope.component import getMultiAdapter
 from zope.interface import implementer
 
 import logging
-
-
-class IRegistration(IRegistrationSchema, IRegisterSchema):
-    """ combination of coursetool and plone schema """
-
+import transaction
 
 
 class Registration(RegistrationForm):
+
     schema = IRegistration
 
     def _get_security_settings(self):
@@ -39,31 +38,107 @@ class Registration(RegistrationForm):
 
         return RegistrationSettingsProxy()
 
-    def applyProperties(self, userid, data):
-        # do not set any properties for membrane user
-        pass
+    def handle_join_success(self, data):
+        # portal should be acquisition wrapped, this is needed for the schema
+        # adapter below
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        registration = getToolByName(self.context, 'portal_registration')
+
+        # user_id and login_name should be in the data, but let's be safe.
+        user_id = data.get('user_id', data.get('username'))
+        login_name = data.get('login_name', data.get('username'))
+
+        # Set the username for good measure, as some code may expect
+        # it to exist and contain the user id.
+        data['username'] = user_id
+
+        # The login name may already be in the form, but not
+        # necessarily, for example when using email as login.  This is
+        # at least needed for logging in immediately when password
+        # reset is bypassed.  We need the login name here, not the
+        # user id.
+        self.request.form['form.username'] = login_name
+
+        password = data.get('password') or registration.generatePassword()
+
+        try:
+            adder = getCurrentUserAdder(self)
+            adder.addUser(login_name, password, **data)
+        except (AttributeError, ValueError) as err:
+            logging.exception(err)
+            IStatusMessage(self.request).addStatusMessage(err, type="error")
+            self._finishedRegister = False
+            return
+
+        settings = self._get_security_settings()
+        self._finishedRegister = True
+        if data.get('mail_me') or (not settings.enable_user_pwd_choice and
+                                   not data.get('password')):
+            # We want to validate the email address (users cannot
+            # select their own passwords on the register form) or the
+            # admin has explicitly requested to send an email on the
+            # 'add new user' form.
+            try:
+                # When all goes well, this call actually returns the
+                # rendered mail_password_response template.  As a side
+                # effect, this removes any status messages added to
+                # the request so far, as they are already shown in
+                # this template.
+                response = registration.registeredNotify(user_id)
+                return response
+            except ConflictError:
+                # Let Zope handle this exception.
+                raise
+            except Exception as err:
+                logging.exception(err)
+                ctrlOverview = getMultiAdapter((portal, self.request),
+                                               name='overview-controlpanel')
+                mail_settings_correct = not ctrlOverview.mailhost_warning()
+                if mail_settings_correct:
+                    # The email settings are correct, so the most
+                    # likely cause of an error is a wrong email
+                    # address.  We remove the account:
+                    # Remove the account:
+                    self.context.acl_users.userFolderDelUsers(
+                        [user_id], REQUEST=self.request)
+                    self._finishedRegister = False
+                    IStatusMessage(self.request).addStatusMessage(
+                        _(u'status_fatal_password_mail',
+                          default=u"Failed to create your account: we were "
+                          "unable to send instructions for setting a password "
+                          "to your email address: ${address}",
+                          mapping={u'address': data.get('email', '')}),
+                        type='error')
+                else:
+                    # This should only happen when an admin registers
+                    # a user.  The admin should have seen a warning
+                    # already, but we warn again for clarity.
+                    IStatusMessage(self.request).addStatusMessage(
+                        _(u'status_nonfatal_password_mail',
+                          default=u"This account has been created, but we "
+                          "were unable to send instructions for setting a "
+                          "password to this email address: ${address}",
+                          mapping={u'address': data.get('email', '')}),
+                        type='warning')
 
 
 @implementer(IUserAdder)
 class CourseToolMemberAdder(object):
 
-    def addUser(self, userid, password):
-        request = getRequest()
-        first_name = request.get("first_name")
-        last_name = request.get("last_name")
-        email = request.get("email")
-
-        if not (first_name or last_name or email):
-            return
+    def addUser(self, login_name, password, **data):
+        userid = uuid_userid_generator()
 
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
-        obj = api.content.create(
-            container=member_base,
-            type="coursetool.member",
-            id=userid,
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-        )
+
+        with api.env.adopt_roles(["Manager", ]):
+            obj = api.content.create(
+                container=member_base,
+                type="coursetool.member",
+                id=userid,
+                first_name=data.get("first_name", "Maximiliane"),
+                last_name=data.get("last_name", "Muster"),
+                email=login_name,
+            )
+            transaction.commit()
 
         logging.info("Successfully added courstool.member %s" % obj.absolute_url(1))
