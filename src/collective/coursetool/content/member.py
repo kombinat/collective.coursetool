@@ -26,6 +26,8 @@ class IRegistration(IRegisterSchema):
 class IMemberSchema(model.Schema):
     """schema"""
 
+    first_name = schema.TextLine(title=_("Firstname"), required=False)
+    last_name = schema.TextLine(title=_("Lastname"), required=False)
     id = schema.TextLine(title=_("Customer Nr"), required=True)
     salutation = schema.TextLine(title=_("Salutation"), required=False)
     graduation = schema.TextLine(title=_("Graduation"), required=False)
@@ -35,6 +37,7 @@ class IMemberSchema(model.Schema):
     city = schema.TextLine(title=_("City"), required=False)
     cty_code = schema.TextLine(title=_("Country"), required=False)
 
+    email = schema.TextLine(title=_("EMail"), required=False)
     website = schema.TextLine(title=_("Internet Address"), required=False)
     booking_nr = schema.TextLine(title=_("Booking Nr"), required=False)
     inactive = schema.Bool(title=_("Inactive"), required=False, default=False)
