@@ -1,14 +1,14 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rolemap>
   <permissions>
-    <permission
-      name="bda.plone.shop: Modify Cart"
-      acquire="True">
+    <permission acquire="True"
+                name="bda.plone.shop: Modify Cart"
+    >
       <role name="Anonymous" />
     </permission>
-    <permission
-      name="bda.plone.shop: View Buyable Info"
-      acquire="True">
+    <permission acquire="True"
+                name="bda.plone.shop: View Buyable Info"
+    >
       <role name="Anonymous" />
     </permission>
   </permissions>

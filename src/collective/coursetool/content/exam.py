@@ -30,15 +30,14 @@ class IExamSchema(model.Schema):
         title=_("Course Members"),
         default=[],
         value_type=RelationChoice(
-            title=_("Member"),
-            vocabulary='plone.app.vocabularies.Catalog'
+            title=_("Member"), vocabulary="plone.app.vocabularies.Catalog"
         ),
         required=False,
     )
     directives.widget(
         "members",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.vocabularies.Catalog',
+        vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
             "selectableTypes": "coursetool.member",
@@ -50,8 +49,11 @@ class IExamSchema(model.Schema):
     model.fieldset(
         "members",
         label=_("Exam Members"),
-        fields=["members", ],
+        fields=[
+            "members",
+        ],
     )
+
 
 @implementer(IExam)
 class Exam(Container):

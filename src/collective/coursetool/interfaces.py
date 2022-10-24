@@ -28,4 +28,4 @@ class ICourseToolSettings(Interface):
 
 
 class ICourseToolBaseFolder(Interface):
-    """ marker for courstool base portal """
+    """marker for courstool base portal"""

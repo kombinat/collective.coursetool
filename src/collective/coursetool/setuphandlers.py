@@ -4,10 +4,11 @@ from collective.coursetool.config import BASE_FOLDER_TITLE
 from collective.coursetool.interfaces import ICourseToolBaseFolder
 from plone import api
 from plone.app.upgrade.utils import loadMigrationProfile
-from Products.CMFPlone.interfaces import INonInstallable
 from plone.base.interfaces.constrains import ISelectableConstrainTypes
-from zope.interface import implementer
+from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import alsoProvides
+from zope.interface import implementer
+
 import transaction
 
 
@@ -61,7 +62,13 @@ def post_install(context):
     else:
         obj = _base["members"]
 
-    prepare_container(obj, "listing_members", ["coursetool.member", ])
+    prepare_container(
+        obj,
+        "listing_members",
+        [
+            "coursetool.member",
+        ],
+    )
 
     if "courses" not in _base:
         obj = api.content.create(
@@ -74,7 +81,13 @@ def post_install(context):
     else:
         obj = _base["courses"]
 
-    prepare_container(obj, "listing_courses", ["coursetool.course", ])
+    prepare_container(
+        obj,
+        "listing_courses",
+        [
+            "coursetool.course",
+        ],
+    )
 
     if "exams" not in _base:
         obj = api.content.create(
@@ -87,7 +100,13 @@ def post_install(context):
     else:
         obj = _base["exams"]
 
-    prepare_container(obj, "listing_exams", ["coursetool.exam", ])
+    prepare_container(
+        obj,
+        "listing_exams",
+        [
+            "coursetool.exam",
+        ],
+    )
 
     if "certificates" not in _base:
         obj = api.content.create(
@@ -100,7 +119,13 @@ def post_install(context):
     else:
         obj = _base["certificates"]
 
-    prepare_container(obj, "listing_certificates", ["coursetool.certificate", ])
+    prepare_container(
+        obj,
+        "listing_certificates",
+        [
+            "coursetool.certificate",
+        ],
+    )
 
     # reload portlet import step to correctly apply blacklist
     context.portal_setup.runImportStepFromProfile(

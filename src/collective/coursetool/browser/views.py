@@ -119,7 +119,6 @@ class CertificatesListing(ListingBase):
 
 
 class ViewBase(DefaultView):
-
     def is_admin(self):
         return api.user.has_permission("Manage portal", obj=self.context)
 
@@ -146,6 +145,7 @@ class ExamView(ViewBase):
 
 class MemberView(ViewBase):
     """ """
+
     def backrefs(self, key):
         return [
             r.from_object

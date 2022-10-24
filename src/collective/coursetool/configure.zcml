@@ -2,67 +2,77 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:monkey="http://namespaces.plone.org/monkey"
-    i18n_domain="collective.coursetool">
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.coursetool"
+    >
 
-    <i18n:registerTranslations directory="locales" />
+  <i18n:registerTranslations directory="locales" />
 
-    <include package="bda.plone.shop" />
-    <include package="collective.z3cform.datagridfield" />
-    <include package="collective.behavior.relatedmedia" />
-    <include package="dexterity.membrane" />
+  <include package="bda.plone.shop" />
+  <include package="collective.z3cform.datagridfield" />
+  <include package="collective.behavior.relatedmedia" />
+  <include package="dexterity.membrane" />
 
-    <include file="permissions.zcml" />
-    <include file="upgrades.zcml" />
+  <include file="permissions.zcml" />
+  <include file="upgrades.zcml" />
 
-    <genericsetup:registerProfile
-        name="default"
-        title="Course Management Tool"
-        description="Manage Courses, Lecturers, Students, Exams and Certificates."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        directory="profiles/default"
-        post_handler=".setuphandlers.post_install" />
+  <genericsetup:registerProfile
+      name="default"
+      title="Course Management Tool"
+      description="Manage Courses, Lecturers, Students, Exams and Certificates."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      post_handler=".setuphandlers.post_install"
+      />
 
-    <genericsetup:registerProfile
-        name="uninstall"
-        title="Course Management Tool (uninstall)"
-        description=""
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        directory="profiles/uninstall"
-        post_handler=".setuphandlers.uninstall" />
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="Course Management Tool (uninstall)"
+      description=""
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      post_handler=".setuphandlers.uninstall"
+      />
 
-    <utility
-        factory=".setuphandlers.HiddenProfiles"
-        name="collective.coursetool-hiddenprofiles" />
+  <utility
+      factory=".setuphandlers.HiddenProfiles"
+      name="collective.coursetool-hiddenprofiles"
+      />
 
 
-    <utility
-        name="coursetool.vocabulary.memberstates"
-        component=".vocabularies.MemberStatesVocabulary" />
-    <utility
-        name="coursetool.vocabulary.memberqualifications"
-        component=".vocabularies.MemberQualificationsVocabulary" />
-    <utility
-        name="coursetool.vocabulary.partnertypes"
-        component=".vocabularies.PartnerTypeVocabularyFactory" />
-    <utility
-        name="coursetool.vocabulary.coursetypes"
-        component=".vocabularies.CourseTypesVocabulary" />
-    <utility
-        name="coursetool.vocabulary.members"
-        component=".vocabularies.members_vocabulary" />
+  <utility
+      name="coursetool.vocabulary.memberstates"
+      component=".vocabularies.MemberStatesVocabulary"
+      />
+  <utility
+      name="coursetool.vocabulary.memberqualifications"
+      component=".vocabularies.MemberQualificationsVocabulary"
+      />
+  <utility
+      name="coursetool.vocabulary.partnertypes"
+      component=".vocabularies.PartnerTypeVocabularyFactory"
+      />
+  <utility
+      name="coursetool.vocabulary.coursetypes"
+      component=".vocabularies.CourseTypesVocabulary"
+      />
+  <utility
+      name="coursetool.vocabulary.members"
+      component=".vocabularies.members_vocabulary"
+      />
 
-    <include package=".browser" />
+  <include package=".browser" />
 
-    <!-- shop patches -->
-    <include package="collective.monkeypatcher" />
+  <!-- shop patches -->
+  <include package="collective.monkeypatcher" />
 
-    <monkey:patch
-        description="Update quantity labels"
-        module="bda.plone.shop.vocabularies"
-        original="AVAILABLE_QUANTITY_UNITS"
-        replacement=".patches._patched_AVAILABLE_QUANTITY_UNITS"
-        preserveOriginal="True" />
+  <monkey:patch
+      original="AVAILABLE_QUANTITY_UNITS"
+      replacement=".patches._patched_AVAILABLE_QUANTITY_UNITS"
+      module="bda.plone.shop.vocabularies"
+      description="Update quantity labels"
+      preserveOriginal="True"
+      />
 
 </configure>

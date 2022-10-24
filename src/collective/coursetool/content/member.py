@@ -22,7 +22,6 @@ class IRegistration(IRegisterSchema):
     email = schema.TextLine(title=_("Email"))
 
 
-
 class IMemberSchema(model.Schema):
     """schema"""
 
@@ -47,7 +46,8 @@ class IMemberSchema(model.Schema):
 
     birthday = schema.Date(title=_("Birthday"), required=False)
     directives.widget(
-        "birthday", DateFieldWidget,
+        "birthday",
+        DateFieldWidget,
         _formater_length="long",
     )
 
@@ -151,7 +151,7 @@ class Member(Container):
 class UserProperties(MembraneUserProperties):
 
     property_map = dict(
-        email='email',
-        first_name='first_name',
-        last_name='last_name',
+        email="email",
+        first_name="first_name",
+        last_name="last_name",
     )

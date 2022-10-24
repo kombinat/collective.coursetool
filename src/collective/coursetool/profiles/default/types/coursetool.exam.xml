@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         meta_type="Dexterity FTI"
         name="coursetool.exam"
@@ -30,8 +30,8 @@
     <element value="plone.richtext" />
 
     <!-- bda.plone.shop -->
-    <element value="bda.shop.buyable"/>
-    <element value="bda.shop.stock"/>
+    <element value="bda.shop.buyable" />
+    <element value="bda.shop.stock" />
     <element value="bda.shop.notificationtext.item" />
     <element value="bda.shop.notificationtext.global" />
     <element value="bda.shop.buyableperiod" />

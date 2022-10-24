@@ -69,7 +69,6 @@ class ICourseSchema(model.Schema):
     )
     directives.widget("type", CheckBoxFieldWidget)
 
-
     max_members = schema.Int(
         title=_("Maximum member count"),
         required=False,
@@ -89,15 +88,14 @@ class ICourseSchema(model.Schema):
         title=_("Instructors"),
         default=[],
         value_type=RelationChoice(
-            title=_("Instructor"),
-            vocabulary='plone.app.vocabularies.Catalog'
+            title=_("Instructor"), vocabulary="plone.app.vocabularies.Catalog"
         ),
         required=False,
     )
     directives.widget(
         "instructors",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.vocabularies.Catalog',
+        vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
             "selectableTypes": "coursetool.member",
@@ -111,14 +109,14 @@ class ICourseSchema(model.Schema):
         title=_("Exams"),
         value_type=RelationChoice(
             title=_("Exam"),
-            vocabulary='plone.app.vocabularies.Catalog',
+            vocabulary="plone.app.vocabularies.Catalog",
         ),
         required=False,
     )
     directives.widget(
         "exams",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.vocabularies.Catalog',
+        vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/exams",
             "selectableTypes": "coursetool.exam",
@@ -131,15 +129,14 @@ class ICourseSchema(model.Schema):
         title=_("Course Members"),
         default=[],
         value_type=RelationChoice(
-            title=_("Member"),
-            vocabulary='plone.app.vocabularies.Catalog'
+            title=_("Member"), vocabulary="plone.app.vocabularies.Catalog"
         ),
         required=False,
     )
     directives.widget(
         "members",
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.vocabularies.Catalog',
+        vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
             "selectableTypes": "coursetool.member",
@@ -151,7 +148,9 @@ class ICourseSchema(model.Schema):
     model.fieldset(
         "members",
         label=_("Course Members"),
-        fields=["members", ],
+        fields=[
+            "members",
+        ],
     )
 
 
@@ -177,8 +176,7 @@ class Course(Container):
 
     def get_exams(self):
         return [
-            r.to_object
-            for r in api.relation.get(source=self, relationship="exams")
+            r.to_object for r in api.relation.get(source=self, relationship="exams")
         ]
 
     def get_instructors(self):

@@ -1,4 +1,4 @@
 
 <configure>
-    <adapter factory=".member.UserProperties" />
+  <adapter factory=".member.UserProperties" />
 </configure>

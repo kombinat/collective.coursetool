@@ -13,11 +13,11 @@ from zope.interface import Interface
 
 
 class ICoursetoolSubMenuItem(IBrowserSubMenuItem):
-    """ menu item linking to coursetool menu """
+    """menu item linking to coursetool menu"""
 
 
 class ICoursetoolMenu(IBrowserMenu):
-    """ toolbar menu """
+    """toolbar menu"""
 
 
 @implementer(ICoursetoolSubMenuItem)
@@ -50,38 +50,42 @@ class CoursetoolSubMenuItem(BrowserSubMenuItem):
 
 @implementer(ICoursetoolMenu)
 class CoursetoolMenu(BrowserMenu):
-
     def getMenuItems(self, context, request):
         # simple listing of the coursetool base folder contents
         coursetool_base = api.portal.get()[BASE_FOLDER_ID]
         coursetool_listing = coursetool_base.restrictedTraverse("@@contentlisting")
 
-        portal_link = [{
-            "title": coursetool_base.Title(),
-            "description": coursetool_base.Description(),
-            "action": addTokenToUrl(coursetool_base.absolute_url(), request),
-            "selected": False,
-            "icon": None,
-            "extra": {
-                "id": f"coursetool-view-{coursetool_base.id}",
-                "separator": None,
-                "class": "",
-                "modal": "",
+        portal_link = [
+            {
+                "title": coursetool_base.Title(),
+                "description": coursetool_base.Description(),
+                "action": addTokenToUrl(coursetool_base.absolute_url(), request),
+                "selected": False,
+                "icon": None,
+                "extra": {
+                    "id": f"coursetool-view-{coursetool_base.id}",
+                    "separator": None,
+                    "class": "",
+                    "modal": "",
+                },
+                "submenu": None,
             },
-            "submenu": None,
-        }, ]
+        ]
 
-        return portal_link + [{
-            "title": item.Title(),
-            "description": item.Description(),
-            "action": addTokenToUrl(item.getURL(), request),
-            "selected": False,
-            "icon": None,
-            "extra": {
-                "id": f"coursetool-view-{item.getId()}",
-                "separator": None,
-                "class": "",
-                "modal": "",
-            },
-            "submenu": None,
-        } for item in coursetool_listing()]
+        return portal_link + [
+            {
+                "title": item.Title(),
+                "description": item.Description(),
+                "action": addTokenToUrl(item.getURL(), request),
+                "selected": False,
+                "icon": None,
+                "extra": {
+                    "id": f"coursetool-view-{item.getId()}",
+                    "separator": None,
+                    "class": "",
+                    "modal": "",
+                },
+                "submenu": None,
+            }
+            for item in coursetool_listing()
+        ]

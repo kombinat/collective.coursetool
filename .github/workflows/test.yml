@@ -15,11 +15,11 @@ jobs:
       fail-fast: false
       matrix:
         python:
-          - "3.7"
           - "3.8"
           - "3.9"
+          - "3.10"
         plone:
-          - "6.0-dev"
+          - "6.0-latest"
 
     steps:
       - uses: actions/checkout@v2
