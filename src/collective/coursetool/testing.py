@@ -1,3 +1,4 @@
+from Products.membrane.testing import MEMBRANE_PROFILES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -11,7 +12,7 @@ import collective.coursetool
 
 class CollectiveCoursetoolLayer(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (MEMBRANE_PROFILES_FIXTURE, PLONE_FIXTURE)
 
     def setUpZope(self, app, configurationContext):
         # Load any other ZCML that is required for your tests.
@@ -20,9 +21,11 @@ class CollectiveCoursetoolLayer(PloneSandboxLayer):
         import plone.app.dexterity
 
         self.loadZCML(package=plone.app.dexterity)
+
         import plone.restapi
 
         self.loadZCML(package=plone.restapi)
+
         self.loadZCML(package=collective.coursetool)
 
     def setUpPloneSite(self, portal):
