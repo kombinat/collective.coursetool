@@ -29,9 +29,6 @@
     <element value="plone.namefromtitle" />
     <element value="plone.richtext" />
 
-    <!-- relatedmedia -->
-    <element value="collective.behavior.relatedmedia.behavior.IRelatedMedia" />
-
     <!-- lead image -->
     <element value="plone.leadimage" />
 

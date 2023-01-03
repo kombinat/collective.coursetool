@@ -3,7 +3,6 @@
   <version>1000</version>
   <dependencies>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
-    <dependency>profile-collective.behavior.relatedmedia:default</dependency>
     <dependency>profile-Products.membrane:default</dependency>
     <dependency>profile-dexterity.membrane:default</dependency>
     <dependency>profile-bda.plone.shop:default</dependency>
