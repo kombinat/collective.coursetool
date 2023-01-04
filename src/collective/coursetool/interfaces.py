@@ -15,6 +15,10 @@ class ICourse(Interface):
     """course marker"""
 
 
+class ILocation(Interface):
+    """location marker"""
+
+
 class IExam(Interface):
     """exam marker"""
 

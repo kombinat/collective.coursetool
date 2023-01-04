@@ -10,6 +10,7 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package="bda.plone.shop" />
+  <include package="collective.address" />
   <include package="collective.z3cform.datagridfield" />
   <include package="dexterity.membrane" />
 

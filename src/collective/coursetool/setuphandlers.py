@@ -89,6 +89,25 @@ def post_install(context):
         ],
     )
 
+    if "locations" not in _base:
+        obj = api.content.create(
+            container=_base,
+            type="Folder",
+            id="locations",
+            title=_("Locations"),
+        )
+        transaction.commit()
+    else:
+        obj = _base["locations"]
+
+    prepare_container(
+        obj,
+        "listing_locations",
+        [
+            "coursetool.location",
+        ],
+    )
+
     if "exams" not in _base:
         obj = api.content.create(
             container=_base,

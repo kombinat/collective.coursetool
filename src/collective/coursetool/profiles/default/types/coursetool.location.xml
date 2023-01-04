@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         meta_type="Dexterity FTI"
-        name="coursetool.course"
+        name="coursetool.location"
         i18n:domain="collective.coursetool"
 >
   <property name="title"
             i18n:translate=""
-  >Course</property>
+  >Location</property>
   <property name="description"
             i18n:translate=""
   />
 
-  <property name="icon_expr">string:clipboard2-check</property>
-  <property name="factory">coursetool.course</property>
-  <property name="add_view_expr">string:${folder_url}/++add++coursetool.course</property>
+  <property name="icon_expr">string:geo-alt</property>
+  <property name="factory">coursetool.location</property>
+  <property name="add_view_expr">string:${folder_url}/++add++coursetool.location</property>
   <property name="link_target" />
   <property name="immediate_view">view</property>
   <property name="global_allow">True</property>
@@ -24,19 +24,20 @@
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>
-  <property name="klass">collective.coursetool.content.Course</property>
+  <property name="klass">collective.coursetool.content.Location</property>
   <property name="behaviors">
     <element value="plone.namefromtitle" />
-    <element value="plone.richtext" />
 
-    <!-- bda.plone.shop -->
-    <element value="bda.shop.buyable" />
-    <element value="bda.shop.stock" />
-    <element value="bda.shop.notificationtext.item" />
-    <element value="bda.shop.notificationtext.global" />
-    <element value="bda.shop.buyableperiod" />
+    <!-- enable searchable textindexer -->
+    <element value="plone.textindexer" />
+
+    <!-- collective.address -->
+    <element value="collective.address.address" />
+
+    <!-- lead image -->
+    <element value="plone.leadimage" />
   </property>
-  <property name="schema">collective.coursetool.content.ICourseSchema</property>
+  <property name="schema">collective.coursetool.content.ILocationSchema</property>
   <property name="model_source" />
   <property name="model_file" />
 

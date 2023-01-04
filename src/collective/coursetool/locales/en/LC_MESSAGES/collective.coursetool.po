@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-08-12 09:32+0000\n"
+"POT-Creation-Date: 2023-01-04 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,10 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/listing_exams.pt
 msgid "Add Exam"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_locations.pt
+msgid "Add Location"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_members.pt
@@ -74,6 +78,7 @@ msgstr ""
 msgid "Certificates"
 msgstr ""
 
+#: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "City"
 msgstr ""
@@ -98,6 +103,14 @@ msgstr ""
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Course Description"
+msgstr ""
+
+#: collective/coursetool/content/exam.py
+msgid "Course Location"
+msgstr ""
+
+#: collective/coursetool/content/course.py
+msgid "Course Locations"
 msgstr ""
 
 #: collective/coursetool/configure.zcml
@@ -128,7 +141,7 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/listing_courses.pt
 #: collective/coursetool/browser/templates/portal.pt
-#: collective/coursetool/browser/templates/view_member.pt
+#: collective/coursetool/browser/templates/view_location.pt
 msgid "Courses"
 msgstr ""
 
@@ -155,6 +168,10 @@ msgstr ""
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Edit"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Email"
 msgstr ""
 
 #: collective/coursetool/content/course.py
@@ -236,6 +253,22 @@ msgstr ""
 msgid "Lastname"
 msgstr ""
 
+#: collective/coursetool/content/course.py
+#: collective/coursetool/content/exam.py
+#: collective/coursetool/profiles/default/types/coursetool.location.xml
+msgid "Location"
+msgstr ""
+
+#: collective/coursetool/content/location.py
+msgid "Location Title"
+msgstr ""
+
+#: collective/coursetool/browser/templates/listing_locations.pt
+#: collective/coursetool/browser/templates/portal.pt
+#: collective/coursetool/setuphandlers.py
+msgid "Locations"
+msgstr ""
+
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Certificates"
 msgstr ""
@@ -250,6 +283,10 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Exams"
+msgstr ""
+
+#: collective/coursetool/browser/templates/portal.pt
+msgid "Manage Locations"
 msgstr ""
 
 #: collective/coursetool/browser/templates/portal.pt
@@ -335,10 +372,6 @@ msgid "Practical experience"
 msgstr ""
 
 #: collective/coursetool/content/member.py
-msgid "Provide a username if Email is not used as login"
-msgstr ""
-
-#: collective/coursetool/content/member.py
 msgid "Qualification"
 msgstr ""
 
@@ -383,7 +416,7 @@ msgid "Upload File"
 msgstr ""
 
 #: collective/coursetool/content/member.py
-msgid "Username"
+msgid "User Image"
 msgstr ""
 
 #: collective/coursetool/content/member.py
@@ -413,12 +446,6 @@ msgstr ""
 msgid "exam_title"
 msgstr ""
 
-#. Default: "Location"
-#: collective/coursetool/content/course.py
-#: collective/coursetool/content/exam.py
-msgid "label_course_location"
-msgstr ""
-
 #. Default: "Type"
 #: collective/coursetool/content/course.py
 msgid "label_course_type"
@@ -437,6 +464,11 @@ msgstr ""
 #. Default: "Suche"
 #: collective/coursetool/browser/templates/listing_macros.pt
 msgid "label_filter_textsearch"
+msgstr ""
+
+#. Default: "Location: ${title}"
+#: collective/coursetool/browser/templates/view_location.pt
+msgid "location_title"
 msgstr ""
 
 #. Default: "Member: ${title}"
@@ -486,4 +518,14 @@ msgstr ""
 
 #: collective/coursetool/vocabularies.py
 msgid "quali_i_label"
+msgstr ""
+
+#. Default: "Failed to create your account: we were unable to send instructions for setting a password to your email address: ${address}"
+#: collective/coursetool/browser/registration.py
+msgid "status_fatal_password_mail"
+msgstr ""
+
+#. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
+#: collective/coursetool/browser/registration.py
+msgid "status_nonfatal_password_mail"
 msgstr ""

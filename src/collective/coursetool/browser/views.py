@@ -100,6 +100,15 @@ class CoursesListing(ListingBase):
     columns = [
         ColumnDefinition(_("Course-ID"), "id"),
         ColumnDefinition(_("Name"), "title", True),
+        ColumnDefinition(_("City"), "location"),
+    ]
+
+
+class LocationsListing(ListingBase):
+    portal_type = "coursetool.location"
+    columns = [
+        ColumnDefinition(_("Name"), "title", True),
+        ColumnDefinition(_("City"), "city"),
     ]
 
 
@@ -140,6 +149,16 @@ class ExamView(ViewBase):
         return [
             r.to_object
             for r in api.relation.get(source=self.context, relationship="members")
+        ]
+
+
+class LocationView(ViewBase):
+    """ """
+
+    def courses(self):
+        return [
+            r.from_object
+            for r in api.relation.get(target=self.context, relationship="location")
         ]
 
 

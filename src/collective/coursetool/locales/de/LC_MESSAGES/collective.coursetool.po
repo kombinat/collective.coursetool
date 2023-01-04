@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2022-08-12 09:32+0000\n"
-"PO-Revision-Date: 2022-08-12 11:33+0200\n"
+"POT-Creation-Date: 2023-01-04 14:08+0000\n"
+"PO-Revision-Date: 2023-01-04 15:08+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
 msgid "Add Certificate"
-msgstr "Zertifikat hinzufügen"
+msgstr "Fischerkarte hinzufügen"
 
 #: collective/coursetool/browser/templates/listing_courses.pt
 msgid "Add Course"
@@ -27,6 +27,10 @@ msgstr "Kurs hinzufügen"
 #: collective/coursetool/browser/templates/listing_exams.pt
 msgid "Add Exam"
 msgstr "Prüfung hinzufügen"
+
+#: collective/coursetool/browser/templates/listing_locations.pt
+msgid "Add Location"
+msgstr "Kursort hinzufügen"
 
 #: collective/coursetool/browser/templates/listing_members.pt
 msgid "Add Member"
@@ -64,7 +68,7 @@ msgstr "Buchungsnr."
 #: collective/coursetool/content/certificate.py
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
 msgid "Certificate"
-msgstr "Zertifikat"
+msgstr "Fischerkarte"
 
 #: collective/coursetool/content/certificate.py
 msgid "Certificate Members"
@@ -74,8 +78,9 @@ msgstr "Mitglieder"
 #: collective/coursetool/browser/templates/portal.pt
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "Certificates"
-msgstr "Zertifikate"
+msgstr "Fischerkarten"
 
+#: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "City"
 msgstr "Ort"
@@ -101,6 +106,14 @@ msgstr "Kurs"
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Course Description"
 msgstr "Kursbeschreibung"
+
+#: collective/coursetool/content/exam.py
+msgid "Course Location"
+msgstr "Kursort"
+
+#: collective/coursetool/content/course.py
+msgid "Course Locations"
+msgstr "Kursorte"
 
 #: collective/coursetool/configure.zcml
 msgid "Course Management Tool"
@@ -130,7 +143,7 @@ msgstr "Kurs-ID"
 
 #: collective/coursetool/browser/templates/listing_courses.pt
 #: collective/coursetool/browser/templates/portal.pt
-#: collective/coursetool/browser/templates/view_member.pt
+#: collective/coursetool/browser/templates/view_location.pt
 msgid "Courses"
 msgstr "Kurse"
 
@@ -158,6 +171,10 @@ msgstr "E-Mail"
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Edit"
 msgstr "Bearbeiten"
+
+#: collective/coursetool/content/member.py
+msgid "Email"
+msgstr "EMail"
 
 #: collective/coursetool/content/course.py
 msgid "Endtime"
@@ -238,9 +255,25 @@ msgstr "Homepage"
 msgid "Lastname"
 msgstr "Nachname"
 
+#: collective/coursetool/content/course.py
+#: collective/coursetool/content/exam.py
+#: collective/coursetool/profiles/default/types/coursetool.location.xml
+msgid "Location"
+msgstr "Kursort"
+
+#: collective/coursetool/content/location.py
+msgid "Location Title"
+msgstr "Name"
+
+#: collective/coursetool/browser/templates/listing_locations.pt
+#: collective/coursetool/browser/templates/portal.pt
+#: collective/coursetool/setuphandlers.py
+msgid "Locations"
+msgstr "Kursorte"
+
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Certificates"
-msgstr "Zertifikate verwalten"
+msgstr "Fischerkarten verwalten"
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Courses"
@@ -248,11 +281,15 @@ msgstr "Kurse verwalten"
 
 #: collective/coursetool/configure.zcml
 msgid "Manage Courses, Lecturers, Students, Exams and Certificates."
-msgstr "Kurse, Trainer, Teilnehmer, Prüfungen und Zertifikate."
+msgstr "Kurse, Trainer, Teilnehmer, Prüfungen und Fischerkarten."
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Exams"
 msgstr "Prüfungen verwalten"
+
+#: collective/coursetool/browser/templates/portal.pt
+msgid "Manage Locations"
+msgstr "Kursorte verwalten"
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Members"
@@ -337,10 +374,6 @@ msgid "Practical experience"
 msgstr "Praxis"
 
 #: collective/coursetool/content/member.py
-msgid "Provide a username if Email is not used as login"
-msgstr "Wenn die EMail nicht als login verwendet wird, geben sie einen Benutzername ein."
-
-#: collective/coursetool/content/member.py
 msgid "Qualification"
 msgstr "Qualifikation"
 
@@ -385,8 +418,8 @@ msgid "Upload File"
 msgstr "Datei auswählen und hochladen"
 
 #: collective/coursetool/content/member.py
-msgid "Username"
-msgstr "Benutzername"
+msgid "User Image"
+msgstr "Passfoto"
 
 #: collective/coursetool/content/member.py
 msgid "ZIP Code"
@@ -395,7 +428,7 @@ msgstr "PLZ"
 #. Default: "Certificate: ${title}"
 #: collective/coursetool/browser/templates/view_certificate.pt
 msgid "certificate_title"
-msgstr "Zertifikat: ${title}"
+msgstr "${title}"
 
 #. Default: "Course: ${title}"
 #: collective/coursetool/browser/templates/view_course.pt
@@ -404,22 +437,16 @@ msgstr "Kurs: ${title}"
 
 #: collective/coursetool/vocabularies.py
 msgid "course_type_offline"
-msgstr "Offline"
+msgstr "Teilnahme am Kursort"
 
 #: collective/coursetool/vocabularies.py
 msgid "course_type_online"
-msgstr "Online"
+msgstr "Selbststudium zu Hause"
 
 #. Default: "Exam: ${title}"
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "exam_title"
 msgstr "Prüfung: ${title}"
-
-#. Default: "Location"
-#: collective/coursetool/content/course.py
-#: collective/coursetool/content/exam.py
-msgid "label_course_location"
-msgstr "Ort"
 
 #. Default: "Type"
 #: collective/coursetool/content/course.py
@@ -440,6 +467,11 @@ msgstr "Suche"
 #: collective/coursetool/browser/templates/listing_macros.pt
 msgid "label_filter_textsearch"
 msgstr "Stichwortsuche"
+
+#. Default: "Location: ${title}"
+#: collective/coursetool/browser/templates/view_location.pt
+msgid "location_title"
+msgstr "Kursort: ${title}"
 
 #. Default: "Member: ${title}"
 #: collective/coursetool/browser/templates/view_member.pt
@@ -489,3 +521,13 @@ msgstr "Befähigung zum Bewirtschafter"
 #: collective/coursetool/vocabularies.py
 msgid "quali_i_label"
 msgstr "Befähigung zur Ausübung der Elektrofischerei"
+
+#. Default: "Failed to create your account: we were unable to send instructions for setting a password to your email address: ${address}"
+#: collective/coursetool/browser/registration.py
+msgid "status_fatal_password_mail"
+msgstr ""
+
+#. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
+#: collective/coursetool/browser/registration.py
+msgid "status_nonfatal_password_mail"
+msgstr ""

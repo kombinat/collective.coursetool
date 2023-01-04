@@ -59,7 +59,7 @@
                                 <label class="fw-bold" tal:content="widget/label" />
                                 <br />
                                 <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
-                                <div tal:content="structure widget/render" />
+                                <div tal:condition="widget/value" tal:content="structure widget/render" />
                             </div>
                         </tal:block>
                     </div>

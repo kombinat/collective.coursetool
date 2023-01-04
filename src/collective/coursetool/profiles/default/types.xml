@@ -7,6 +7,9 @@
           name="coursetool.course"
   />
   <object meta_type="Dexterity FTI"
+          name="coursetool.location"
+  />
+  <object meta_type="Dexterity FTI"
           name="coursetool.exam"
   />
   <object meta_type="Dexterity FTI"

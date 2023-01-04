@@ -39,7 +39,7 @@
             <div class="card-body tab-content">
                 <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
                     <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
-                        <tal:block repeat="info_fld python:['id', 'start', 'end', 'location', 'type', 'duration']">
+                        <tal:block repeat="info_fld python:['id', 'start', 'end', 'type', 'duration']">
                         <div class="col"
                             tal:define="wdgt python:view.w.get(info_fld)"
                             tal:condition="python:getattr(context, info_fld, None) and wdgt">
@@ -48,6 +48,14 @@
                             </div>
                         </div>
                         </tal:block>
+                        <div class="col"
+                                tal:define="locations context/get_locations"
+                                tal:condition="locations">
+                            <div class="text-bg-light py-1 px-2"
+                                    tal:define="wdgt python:view.w.get('locations')">
+                                    <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(['%s, %s' % (e.title, e.city) for e in locations])" />
+                            </div>
+                        </div>
                         <div class="col"
                                 tal:define="exams context/get_exams"
                                 tal:condition="exams">

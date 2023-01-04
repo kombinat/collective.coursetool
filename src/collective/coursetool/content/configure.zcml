@@ -1,4 +1,5 @@
 
 <configure>
   <adapter factory=".member.UserProperties" />
+  <adapter factory=".course.location" name="location" />
 </configure>

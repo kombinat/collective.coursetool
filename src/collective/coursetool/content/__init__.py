@@ -4,5 +4,7 @@ from .course import Course
 from .course import ICourseSchema
 from .exam import Exam
 from .exam import IExamSchema
+from .location import Location
+from .location import ILocationSchema
 from .member import IMemberSchema
 from .member import Member

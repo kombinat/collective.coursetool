@@ -7,6 +7,7 @@ from plone import api
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
+from plone.indexer import indexer
 from plone.supermodel import model
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.relationfield.schema import RelationChoice
@@ -56,10 +57,7 @@ class ICourseSchema(model.Schema):
         display_table_css_class="table table-sm",
     )
 
-    location = schema.TextLine(
-        title=_("label_course_location", default="Location"),
-    )
-
+    # TODO: radio button
     type = schema.Tuple(
         title=_("label_course_type", default="Type"),
         value_type=schema.Choice(
@@ -84,11 +82,34 @@ class ICourseSchema(model.Schema):
         required=False,
     )
 
+    locations = RelationList(
+        title=_("Course Locations"),
+        default=[],
+        value_type=RelationChoice(
+            title=_("Location"),
+            vocabulary="plone.app.vocabularies.Catalog",
+        ),
+        required=True,
+    )
+    directives.widget(
+        "locations",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "basePath": f"/Plone/{BASE_FOLDER_ID}/locations",
+            "selectableTypes": "coursetool.location",
+            "mode": "search",
+            "favorites": [],
+            "browseable": False,
+        },
+    )
+
     instructors = RelationList(
         title=_("Instructors"),
         default=[],
         value_type=RelationChoice(
-            title=_("Instructor"), vocabulary="plone.app.vocabularies.Catalog"
+            title=_("Instructor"),
+            vocabulary="plone.app.vocabularies.Catalog",
         ),
         required=False,
     )
@@ -129,7 +150,8 @@ class ICourseSchema(model.Schema):
         title=_("Course Members"),
         default=[],
         value_type=RelationChoice(
-            title=_("Member"), vocabulary="plone.app.vocabularies.Catalog"
+            title=_("Member"),
+            vocabulary="plone.app.vocabularies.Catalog",
         ),
         required=False,
     )
@@ -185,6 +207,12 @@ class Course(Container):
             for r in api.relation.get(source=self, relationship="instructors")
         ]
 
+    def get_locations(self):
+        return [
+            r.to_object
+            for r in api.relation.get(source=self, relationship="locations")
+        ]
+
     # indexer helpers for start/end date
 
     def start(self):
@@ -198,3 +226,9 @@ class Course(Container):
         if not occ:
             return
         return dateparser.parse(f"{occ[-1]['start_date']}T{occ[-1]['end_time']}")
+
+    @property
+    def location(self):
+        return " - ".join([
+            f"{l.title}, {l.city}" for l in self.get_locations()
+        ])

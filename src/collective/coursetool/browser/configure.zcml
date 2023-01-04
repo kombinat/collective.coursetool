@@ -77,6 +77,15 @@
       />
 
   <browser:page
+      name="listing_locations"
+      for="*"
+      class=".views.LocationsListing"
+      template="templates/listing_locations.pt"
+      permission="zope2.View"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
       name="listing_exams"
       for="*"
       class=".views.ExamsListing"
@@ -137,6 +146,15 @@
       for="collective.coursetool.interfaces.ICertificate"
       class=".views.CertificateView"
       template="templates/view_certificate.pt"
+      permission="zope2.View"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
+      name="view"
+      for="collective.coursetool.interfaces.ILocation"
+      class=".views.LocationView"
+      template="templates/view_location.pt"
       permission="zope2.View"
       layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
       />

@@ -10,7 +10,7 @@
 
 <body>
     <div class="coursetool-wrapper" metal:fill-slot="main"
-         tal:define="is_admin view/is_admin; members view/members">
+         tal:define="is_admin view/is_admin; courses view/courses">
 
         <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
             <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
@@ -20,8 +20,8 @@
         <div class="card">
 
             <div class="card-header">
-                <h1 i18n:translate="exam_title">
-                    Exam: <tal:block i18n:name="title" replace="context/Title" />
+                <h1 i18n:translate="location_title">
+                    Location: <tal:block i18n:name="title" replace="context/Title" />
                 </h1>
 
                 <ul class="nav nav-tabs card-header-tabs" tal:condition="is_admin">
@@ -29,8 +29,8 @@
                         <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default" aria-current="true" href="#" i18n:translate="">Information</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="members-tab" data-bs-toggle="tab" data-bs-target="#tab-members" aria-current="true" href="#">
-                            <span i18n:translate="">Members</span> <span class="badge text-bg-secondary">${python:len(members)}</span>
+                        <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses" aria-current="true" href="#">
+                            <span i18n:translate="">Courses</span> <span class="badge text-bg-secondary">${python:len(courses)}</span>
                         </a>
                     </li>
                 </ul>
@@ -39,42 +39,25 @@
             <div class="card-body tab-content">
                 <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
                     <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
-                        <tal:block repeat="info_fld python:['date', ]">
+                        <tal:block repeat="info_fld python:['IAddress.street', 'IAddress.zip_code', 'IAddress.city', 'IAddress.country']">
                         <div class="col"
                              tal:define="wdgt python:view.w.get(info_fld)"
-                             tal:condition="python:wdgt.value and wdgt">
+                             tal:condition="python:wdgt and wdgt.value">
                             <div class="text-bg-light py-1 px-2">
                                 <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure wdgt/render" />
                             </div>
                         </div>
                         </tal:block>
-                        <div class="col"
-                                tal:define="locations context/get_locations"
-                                tal:condition="locations">
-                            <div class="text-bg-light py-1 px-2"
-                                    tal:define="wdgt python:view.w.get('location')">
-                                    <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(['%s, %s' % (e.title, e.city) for e in locations])" />
-                            </div>
-                        </div>
                     </div>
                     <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
-
-                    <section id="section-text"
-                             tal:condition="python:getattr(context.aq_base, 'text', None)">
-                        <strong i18n:translate="">Course Description</strong>:
-                        <div id="parent-fieldname-text"
-                             tal:content="structure python:context.text.output_relative_to(view.context)">
-                          Text
-                        </div>
-                    </section>
                 </div>
-                <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
+                <div class="tab-pane fade" id="tab-courses" role="tabpabel" aria-labelledby="courses-tab" tal:condition="is_admin">
                     <ol class="list-group list-group-numbered">
-                        <li class="list-group-item" tal:repeat="member members">
-                            <a href="${member/absolute_url}" tal:content="member/title">Coursetitle</a>
+                        <li class="list-group-item" tal:repeat="course courses">
+                            <a href="${course/absolute_url}" tal:content="course/title">Coursetitle</a>
                         </li>
                     </ol>
-                    <span class="text-muted fs-sm" tal:condition="not:members" i18n:translate="">
+                    <span class="text-muted fs-sm" tal:condition="not:courses" i18n:translate="">
                         No items found.
                     </span>
                 </div>
