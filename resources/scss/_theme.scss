@@ -1,0 +1,12 @@
+.injecting {
+    position:relative;
+
+    &::before {
+        content: " ";
+        position: absolute;
+        top: 1rem;
+        left: 45%;
+        z-index: 1000;
+        @extend .spinner-grow;
+    }
+}

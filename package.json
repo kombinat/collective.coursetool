@@ -1,0 +1,43 @@
+{
+  "name": "collective.coursetool",
+  "description": "Coursetool - Manage Courses, Members, Exams and Certificates",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kombinat/collective.coursetool.git"
+  },
+  "bugs": {
+    "email": "office@kombinat.at"
+  },
+  "homepage": "https://github.com/kombinat/collective.coursetool/",
+  "license": "MIT",
+  "keywords": [
+    "plone",
+    "addon",
+    "coursetool",
+    "sass",
+    "css"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "bootstrap": "5.2.3",
+    "clean-css-cli": "^5.6.1",
+    "nodemon": "^2.0.15",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.16",
+    "postcss-cli": "^9.0.1",
+    "sass": "1.55.0",
+    "sass-loader": "^13.2.0",
+    "stylelint-config-twbs-bootstrap": "^5.0.0"
+  },
+  "scripts": {
+    "build": "npm-run-all css-compile-main css-prefix-main css-minify-main",
+    "watch": "nodemon --watch resources/scss/ --ext scss --exec \"npm run css-main\"",
+    "css-main": "npm-run-all css-compile-main css-prefix-main css-minify-main",
+    "css-compile-main": "sass --load-path=node_modules --style expanded --source-map --embed-sources --no-error-css resources/scss/coursetool.scss:src/collective/coursetool/browser/static/coursetool.css",
+    "css-prefix-main": "postcss --config postcss.config.js --replace \"src/collective/coursetool/browser/static/*.css\" \"!src/collective/coursetool/browser/static/*.min.css\"",
+    "css-minify-main": "cleancss -O1 --format breakWith=lf --with-rebase --source-map --source-map-inline-sources --output src/collective/coursetool/browser/static/coursetool.min.css src/collective/coursetool/browser/static/coursetool.css",
+    "css-lint": "stylelint \"resources/scss/**/*.scss\" --cache --cache-location .cache/.stylelintcache"
+  },
+  "dependencies": {}
+}

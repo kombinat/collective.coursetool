@@ -86,7 +86,6 @@ class ListingBase(BrowserView):
 class MembersListing(ListingBase):
     portal_type = "coursetool.member"
     columns = [
-        ColumnDefinition(_("PID"), "id"),
         ColumnDefinition(_("Name"), "title", True),
         ColumnDefinition(_("Address"), "address_inline"),
         ColumnDefinition(_("EMail"), "email"),

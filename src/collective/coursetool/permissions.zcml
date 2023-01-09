@@ -5,7 +5,9 @@
     >
 
   <configure zcml:condition="installed AccessControl.security">
-    <!-- -*- extra stuff goes here -*- -->
+    <permission
+      id="collective.coursetool.RegisterMember"
+      title="collective.coursetool: Register member" />
 
 
   </configure>

@@ -1,11 +1,10 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.content.member import IRegistration
+from collective.coursetool.utils import generate_courstool_member_id
 from dexterity.membrane.behavior.settings import IDexterityMembraneSettings
 from plone import api
 from plone.app.users.browser.register import RegistrationForm
-from plone.app.users.utils import uuid_userid_generator
-from plone.autoform import directives
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces.utilities import IUserAdder
 from Products.membrane.utils import getCurrentUserAdder
@@ -48,7 +47,7 @@ class Registration(RegistrationForm):
 
         # user_id and login_name should be in the data, but let's be safe.
         user_id = data.get("user_id", data.get("username"))
-        login_name = data.get("login_name", data.get("username"))
+        login_name = data.pop("login_name", data.get("username"))
 
         # Set the username for good measure, as some code may expect
         # it to exist and contain the user id.
@@ -65,7 +64,7 @@ class Registration(RegistrationForm):
 
         try:
             adder = getCurrentUserAdder(self)
-            adder.addUser(login_name, password, **data)
+            new_user_id = adder.addUser(login_name, password, **data)
         except (AttributeError, ValueError) as err:
             logging.exception(err)
             IStatusMessage(self.request).addStatusMessage(err, type="error")
@@ -87,7 +86,7 @@ class Registration(RegistrationForm):
                 # effect, this removes any status messages added to
                 # the request so far, as they are already shown in
                 # this template.
-                response = registration.registeredNotify(user_id)
+                response = registration.registeredNotify(new_user_id)
                 return response
             except ConflictError:
                 # Let Zope handle this exception.
@@ -104,7 +103,7 @@ class Registration(RegistrationForm):
                     # address.  We remove the account:
                     # Remove the account:
                     self.context.acl_users.userFolderDelUsers(
-                        [user_id], REQUEST=self.request
+                        [new_user_id], REQUEST=self.request
                     )
                     self._finishedRegister = False
                     IStatusMessage(self.request).addStatusMessage(
@@ -136,15 +135,19 @@ class Registration(RegistrationForm):
 @implementer(IUserAdder)
 class CourseToolMemberAdder(object):
     def addUser(self, login_name, password, **data):
-        userid = uuid_userid_generator()
-
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
+        # generate random 6 digit user id
+        userid = generate_courstool_member_id()
+        id_gen_count = 0
 
-        with api.env.adopt_roles(
-            [
-                "Manager",
-            ]
-        ):
+        while userid in member_base:
+            # if sequential ID is already there, generate a random one
+            userid = generate_courstool_member_id()
+            id_gen_count += 1
+            if id_gen_count > 10:
+                raise Exception("Could not generate UserID")
+
+        with api.env.adopt_roles(["Manager", ]):
             obj = api.content.create(
                 container=member_base,
                 type="coursetool.member",
@@ -156,3 +159,4 @@ class CourseToolMemberAdder(object):
             transaction.commit()
 
         logging.info("Successfully added courstool.member %s" % obj.absolute_url(1))
+        return obj.UID()

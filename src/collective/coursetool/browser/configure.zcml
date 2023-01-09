@@ -174,4 +174,12 @@
       name="coursetool.member.adder"
       />
 
+  <browser:page
+      name="registered"
+      for="collective.coursetool.interfaces.ICourseToolBaseFolder"
+      class="plone.app.users.browser.registered.RegisteredView"
+      template="templates/registered.pt"
+      permission="zope2.View"
+      />
+
 </configure>

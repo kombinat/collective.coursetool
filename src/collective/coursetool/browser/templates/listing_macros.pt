@@ -1,7 +1,7 @@
 <html i18n:domain="collective.coursetool">
     <body>
         <metal:def define-macro="filter">
-            <form action="${python:context.absolute_url()}" class="row g-3 mb-3 align-items-end">
+            <form action="${python:context.absolute_url()}" class="row g-3 mb-3 align-items-end pat-inject" data-pat-inject="source:#content;target:#content;history:record">
                 <div class="col">
                     <label class="form-label" for="floatingSearchableText" i18n:translate="label_filter_textsearch">Suche</label>
                     <input class="form-control" id="floatingSearchableText" name="SearchableText" type="text" value="" tal:attributes="value request/SearchableText|nothing">

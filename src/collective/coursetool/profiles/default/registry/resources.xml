@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<registry xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+    <records
+        prefix="plone.bundles/collective-coursetool"
+        interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+        <value key="jscompilation"></value>
+        <value key="csscompilation">++plone++collective.coursetool/coursetool.min.css</value>
+        <value key="depends"></value>
+        <value key="enabled">True</value>
+        <value key="load_async">False</value>
+        <value key="load_defer">False</value>
+    </records>
+
+</registry>

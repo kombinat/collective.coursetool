@@ -133,3 +133,6 @@ dmypy.json
 sources/
 /*-mxdev.txt
 .installed.txt
+
+# node
+/node_modules

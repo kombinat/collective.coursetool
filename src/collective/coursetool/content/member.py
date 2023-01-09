@@ -153,5 +153,7 @@ class UserProperties(MembraneUserProperties):
     property_map = dict(
         email="email",
         first_name="first_name",
+        firstname="first_name",
         last_name="last_name",
+        lastname="last_name",
     )
