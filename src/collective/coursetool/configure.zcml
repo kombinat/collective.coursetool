@@ -75,4 +75,9 @@
       preserveOriginal="True"
       />
 
+  <!-- payment success event -->
+  <subscriber
+    for="bda.plone.payment.interfaces.IPaymentSuccessEvent"
+    handler=".shop.payment_success" />
+
 </configure>

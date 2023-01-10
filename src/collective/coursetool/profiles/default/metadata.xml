@@ -6,5 +6,6 @@
     <dependency>profile-Products.membrane:default</dependency>
     <dependency>profile-dexterity.membrane:default</dependency>
     <dependency>profile-bda.plone.shop:default</dependency>
+    <dependency>profile-bda.plone.stripe:default</dependency>
   </dependencies>
 </metadata>

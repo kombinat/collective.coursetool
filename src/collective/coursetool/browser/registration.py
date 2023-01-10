@@ -156,7 +156,10 @@ class CourseToolMemberAdder(object):
                 last_name=data.get("last_name", "Muster"),
                 email=login_name,
             )
+            # set workflow state to "enabled"
+            api.content.transition(obj, to_state="enabled")
+
             transaction.commit()
 
-        logging.info("Successfully added courstool.member %s" % obj.absolute_url(1))
+        logging.info("Successfully added coursetool.member %s" % obj.absolute_url(1))
         return obj.UID()
