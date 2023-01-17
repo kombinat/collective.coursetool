@@ -13,5 +13,10 @@
                 name="collective.coursetool: Register member">
       <role name="Manager" />
     </permission>
+    <permission acquire="True"
+                name="collective.coursetool: Administrator">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+    </permission>
   </permissions>
 </rolemap>

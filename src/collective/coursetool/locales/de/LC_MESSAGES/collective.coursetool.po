@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-04 14:08+0000\n"
-"PO-Revision-Date: 2023-01-04 15:08+0100\n"
+"POT-Creation-Date: 2023-01-17 09:48+0000\n"
+"PO-Revision-Date: 2023-01-17 10:49+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -348,10 +348,6 @@ msgstr "No."
 msgid "Occurrences"
 msgstr "Kurstermine"
 
-#: collective/coursetool/browser/views.py
-msgid "PID"
-msgstr "PID"
-
 #: collective/coursetool/content/member.py
 msgid "Partnertype"
 msgstr "Partnerart"
@@ -359,6 +355,10 @@ msgstr "Partnerart"
 #: collective/coursetool/content/member.py
 msgid "Payed"
 msgstr "bezahlt"
+
+#: collective/coursetool/profiles/default/actions.xml
+msgid "Personal Information"
+msgstr "Meine Informationen"
 
 #: collective/coursetool/content/member.py
 msgid "Personal Saluation"
@@ -421,6 +421,10 @@ msgstr "Datei auswählen und hochladen"
 msgid "User Image"
 msgstr "Passfoto"
 
+#: collective/coursetool/browser/templates/view_course.pt
+msgid "You're already registered for this course"
+msgstr "Sie haben sich bereits für diesen Kurs eingetragen"
+
 #: collective/coursetool/content/member.py
 msgid "ZIP Code"
 msgstr "PLZ"
@@ -472,11 +476,6 @@ msgstr "Stichwortsuche"
 #: collective/coursetool/browser/templates/view_location.pt
 msgid "location_title"
 msgstr "Kursort: ${title}"
-
-#. Default: "Member: ${title}"
-#: collective/coursetool/browser/templates/view_member.pt
-msgid "member_title"
-msgstr "Mitglied: ${title}"
 
 #: collective/coursetool/vocabularies.py
 msgid "quali_a_label"

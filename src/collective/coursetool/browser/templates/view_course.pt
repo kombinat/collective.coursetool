@@ -10,7 +10,9 @@
 
 <body>
     <div class="coursetool-wrapper" metal:fill-slot="main"
-         tal:define="is_admin view/is_admin; members view/members">
+         tal:define="is_admin view/is_admin;
+                     members view/members;
+                     can_add_to_cart view/can_add_to_cart">
 
         <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
             <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
@@ -92,7 +94,7 @@
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item" tal:repeat="member members">
-                            <a href="${member/absolute_url}" tal:content="member/title">Coursetitle</a>
+                            <a href="${member/absolute_url}" tal:content="string:${member/title} (${member/id})">Member title</a>
                         </li>
                     </ol>
                     <span class="text-muted fs-sm" tal:condition="not:members" i18n:translate="">
@@ -102,7 +104,10 @@
             </div>
 
             <div class="card-footer">
-                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:is_admin" />
+                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="can_add_to_cart" />
+                <div class="alert alert-primary mb-0" i18n:translate="" tal:condition="python:not can_add_to_cart and not is_admin">
+                    You're already registered for this course
+                </div>
                 <tal:block condition="is_admin">
                     <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
                        data-pat-plone-modal='modalSizeClass: modal-xl;'>

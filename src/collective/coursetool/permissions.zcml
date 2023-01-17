@@ -8,6 +8,9 @@
     <permission
       id="collective.coursetool.RegisterMember"
       title="collective.coursetool: Register member" />
+    <permission
+      id="collective.coursetool.Administrator"
+      title="collective.coursetool: Administrator" />
 
 
   </configure>

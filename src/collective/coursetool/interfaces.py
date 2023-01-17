@@ -33,3 +33,9 @@ class ICourseToolSettings(Interface):
 
 class ICourseToolBaseFolder(Interface):
     """marker for courstool base portal"""
+
+
+class IUtils(Interface):
+
+    def member_url(self):
+        """ get url of coursetool member for usermenu """

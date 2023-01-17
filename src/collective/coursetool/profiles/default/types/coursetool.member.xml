@@ -26,7 +26,6 @@
   <property name="add_permission">cmf.AddPortalContent</property>
   <property name="klass">collective.coursetool.content.Member</property>
   <property name="behaviors">
-    <element value="plone.app.dexterity.behaviors.metadata.IPublication" />
     <element value="dexterity.membrane.user" />
     <element value="dexterity.membrane.provide_password" />
   </property>

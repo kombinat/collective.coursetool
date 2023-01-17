@@ -9,7 +9,7 @@ from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.indexer import indexer
 from plone.supermodel import model
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.browser.radio import RadioFieldWidget
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
@@ -58,14 +58,12 @@ class ICourseSchema(model.Schema):
     )
 
     # TODO: radio button
-    type = schema.Tuple(
+    type = schema.Choice(
         title=_("label_course_type", default="Type"),
-        value_type=schema.Choice(
-            vocabulary="coursetool.vocabulary.coursetypes",
-        ),
+        vocabulary="coursetool.vocabulary.coursetypes",
         required=True,
     )
-    directives.widget("type", CheckBoxFieldWidget)
+    directives.widget("type", RadioFieldWidget)
 
     max_members = schema.Int(
         title=_("Maximum member count"),

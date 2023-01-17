@@ -10,6 +10,7 @@ from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.namedfile import field as namedfile
 from plone.supermodel import model
+from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
@@ -25,10 +26,10 @@ class IRegistration(IRegisterSchema):
 class IMemberSchema(model.Schema):
     """schema"""
 
-    first_name = schema.TextLine(title=_("Firstname"), required=False)
-    last_name = schema.TextLine(title=_("Lastname"), required=False)
     id = schema.TextLine(title=_("Customer Nr"), required=True)
     salutation = schema.TextLine(title=_("Salutation"), required=False)
+    first_name = schema.TextLine(title=_("Firstname"), required=False)
+    last_name = schema.TextLine(title=_("Lastname"), required=False)
     graduation = schema.TextLine(title=_("Graduation"), required=False)
     address = schema.TextLine(title=_("Address"), required=False)
     address2 = schema.TextLine(title=_("Address2"), required=False)
@@ -98,13 +99,44 @@ class IMemberSchema(model.Schema):
         },
     )
 
+    # field visibility
+    directives.omitted("id")
+    directives.no_omit(IEditForm, "id")
+
+    # field permissions
+    directives.read_permission(
+        booking_nr="cmf.ManagePortal",
+        inactive="cmf.ManagePortal",
+        salutation_personal="cmf.ManagePortal",
+        salutation_letter="cmf.ManagePortal",
+        payed="cmf.ManagePortal",
+        state="cmf.ManagePortal",
+        qualification="cmf.ManagePortal",
+        partner_type="cmf.ManagePortal",
+    )
+    directives.write_permission(
+        id="cmf.ManagePortal",
+        booking_nr="cmf.ManagePortal",
+        inactive="cmf.ManagePortal",
+        salutation_personal="cmf.ManagePortal",
+        salutation_letter="cmf.ManagePortal",
+        payed="cmf.ManagePortal",
+        state="cmf.ManagePortal",
+        qualification="cmf.ManagePortal",
+        partner_type="cmf.ManagePortal",
+    )
+
     model.fieldset(
         "metadata",
         label=_("Metadata"),
         fields=[
+            "id",
+            "booking_nr",
+            "salutation_personal",
             "salutation_letter",
             "payed",
             "state",
+            "inactive",
             "qualification",
             "partner_type",
         ],

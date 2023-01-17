@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from collective.coursetool import _
+from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
 from plone import api
 from plone.base.batch import Batch
@@ -127,6 +128,9 @@ class CertificatesListing(ListingBase):
 
 
 class ViewBase(DefaultView):
+    def can_edit(self):
+        return api.user.has_permission("Modify portal content", obj=self.context)
+
     def is_admin(self):
         return api.user.has_permission("Manage portal", obj=self.context)
 
@@ -139,6 +143,13 @@ class CourseView(ViewBase):
             r.to_object
             for r in api.relation.get(source=self.context, relationship="members")
         ]
+
+    def can_add_to_cart(self):
+        if CoursetoolAdmin in api.user.get_permissions():
+            # no cart widget for admins
+            return False
+        user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
+        return user is None or user not in self.members()
 
 
 class ExamView(ViewBase):
@@ -189,3 +200,15 @@ class CertificateView(ViewBase):
             r.to_object
             for r in api.relation.get(source=self.context, relationship="members")
         ]
+
+
+class Utils(BrowserView):
+
+    def member_url(self):
+        """ get url of logged in member """
+        user = api.user.get_current()
+        mbtool = self.context.membrane_tool
+        if user:
+            uobj = mbtool.getUserObject(user.getUserName())
+            return uobj.absolute_url() if uobj else ""
+        return ""

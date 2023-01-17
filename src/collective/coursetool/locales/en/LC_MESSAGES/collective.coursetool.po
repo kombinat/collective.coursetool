@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-04 14:08+0000\n"
+"POT-Creation-Date: 2023-01-17 09:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -346,16 +346,16 @@ msgstr ""
 msgid "Occurrences"
 msgstr ""
 
-#: collective/coursetool/browser/views.py
-msgid "PID"
-msgstr ""
-
 #: collective/coursetool/content/member.py
 msgid "Partnertype"
 msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Payed"
+msgstr ""
+
+#: collective/coursetool/profiles/default/actions.xml
+msgid "Personal Information"
 msgstr ""
 
 #: collective/coursetool/content/member.py
@@ -419,6 +419,10 @@ msgstr ""
 msgid "User Image"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_course.pt
+msgid "You're already registered for this course"
+msgstr ""
+
 #: collective/coursetool/content/member.py
 msgid "ZIP Code"
 msgstr ""
@@ -469,11 +473,6 @@ msgstr ""
 #. Default: "Location: ${title}"
 #: collective/coursetool/browser/templates/view_location.pt
 msgid "location_title"
-msgstr ""
-
-#. Default: "Member: ${title}"
-#: collective/coursetool/browser/templates/view_member.pt
-msgid "member_title"
 msgstr ""
 
 #: collective/coursetool/vocabularies.py
