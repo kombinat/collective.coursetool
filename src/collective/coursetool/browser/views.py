@@ -145,11 +145,11 @@ class CourseView(ViewBase):
         ]
 
     def can_add_to_cart(self):
-        if CoursetoolAdmin in api.user.get_permissions():
+        if api.user.get_permissions().get(CoursetoolAdmin):
             # no cart widget for admins
             return False
         user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
-        return user is None or user not in self.members()
+        return not user or user not in self.members()
 
 
 class ExamView(ViewBase):
