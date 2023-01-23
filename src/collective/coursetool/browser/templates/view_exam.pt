@@ -10,7 +10,7 @@
 
 <body>
     <div class="coursetool-wrapper" metal:fill-slot="main"
-         tal:define="is_admin view/is_admin; members view/members">
+         tal:define="is_admin view/is_admin; members view/members; len_members python:len(context.members)">
 
         <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
             <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
@@ -30,7 +30,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="members-tab" data-bs-toggle="tab" data-bs-target="#tab-members" aria-current="true" href="#">
-                            <span i18n:translate="">Members</span> <span class="badge text-bg-secondary">${python:len(members)}</span>
+                            <span i18n:translate="">Members</span> <span class="badge text-bg-secondary">${len_members}</span>
                         </a>
                     </li>
                 </ul>
@@ -69,12 +69,34 @@
                     </section>
                 </div>
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
-                    <ol class="list-group list-group-numbered">
-                        <li class="list-group-item" tal:repeat="member members">
-                            <a href="${member/absolute_url}" tal:content="member/title">Coursetitle</a>
-                        </li>
-                    </ol>
-                    <span class="text-muted fs-sm" tal:condition="not:members" i18n:translate="">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th width="1%">
+                                    <input type="checkbox" class="form-check-input pat-toggle" data-pat-toggle="selector:input.member; attr:checked; value:checked" />
+                                </th>
+                                <th>Name</th>
+                                <th>
+                                    <span i18n:translate="">Exam successfully passed</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr tal:repeat="m members">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="member form-check-input" type="checkbox" value="${python:m['member'].UID()}" />
+                                    </div>
+                                </td>
+                                <td>${m/member/title}</td>
+                                <td>
+                                    <tal:icon condition="m/success" replace="structure python:icons.tag('file-earmark-check', tag_class='text-success')" />
+                                    <tal:icon condition="not:m/success" replace="structure python:icons.tag('file-earmark-minus', tag_class='text-danger')" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
                         No items found.
                     </span>
                 </div>

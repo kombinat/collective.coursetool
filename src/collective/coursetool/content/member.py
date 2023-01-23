@@ -62,6 +62,11 @@ class IMemberSchema(model.Schema):
         required=False,
     )
 
+    instructor = schema.Bool(
+        title=_("Instructor"),
+        required=False,
+    )
+
     state = schema.Choice(
         title=_("State"),
         vocabulary="coursetool.vocabulary.memberstates",

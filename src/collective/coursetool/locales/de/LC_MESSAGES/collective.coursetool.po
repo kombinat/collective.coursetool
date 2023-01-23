@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-17 09:48+0000\n"
-"PO-Revision-Date: 2023-01-17 10:49+0100\n"
+"POT-Creation-Date: 2023-01-23 13:55+0000\n"
+"PO-Revision-Date: 2023-01-23 14:56+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -194,6 +194,11 @@ msgstr "Mitglieder"
 msgid "Exam date"
 msgstr "Prüfungsdatum"
 
+#: collective/coursetool/browser/templates/view_exam.pt
+#: collective/coursetool/content/exam.py
+msgid "Exam successfully passed"
+msgstr "Erfolgreich absolviert"
+
 #: collective/coursetool/browser/templates/listing_exams.pt
 #: collective/coursetool/browser/templates/portal.pt
 #: collective/coursetool/browser/templates/view_member.pt
@@ -240,6 +245,7 @@ msgid "Information"
 msgstr "Information"
 
 #: collective/coursetool/content/course.py
+#: collective/coursetool/content/member.py
 msgid "Instructor"
 msgstr "Referent:in"
 
@@ -400,6 +406,10 @@ msgstr "Anrede"
 #: collective/coursetool/content/member.py
 msgid "Salutation Letter"
 msgstr "Anrede Brief"
+
+#: collective/coursetool/browser/templates/widget_course_occurrences_display.pt
+msgid "Start date day"
+msgstr "Wochentag"
 
 #: collective/coursetool/content/course.py
 msgid "Startdate"

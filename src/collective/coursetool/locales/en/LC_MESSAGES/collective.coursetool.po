@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-17 09:48+0000\n"
+"POT-Creation-Date: 2023-01-23 13:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -192,6 +192,11 @@ msgstr ""
 msgid "Exam date"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_exam.pt
+#: collective/coursetool/content/exam.py
+msgid "Exam successfully passed"
+msgstr ""
+
 #: collective/coursetool/browser/templates/listing_exams.pt
 #: collective/coursetool/browser/templates/portal.pt
 #: collective/coursetool/browser/templates/view_member.pt
@@ -238,6 +243,7 @@ msgid "Information"
 msgstr ""
 
 #: collective/coursetool/content/course.py
+#: collective/coursetool/content/member.py
 msgid "Instructor"
 msgstr ""
 
@@ -397,6 +403,10 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Salutation Letter"
+msgstr ""
+
+#: collective/coursetool/browser/templates/widget_course_occurrences_display.pt
+msgid "Start date day"
 msgstr ""
 
 #: collective/coursetool/content/course.py

@@ -156,10 +156,11 @@ class ExamView(ViewBase):
     """ """
 
     def members(self):
-        return [
-            r.to_object
-            for r in api.relation.get(source=self.context, relationship="members")
-        ]
+        for m in self.context.members:
+            yield dict(
+                member=api.content.get(UID=m["member"]),
+                success="selected" in m["success"],
+            )
 
 
 class LocationView(ViewBase):

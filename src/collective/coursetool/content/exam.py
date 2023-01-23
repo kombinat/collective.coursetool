@@ -1,6 +1,8 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IExam
+from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
+from collective.z3cform.datagridfield.row import DictRow
 from plone import api
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
@@ -10,6 +12,32 @@ from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.interface import implementer
+
+
+class IMembers(model.Schema):
+
+    member = schema.Choice(
+        title=_("Member"),
+        vocabulary="plone.app.vocabularies.Catalog",
+        required=False,
+    )
+    directives.widget(
+        "member",
+        RelatedItemsFieldWidget,
+        vocabulary="plone.app.vocabularies.Catalog",
+        pattern_options={
+            "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
+            "selectableTypes": "coursetool.member",
+            "mode": "search",
+            "favorites": [],
+            "browseable": False,
+        },
+    )
+
+    success = schema.Bool(
+        title=_("Exam successfully passed"),
+        required=False,
+    )
 
 
 class IExamSchema(model.Schema):
@@ -45,24 +73,19 @@ class IExamSchema(model.Schema):
         },
     )
 
-    members = RelationList(
+    members = schema.List(
         title=_("Course Members"),
-        default=[],
-        value_type=RelationChoice(
-            title=_("Member"), vocabulary="plone.app.vocabularies.Catalog"
+        value_type=DictRow(
+            title="Member",
+            schema=IMembers,
         ),
         required=False,
     )
     directives.widget(
         "members",
-        RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
-        pattern_options={
-            "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
-            "selectableTypes": "coursetool.member",
-            "mode": "search",
-            "favorites": [],
-        },
+        DataGridFieldWidgetFactory,
+        input_table_css_class="table table-sm",
+        display_table_css_class="table table-sm",
     )
 
     model.fieldset(

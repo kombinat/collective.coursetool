@@ -43,7 +43,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="certificates-tab" data-bs-toggle="tab" data-bs-target="#tab-certificates" aria-current="true" href="#">
-                            <span i18n:translate="">Certificates</span> <span class="badge text-bg-secondary">${python:len(exams)}</span>
+                            <span i18n:translate="">Certificates</span> <span class="badge text-bg-secondary">${python:len(certificates)}</span>
                         </a>
                     </li>
                 </ul>

@@ -2,6 +2,7 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
     i18n_domain="collective.coursetool"
     >
 
@@ -187,6 +188,20 @@
       class=".views.Utils"
       allowed_interface="..interfaces.IUtils"
       permission="zope2.View"
+      />
+
+  <!-- z3c.form widget templates -->
+  <z3c:widgetTemplate
+      widget=".widgets.CourseOccurrencesWidget"
+      template="templates/widget_course_occurrences_display.pt"
+      layer="collective.z3cform.datagridfield.interfaces.IDataGridFieldLayer"
+      mode="display"
+      />
+  <z3c:widgetTemplate
+      widget=".widgets.CourseOccurrencesObjectWidget"
+      template="templates/widget_course_occurrences_object_display.pt"
+      layer="collective.z3cform.datagridfield.interfaces.IDataGridFieldLayer"
+      mode="display"
       />
 
 </configure>

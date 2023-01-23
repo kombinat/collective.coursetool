@@ -11,3 +11,6 @@ def payment_success(data):
     course = api.content.get(UID=uids[0])
     member = api.content.get(UID=order.attrs.get("creator"))
     api.relation.create(source=course, target=member, relationship="members")
+
+    for exam in course.get_exams():
+        api.relation.create(source=exam, target=member, relationship="members")

@@ -1,13 +1,13 @@
 from collective.coursetool import _
+from collective.coursetool.browser.widgets import CourseOccurrencesFieldWidget
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import ICourse
-from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
+from plone.app.z3cform.widget import DateFieldWidget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
-from plone.indexer import indexer
 from plone.supermodel import model
 from z3c.form.browser.radio import RadioFieldWidget
 from z3c.relationfield.schema import RelationChoice
@@ -24,6 +24,12 @@ class ICourseOccurrences(model.Schema):
         title=_("Startdate"),
         required=False,
     )
+    directives.widget(
+        "start_date",
+        DateFieldWidget,
+        _formater_length="long",
+    )
+
     start_time = schema.Time(
         title=_("Starttime"),
         required=False,
@@ -51,7 +57,7 @@ class ICourseSchema(model.Schema):
     )
     directives.widget(
         "occurrences",
-        DataGridFieldWidgetFactory,
+        CourseOccurrencesFieldWidget,
         auto_append=False,
         input_table_css_class="table table-sm",
         display_table_css_class="table table-sm",

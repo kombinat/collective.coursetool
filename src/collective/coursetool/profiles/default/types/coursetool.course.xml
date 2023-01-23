@@ -28,6 +28,7 @@
   <property name="behaviors">
     <element value="plone.namefromtitle" />
     <element value="plone.richtext" />
+    <element value="plone.categorization" />
 
     <!-- bda.plone.shop -->
     <element value="bda.shop.buyable" />
