@@ -6,6 +6,7 @@ from collective.z3cform.datagridfield.row import DictRow
 from plone import api
 from plone.app.z3cform.widget import DateFieldWidget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.app.vocabularies.catalog import CatalogSource
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
@@ -113,14 +114,16 @@ class ICourseSchema(model.Schema):
         default=[],
         value_type=RelationChoice(
             title=_("Instructor"),
-            vocabulary="plone.app.vocabularies.Catalog",
+            source=CatalogSource(
+                portal_type='coursetool.member',
+                instructor=True,
+            ),
         ),
         required=False,
     )
     directives.widget(
         "instructors",
         RelatedItemsFieldWidget,
-        vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
             "selectableTypes": "coursetool.member",
