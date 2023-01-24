@@ -186,6 +186,7 @@ class IMemberSchema(model.Schema):
             "payed",
             "state",
             "inactive",
+            "instructor",
             "qualification",
             "partner_type",
         ],
