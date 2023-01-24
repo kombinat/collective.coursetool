@@ -4,7 +4,9 @@ from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
 from plone import api
 from plone.base.batch import Batch
+from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
 
@@ -191,6 +193,13 @@ class MemberView(ViewBase):
 
     def certificates(self):
         return self.backrefs("coursetool.certificate")
+
+
+class MemberEditForm(DefaultEditForm):
+    css_class = "row"
+
+
+MemberEditView = layout.wrap_form(MemberEditForm)
 
 
 class CertificateView(ViewBase):

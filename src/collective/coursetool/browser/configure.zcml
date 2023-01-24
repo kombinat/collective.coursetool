@@ -143,6 +143,14 @@
       />
 
   <browser:page
+      name="edit"
+      for="collective.coursetool.interfaces.IMember"
+      class=".views.MemberEditView"
+      permission="cmf.ModifyPortalContent"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
       name="view"
       for="collective.coursetool.interfaces.ICertificate"
       class=".views.CertificateView"

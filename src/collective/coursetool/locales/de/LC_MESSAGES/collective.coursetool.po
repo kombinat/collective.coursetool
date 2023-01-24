@@ -1,11 +1,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-23 13:55+0000\n"
-"PO-Revision-Date: 2023-01-23 14:56+0100\n"
+"POT-Creation-Date: 2023-01-24 08:38+0000\n"
+"PO-Revision-Date: 2023-01-24 07:57+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,6 +13,7 @@ msgstr ""
 "Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+"Language: de\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
@@ -359,12 +359,16 @@ msgid "Partnertype"
 msgstr "Partnerart"
 
 #: collective/coursetool/content/member.py
+msgid "Passport Image"
+msgstr "Foto Ihres Lichtbildausweises"
+
+#: collective/coursetool/content/member.py
 msgid "Payed"
 msgstr "bezahlt"
 
 #: collective/coursetool/profiles/default/actions.xml
 msgid "Personal Information"
-msgstr "Meine Informationen"
+msgstr "Mein Profil"
 
 #: collective/coursetool/content/member.py
 msgid "Personal Saluation"
@@ -374,6 +378,10 @@ msgstr "persönliche Anrede"
 #: collective/coursetool/content/member.py
 msgid "Phone"
 msgstr "Telefon"
+
+#: collective/coursetool/content/member.py
+msgid "Please upload a foto of your passport to validate your identity."
+msgstr "Bitte laden Sie hier ein Foto Ihres Reisepasses oder Personalausweises hoch, damit wir für den Druck des Fischerausweises Ihre Identität bestätigen können."
 
 #: collective/coursetool/content/course.py
 msgid "Practical experience"
@@ -426,6 +434,10 @@ msgstr "Status"
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Upload File"
 msgstr "Datei auswählen und hochladen"
+
+#: collective/coursetool/content/member.py
+msgid "Upload your Passfoto (5MB max size)"
+msgstr "Laden Sie hier Ihr Passfoto hoch (Bildformat JPG, maximale Größe: 15MB)"
 
 #: collective/coursetool/content/member.py
 msgid "User Image"

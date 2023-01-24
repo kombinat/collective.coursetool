@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-23 13:55+0000\n"
+"POT-Creation-Date: 2023-01-24 08:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -357,6 +357,10 @@ msgid "Partnertype"
 msgstr ""
 
 #: collective/coursetool/content/member.py
+msgid "Passport Image"
+msgstr ""
+
+#: collective/coursetool/content/member.py
 msgid "Payed"
 msgstr ""
 
@@ -371,6 +375,10 @@ msgstr ""
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "Phone"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Please upload a foto of your passport to validate your identity."
 msgstr ""
 
 #: collective/coursetool/content/course.py
@@ -423,6 +431,10 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Upload File"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Upload your Passfoto (5MB max size)"
 msgstr ""
 
 #: collective/coursetool/content/member.py

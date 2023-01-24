@@ -28,6 +28,7 @@
   <property name="behaviors">
     <element value="dexterity.membrane.user" />
     <element value="dexterity.membrane.provide_password" />
+    <element value="plone.textindexer" />
   </property>
   <property name="schema">collective.coursetool.content.IMemberSchema</property>
   <property name="model_source" />

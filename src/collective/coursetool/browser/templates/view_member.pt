@@ -51,11 +51,9 @@
 
             <div class="card-body tab-content">
                 <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
-                    <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
-
+                    <div class="factbox my-3 row">
                         <tal:block repeat="widget view/widgets/values">
-                            <div class="col mb-3"
-                                 tal:condition="python:widget.__name__ not in ('IBasic.title', 'IBasic.description', 'title', 'description',)">
+                            <div class="${widget/wrapper_css_class|string:col-lg-12} mb-2 pb-1 border-bottom border-end">
                                 <label class="fw-bold" tal:content="widget/label" />
                                 <br />
                                 <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
@@ -63,15 +61,6 @@
                             </div>
                         </tal:block>
                     </div>
-
-                    <section id="section-text"
-                             tal:condition="python:getattr(context.aq_base, 'text', None)">
-                        <label class="fw-bold" i18n:translate="">Course Description</label>:
-                        <div id="parent-fieldname-text"
-                             tal:content="structure python:context.text.output_relative_to(view.context)">
-                          Text
-                        </div>
-                    </section>
                 </div>
 
                 <div class="tab-pane fade" id="tab-metadata" role="tabpabel" aria-labelledby="metadata-tab">

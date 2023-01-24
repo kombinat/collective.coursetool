@@ -155,6 +155,8 @@ class CourseToolMemberAdder(object):
                 first_name=data.get("first_name", "Maximiliane"),
                 last_name=data.get("last_name", "Muster"),
                 email=login_name,
+                picture=data.get("picture", None),
+                passport_image=data.get("passport_image", None),
             )
             # set workflow state to "enabled"
             api.content.transition(obj, to_state="enabled")
