@@ -63,7 +63,10 @@
                                 tal:condition="exams">
                             <div class="text-bg-light py-1 px-2"
                                     tal:define="wdgt python:view.w.get('exams')">
-                                    <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(['%s (%s)' % (e.title, e.date.strftime('%d.%m.%Y %H:%M')) for e in exams])" />
+                                <span class="fw-bold" tal:content="structure wdgt/label" />:
+                                <a tal:repeat="e exams" href="${e/absolute_url}" tal:omit-tag="not:is_admin">
+                                    ${e/title} (${python:e.date.strftime('%d.%m.%Y %H:%M')})
+                                </a>
                             </div>
                         </div>
                         <div class="col"

@@ -13,6 +13,7 @@ from plone.formwidget.namedfile import NamedImageFieldWidget
 from plone.namedfile import field as namedfile
 from plone.supermodel import model
 from z3c.form.browser.text import TextFieldWidget
+from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.component import adapter
@@ -39,7 +40,11 @@ class IRegistration(IRegisterSchema):
 class IMemberSchema(model.Schema):
     """schema"""
 
-    salutation = schema.TextLine(title=_("Salutation"), required=False)
+    salutation = schema.Choice(
+        title=_("Salutation"),
+        required=False,
+        vocabulary="bda.plone.shop.vocabularies.GenderVocabulary",
+    )
     graduation = schema.TextLine(title=_("Graduation"), required=False)
     first_name = schema.TextLine(title=_("Firstname"), required=False)
     last_name = schema.TextLine(title=_("Lastname"), required=False)
@@ -70,7 +75,7 @@ class IMemberSchema(model.Schema):
     )
 
     # layout wrapper CSS classes
-    directives.widget("salutation", TextFieldWidget, wrapper_css_class="col-lg-1")
+    directives.widget("salutation", SelectFieldWidget, wrapper_css_class="col-lg-1")
     directives.widget("graduation", TextFieldWidget, wrapper_css_class="col-lg-1")
     directives.widget("first_name", TextFieldWidget, wrapper_css_class="col-lg-5")
     directives.widget("last_name", TextFieldWidget, wrapper_css_class="col-lg-5")
@@ -233,9 +238,12 @@ class Member(Container):
 class UserProperties(MembraneUserProperties):
 
     property_map = dict(
+        gender="salutation",
         email="email",
         first_name="first_name",
-        firstname="first_name",
         last_name="last_name",
-        lastname="last_name",
+        street="address",
+        zip="zip_code",
+        city="city",
+        country="cty_code",
     )

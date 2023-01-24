@@ -239,3 +239,6 @@ class Course(Container):
         return " - ".join([
             f"{l.title}, {l.city}" for l in self.get_locations()
         ])
+
+    def members_uuids(self):
+        return [m.to_object.UID() for m in self.members]

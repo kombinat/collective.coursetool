@@ -63,6 +63,7 @@
       />
 
   <include package=".browser" />
+  <include package=".content" />
 
   <!-- shop patches -->
   <include package="collective.monkeypatcher" />

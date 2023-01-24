@@ -164,6 +164,13 @@ class ExamView(ViewBase):
                 success="selected" in m["success"],
             )
 
+    def can_add_to_cart(self):
+        if api.user.get_permissions().get(CoursetoolAdmin):
+            # no cart widget for admins
+            return False
+        user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
+        return not user or user.UID() not in self.context.members_uuids()
+
 
 class LocationView(ViewBase):
     """ """
@@ -189,7 +196,14 @@ class MemberView(ViewBase):
         return self.backrefs("coursetool.course")
 
     def exams(self):
-        return self.backrefs("coursetool.exam")
+        return [
+            b.getObject() for b
+            in self.context.portal_catalog(
+                portal_type="coursetool.exam",
+                members_uuid=self.context.UID(),
+                sort_on="start",
+            )
+        ]
 
     def certificates(self):
         return self.backrefs("coursetool.certificate")

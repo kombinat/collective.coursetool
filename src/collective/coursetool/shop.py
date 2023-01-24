@@ -13,4 +13,9 @@ def payment_success(data):
     api.relation.create(source=course, target=member, relationship="members")
 
     for exam in course.get_exams():
-        api.relation.create(source=exam, target=member, relationship="members")
+        members = exam.members
+        if len([m for m in members if m["member"] == member.UID()]):
+            # member is already in members
+            continue
+        members.append({"member": member.UID(), "success": ()})
+        exam.members = members

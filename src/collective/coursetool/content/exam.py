@@ -101,8 +101,14 @@ class IExamSchema(model.Schema):
 class Exam(Container):
     """object"""
 
+    def start(self):
+        return self.date
+
     def get_locations(self):
         return [
             r.to_object
             for r in api.relation.get(source=self, relationship="location")
         ]
+
+    def members_uuids(self):
+        return [m["member"] for m in self.members]

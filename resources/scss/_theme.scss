@@ -11,6 +11,10 @@
     }
 }
 
+div.quantity-group {
+    display:none;
+}
+
 @include media-breakpoint-up(lg) {
     #form-widgets-picture, #form-widgets-passport_image {
         img {

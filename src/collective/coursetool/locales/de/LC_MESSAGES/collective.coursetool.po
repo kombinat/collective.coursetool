@@ -1,10 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-24 08:38+0000\n"
-"PO-Revision-Date: 2023-01-24 07:57+0100\n"
+"POT-Creation-Date: 2023-01-24 12:20+0000\n"
+"PO-Revision-Date: 2023-01-24 13:20+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +14,6 @@ msgstr ""
 "Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
-"Language: de\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
@@ -446,6 +446,10 @@ msgstr "Passfoto"
 #: collective/coursetool/browser/templates/view_course.pt
 msgid "You're already registered for this course"
 msgstr "Sie haben sich bereits für diesen Kurs eingetragen"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "You're already registered for this exam"
+msgstr "Sie haben sich bereits für diese Prüfung eingetragen."
 
 #: collective/coursetool/content/member.py
 msgid "ZIP Code"

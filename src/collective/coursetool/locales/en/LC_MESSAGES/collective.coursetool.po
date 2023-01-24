@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-24 08:38+0000\n"
+"POT-Creation-Date: 2023-01-24 12:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -443,6 +443,10 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/view_course.pt
 msgid "You're already registered for this course"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "You're already registered for this exam"
 msgstr ""
 
 #: collective/coursetool/content/member.py

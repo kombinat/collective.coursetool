@@ -4,6 +4,10 @@
          name="partner_type">
     <indexed_attr value="partner_type" />
   </index>
+  <index meta_type="KeywordIndex"
+         name="members_uuids">
+    <indexed_attr value="members_uuids" />
+  </index>
   <index meta_type="BooleanIndex"
          name="instructor">
     <indexed_attr value="instructor" />

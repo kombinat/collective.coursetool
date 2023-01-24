@@ -1,4 +1,4 @@
 
-<configure>
+<configure xmlns="http://namespaces.zope.org/zope">
   <adapter factory=".member.UserProperties" />
 </configure>

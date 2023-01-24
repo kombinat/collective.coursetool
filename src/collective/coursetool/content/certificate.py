@@ -49,4 +49,6 @@ class ICertificateSchema(model.Schema):
 
 @implementer(ICertificate)
 class Certificate(Container):
-    """object"""
+
+    def members_uuids(self):
+        return [m.to_object.UID() for m in self.members]
