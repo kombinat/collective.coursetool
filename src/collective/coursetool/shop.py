@@ -1,5 +1,17 @@
+from bda.plone.checkout.interfaces import ICheckoutFormPresets
 from bda.plone.orders.common import get_order
+from bda.plone.shop.interfaces import IShopExtensionLayer
+from collective.coursetool.browser.views import Utils
+from collective.coursetool.interfaces import ICollectiveCoursetoolLayer
+from node.utils import UNSET
 from plone import api
+from zope.component import adapter
+from zope.interface import implementer
+from zope.interface import Interface
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def payment_success(data):
@@ -19,3 +31,37 @@ def payment_success(data):
             continue
         members.append({"member": member.UID(), "success": ()})
         exam.members = members
+
+
+CHECKOUT_FIELD_MAP = {
+    "gender": "salutation",
+    "firstname": "first_name",
+    "lastname": "last_name",
+    "street": "address",
+    "zip": "zip_code",
+    "country": "cty_code",
+}
+
+
+@implementer(ICheckoutFormPresets)
+@adapter(Interface, ICollectiveCoursetoolLayer)
+class CheckoutFormCourseMemberPresets(object):
+    """Adapter to retrieve member presets for checkout form."""
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        if api.user.is_anonymous():
+            self.member = None
+        else:
+            self.member = Utils(context, request).member()
+
+    def get_value(self, field_name):
+        default = UNSET
+        if self.member:
+            parts = field_name.split(".")
+            name = parts[-1]
+            if "delivery_address" in parts:
+                name = "delivery_%s" % name
+            default = getattr(self.member, CHECKOUT_FIELD_MAP.get(name, name), UNSET)
+        return default

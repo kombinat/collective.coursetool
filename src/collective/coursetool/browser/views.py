@@ -228,11 +228,17 @@ class CertificateView(ViewBase):
 
 class Utils(BrowserView):
 
-    def member_url(self):
-        """ get url of logged in member """
+    def member(self):
         user = api.user.get_current()
         mbtool = self.context.membrane_tool
+        uobj = None
         if user:
             uobj = mbtool.getUserObject(user.getUserName())
-            return uobj.absolute_url() if uobj else ""
+        return uobj
+
+    def member_url(self):
+        """ get url of logged in member """
+        member = self.member()
+        if member:
+            return member.absolute_url()
         return ""
