@@ -100,6 +100,9 @@
                             <a href="${member/absolute_url}" tal:content="string:${member/title} (${member/id})">Member title</a>
                         </li>
                     </ol>
+                    <div class="btn-group mt-2" tal:condition="members">
+                        <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                    </div>
                     <span class="text-muted fs-sm" tal:condition="not:members" i18n:translate="">
                         No items found.
                     </span>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-24 12:20+0000\n"
+"POT-Creation-Date: 2023-01-25 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Actions for selected members"
+msgstr ""
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
 msgid "Add Certificate"
@@ -81,6 +85,10 @@ msgstr ""
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "City"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Comment"
 msgstr ""
 
 #: collective/coursetool/vocabularies.py
@@ -411,6 +419,11 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Salutation Letter"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to all members"
 msgstr ""
 
 #: collective/coursetool/browser/templates/widget_course_occurrences_display.pt

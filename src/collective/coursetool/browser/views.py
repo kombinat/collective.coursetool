@@ -154,6 +154,11 @@ class CourseView(ViewBase):
         return not user or user not in self.members()
 
 
+    def all_members_mailaddress(self):
+        mails = [m.email for m in self.members()]
+        return ";".join(mails)
+
+
 class ExamView(ViewBase):
     """ """
 
@@ -170,6 +175,10 @@ class ExamView(ViewBase):
             return False
         user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
         return not user or user.UID() not in self.context.members_uuids()
+
+    def all_members_mailaddress(self):
+        mails = [m["member"].email for m in self.members()]
+        return ";".join(mails)
 
 
 class LocationView(ViewBase):

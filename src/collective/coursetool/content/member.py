@@ -42,12 +42,11 @@ class IMemberSchema(model.Schema):
 
     salutation = schema.Choice(
         title=_("Salutation"),
-        required=False,
         vocabulary="bda.plone.shop.vocabularies.GenderVocabulary",
     )
     graduation = schema.TextLine(title=_("Graduation"), required=False)
-    first_name = schema.TextLine(title=_("Firstname"), required=False)
-    last_name = schema.TextLine(title=_("Lastname"), required=False)
+    first_name = schema.TextLine(title=_("Firstname"), required=True)
+    last_name = schema.TextLine(title=_("Lastname"), required=True)
     address = schema.TextLine(title=_("Address"), required=False)
     address2 = schema.TextLine(title=_("Address2"), required=False)
     zip_code = schema.TextLine(title=_("ZIP Code"), required=False)
@@ -145,6 +144,11 @@ class IMemberSchema(model.Schema):
         },
     )
 
+    comment = schema.Text(
+        title=_("Comment"),
+        required=False,
+    )
+
     # field visibility
     directives.omitted("id")
     directives.no_omit(IEditForm, "id")
@@ -160,6 +164,7 @@ class IMemberSchema(model.Schema):
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
         partner_type="cmf.ManagePortal",
+        comment="cmf.ManagePortal",
     )
     directives.write_permission(
         id="cmf.ManagePortal",
@@ -173,6 +178,7 @@ class IMemberSchema(model.Schema):
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
         partner_type="cmf.ManagePortal",
+        comment="cmf.ManagePortal",
     )
 
     # mark searchable fields
@@ -194,6 +200,7 @@ class IMemberSchema(model.Schema):
             "instructor",
             "qualification",
             "partner_type",
+            "comment",
         ],
     )
 

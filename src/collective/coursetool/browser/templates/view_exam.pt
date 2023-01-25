@@ -99,6 +99,12 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="btn-group mt-2" tal:condition="len_members">
+                        <select name="member_actions">
+                            <option value="" i18n:translate="">Actions for selected members</option>
+                        </select>
+                        <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                    </div>
                     <span class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
                         No items found.
                     </span>
