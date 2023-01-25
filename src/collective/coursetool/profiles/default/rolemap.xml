@@ -11,7 +11,7 @@
     </permission>
     <permission acquire="True"
                 name="collective.coursetool: Register member">
-      <role name="Manager" />
+      <role name="Anonymous" />
     </permission>
     <permission acquire="True"
                 name="collective.coursetool: Administrator">

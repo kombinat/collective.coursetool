@@ -3,6 +3,7 @@ from collective.coursetool import _
 from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
 from io import BytesIO
+from PIL import Image
 from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
@@ -309,14 +310,16 @@ class PrintView(BrowserView):
             buff,
             pagesize=(95*mm, 55*mm),
         )
+        # general
+        #canv.setFont()
         # background rectangle
         canv.setFillColor(toColor("rgb(205,228,252)"))
         canv.rect(0, 0, 95*mm, 55*mm, stroke=0, fill=1)
 
         # text
+        canv.setFontSize(2.5*mm)
         canv.setFillColor((0, 0, 0))
         canv.drawString(10*mm, 40*mm, f"{self.context.cty_code} {self.context.id}")
-
         name_line = " ".join([
             x for x in [
                 self.context.graduation,
@@ -324,6 +327,14 @@ class PrintView(BrowserView):
                 self.context.last_name
             ] if x])
         canv.drawString(10*mm, 35*mm, name_line)
+
+        # passfoto
+        if self.context.picture:
+            view = self.context.restrictedTraverse("@@images")
+            # the passfoto scale is defined in registry
+            cropped_img = view.scale("picture", scale="passfoto", mode="contain")
+            _pil_image = Image.open(BytesIO(cropped_img.data.data))
+            canv.drawInlineImage(_pil_image, 60*mm, 13*mm, 20*mm, 30*mm)
 
         canv.showPage()
         canv.save()

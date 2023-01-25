@@ -4,5 +4,10 @@
 >
 
   <!-- -*- extra stuff goes here -*- -->
+  <record name="plone.allowed_sizes">
+    <value purge="false">
+        <element>passfoto 600:900</element>
+    </value>
+  </record>
 
 </registry>
