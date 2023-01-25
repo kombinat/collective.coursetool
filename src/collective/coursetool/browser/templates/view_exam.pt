@@ -72,6 +72,7 @@
                     </section>
                 </div>
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
+                    <form action="${context/absolute_url}" class="pat-inject" data-pat-inject="#tab-members #tab-members && #global_statusmessage #global_statusmessage && #members-tab #members-tab" method="POST">
                     <table class="table table-condensed table-striped">
                         <thead>
                             <tr>
@@ -88,26 +89,31 @@
                             <tr tal:repeat="m members">
                                 <td>
                                     <div class="form-check">
-                                        <input class="member form-check-input" type="checkbox" value="${python:m['member'].UID()}" />
+                                        <input class="member form-check-input" name="uids:list" type="checkbox" value="${python:m['member'].UID()}" />
                                     </div>
                                 </td>
                                 <td>${m/member/title}</td>
                                 <td>
-                                    <tal:icon condition="m/success" replace="structure python:icons.tag('file-earmark-check', tag_class='text-success')" />
-                                    <tal:icon condition="not:m/success" replace="structure python:icons.tag('file-earmark-minus', tag_class='text-danger')" />
+                                    <tal:icon replace="structure python:icons.tag('file-earmark-check' if m['success'] else 'file-earmark-minus', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="btn-group mt-2" tal:condition="len_members">
-                        <select name="member_actions">
-                            <option value="" i18n:translate="">Actions for selected members</option>
-                        </select>
+                    <div class="formActions" tal:condition="len_members">
+                        <div class="input-group">
+                            <select name="member_action" class="form-select form-select-sm">
+                                <option value="" i18n:translate="">Actions for selected members</option>
+                                <option value="action_successfully_passed" i18n:translate="">successfully passed</option>
+                                <option value="action_delete" i18n:translate="">delete</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Perform Action</button>
+                        </div>
                         <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
                     </div>
                     <span class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
                         No items found.
                     </span>
+                    </form>
                 </div>
             </div>
 

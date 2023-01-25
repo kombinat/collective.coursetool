@@ -6,9 +6,14 @@ from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plone.protect import PostOnly
+from plone.protect import protect
 from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
+from zExceptions import Forbidden
+
+import transaction
 
 
 def pretty_date(val):
@@ -162,6 +167,17 @@ class CourseView(ViewBase):
 class ExamView(ViewBase):
     """ """
 
+    def __call__(self):
+        if (
+            self.request.get("REQUEST_METHOD", "GET").upper() == "POST"
+            and self.request.get("member_action")
+        ):
+            action = self.request.get("member_action")
+            factory = getattr(self, action, None)
+            if factory and callable(factory):
+                factory(self.request)
+        return super().__call__()
+
     def members(self):
         for m in self.context.members:
             yield dict(
@@ -179,6 +195,42 @@ class ExamView(ViewBase):
     def all_members_mailaddress(self):
         mails = [m["member"].email for m in self.members()]
         return ";".join(mails)
+
+    @protect(PostOnly)
+    def action_delete(self, REQUEST):
+        _changes = False
+        _exam_members = self.context.members
+
+        for uid in REQUEST.get("uids", []):
+            obj = api.content.get(UID=uid)
+            obj.aq_parent.manage_delObjects([obj.id, ])
+            _changes = True
+            _exam_members = [m for m in _exam_members if m["member"] != uid]
+
+        if _changes:
+            self.context.members = _exam_members
+            self.context.reindexObject()
+            transaction.commit()
+            api.portal.show_message(_("Successfully deleted users."))
+        else:
+            api.portal.show_message(_("No action performed."))
+
+    @protect(PostOnly)
+    def action_successfully_passed(self, REQUEST):
+        _changes = False
+        _exam_members = self.context.members
+        uids = REQUEST.get("uids", [])
+
+        for m in _exam_members:
+            if m["member"] in uids:
+                m["success"] = ("selected", )
+                _changes = True
+
+        if _changes:
+            self.context.members = _exam_members
+            api.portal.show_message(_("Successfully changed users state."))
+        else:
+            api.portal.show_message(_("No action performed."))
 
 
 class LocationView(ViewBase):
@@ -209,7 +261,7 @@ class MemberView(ViewBase):
             b.getObject() for b
             in self.context.portal_catalog(
                 portal_type="coursetool.exam",
-                members_uuid=self.context.UID(),
+                members_uuids=self.context.UID(),
                 sort_on="start",
             )
         ]

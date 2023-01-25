@@ -31,6 +31,7 @@ def payment_success(data):
             continue
         members.append({"member": member.UID(), "success": ()})
         exam.members = members
+        exam.reindexObject()
 
 
 CHECKOUT_FIELD_MAP = {

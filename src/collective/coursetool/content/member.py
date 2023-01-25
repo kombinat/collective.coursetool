@@ -144,7 +144,7 @@ class IMemberSchema(model.Schema):
         },
     )
 
-    comment = schema.Text(
+    admin_comment = schema.Text(
         title=_("Comment"),
         required=False,
     )
@@ -164,7 +164,7 @@ class IMemberSchema(model.Schema):
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
         partner_type="cmf.ManagePortal",
-        comment="cmf.ManagePortal",
+        admin_comment="cmf.ManagePortal",
     )
     directives.write_permission(
         id="cmf.ManagePortal",
@@ -178,7 +178,7 @@ class IMemberSchema(model.Schema):
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
         partner_type="cmf.ManagePortal",
-        comment="cmf.ManagePortal",
+        admin_comment="cmf.ManagePortal",
     )
 
     # mark searchable fields
@@ -200,7 +200,7 @@ class IMemberSchema(model.Schema):
             "instructor",
             "qualification",
             "partner_type",
-            "comment",
+            "admin_comment",
         ],
     )
 

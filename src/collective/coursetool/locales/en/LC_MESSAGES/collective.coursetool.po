@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-25 09:15+0000\n"
+"POT-Creation-Date: 2023-01-25 12:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -341,6 +341,10 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: collective/coursetool/browser/views.py
+msgid "No action performed."
+msgstr ""
+
 #: collective/coursetool/browser/templates/listing_macros.pt
 #: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
@@ -442,6 +446,14 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+#: collective/coursetool/browser/views.py
+msgid "Successfully changed users state."
+msgstr ""
+
+#: collective/coursetool/browser/views.py
+msgid "Successfully deleted users."
+msgstr ""
+
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Upload File"
 msgstr ""
@@ -482,6 +494,10 @@ msgstr ""
 
 #: collective/coursetool/vocabularies.py
 msgid "course_type_online"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "delete"
 msgstr ""
 
 #. Default: "Exam: ${title}"
@@ -566,4 +582,8 @@ msgstr ""
 #. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
 #: collective/coursetool/browser/registration.py
 msgid "status_nonfatal_password_mail"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "successfully passed"
 msgstr ""

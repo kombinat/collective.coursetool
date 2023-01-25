@@ -1,10 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-25 09:15+0000\n"
-"PO-Revision-Date: 2023-01-25 10:02+0100\n"
+"POT-Creation-Date: 2023-01-25 12:16+0000\n"
+"PO-Revision-Date: 2023-01-25 13:16+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,12 +14,11 @@ msgstr ""
 "Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
-"Language: de\n"
 "X-Generator: Poedit 3.2.2\n"
 
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Actions for selected members"
-msgstr ""
+msgstr "Mitglieder-Aktionen"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
 msgid "Add Certificate"
@@ -91,7 +91,7 @@ msgstr "Ort"
 
 #: collective/coursetool/content/member.py
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 #: collective/coursetool/vocabularies.py
 msgid "Complete - not printed"
@@ -343,6 +343,10 @@ msgstr "Mobiltelefon"
 msgid "Name"
 msgstr "Name"
 
+#: collective/coursetool/browser/views.py
+msgid "No action performed."
+msgstr "Keine Aktion ausgeführt."
+
 #: collective/coursetool/browser/templates/listing_macros.pt
 #: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
@@ -444,6 +448,14 @@ msgstr "Start"
 msgid "State"
 msgstr "Status"
 
+#: collective/coursetool/browser/views.py
+msgid "Successfully changed users state."
+msgstr "Mitgliederstatus erfolgreich geändert."
+
+#: collective/coursetool/browser/views.py
+msgid "Successfully deleted users."
+msgstr "Mitglied(er) erfolgreich gelöscht."
+
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Upload File"
 msgstr "Datei auswählen und hochladen"
@@ -485,6 +497,10 @@ msgstr "Teilnahme am Kursort"
 #: collective/coursetool/vocabularies.py
 msgid "course_type_online"
 msgstr "Selbststudium zu Hause"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "delete"
+msgstr "löschen"
 
 #. Default: "Exam: ${title}"
 #: collective/coursetool/browser/templates/view_exam.pt
@@ -569,3 +585,7 @@ msgstr ""
 #: collective/coursetool/browser/registration.py
 msgid "status_nonfatal_password_mail"
 msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "successfully passed"
+msgstr "erfolgreich absolviert"
