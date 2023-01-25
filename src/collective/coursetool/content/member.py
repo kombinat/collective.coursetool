@@ -43,6 +43,7 @@ class IMemberSchema(model.Schema):
     salutation = schema.Choice(
         title=_("Salutation"),
         vocabulary="bda.plone.shop.vocabularies.GenderVocabulary",
+        required=False,
     )
     graduation = schema.TextLine(title=_("Graduation"), required=False)
     first_name = schema.TextLine(title=_("Firstname"), required=True)

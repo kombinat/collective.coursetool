@@ -59,6 +59,11 @@ STATE_MAPPING = {
     "Komplett, gedruckt": "complete_printed",
     "Nicht Eingelesen": "not_read",
 }
+SALUTATION_MAPPING = {
+    "Herrn": "male",
+    "Herr": "male",
+    "Frau": "female",
+}
 
 
 def no_validation(value):
@@ -107,6 +112,10 @@ class ImportMembers(BrowserView):
                     data[fld] = row[idx].strftime("%Y-%m-%d")
                 else:
                     data[fld] = row[idx]
+
+                # extra mappings
+                if fld == "salutation":
+                    data[fld] = SALUTATION_MAPPING.get(row[idx], None)
 
             for fld, idx in METADATA_MAPPING.items():
                 if row[idx] is None:

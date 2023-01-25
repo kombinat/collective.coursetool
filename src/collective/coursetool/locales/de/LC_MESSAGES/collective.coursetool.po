@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-25 12:16+0000\n"
-"PO-Revision-Date: 2023-01-25 13:16+0100\n"
+"POT-Creation-Date: 2023-01-25 14:17+0000\n"
+"PO-Revision-Date: 2023-01-25 15:17+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,7 +18,7 @@ msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Actions for selected members"
-msgstr "Mitglieder-Aktionen"
+msgstr "Aktionen für ausgwählte Mitglieder"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
 msgid "Add Certificate"
@@ -49,9 +49,9 @@ msgstr "Straße, Nr."
 msgid "Address2"
 msgstr "Adresszusatz"
 
+#: collective/coursetool/browser/templates/import_members.pt
 #: collective/coursetool/browser/templates/listing_certificates.pt
 #: collective/coursetool/browser/templates/listing_courses.pt
-#: collective/coursetool/browser/templates/listing_exams.pt
 msgid "Back to course portal"
 msgstr "Zurück zur Kursverwaltung"
 
@@ -201,6 +201,14 @@ msgstr "Mitglieder"
 #: collective/coursetool/browser/views.py collective/coursetool/content/exam.py
 msgid "Exam date"
 msgstr "Prüfungsdatum"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Exam failed"
+msgstr "Prüfung nicht bestanden"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Exam passed"
+msgstr "Prüfung bestanden"
 
 #: collective/coursetool/browser/templates/view_exam.pt
 #: collective/coursetool/content/exam.py
@@ -378,6 +386,10 @@ msgstr "Foto Ihres Lichtbildausweises"
 msgid "Payed"
 msgstr "bezahlt"
 
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Perform Action"
+msgstr "ausführen"
+
 #: collective/coursetool/profiles/default/actions.xml
 msgid "Personal Information"
 msgstr "Mein Profil"
@@ -532,6 +544,11 @@ msgstr "Stichwortsuche"
 msgid "location_title"
 msgstr "Kursort: ${title}"
 
+#: collective/coursetool/browser/templates/view_exam.pt
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "print card"
+msgstr "Fischerkarte drucken"
+
 #: collective/coursetool/vocabularies.py
 msgid "quali_a_label"
 msgstr "abgelegte Fischerprüfung"
@@ -585,7 +602,3 @@ msgstr ""
 #: collective/coursetool/browser/registration.py
 msgid "status_nonfatal_password_mail"
 msgstr ""
-
-#: collective/coursetool/browser/templates/view_exam.pt
-msgid "successfully passed"
-msgstr "erfolgreich absolviert"

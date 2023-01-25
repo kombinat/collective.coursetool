@@ -70,19 +70,30 @@
                           Text
                         </div>
                     </section>
+
+                    <tal:block condition="is_admin">
+                        <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
+                        data-pat-plone-modal='modalSizeClass: modal-xl;'>
+                            Edit
+                        </a>
+                        <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}' i18n:translate="">
+                            Delete
+                        </a>
+                    </tal:block>
                 </div>
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
                     <form action="${context/absolute_url}" class="pat-inject" data-pat-inject="#tab-members #tab-members && #global_statusmessage #global_statusmessage && #members-tab #members-tab" method="POST">
-                    <table class="table table-condensed table-striped">
+                    <table class="table table-condensed table-striped table-sm pat-checklist">
                         <thead>
                             <tr>
                                 <th width="1%">
-                                    <input type="checkbox" class="form-check-input pat-toggle" data-pat-toggle="selector:input.member; attr:checked; value:checked" />
+                                    <input type="checkbox" class="form-check-input toggle-all" />
                                 </th>
                                 <th>Name</th>
                                 <th>
                                     <span i18n:translate="">Exam successfully passed</span>
                                 </th>
+                                <th width="1%">Fischerkarte</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,19 +107,30 @@
                                 <td>
                                     <tal:icon replace="structure python:icons.tag('file-earmark-check' if m['success'] else 'file-earmark-minus', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
                                 </td>
+                                <td class="text-center">
+                                    <a href="${python:m['member'].absolute_url()}/@@print">
+                                        <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="formActions" tal:condition="len_members">
-                        <div class="input-group">
-                            <select name="member_action" class="form-select form-select-sm">
-                                <option value="" i18n:translate="">Actions for selected members</option>
-                                <option value="action_successfully_passed" i18n:translate="">successfully passed</option>
-                                <option value="action_delete" i18n:translate="">delete</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary btn-sm">Perform Action</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <select name="member_action" class="form-select form-select-sm">
+                                    <option value="" i18n:translate="">Actions for selected members</option>
+                                    <option value="action_exam_success" i18n:translate="">Exam passed</option>
+                                    <option value="action_exam_failed" i18n:translate="">Exam failed</option>
+                                    <option value="action_print" i18n:translate="">print card</option>
+                                    <option value="action_delete" i18n:translate="">delete</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary btn-sm" i18n:translate="">Perform Action</button>
+                            </div>
                         </div>
-                        <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                        <div class="col-md-6 text-end">
+                            <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                        </div>
                     </div>
                     <span class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
                         No items found.
@@ -122,15 +144,6 @@
                 <div class="alert alert-primary mb-0" i18n:translate="" tal:condition="python:not can_add_to_cart and not is_admin">
                     You're already registered for this exam
                 </div>
-                <tal:block condition="is_admin">
-                    <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
-                       data-pat-plone-modal='modalSizeClass: modal-xl;'>
-                        Edit
-                    </a>
-                    <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}' i18n:translate="">
-                        Delete
-                    </a>
-                </tal:block>
             </div>
 
         </div>

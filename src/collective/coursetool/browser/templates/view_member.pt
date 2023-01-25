@@ -1,49 +1,52 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    metal:use-macro="context/@@main_template/macros/master"
-    lang="en"
-    xml:lang="en"
-    i18n:domain="collective.coursetool">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns:tal="http://xml.zope.org/namespaces/tal"
+    metal:use-macro="context/@@main_template/macros/master" lang="en" xml:lang="en" i18n:domain="collective.coursetool">
 
 <body>
     <div class="coursetool-wrapper" metal:fill-slot="main">
 
-        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="view/is_admin">
+        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}"
+            tal:condition="view/is_admin">
             <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
             <span i18n:translate="">Back to overview</span>
         </a>
 
-        <div class="card"
-             tal:define="courses view/courses; exams view/exams; certificates view/certificates;">
+        <div class="card" tal:define="courses view/courses; exams view/exams; certificates view/certificates;">
 
             <div class="card-header">
                 <h1>
-                    <tal:block replace="context/id" />: <tal:block replace="context/Title" />
+                    <tal:block replace="context/id" />:
+                    <tal:block replace="context/Title" />
                 </h1>
 
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default" aria-current="true" href="#" i18n:translate="">Information</a>
+                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default"
+                            aria-current="true" href="#" i18n:translate="">Information</a>
                     </li>
                     <li class="nav-item" tal:condition="view/is_admin">
-                        <a class="nav-link" id="metadata-tab" data-bs-toggle="tab" data-bs-target="#tab-metadata" aria-current="true" href="#" i18n:translate="">Metadata</a>
+                        <a class="nav-link" id="metadata-tab" data-bs-toggle="tab" data-bs-target="#tab-metadata"
+                            aria-current="true" href="#" i18n:translate="">Metadata</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses" aria-current="true" href="#">
-                            <span i18n:translate="">Courses</span> <span class="badge text-bg-secondary">${python:len(courses)}</span>
+                        <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses"
+                            aria-current="true" href="#">
+                            <span i18n:translate="">Courses</span> <span
+                                class="badge text-bg-secondary">${python:len(courses)}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="exams-tab" data-bs-toggle="tab" data-bs-target="#tab-exams" aria-current="true" href="#">
-                            <span i18n:translate="">Exams</span> <span class="badge text-bg-secondary">${python:len(exams)}</span>
+                        <a class="nav-link" id="exams-tab" data-bs-toggle="tab" data-bs-target="#tab-exams"
+                            aria-current="true" href="#">
+                            <span i18n:translate="">Exams</span> <span
+                                class="badge text-bg-secondary">${python:len(exams)}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="certificates-tab" data-bs-toggle="tab" data-bs-target="#tab-certificates" aria-current="true" href="#">
-                            <span i18n:translate="">Certificates</span> <span class="badge text-bg-secondary">${python:len(certificates)}</span>
+                        <a class="nav-link" id="certificates-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab-certificates" aria-current="true" href="#">
+                            <span i18n:translate="">Certificates</span> <span
+                                class="badge text-bg-secondary">${python:len(certificates)}</span>
                         </a>
                     </li>
                 </ul>
@@ -53,13 +56,34 @@
                 <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
                     <div class="factbox my-3 row">
                         <tal:block repeat="widget view/widgets/values">
-                            <div class="${widget/wrapper_css_class|string:col-lg-12} mb-2 pb-1 border-bottom border-end">
+                            <div
+                                class="${widget/wrapper_css_class|string:col-lg-12} mb-2 pb-1 border-bottom border-end">
                                 <label class="fw-bold" tal:content="widget/label" />
                                 <br />
-                                <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
+                                <span tal:condition="not:widget/value">
+                                    <tal:icon replace="structure python:icons.tag('dash')" />
+                                </span>
                                 <div tal:condition="widget/value" tal:content="structure widget/render" />
                             </div>
                         </tal:block>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="${context/absolute_url}/@@print" class="btn btn-outline-primary" i18n:translate="">print card</a>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <a tal:condition="view/can_edit" href="${python:context.absolute_url()}/edit"
+                                class="pat-plone-modal btn btn-primary" i18n:translate=""
+                                data-pat-plone-modal='modalSizeClass: modal-xl;'>
+                                Edit
+                            </a>
+                            <a tal:condition="view/is_admin" href="${python:context.absolute_url()}/delete_confirmation"
+                                class="pat-plone-modal btn btn-danger"
+                                data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
+                                i18n:translate="">
+                                Delete
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -68,7 +92,9 @@
                         <div class="col mb-3" tal:repeat="widget group/widgets/values">
                             <label class="fw-bold" tal:content="widget/label" />
                             <br />
-                            <span tal:condition="not:widget/value"><tal:icon replace="structure python:icons.tag('dash')" /></span>
+                            <span tal:condition="not:widget/value">
+                                <tal:icon replace="structure python:icons.tag('dash')" />
+                            </span>
                             <div tal:content="structure widget/render" />
                         </div>
                     </div>
@@ -110,23 +136,10 @@
 
             <div class="card-footer">
                 <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
-                <a tal:condition="view/can_edit"
-                   href="${python:context.absolute_url()}/edit"
-                   class="pat-plone-modal btn btn-primary"
-                   i18n:translate=""
-                    data-pat-plone-modal='modalSizeClass: modal-xl;'>
-                    Edit
-                </a>
-                <a tal:condition="view/is_admin"
-                   href="${python:context.absolute_url()}/delete_confirmation"
-                   class="pat-plone-modal btn btn-danger"
-                   data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
-                   i18n:translate="">
-                    Delete
-                </a>
             </div>
 
         </div>
 
     </div>
+
 </html>

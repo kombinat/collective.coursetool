@@ -10,6 +10,11 @@
 
 <body>
     <metal:main fill-slot="main">
+        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.absolute_url()}">
+            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+            <span i18n:translate="">Back to course portal</span>
+        </a>
+
         <h1 class="mb-3" i18n:translate="">Import Members</h1>
         <p class="mb-3" i18n:translate="">
             Import Memberdata via Excel file.

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-25 12:16+0000\n"
+"POT-Creation-Date: 2023-01-25 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,9 +47,9 @@ msgstr ""
 msgid "Address2"
 msgstr ""
 
+#: collective/coursetool/browser/templates/import_members.pt
 #: collective/coursetool/browser/templates/listing_certificates.pt
 #: collective/coursetool/browser/templates/listing_courses.pt
-#: collective/coursetool/browser/templates/listing_exams.pt
 msgid "Back to course portal"
 msgstr ""
 
@@ -198,6 +198,14 @@ msgstr ""
 
 #: collective/coursetool/browser/views.py collective/coursetool/content/exam.py
 msgid "Exam date"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Exam failed"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Exam passed"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt
@@ -376,6 +384,10 @@ msgstr ""
 msgid "Payed"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Perform Action"
+msgstr ""
+
 #: collective/coursetool/profiles/default/actions.xml
 msgid "Personal Information"
 msgstr ""
@@ -530,6 +542,11 @@ msgstr ""
 msgid "location_title"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_exam.pt
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "print card"
+msgstr ""
+
 #: collective/coursetool/vocabularies.py
 msgid "quali_a_label"
 msgstr ""
@@ -582,8 +599,4 @@ msgstr ""
 #. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
 #: collective/coursetool/browser/registration.py
 msgid "status_nonfatal_password_mail"
-msgstr ""
-
-#: collective/coursetool/browser/templates/view_exam.pt
-msgid "successfully passed"
 msgstr ""

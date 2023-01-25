@@ -2,6 +2,7 @@ from Acquisition import aq_inner
 from collective.coursetool import _
 from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
+from io import BytesIO
 from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
@@ -11,9 +12,15 @@ from plone.protect import protect
 from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
-from zExceptions import Forbidden
+from reportlab.lib.colors import toColor
+from reportlab.lib.units import mm
+from reportlab.pdfgen import canvas
 
+import logging
 import transaction
+
+
+logger = logging.getLogger(__name__)
 
 
 def pretty_date(val):
@@ -199,16 +206,16 @@ class ExamView(ViewBase):
     @protect(PostOnly)
     def action_delete(self, REQUEST):
         _changes = False
-        _exam_members = self.context.members
+        _members = self.context.members
 
         for uid in REQUEST.get("uids", []):
             obj = api.content.get(UID=uid)
             obj.aq_parent.manage_delObjects([obj.id, ])
             _changes = True
-            _exam_members = [m for m in _exam_members if m["member"] != uid]
+            _members = [m for m in _members if m["member"] != uid]
 
         if _changes:
-            self.context.members = _exam_members
+            self.context.members = _members
             self.context.reindexObject()
             transaction.commit()
             api.portal.show_message(_("Successfully deleted users."))
@@ -216,21 +223,37 @@ class ExamView(ViewBase):
             api.portal.show_message(_("No action performed."))
 
     @protect(PostOnly)
-    def action_successfully_passed(self, REQUEST):
-        _changes = False
-        _exam_members = self.context.members
-        uids = REQUEST.get("uids", [])
-
-        for m in _exam_members:
-            if m["member"] in uids:
-                m["success"] = ("selected", )
-                _changes = True
-
-        if _changes:
-            self.context.members = _exam_members
+    def action_exam_success(self, REQUEST):
+        if self._update_members(REQUEST.get("uids", []), success=("selected", )):
             api.portal.show_message(_("Successfully changed users state."))
         else:
             api.portal.show_message(_("No action performed."))
+
+    @protect(PostOnly)
+    def action_exam_failed(self, REQUEST):
+        if self._update_members(REQUEST.get("uids", []), success=()):
+            api.portal.show_message(_("Successfully changed users state."))
+        else:
+            api.portal.show_message(_("No action performed."))
+
+    @protect(PostOnly)
+    def action_print(self, REQUEST):
+        pdfs = []
+        for uid in REQUEST.get("uids", []):
+            member = api.content.get(UID=uid)
+            view = PrintView(member, REQUEST)
+            pdfs.append(view(download=False))
+        return pdfs
+
+    def _update_members(self, uids, **kw):
+        _members = self.context.members
+        _changes = False
+        for m in _members:
+            if m["member"] in uids:
+                m.update(kw)
+                _changes = True
+        self.context.members = _members
+        return _changes
 
 
 class LocationView(ViewBase):
@@ -275,6 +298,45 @@ class MemberEditForm(DefaultEditForm):
 
 
 MemberEditView = layout.wrap_form(MemberEditForm)
+
+
+class PrintView(BrowserView):
+
+    def __call__(self, download=True):
+        filename = f"fischerkarte-{self.context.id}.pdf"
+        buff = BytesIO()
+        canv = canvas.Canvas(
+            buff,
+            pagesize=(95*mm, 55*mm),
+        )
+        # background rectangle
+        canv.setFillColor(toColor("rgb(205,228,252)"))
+        canv.rect(0, 0, 95*mm, 55*mm, stroke=0, fill=1)
+
+        # text
+        canv.setFillColor((0, 0, 0))
+        canv.drawString(10*mm, 40*mm, f"{self.context.cty_code} {self.context.id}")
+
+        name_line = " ".join([
+            x for x in [
+                self.context.graduation,
+                self.context.first_name,
+                self.context.last_name
+            ] if x])
+        canv.drawString(10*mm, 35*mm, name_line)
+
+        canv.showPage()
+        canv.save()
+
+        pdf_data = buff.getvalue()
+
+        if download:
+            self.request.response.setHeader(
+                "Content-disposition", f"attachment; filename={filename}")
+            self.request.response.setHeader(
+                "Content-lengts", len(pdf_data))
+
+        return pdf_data
 
 
 class CertificateView(ViewBase):

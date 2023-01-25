@@ -143,6 +143,14 @@
       />
 
   <browser:page
+      name="print"
+      for="collective.coursetool.interfaces.IMember"
+      class=".views.PrintView"
+      permission="collective.coursetool.Administrator"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
       name="edit"
       for="collective.coursetool.interfaces.IMember"
       class=".views.MemberEditView"
