@@ -92,6 +92,16 @@
                         Text
                         </div>
                     </section>
+
+                    <tal:block condition="is_admin">
+                        <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
+                        data-pat-plone-modal='modalSizeClass: modal-xl;'>
+                            Edit
+                        </a>
+                        <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}' i18n:translate="">
+                            Delete
+                        </a>
+                    </tal:block>
                 </div>
 
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
@@ -114,15 +124,6 @@
                 <div class="alert alert-primary mb-0" i18n:translate="" tal:condition="python:not can_add_to_cart and not is_admin">
                     You're already registered for this course
                 </div>
-                <tal:block condition="is_admin">
-                    <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
-                       data-pat-plone-modal='modalSizeClass: modal-xl;'>
-                        Edit
-                    </a>
-                    <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}' i18n:translate="">
-                        Delete
-                    </a>
-                </tal:block>
             </div>
 
         </div>

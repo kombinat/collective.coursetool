@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-25 14:17+0000\n"
+"POT-Creation-Date: 2023-01-26 11:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -327,6 +327,10 @@ msgstr ""
 #: collective/coursetool/content/course.py
 #: collective/coursetool/content/exam.py
 msgid "Member"
+msgstr ""
+
+#: collective/coursetool/browser/templates/import_members.pt
+msgid "Memberlist as Excel"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_members.pt

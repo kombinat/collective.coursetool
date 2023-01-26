@@ -2,8 +2,6 @@ from Acquisition import aq_inner
 from collective.coursetool import _
 from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
-from io import BytesIO
-from PIL import Image
 from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
@@ -13,9 +11,6 @@ from plone.protect import protect
 from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
-from reportlab.lib.colors import toColor
-from reportlab.lib.units import mm
-from reportlab.pdfgen import canvas
 
 import logging
 import transaction
@@ -302,52 +297,8 @@ MemberEditView = layout.wrap_form(MemberEditForm)
 
 
 class PrintView(BrowserView):
-
     def __call__(self, download=True):
-        filename = f"fischerkarte-{self.context.id}.pdf"
-        buff = BytesIO()
-        canv = canvas.Canvas(
-            buff,
-            pagesize=(95*mm, 55*mm),
-        )
-        # general
-        #canv.setFont()
-        # background rectangle
-        canv.setFillColor(toColor("rgb(205,228,252)"))
-        canv.rect(0, 0, 95*mm, 55*mm, stroke=0, fill=1)
-
-        # text
-        canv.setFontSize(2.5*mm)
-        canv.setFillColor((0, 0, 0))
-        canv.drawString(10*mm, 40*mm, f"{self.context.cty_code} {self.context.id}")
-        name_line = " ".join([
-            x for x in [
-                self.context.graduation,
-                self.context.first_name,
-                self.context.last_name
-            ] if x])
-        canv.drawString(10*mm, 35*mm, name_line)
-
-        # passfoto
-        if self.context.picture:
-            view = self.context.restrictedTraverse("@@images")
-            # the passfoto scale is defined in registry
-            cropped_img = view.scale("picture", scale="passfoto", mode="contain")
-            _pil_image = Image.open(BytesIO(cropped_img.data.data))
-            canv.drawInlineImage(_pil_image, 60*mm, 13*mm, 20*mm, 30*mm)
-
-        canv.showPage()
-        canv.save()
-
-        pdf_data = buff.getvalue()
-
-        if download:
-            self.request.response.setHeader(
-                "Content-disposition", f"attachment; filename={filename}")
-            self.request.response.setHeader(
-                "Content-lengts", len(pdf_data))
-
-        return pdf_data
+        raise NotImplemented()
 
 
 class CertificateView(ViewBase):

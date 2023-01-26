@@ -21,7 +21,7 @@
         </p>
         <form action="./@@import_members" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <label class="form-label" i18n:translate>Memberlist as Excel</label>
+                <label class="form-label" i18n:translate="">Memberlist as Excel</label>
                 <input class="form-control" type="file" name="import_data">
             </div>
             <button type="submit" class="btn btn-primary" i18n:translate="">Import</button>
