@@ -11,7 +11,11 @@
             <span i18n:translate="">Back to overview</span>
         </a>
 
-        <div class="card" tal:define="courses view/courses; exams view/exams; certificates view/certificates;">
+        <div class="card"
+             tal:define="courses view/courses;
+                         exams view/exams;
+                         certificates view/certificates;
+                         is_admin view/is_admin">
 
             <div class="card-header">
                 <h1>
@@ -69,7 +73,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="${context/absolute_url}/@@print" class="btn btn-outline-primary" i18n:translate="">print card</a>
+                            <a href="${context/absolute_url}/@@print" class="btn btn-outline-primary" i18n:translate="" tal:condition="is_admin">print card</a>
                         </div>
                         <div class="col-md-6 text-end">
                             <a tal:condition="view/can_edit" href="${python:context.absolute_url()}/edit"

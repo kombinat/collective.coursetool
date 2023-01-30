@@ -181,12 +181,15 @@ class ExamView(ViewBase):
                 factory(self.request)
         return super().__call__()
 
-    def members(self):
-        for m in self.context.members:
-            yield dict(
+    def members(self, mid=None):
+        return [
+            dict(
                 member=api.content.get(UID=m["member"]),
                 success="selected" in m["success"],
-            )
+            ) for m
+            in self.context.members
+            if mid is None or mid==m["member"]
+        ]
 
     def can_add_to_cart(self):
         if api.user.get_permissions().get(CoursetoolAdmin):
@@ -275,15 +278,27 @@ class MemberView(ViewBase):
     def courses(self):
         return self.backrefs("coursetool.course")
 
-    def exams(self):
-        return [
-            b.getObject() for b
-            in self.context.portal_catalog(
-                portal_type="coursetool.exam",
-                members_uuids=self.context.UID(),
-                sort_on="start",
-            )
-        ]
+    def exams(self, success=False):
+        _ret = []
+
+        for exam in self.context.portal_catalog(
+            portal_type="coursetool.exam",
+            members_uuids=self.context.UID(),
+            sort_on="start",
+        ):
+            obj = exam.getObject()
+
+            if not success:
+                _ret.append(obj)
+                continue
+
+            # filter for successful exams
+            for my_exam in ExamView(obj, self.request).members(mid=self.context.UID()):
+                if my_exam["success"]:
+                    _ret.append(obj)
+                    break
+
+        return _ret
 
     def certificates(self):
         return self.backrefs("coursetool.certificate")
@@ -297,7 +312,34 @@ MemberEditView = layout.wrap_form(MemberEditForm)
 
 
 class PrintView(BrowserView):
+
+    pdf_data = None
+    filename = "card.pdf"
+
     def __call__(self, download=True):
+        m_view = MemberView(self.context, self.request)
+        success_exams = m_view.exams(success=True)
+
+        if not success_exams:
+            api.portal.show_message(
+                _("Member has no certificates or external qualifiaction."),
+                type="error",
+            )
+            return self.request.response.redirect(self.context.absolute_url())
+
+        # generate PDF content in your custom view
+        self.update()
+
+        if download:
+            self.request.response.setHeader(
+                "Content-disposition", f"attachment; filename={self.filename}")
+            self.request.response.setHeader(
+                "Content-lengts", len(self.pdf_data))
+
+        return self.pdf_data
+
+    def update(self):
+        # generate PDF content in your custom view and save it to self.pdf_data
         raise NotImplemented()
 
 
@@ -309,6 +351,13 @@ class CertificateView(ViewBase):
             r.to_object
             for r in api.relation.get(source=self.context, relationship="members")
         ]
+
+    def can_add_to_cart(self):
+        if api.user.get_permissions().get(CoursetoolAdmin):
+            # no cart widget for admins
+            return False
+        user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
+        return user and user.can_buy_certificate()
 
 
 class Utils(BrowserView):

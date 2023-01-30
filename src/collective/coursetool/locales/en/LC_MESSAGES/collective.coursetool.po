@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-26 11:59+0000\n"
+"POT-Creation-Date: 2023-01-30 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -231,6 +231,10 @@ msgstr ""
 msgid "Graduation"
 msgstr ""
 
+#: collective/coursetool/content/member.py
+msgid "ID Type"
+msgstr ""
+
 #: collective/coursetool/browser/templates/import_members.pt
 msgid "Import"
 msgstr ""
@@ -329,6 +333,10 @@ msgstr ""
 msgid "Member"
 msgstr ""
 
+#: collective/coursetool/browser/views.py
+msgid "Member has no certificates or external qualifiaction."
+msgstr ""
+
 #: collective/coursetool/browser/templates/import_members.pt
 msgid "Memberlist as Excel"
 msgstr ""
@@ -365,6 +373,10 @@ msgstr ""
 
 #: collective/coursetool/vocabularies.py
 msgid "Not read"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Nothing"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_macros.pt

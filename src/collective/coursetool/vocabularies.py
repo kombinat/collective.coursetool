@@ -21,6 +21,7 @@ def MemberStatesVocabulary(context):
         ("complete_not_printed", _("Complete - not printed")),
         ("complete_printed", _("Complete - printed")),
         ("not_read", _("Not read")),
+        ("--NOVALUE--", _("Nothing")),
     ]
     terms = []
     request = getRequest()
@@ -46,6 +47,7 @@ def MemberQualificationsVocabulary(context):
         ("g", _("quali_g_label")),
         ("h", _("quali_h_label")),
         ("i", _("quali_i_label")),
+        ("--NOVALUE--", _("Nothing")),
     ]
     terms = []
     request = getRequest()

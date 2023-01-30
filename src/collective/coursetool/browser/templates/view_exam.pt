@@ -90,10 +90,10 @@
                                     <input type="checkbox" class="form-check-input toggle-all" />
                                 </th>
                                 <th>Name</th>
-                                <th>
+                                <th width="5%" class="text-nowrap">
                                     <span i18n:translate="">Exam successfully passed</span>
                                 </th>
-                                <th width="1%">Fischerkarte</th>
+                                <th width="5%">Fischerkarte</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,9 +103,13 @@
                                         <input class="member form-check-input" name="uids:list" type="checkbox" value="${python:m['member'].UID()}" />
                                     </div>
                                 </td>
-                                <td>${m/member/title}</td>
                                 <td>
-                                    <tal:icon replace="structure python:icons.tag('file-earmark-check' if m['success'] else 'file-earmark-minus', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
+                                    <a href="${m/member/absolute_url}">
+                                        ${m/member/title}
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
                                 </td>
                                 <td class="text-center">
                                     <a href="${python:m['member'].absolute_url()}/@@print">

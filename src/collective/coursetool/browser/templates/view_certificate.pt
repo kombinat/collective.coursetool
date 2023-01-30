@@ -62,7 +62,7 @@
             </div>
 
             <div class="card-footer">
-                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:is_admin" />
+                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="view/can_add_to_cart" />
                 <tal:block condition="is_admin">
                     <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
                        data-pat-plone-modal='modalSizeClass: modal-xl;'>

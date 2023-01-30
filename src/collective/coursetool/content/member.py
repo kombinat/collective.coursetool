@@ -60,19 +60,9 @@ class IMemberSchema(model.Schema):
     mobile_phone = schema.TextLine(title=_("Mobile Phone"), required=False)
     fax = schema.TextLine(title=_("Fax"), required=False)
 
-    birthday = schema.Date(title=_("Birthday"), required=False)
-    directives.widget(
-        "birthday",
-        DateFieldWidget,
-        _formater_length="long",
-    )
-
-    picture = namedfile.NamedBlobImage(
-        title=_("User Image"),
-    )
-    passport_image = namedfile.NamedBlobImage(
-        title=_("Passport Image"),
-    )
+    birthday = schema.Date(title=_("Birthday"), required=True)
+    picture = namedfile.NamedBlobImage(title=_("User Image"))
+    passport_image = namedfile.NamedBlobImage(title=_("Passport Image"))
 
     # layout wrapper CSS classes
     directives.widget("salutation", SelectFieldWidget, wrapper_css_class="col-lg-1")
@@ -88,11 +78,16 @@ class IMemberSchema(model.Schema):
     directives.widget("mobile_phone", TextFieldWidget, wrapper_css_class="col-lg-4")
     directives.widget("website", TextFieldWidget, wrapper_css_class="col-lg-4")
     directives.widget("fax", TextFieldWidget, wrapper_css_class="col-lg-6")
-    directives.widget("birthday", TextFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("birthday", DateFieldWidget, wrapper_css_class="col-lg-6", _formater_length="long")
     directives.widget("picture", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
     directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
 
     # the following are only admin infos
+    pre_id = schema.Choice(
+        title=_("ID Type"),
+        values=["A", "B", "J"],
+        required=False,
+    )
     id = schema.TextLine(title=_("Customer Nr"), required=True)
 
     salutation_personal = schema.Bool(
@@ -156,6 +151,7 @@ class IMemberSchema(model.Schema):
 
     # field permissions
     directives.read_permission(
+        pre_id="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
         inactive="cmf.ManagePortal",
         salutation_personal="cmf.ManagePortal",
@@ -168,6 +164,7 @@ class IMemberSchema(model.Schema):
         admin_comment="cmf.ManagePortal",
     )
     directives.write_permission(
+        pre_id="cmf.ManagePortal",
         id="cmf.ManagePortal",
         email="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
@@ -191,6 +188,7 @@ class IMemberSchema(model.Schema):
         "metadata",
         label=_("Metadata"),
         fields=[
+            "pre_id",
             "id",
             "booking_nr",
             "salutation_personal",
@@ -240,6 +238,10 @@ class Member(Container):
     @property
     def address_inline(self):
         return ", ".join(self.get_address())
+
+    def can_buy_certificate():
+        return False
+
 
 
 @adapter(IMember)

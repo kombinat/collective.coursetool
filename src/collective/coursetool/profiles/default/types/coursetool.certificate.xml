@@ -28,6 +28,11 @@
   <property name="behaviors">
     <element value="plone.namefromtitle" />
     <element value="plone.richtext" />
+
+    <!-- bda.plone.shop -->
+    <element value="bda.shop.buyable" />
+    <element value="bda.shop.notificationtext.item" />
+    <element value="bda.shop.notificationtext.global" />
   </property>
   <property name="schema">collective.coursetool.content.ICertificateSchema</property>
   <property name="model_source" />
