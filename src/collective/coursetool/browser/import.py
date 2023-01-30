@@ -1,6 +1,7 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.content.member import IMemberSchema
+from collective.coursetool.utils import generate_member_id
 from datetime import datetime
 from openpyxl import load_workbook
 from plone import api
@@ -17,7 +18,7 @@ log = logging.getLogger(__name__)
 
 SCHEMA_MAPPING = {
     # schema name: excel col idx
-    "id": 1,
+    "customer_id": 1,
     "salutation": 2,
     "graduation": 3,
     "last_name": 4,
@@ -83,6 +84,10 @@ class ImportMembers(BrowserView):
 
         schema_names = IMemberSchema.names()
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
+        customer_id_map = {
+            b.customer_id: b.id
+            for b in self.context.portal_catalog(portal_type="coursetool.member")
+        }
 
         # disable constraints for vocabularies during import
         for fld in VOCAB_MAPPING.keys():
@@ -132,20 +137,22 @@ class ImportMembers(BrowserView):
 
             __traceback_info__ = data
 
-            if data["id"] in member_base:
-                obj = member_base[data["id"]]
+            if data["customer_id"] in customer_id_map:
+                obj = member_base[customer_id_map[data["customer_id"]]]
+                msg = "{0} Imported data for {1}"
             else:
                 obj = api.content.create(
                     container=member_base,
                     type="coursetool.member",
-                    id=data["id"],
+                    id=generate_member_id()
                 )
+                msg = "{0} Generated new member {1}"
 
             deserializer = getMultiAdapter((obj, self.request), IDeserializeFromJson)
             obj = deserializer(validate_all=False, data=data)
             obj.reindexObject()
 
-            log.info(f"{num} Imported data for {obj}")
+            log.info(msg.format(num, obj))
             transaction.commit()
 
         # reset original constraints

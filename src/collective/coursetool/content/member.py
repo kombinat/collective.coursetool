@@ -1,7 +1,10 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IMember
+from collective.coursetool.utils import generate_member_id
+from datetime import datetime
 from dexterity.membrane.behavior.user import MembraneUserProperties
+from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity import textindexer
 from plone.app.users.schema import IRegisterSchema
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
@@ -12,13 +15,12 @@ from plone.dexterity.content import Container
 from plone.formwidget.namedfile import NamedImageFieldWidget
 from plone.namedfile import field as namedfile
 from plone.supermodel import model
-from z3c.form.browser.text import TextFieldWidget
 from z3c.form.browser.select import SelectFieldWidget
+from z3c.form.browser.text import TextFieldWidget
 from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
-from zope.interface import Interface
 
 
 class IRegistration(IRegisterSchema):
@@ -83,12 +85,12 @@ class IMemberSchema(model.Schema):
     directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
 
     # the following are only admin infos
-    pre_id = schema.Choice(
+    customer_type = schema.Choice(
         title=_("ID Type"),
         values=["A", "B", "J"],
         required=False,
     )
-    id = schema.TextLine(title=_("Customer Nr"), required=True)
+    customer_id = schema.TextLine(title=_("Customer Nr"), required=True)
 
     salutation_personal = schema.Bool(
         title=_("Personal Saluation"), required=False, default=False
@@ -146,12 +148,12 @@ class IMemberSchema(model.Schema):
     )
 
     # field visibility
-    directives.omitted("id")
-    directives.no_omit(IEditForm, "id")
+    directives.omitted("customer_id")
+    directives.no_omit(IEditForm, "customer_id")
 
     # field permissions
     directives.read_permission(
-        pre_id="cmf.ManagePortal",
+        customer_type="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
         inactive="cmf.ManagePortal",
         salutation_personal="cmf.ManagePortal",
@@ -164,8 +166,8 @@ class IMemberSchema(model.Schema):
         admin_comment="cmf.ManagePortal",
     )
     directives.write_permission(
-        pre_id="cmf.ManagePortal",
-        id="cmf.ManagePortal",
+        customer_type="cmf.ManagePortal",
+        customer_id="cmf.ManagePortal",
         email="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
         inactive="cmf.ManagePortal",
@@ -181,15 +183,15 @@ class IMemberSchema(model.Schema):
 
     # mark searchable fields
     textindexer.searchable(
-        "first_name", "last_name", "email",
+        "customer_id", "first_name", "last_name", "email",
     )
 
     model.fieldset(
         "metadata",
         label=_("Metadata"),
         fields=[
-            "pre_id",
-            "id",
+            "customer_type",
+            "customer_id",
             "booking_nr",
             "salutation_personal",
             "salutation_letter",
@@ -257,3 +259,17 @@ class UserProperties(MembraneUserProperties):
         city="city",
         country="cty_code",
     )
+
+
+@implementer(INameFromTitle)
+@adapter(IMember)
+class NameFromCreationDateEncrypted(object):
+
+    def __new__(cls, context):
+        now = datetime.now().isoformat()
+        instance = super().__new__(cls)
+        instance.title = generate_member_id()
+        return instance
+
+    def __init__(self, context):
+        pass

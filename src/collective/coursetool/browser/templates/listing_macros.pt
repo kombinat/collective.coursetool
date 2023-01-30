@@ -15,14 +15,15 @@
         </metal:def>
 
         <metal:def define-macro="batch_table"
-            tal:define="batch batch|nothing">
+            tal:define="batch batch|nothing;
+                        row_count view/row_count|python:True">
 
             <tal:block tal:condition="batch">
             <div class="table-responsive">
             <table class="table table-condensed table-striped">
                 <thead>
                     <tr>
-                        <th i18n:translate="">Nr</th>
+                        <th i18n:translate="" tal:condition="row_count">Nr</th>
                         <th tal:repeat="col columns">
                             <span tal:replace="col/label" />
                         </th>
@@ -33,7 +34,7 @@
                     <tr tal:repeat="item batch">
                         <tal:def define="obj item/getObject;
                                          obj_url obj/absolute_url">
-                        <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)"></td>
+                        <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)" tal:condition="row_count"></td>
                         <td tal:repeat="col columns">
                             <span tal:replace="structure python: col.factory(obj)" />
                         </td>

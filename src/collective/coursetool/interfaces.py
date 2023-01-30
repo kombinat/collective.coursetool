@@ -1,10 +1,9 @@
 """Module where all interfaces, events and exceptions live."""
-from collective.z3cform.datagridfield.interfaces import IDataGridFieldLayer
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-class ICollectiveCoursetoolLayer(IDataGridFieldLayer, IDefaultBrowserLayer):
+class ICollectiveCoursetoolLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
 
 

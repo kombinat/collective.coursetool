@@ -1,7 +1,7 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.content.member import IRegistration
-from collective.coursetool.utils import generate_courstool_member_id
+from collective.coursetool.utils import generate_member_id
 from dexterity.membrane.behavior.settings import IDexterityMembraneSettings
 from plone import api
 from plone.app.users.browser.register import RegistrationForm
@@ -136,22 +136,12 @@ class Registration(RegistrationForm):
 class CourseToolMemberAdder(object):
     def addUser(self, login_name, password, **data):
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
-        # generate random 6 digit user id
-        userid = generate_courstool_member_id()
-        id_gen_count = 0
-
-        while userid in member_base:
-            # if sequential ID is already there, generate a random one
-            userid = generate_courstool_member_id()
-            id_gen_count += 1
-            if id_gen_count > 10:
-                raise Exception("Could not generate UserID")
 
         with api.env.adopt_roles(["Manager", ]):
             obj = api.content.create(
                 container=member_base,
                 type="coursetool.member",
-                id=userid,
+                id=generate_member_id(),
                 first_name=data.get("first_name", "Maximiliane"),
                 last_name=data.get("last_name", "Muster"),
                 email=login_name,

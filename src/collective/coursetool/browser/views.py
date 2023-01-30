@@ -45,6 +45,7 @@ class ColumnDefinition(object):
 
 class ListingBase(BrowserView):
     portal_type = " - "
+    row_count = True
 
     def __init__(self, *args):
         super().__init__(*args)
@@ -96,7 +97,9 @@ class ListingBase(BrowserView):
 
 class MembersListing(ListingBase):
     portal_type = "coursetool.member"
+    row_count = False
     columns = [
+        ColumnDefinition(_("Customer Nr"), "customer_id"),
         ColumnDefinition(_("Name"), "title", True),
         ColumnDefinition(_("Address"), "address_inline"),
         ColumnDefinition(_("EMail"), "email"),

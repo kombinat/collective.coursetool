@@ -19,7 +19,7 @@
 
             <div class="card-header">
                 <h1>
-                    <tal:block replace="context/id" />:
+                    <tal:block replace="context/customer_id" />:
                     <tal:block replace="context/Title" />
                 </h1>
 

@@ -1,2 +1,4 @@
 BASE_FOLDER_ID = "coursetool"
 BASE_FOLDER_TITLE = "Course Tool"
+MEMBER_ID_FORMAT = "{:06d}"
+MEMBER_ID_OFFSET = 0
