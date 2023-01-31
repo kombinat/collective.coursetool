@@ -96,11 +96,6 @@ class IMemberSchema(model.Schema):
     )
 
     # the following are only admin infos
-    customer_type = schema.Choice(
-        title=_("ID Type"),
-        values=["A", "B", "J"],
-        required=False,
-    )
     customer_id = schema.TextLine(title=_("Customer Nr"), required=True)
 
     salutation_personal = schema.Bool(
@@ -167,7 +162,6 @@ class IMemberSchema(model.Schema):
 
     # field permissions
     directives.read_permission(
-        customer_type="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
         inactive="cmf.ManagePortal",
         salutation_personal="cmf.ManagePortal",
@@ -183,7 +177,6 @@ class IMemberSchema(model.Schema):
         admin_comment="cmf.ManagePortal",
     )
     directives.write_permission(
-        customer_type="cmf.ManagePortal",
         customer_id="cmf.ManagePortal",
         email="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
@@ -210,7 +203,6 @@ class IMemberSchema(model.Schema):
         "metadata",
         label=_("Metadata"),
         fields=[
-            "customer_type",
             "customer_id",
             "booking_nr",
             "salutation_personal",

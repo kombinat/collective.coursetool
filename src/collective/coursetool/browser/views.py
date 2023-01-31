@@ -323,7 +323,7 @@ class PrintView(BrowserView):
         m_view = MemberView(self.context, self.request)
         success_exams = m_view.exams(success=True)
 
-        if not success_exams:
+        if not success_exams and not self.context.qualification:
             api.portal.show_message(
                 _("Member has no certificates or external qualifiaction."),
                 type="error",
