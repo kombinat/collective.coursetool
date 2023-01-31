@@ -144,7 +144,8 @@ class CourseToolMemberAdder(object):
                 id=generate_member_id(),
                 first_name=data.get("first_name", "Maximiliane"),
                 last_name=data.get("last_name", "Muster"),
-                email=login_name,
+                username=login_name,
+                email=data["email"],
                 picture=data.get("picture", None),
                 passport_image=data.get("passport_image", None),
             )

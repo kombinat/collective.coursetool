@@ -28,7 +28,10 @@ from zope.interface import implementer
 class IRegistration(IRegisterSchema):
     first_name = schema.TextLine(title=_("Firstname"))
     last_name = schema.TextLine(title=_("Lastname"))
-    username = schema.TextLine(title=_("Username"))
+    username = schema.TextLine(
+        title=_("Username"),
+        description=_("Registry username description"),
+    )
     email = schema.TextLine(title=_("Email"))
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
@@ -273,6 +276,7 @@ class UserProperties(MembraneUserProperties):
 
     property_map = dict(
         gender="salutation",
+        username="username",
         email="email",
         first_name="first_name",
         last_name="last_name",

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-01-31 12:54+0000\n"
-"PO-Revision-Date: 2023-01-31 13:55+0100\n"
+"POT-Creation-Date: 2023-01-31 13:58+0000\n"
+"PO-Revision-Date: 2023-01-31 15:00+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -463,6 +463,10 @@ msgstr "Eingelesen, keine Qualifikation"
 #: collective/coursetool/vocabularies.py
 msgid "Read - qualified"
 msgstr "Eingelesen, qualifiziert"
+
+#: collective/coursetool/content/member.py
+msgid "Registry username description"
+msgstr "Tragen Sie Ihren gewünschten Benutzernamen ein. Diesen Namen benötigen Sie später zur Anmeldung. Es sind keine Leer- oder Sonderzeichen erlaubt, zwischen Groß- und Kleinschreibung wird unterschieden."
 
 #: collective/coursetool/content/member.py
 msgid "Salutation"
