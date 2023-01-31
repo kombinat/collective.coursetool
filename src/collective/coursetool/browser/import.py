@@ -136,7 +136,7 @@ class ImportMembers(BrowserView):
                 ):
                     # handle broken mail addresses
                     log.warn("EMail not valid: %s", row[idx])
-                    data[fld] = ""
+                    data[fld] = None
 
             for fld, idx in METADATA_MAPPING.items():
                 if row[idx] is None:
