@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-30 08:07+0000\n"
+"POT-Creation-Date: 2023-01-31 12:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,6 +157,7 @@ msgstr ""
 msgid "Coursetool menu for the toolbar"
 msgstr ""
 
+#: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "Customer Nr"
 msgstr ""
@@ -347,6 +348,10 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
+#: collective/coursetool/content/member.py
+msgid "Membership"
+msgstr ""
+
 #: collective/coursetool/browser/templates/view_member.pt
 #: collective/coursetool/content/member.py
 msgid "Metadata"
@@ -393,11 +398,23 @@ msgid "Partnertype"
 msgstr ""
 
 #: collective/coursetool/content/member.py
+msgid "Pass expires on"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Pass issued on"
+msgstr ""
+
+#: collective/coursetool/content/member.py
 msgid "Passport Image"
 msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Payed"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Payed on"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt
@@ -492,6 +509,10 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "User Image"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Username"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_course.pt

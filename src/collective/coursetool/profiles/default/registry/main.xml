@@ -10,4 +10,8 @@
     </value>
   </record>
 
+  <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.use_email_as_username">
+    <value>False</value>
+  </record>
+
 </registry>

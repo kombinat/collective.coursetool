@@ -1,5 +1,8 @@
-
 <configure xmlns="http://namespaces.zope.org/zope">
   <adapter factory=".member.UserProperties" />
   <adapter factory=".member.NameFromCreationDateEncrypted" />
+  <subscriber
+    for=".member.IMember
+         zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    handler=".member.new_customer_id" />
 </configure>

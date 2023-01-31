@@ -39,3 +39,7 @@ class IUtils(Interface):
 
     def member_url(self):
         """ get url of coursetool member for usermenu """
+
+
+class IImportingMembers(Interface):
+    """ marker for events """

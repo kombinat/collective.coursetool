@@ -1,12 +1,17 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.content.member import IMemberSchema
+from collective.coursetool.interfaces import IImportingMembers
 from collective.coursetool.utils import generate_member_id
 from datetime import datetime
 from openpyxl import load_workbook
 from plone import api
 from plone.restapi.interfaces import IDeserializeFromJson
+from plone.schema.email import _isemail
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
+from zope.interface import alsoProvides
+from zope.interface import Interface
 from zope.publisher.browser import BrowserView
 
 import logging
@@ -37,6 +42,8 @@ SCHEMA_MAPPING = {
     "fax": 17,
     "birthday": 18,
     "salutation_letter": 21,
+    "pass_issue_date": 23,
+    "pass_expiration_date": 24,
     "payed": 25,
     "payed_date": 26,
     "salutation_personal": 27,
@@ -76,6 +83,8 @@ class ImportMembers(BrowserView):
         if not self.request.get("import_data"):
             return self.index()
 
+        alsoProvides(self.request, IImportingMembers)
+
         _xlsx_file = self.request["import_data"]
 
         wb = load_workbook(_xlsx_file, read_only=True)
@@ -103,8 +112,6 @@ class ImportMembers(BrowserView):
         for num, row in enumerate(ws.iter_rows(min_row=2, values_only=True), 1):
             data = {}
 
-            __traceback_info__ = row
-
             for fld, idx in SCHEMA_MAPPING.items():
                 if fld not in schema_names or row[idx] is None:
                     continue
@@ -112,7 +119,7 @@ class ImportMembers(BrowserView):
                     data[fld] = str(row[idx]).lower() == "true"
                 elif IMemberSchema[fld]._type == str:
                     # force str
-                    data[fld] = str(row[idx])
+                    data[fld] = str(row[idx]).strip()
                 elif isinstance(row[idx], datetime):
                     data[fld] = row[idx].strftime("%Y-%m-%d")
                 else:
@@ -121,6 +128,15 @@ class ImportMembers(BrowserView):
                 # extra mappings
                 if fld == "salutation":
                     data[fld] = SALUTATION_MAPPING.get(row[idx], None)
+
+                if (
+                    fld == "email"
+                    and data[fld] != ""
+                    and not _isemail(data[fld])
+                ):
+                    # handle broken mail addresses
+                    log.warn("EMail not valid: %s", row[idx])
+                    data[fld] = ""
 
             for fld, idx in METADATA_MAPPING.items():
                 if row[idx] is None:

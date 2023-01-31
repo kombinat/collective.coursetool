@@ -23,10 +23,10 @@ def generate_customer_id(random=False):
     catalog = api.portal.get_tool("portal_catalog")
     members = catalog.unrestrictedSearchResults(
         portal_type="coursetool.member",
-        sort_on="id",
+        sort_on="customer_id",
         sort_order="reverse",
     )
-    last_id = members and int(members[0].id) or 0
+    last_id = members and int(members[0].customer_id) or 0
     if last_id < MEMBER_ID_OFFSET:
         last_id = MEMBER_ID_OFFSET
     return MEMBER_ID_FORMAT.format(last_id + 1)

@@ -1,8 +1,9 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IMember
+from collective.coursetool.interfaces import IImportingMembers
 from collective.coursetool.utils import generate_member_id
-from datetime import datetime
+from collective.coursetool.utils import generate_customer_id
 from dexterity.membrane.behavior.user import MembraneUserProperties
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity import textindexer
@@ -14,6 +15,7 @@ from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.formwidget.namedfile import NamedImageFieldWidget
 from plone.namedfile import field as namedfile
+from plone.schema.email import _isemail
 from plone.supermodel import model
 from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.browser.text import TextFieldWidget
@@ -26,6 +28,7 @@ from zope.interface import implementer
 class IRegistration(IRegisterSchema):
     first_name = schema.TextLine(title=_("Firstname"))
     last_name = schema.TextLine(title=_("Lastname"))
+    username = schema.TextLine(title=_("Username"))
     email = schema.TextLine(title=_("Email"))
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
@@ -56,7 +59,7 @@ class IMemberSchema(model.Schema):
     city = schema.TextLine(title=_("City"), required=False)
     cty_code = schema.TextLine(title=_("Country"), required=False)
 
-    email = schema.TextLine(title=_("EMail"), required=True)
+    email = schema.ASCIILine(title=_("EMail"), required=False, constraint=_isemail)
     website = schema.TextLine(title=_("Internet Address"), required=False)
     phone = schema.TextLine(title=_("Phone"), required=False)
     mobile_phone = schema.TextLine(title=_("Mobile Phone"), required=False)
@@ -84,6 +87,11 @@ class IMemberSchema(model.Schema):
     directives.widget("picture", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
     directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
 
+    username = schema.TextLine(
+        title=_("Username"),
+        required=False,
+    )
+
     # the following are only admin infos
     customer_type = schema.Choice(
         title=_("ID Type"),
@@ -96,7 +104,10 @@ class IMemberSchema(model.Schema):
         title=_("Personal Saluation"), required=False, default=False
     )
     salutation_letter = schema.TextLine(title=_("Salutation Letter"), required=False)
+    pass_issue_date = schema.Date(title=_("Pass issued on"), required=False)
+    pass_expiration_date = schema.Date(title=_("Pass expires on"), required=False)
     payed = schema.Bool(title=_("Payed"), required=False, default=False)
+    payed_date = schema.Date(title=_("Payed on"), required=False)
     booking_nr = schema.TextLine(title=_("Booking Nr"), required=False)
     inactive = schema.Bool(title=_("Inactive"), required=False, default=False)
 
@@ -158,7 +169,10 @@ class IMemberSchema(model.Schema):
         inactive="cmf.ManagePortal",
         salutation_personal="cmf.ManagePortal",
         salutation_letter="cmf.ManagePortal",
+        pass_issue_date="cmf.ManagePortal",
+        pass_expiration_date="cmf.ManagePortal",
         payed="cmf.ManagePortal",
+        payed_date="cmf.ManagePortal",
         instructor="cmf.ManagePortal",
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
@@ -173,7 +187,10 @@ class IMemberSchema(model.Schema):
         inactive="cmf.ManagePortal",
         salutation_personal="cmf.ManagePortal",
         salutation_letter="cmf.ManagePortal",
+        pass_issue_date="cmf.ManagePortal",
+        pass_expiration_date="cmf.ManagePortal",
         payed="cmf.ManagePortal",
+        payed_date="cmf.ManagePortal",
         instructor="cmf.ManagePortal",
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
@@ -195,7 +212,10 @@ class IMemberSchema(model.Schema):
             "booking_nr",
             "salutation_personal",
             "salutation_letter",
+            "pass_issue_date",
+            "pass_expiration_date",
             "payed",
+            "payed_date",
             "state",
             "inactive",
             "instructor",
@@ -204,6 +224,8 @@ class IMemberSchema(model.Schema):
             "admin_comment",
         ],
     )
+
+    model.fieldset("membership", label=_("Membership"), fields=["username"])
 
 
 @implementer(IMember)
@@ -266,10 +288,18 @@ class UserProperties(MembraneUserProperties):
 class NameFromCreationDateEncrypted(object):
 
     def __new__(cls, context):
-        now = datetime.now().isoformat()
         instance = super().__new__(cls)
         instance.title = generate_member_id()
         return instance
 
     def __init__(self, context):
         pass
+
+
+def new_customer_id(obj, event):
+
+    if IImportingMembers.providedBy(obj.REQUEST):
+        # customer_id is set during import
+        return
+
+    obj.customer_id = generate_customer_id()
