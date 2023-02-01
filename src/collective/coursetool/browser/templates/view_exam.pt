@@ -112,7 +112,7 @@
                                     <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
                                 </td>
                                 <td class="text-center">
-                                    <a href="${python:m['member'].absolute_url()}/@@print">
+                                    <a href="${python:m['member'].absolute_url()}/@@print" tal:condition="m/success">
                                         <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
                                     </a>
                                 </td>

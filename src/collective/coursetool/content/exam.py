@@ -73,6 +73,12 @@ class IExamSchema(model.Schema):
         },
     )
 
+    qualification = schema.Choice(
+        title=_("Qualification"),
+        vocabulary="coursetool.vocabulary.memberqualifications",
+        required=False,
+    )
+
     members = schema.List(
         title=_("Course Members"),
         value_type=DictRow(

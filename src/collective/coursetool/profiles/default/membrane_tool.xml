@@ -3,4 +3,15 @@
         name="membrane_tool"
 >
   <membrane-type name="coursetool.member" />
+
+  <index
+    meta_type="KeywordIndex"
+    name="email">
+    <indexed_attr value="email" />
+  </index>
+
+  <query_index_map>
+    <index name="email">email</index>
+  </query_index_map>
+
 </object>

@@ -1,9 +1,9 @@
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
-from collective.coursetool.interfaces import IMember
 from collective.coursetool.interfaces import IImportingMembers
-from collective.coursetool.utils import generate_member_id
+from collective.coursetool.interfaces import IMember
 from collective.coursetool.utils import generate_customer_id
+from collective.coursetool.utils import generate_member_id
 from dexterity.membrane.behavior.user import MembraneUserProperties
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity import textindexer
@@ -14,6 +14,7 @@ from plone.app.z3cform.widget import SelectFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.formwidget.namedfile import NamedImageFieldWidget
+from plone.indexer import indexer
 from plone.namedfile import field as namedfile
 from plone.schema.email import _isemail
 from plone.supermodel import model
@@ -28,11 +29,12 @@ from zope.interface import implementer
 class IRegistration(IRegisterSchema):
     first_name = schema.TextLine(title=_("Firstname"))
     last_name = schema.TextLine(title=_("Lastname"))
-    username = schema.TextLine(
-        title=_("Username"),
-        description=_("Registry username description"),
-    )
     email = schema.TextLine(title=_("Email"))
+    customer_id = schema.TextLine(
+        title=_("Customer Nr"),
+        description=_("Registration optional Customer Nr"),
+        required=False,
+    )
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
         description=_("Upload your Passfoto (5MB max size)"),
@@ -122,7 +124,7 @@ class IMemberSchema(model.Schema):
     directives.widget("state", SelectFieldWidget)
 
     qualification = schema.Tuple(
-        title=_("Qualification"),
+        title=_("Qualifications"),
         value_type=schema.Choice(
             vocabulary="coursetool.vocabulary.memberqualifications",
         ),
@@ -157,7 +159,7 @@ class IMemberSchema(model.Schema):
     )
 
     # field visibility
-    directives.omitted("customer_id")
+    directives.omitted("customer_id", "username")
     directives.no_omit(IEditForm, "customer_id")
 
     # field permissions
@@ -240,6 +242,12 @@ class Member(Container):
     def title(self, value):
         pass
 
+    def Title(self):
+        return f"{self.customer_id}: {self.title}"
+
+    def sortable_title(self):
+        return self.title
+
     def get_full_name(self):
         return self.title
 
@@ -268,7 +276,6 @@ class UserProperties(MembraneUserProperties):
 
     property_map = dict(
         gender="salutation",
-        username="username",
         email="email",
         first_name="first_name",
         last_name="last_name",
@@ -294,8 +301,16 @@ class NameFromCreationDateEncrypted(object):
 
 def new_customer_id(obj, event):
 
-    if IImportingMembers.providedBy(obj.REQUEST):
+    if (
+        IImportingMembers.providedBy(obj.REQUEST)
+        or getattr(obj, "customer_id", None) is not None
+    ):
         # customer_id is set during import
         return
 
     obj.customer_id = generate_customer_id()
+
+
+@indexer(IMember)
+def sortable_title(obj):
+    return obj.title.lower().replace(" ", "_")

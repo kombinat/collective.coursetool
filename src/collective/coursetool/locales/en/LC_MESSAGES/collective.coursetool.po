@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-01-31 16:05+0000\n"
+"POT-Creation-Date: 2023-02-01 12:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -438,8 +438,12 @@ msgstr ""
 msgid "Practical experience"
 msgstr ""
 
-#: collective/coursetool/content/member.py
+#: collective/coursetool/content/exam.py
 msgid "Qualification"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Qualifications"
 msgstr ""
 
 #: collective/coursetool/patches.py
@@ -456,6 +460,10 @@ msgstr ""
 
 #: collective/coursetool/vocabularies.py
 msgid "Read - qualified"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Registration optional Customer Nr"
 msgstr ""
 
 #: collective/coursetool/content/member.py

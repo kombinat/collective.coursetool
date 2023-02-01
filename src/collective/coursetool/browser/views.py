@@ -202,7 +202,7 @@ class ExamView(ViewBase):
         return not user or user.UID() not in self.context.members_uuids()
 
     def all_members_mailaddress(self):
-        mails = [m["member"].email for m in self.members()]
+        mails = [m["member"].email for m in self.members() if m["member"].email]
         return ";".join(mails)
 
     @protect(PostOnly)
