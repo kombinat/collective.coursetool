@@ -5,6 +5,7 @@ from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFa
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.app.z3cform.widget import SelectFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
@@ -73,10 +74,19 @@ class IExamSchema(model.Schema):
         },
     )
 
-    qualification = schema.Choice(
-        title=_("Qualification"),
-        vocabulary="coursetool.vocabulary.memberqualifications",
+    qualification = schema.Tuple(
+        title=_("Qualifications"),
+        value_type=schema.Choice(
+            vocabulary="coursetool.vocabulary.memberqualifications",
+        ),
         required=False,
+    )
+    directives.widget(
+        "qualification",
+        SelectFieldWidget,
+        pattern_options={
+            "allowNewItems": "false",
+        },
     )
 
     members = schema.List(

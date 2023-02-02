@@ -42,7 +42,7 @@
             <div class="card-body tab-content">
                 <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
                     <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
-                        <tal:block repeat="info_fld python:['date', ]">
+                        <tal:block repeat="info_fld python:['date', 'qualification']">
                         <div class="col"
                              tal:define="wdgt python:view.w.get(info_fld)"
                              tal:condition="python:wdgt.value and wdgt">

@@ -72,7 +72,9 @@ SALUTATION_MAPPING = {
     "Herr": "male",
     "Frau": "female",
 }
-
+DISABLE_VALIDATION = [
+    "email", "birthday", "first_name", "last_name"
+]
 
 def no_validation(value):
     return
@@ -108,48 +110,55 @@ class ImportMembers(BrowserView):
                 schema_fld._orig_validate = schema_fld._validate
                 schema_fld._validate = no_validation
 
+        # disable required fields during import
+        for fld in DISABLE_VALIDATION:
+            IMemberSchema[fld]._orig_required = IMemberSchema[fld].required
+            IMemberSchema[fld]._orig_validate = IMemberSchema[fld]._validate
+            IMemberSchema[fld].required = False
+            IMemberSchema[fld]._validate = no_validation
+
         # assume the first row columns are titles
         for num, row in enumerate(ws.iter_rows(min_row=2, values_only=True), 1):
             data = {}
 
             for fld, idx in SCHEMA_MAPPING.items():
-                if fld not in schema_names or row[idx] is None:
+                if fld not in schema_names:
                     continue
                 if IMemberSchema[fld]._type == bool:
                     data[fld] = str(row[idx]).lower() == "true"
                 elif IMemberSchema[fld]._type == str:
                     # force str
-                    data[fld] = str(row[idx]).strip()
+                    data[fld] = str(row[idx]).strip() if row[idx] else ""
                 elif isinstance(row[idx], datetime):
-                    data[fld] = row[idx].strftime("%Y-%m-%d")
+                    data[fld] = row[idx].strftime("%Y-%m-%d") if row[idx] else None
                 else:
                     data[fld] = row[idx]
 
                 # extra mappings
                 if fld == "salutation":
-                    data[fld] = SALUTATION_MAPPING.get(row[idx], None)
+                    data[fld] = SALUTATION_MAPPING.get(row[idx], None) if row[idx] else None
 
                 if (
                     fld == "email"
                     and data[fld] != ""
-                    and not _isemail(data[fld])
                 ):
-                    # handle broken mail addresses
-                    log.warn("EMail not valid: %s", row[idx])
-                    data[fld] = None
+                    if not _isemail(data[fld]):
+                        # handle broken mail addresses
+                        log.warn("EMail not valid: %s", row[idx])
+                        data[fld] = None
+                    else:
+                        data[fld] = data[fld].lower()
 
             for fld, idx in METADATA_MAPPING.items():
-                if row[idx] is None:
-                    continue
-                data[fld] = row[idx].isoformat()
+                data[fld] = row[idx].isoformat() if row[idx] else None
 
             for fld, idx in VOCAB_MAPPING.items():
-                if len(row) <= idx or row[idx] is None:
+                if len(row) <= idx :
                     continue
                 if fld == "state":
-                    data[fld] = STATE_MAPPING.get(row[idx], None)
+                    data[fld] = STATE_MAPPING.get(row[idx], None) if row[idx] else None
                     continue
-                data[fld] = [v.strip() for v in row[idx].split(",") if v]
+                data[fld] = [v.strip() for v in row[idx].split(",") if v] if row[idx] else None
 
             __traceback_info__ = data
 
@@ -165,10 +174,13 @@ class ImportMembers(BrowserView):
                 msg = "{0} Generated new member {1}"
 
             deserializer = getMultiAdapter((obj, self.request), IDeserializeFromJson)
-            obj = deserializer(validate_all=False, data=data)
-            obj.reindexObject()
+            try:
+                obj = deserializer(validate_all=False, data=data)
+                obj.reindexObject()
+                log.info(msg.format(num, obj))
+            except Exception as msg:
+                log.warn(f"Could not set data {data} for {obj}: {msg}")
 
-            log.info(msg.format(num, obj))
             transaction.commit()
 
         # reset original constraints
@@ -180,6 +192,13 @@ class ImportMembers(BrowserView):
             else:
                 schema_fld._validate = schema_fld._orig_validate
                 delattr(schema_fld, "_orig_validate")
+
+        # reset required fields
+        for fld in DISABLE_VALIDATION:
+            IMemberSchema[fld].required = IMemberSchema[fld]._orig_required
+            IMemberSchema[fld]._validate = IMemberSchema[fld]._orig_validate
+            delattr(IMemberSchema[fld], "_orig_required")
+            delattr(IMemberSchema[fld], "_orig_validate")
 
         api.portal.show_message(_("Imported members"), request=self.request)
         return self.index()

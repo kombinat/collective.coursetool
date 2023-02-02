@@ -1,3 +1,4 @@
+from Acquisition import aq_base
 from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IImportingMembers
@@ -18,7 +19,6 @@ from plone.indexer import indexer
 from plone.namedfile import field as namedfile
 from plone.schema.email import _isemail
 from plone.supermodel import model
-from z3c.form.browser.select import SelectFieldWidget
 from z3c.form.browser.text import TextFieldWidget
 from z3c.form.interfaces import IEditForm
 from zope import schema
@@ -129,6 +129,7 @@ class IMemberSchema(model.Schema):
             vocabulary="coursetool.vocabulary.memberqualifications",
         ),
         required=False,
+        default=(),
     )
     directives.widget(
         "qualification",
@@ -232,8 +233,8 @@ class Member(Container):
     @property
     def title(self):
         title_parts = [
-            self.last_name or self.lastname,
-            self.first_name or self.firstname,
+            getattr(aq_base(self), "last_name", "-") or "-",
+            getattr(aq_base(self), "first_name"),
         ]
 
         return " ".join([p for p in title_parts if p])

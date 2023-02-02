@@ -40,14 +40,13 @@
       name="collective.coursetool-hiddenprofiles"
       />
 
-
   <utility
       name="coursetool.vocabulary.memberstates"
-      component=".vocabularies.MemberStatesVocabulary"
+      component=".vocabularies.MemberStatesVocabularyFactory"
       />
   <utility
       name="coursetool.vocabulary.memberqualifications"
-      component=".vocabularies.MemberQualificationsVocabulary"
+      component=".vocabularies.MemberQualificationsVocabularyFactory"
       />
   <utility
       name="coursetool.vocabulary.partnertypes"
@@ -55,7 +54,7 @@
       />
   <utility
       name="coursetool.vocabulary.coursetypes"
-      component=".vocabularies.CourseTypesVocabulary"
+      component=".vocabularies.CourseTypesVocabularyFactory"
       />
   <utility
       name="coursetool.vocabulary.members"

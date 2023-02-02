@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-01 12:48+0000\n"
-"PO-Revision-Date: 2023-02-01 13:51+0100\n"
+"POT-Creation-Date: 2023-02-02 08:24+0000\n"
+"PO-Revision-Date: 2023-02-02 09:24+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -212,6 +212,7 @@ msgid "Exam passed"
 msgstr "Prüfung bestanden"
 
 #: collective/coursetool/browser/templates/view_exam.pt
+#: collective/coursetool/browser/templates/view_member.pt
 #: collective/coursetool/content/exam.py
 msgid "Exam successfully passed"
 msgstr "Erfolgreich absolviert"
@@ -368,6 +369,18 @@ msgstr "Name"
 msgid "No action performed."
 msgstr "Keine Aktion ausgeführt."
 
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "No certificates found."
+msgstr "Keine Fischerkarten vorhanden."
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "No courses found."
+msgstr "Keine Kurse vorhanden"
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "No exams found."
+msgstr "Keine Prüfungen vorhanden."
+
 #: collective/coursetool/browser/templates/listing_macros.pt
 #: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
@@ -377,10 +390,6 @@ msgstr "Keine Artikel vorhanden."
 #: collective/coursetool/vocabularies.py
 msgid "Not read"
 msgstr "nicht Eingelesen"
-
-#: collective/coursetool/vocabularies.py
-msgid "Nothing"
-msgstr "kein Wert"
 
 #: collective/coursetool/browser/templates/listing_macros.pt
 msgid "Nr"
@@ -441,9 +450,6 @@ msgid "Practical experience"
 msgstr "Praxis"
 
 #: collective/coursetool/content/exam.py
-msgid "Qualification"
-msgstr "Befähigung"
-
 #: collective/coursetool/content/member.py
 msgid "Qualifications"
 msgstr "Befähigungen"
@@ -467,10 +473,6 @@ msgstr "Eingelesen, qualifiziert"
 #: collective/coursetool/content/member.py
 msgid "Registration optional Customer Nr"
 msgstr "Optional: Wenn Sie bereits eine Fischerkarte besitzen, dann geben Sie hier die Nummer an, damit wir Ihren Benutzeraccount richtig zuordnen können."
-
-#: collective/coursetool/content/member.py
-msgid "Registry username description"
-msgstr "Tragen Sie Ihren gewünschten Benutzernamen ein. Diesen Namen benötigen Sie später zur Anmeldung. Es sind keine Leer- oder Sonderzeichen erlaubt, zwischen Groß- und Kleinschreibung wird unterschieden."
 
 #: collective/coursetool/content/member.py
 msgid "Salutation"

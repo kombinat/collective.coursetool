@@ -6,36 +6,41 @@ from random import paretovariate
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import provider
+from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
 
-@provider(IVocabularyFactory)
-def MemberStatesVocabulary(context):
-    """Obtains available scales from registry"""
-    states = [
+@implementer(IVocabularyFactory)
+class StaticValuesVocabulary(object):
+    values = []
+
+    def __call__(self, context=None):
+        terms = []
+        request = getRequest()
+
+        for _s, _title in self.values:
+            terms.append(SimpleTerm(_s, _s, translate(_title, context=request)))
+
+        return SimpleVocabulary(terms)
+
+
+class MemberStatesVocabulary(StaticValuesVocabulary):
+    values = [
         ("read_qualified", _("Read - qualified")),
         ("read_no_qualification", _("Read - no qualification")),
         ("read_no_birthday", _("Read - no birthday")),
         ("complete_not_printed", _("Complete - not printed")),
         ("complete_printed", _("Complete - printed")),
         ("not_read", _("Not read")),
-        ("--NOVALUE--", _("Nothing")),
     ]
-    terms = []
-    request = getRequest()
 
-    for _s, _title in states:
-        terms.append(SimpleTerm(_s, _s, translate(_title, context=request)))
-
-    return SimpleVocabulary(terms)
+MemberStatesVocabularyFactory = MemberStatesVocabulary()
 
 
-@provider(IVocabularyFactory)
-def MemberQualificationsVocabulary(context):
-    """Obtains available scales from registry"""
-    qualifications = [
+class MemberQualificationsVocabulary(StaticValuesVocabulary):
+    values = [
         ("a", _("quali_a_label")),
         ("b1", _("quali_b1_label")),
         ("b2", _("quali_b2_label")),
@@ -47,31 +52,18 @@ def MemberQualificationsVocabulary(context):
         ("g", _("quali_g_label")),
         ("h", _("quali_h_label")),
         ("i", _("quali_i_label")),
-        ("--NOVALUE--", _("Nothing")),
     ]
-    terms = []
-    request = getRequest()
 
-    for _s, _title in qualifications:
-        terms.append(SimpleTerm(_s, _s, translate(_title, context=request)))
-
-    return SimpleVocabulary(terms)
+MemberQualificationsVocabularyFactory = MemberQualificationsVocabulary()
 
 
-@provider(IVocabularyFactory)
-def CourseTypesVocabulary(context):
-    """Obtains available scales from registry"""
-    types = [
+class CourseTypesVocabulary(StaticValuesVocabulary):
+    values = [
         ("offline", _("course_type_offline")),
         ("online", _("course_type_online")),
     ]
-    terms = []
-    request = getRequest()
 
-    for _s, _title in types:
-        terms.append(SimpleTerm(_s, _s, translate(_title, context=request)))
-
-    return SimpleVocabulary(terms)
+CourseTypesVocabularyFactory = CourseTypesVocabulary()
 
 
 class PartnerTypeVocabulary(KeywordsVocabulary):

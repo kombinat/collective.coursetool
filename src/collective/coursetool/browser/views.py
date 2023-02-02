@@ -35,7 +35,7 @@ class ColumnDefinition(object):
         self.formatter = formatter
 
     def factory(self, obj):
-        attr = getattr(obj, self.f_attr, "")
+        attr = getattr(obj.aq_base, self.f_attr, "-")
         if self.formatter:
             attr = self.formatter(attr)
         if self.linked:
@@ -99,7 +99,7 @@ class MembersListing(ListingBase):
     portal_type = "coursetool.member"
     row_count = False
     columns = [
-        ColumnDefinition(_("Customer Nr"), "customer_id"),
+        ColumnDefinition(_("Customer Nr"), "customer_id", True),
         ColumnDefinition(_("Name"), "title", True),
         ColumnDefinition(_("Address"), "address_inline"),
         ColumnDefinition(_("EMail"), "email"),
@@ -226,14 +226,14 @@ class ExamView(ViewBase):
 
     @protect(PostOnly)
     def action_exam_success(self, REQUEST):
-        if self._update_members(REQUEST.get("uids", []), success=("selected", )):
+        if self._update_members(REQUEST.get("uids", []), success=True):
             api.portal.show_message(_("Successfully changed users state."))
         else:
             api.portal.show_message(_("No action performed."))
 
     @protect(PostOnly)
     def action_exam_failed(self, REQUEST):
-        if self._update_members(REQUEST.get("uids", []), success=()):
+        if self._update_members(REQUEST.get("uids", []), success=False):
             api.portal.show_message(_("Successfully changed users state."))
         else:
             api.portal.show_message(_("No action performed."))
@@ -247,13 +247,22 @@ class ExamView(ViewBase):
             pdfs.append(view(download=False))
         return pdfs
 
-    def _update_members(self, uids, **kw):
+    def _update_members(self, uids, success=False):
         _members = self.context.members
         _changes = False
+        qualifications = self.context.qualification
         for m in _members:
             if m["member"] in uids:
-                m.update(kw)
+                m["success"] = ("selected") if success else ()
+                m_obj = api.content.get(UID=m["member"])
+                m_quali = m_obj.qualification or ()
+                if success:
+                    m_quali += qualifications
+                else:
+                    m_quali = tuple([q for q in m_quali if q not in qualifications])
+                m_obj.qualification = m_quali
                 _changes = True
+                transaction.commit()
         self.context.members = _members
         return _changes
 
@@ -281,7 +290,7 @@ class MemberView(ViewBase):
     def courses(self):
         return self.backrefs("coursetool.course")
 
-    def exams(self, success=False):
+    def exams(self):
         _ret = []
 
         for exam in self.context.portal_catalog(
@@ -291,15 +300,13 @@ class MemberView(ViewBase):
         ):
             obj = exam.getObject()
 
-            if not success:
-                _ret.append(obj)
-                continue
-
             # filter for successful exams
-            for my_exam in ExamView(obj, self.request).members(mid=self.context.UID()):
-                if my_exam["success"]:
-                    _ret.append(obj)
-                    break
+            for e in ExamView(obj, self.request).members(mid=self.context.UID()):
+                _ret.append(dict(
+                    url=obj.absolute_url(),
+                    title=obj.title,
+                    success=e["success"],
+                ))
 
         return _ret
 
@@ -320,10 +327,7 @@ class PrintView(BrowserView):
     filename = "card.pdf"
 
     def __call__(self, download=True):
-        m_view = MemberView(self.context, self.request)
-        success_exams = m_view.exams(success=True)
-
-        if not success_exams and not self.context.qualification:
+        if not self.context.qualification:
             api.portal.show_message(
                 _("Member has no certificates or external qualifiaction."),
                 type="error",
@@ -343,7 +347,7 @@ class PrintView(BrowserView):
 
     def update(self):
         # generate PDF content in your custom view and save it to self.pdf_data
-        raise NotImplemented()
+        pass
 
 
 class CertificateView(ViewBase):

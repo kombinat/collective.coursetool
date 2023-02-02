@@ -110,18 +110,33 @@
                         </li>
                     </ul>
                     <span class="text-muted fs-sm" tal:condition="not:courses" i18n:translate="">
-                        No items found.
+                        No courses found.
                     </span>
                 </div>
 
                 <div class="tab-pane fade" id="tab-exams" role="tabpabel" aria-labelledby="exams-tab">
-                    <ul class="list-group">
-                        <li class="list-group-item" tal:repeat="exam exams">
-                            <a href="${exam/absolute_url}" tal:content="exam/title">Examtitle</a>
-                        </li>
-                    </ul>
+                    <table class="table table-sm" tal:condition="exams">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th width="5%" class="text-nowrap">
+                                    <span i18n:translate="">Exam successfully passed</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr tal:repeat="exam exams">
+                                <td>
+                                    <a href="${exam/url}" tal:content="exam/title" tal:omit-tag="not:view/is_admin">Examtitle</a>
+                                </td>
+                                <td class="text-center">
+                                    <tal:icon replace="structure python:icons.tag('check-circle' if exam['success'] else 'slash-circle', tag_class='text-' + ('success' if exam['success'] else 'danger'))" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <span class="text-muted fs-sm" tal:condition="not:exams" i18n:translate="">
-                        No items found.
+                        No exams found.
                     </span>
                 </div>
 
@@ -132,7 +147,7 @@
                         </li>
                     </ul>
                     <span class="text-muted fs-sm" tal:condition="not:certificates" i18n:translate="">
-                        No items found.
+                        No certificates found.
                     </span>
                 </div>
             </div>

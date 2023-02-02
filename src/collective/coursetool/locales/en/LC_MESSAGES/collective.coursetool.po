@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-02-01 12:48+0000\n"
+"POT-Creation-Date: 2023-02-02 08:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,6 +210,7 @@ msgid "Exam passed"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt
+#: collective/coursetool/browser/templates/view_member.pt
 #: collective/coursetool/content/exam.py
 msgid "Exam successfully passed"
 msgstr ""
@@ -366,6 +367,18 @@ msgstr ""
 msgid "No action performed."
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "No certificates found."
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "No courses found."
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "No exams found."
+msgstr ""
+
 #: collective/coursetool/browser/templates/listing_macros.pt
 #: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
@@ -374,10 +387,6 @@ msgstr ""
 
 #: collective/coursetool/vocabularies.py
 msgid "Not read"
-msgstr ""
-
-#: collective/coursetool/vocabularies.py
-msgid "Nothing"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_macros.pt
@@ -439,9 +448,6 @@ msgid "Practical experience"
 msgstr ""
 
 #: collective/coursetool/content/exam.py
-msgid "Qualification"
-msgstr ""
-
 #: collective/coursetool/content/member.py
 msgid "Qualifications"
 msgstr ""
@@ -464,10 +470,6 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Registration optional Customer Nr"
-msgstr ""
-
-#: collective/coursetool/content/member.py
-msgid "Registry username description"
 msgstr ""
 
 #: collective/coursetool/content/member.py
