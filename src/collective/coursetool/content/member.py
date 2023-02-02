@@ -74,6 +74,9 @@ class IMemberSchema(model.Schema):
     picture = namedfile.NamedBlobImage(title=_("User Image"))
     passport_image = namedfile.NamedBlobImage(title=_("Passport Image"))
 
+    # this gets set by the PrintView if printed
+    card_image = namedfile.NamedBlobImage(title=_("Card Image"), required=False)
+
     # layout wrapper CSS classes
     directives.widget("salutation", SelectFieldWidget, wrapper_css_class="col-lg-1")
     directives.widget("graduation", TextFieldWidget, wrapper_css_class="col-lg-1")
@@ -91,6 +94,7 @@ class IMemberSchema(model.Schema):
     directives.widget("birthday", DateFieldWidget, wrapper_css_class="col-lg-6", _formater_length="long")
     directives.widget("picture", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
     directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("card_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
 
     username = schema.TextLine(
         title=_("Username"),
@@ -160,8 +164,8 @@ class IMemberSchema(model.Schema):
     )
 
     # field visibility
-    directives.omitted("customer_id", "username")
-    directives.no_omit(IEditForm, "customer_id")
+    directives.omitted("customer_id", "username", "card_image")
+    directives.no_omit(IEditForm, "customer_id", "card_image")
 
     # field permissions
     directives.read_permission(
@@ -180,6 +184,7 @@ class IMemberSchema(model.Schema):
         admin_comment="cmf.ManagePortal",
     )
     directives.write_permission(
+        card_image="cmf.ManagePortal",
         customer_id="cmf.ManagePortal",
         email="cmf.ManagePortal",
         booking_nr="cmf.ManagePortal",
@@ -206,6 +211,7 @@ class IMemberSchema(model.Schema):
         "metadata",
         label=_("Metadata"),
         fields=[
+            "card_image",
             "customer_id",
             "booking_nr",
             "salutation_personal",

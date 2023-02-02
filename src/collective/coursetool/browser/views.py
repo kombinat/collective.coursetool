@@ -2,17 +2,22 @@ from Acquisition import aq_inner
 from collective.coursetool import _
 from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
+from io import BytesIO
 from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plone.namedfile.file import NamedBlobImage
 from plone.protect import PostOnly
 from plone.protect import protect
+from plone.protect.interfaces import IDisableCSRFProtection
 from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
+from zope.interface import alsoProvides
 
 import logging
+import pdf2image
 import transaction
 
 
@@ -336,6 +341,7 @@ class PrintView(BrowserView):
 
         # generate PDF content in your custom view
         self.update()
+        self.save_preview()
 
         if download:
             self.request.response.setHeader(
@@ -348,6 +354,27 @@ class PrintView(BrowserView):
     def update(self):
         # generate PDF content in your custom view and save it to self.pdf_data
         pass
+
+    def save_preview(self):
+        if self.pdf_data is None:
+            # no pdf rendered
+            return
+
+        alsoProvides(self.request, IDisableCSRFProtection)
+
+        try:
+            preview = pdf2image.convert_from_bytes(self.pdf_data)
+            png = BytesIO()
+            png.name = self.filename.replace(".pdf", ".png")
+            # save to BytesIO and convert to PNG
+            preview[0].save(png)
+            self.context.card_image = NamedBlobImage(
+                data=png.getvalue(),
+                contentType="image/png",
+                filename=png.name,
+            )
+        except Exception as msg:
+            logger.info(f"Could not save PDF preview: {msg}")
 
 
 class CertificateView(ViewBase):

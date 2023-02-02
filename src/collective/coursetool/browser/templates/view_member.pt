@@ -49,7 +49,7 @@
                         <a class="nav-link" id="certificates-tab" data-bs-toggle="tab"
                             data-bs-target="#tab-certificates" aria-current="true" href="#">
                             <span i18n:translate="">Certificates</span> <span
-                                class="badge text-bg-secondary">${python:len(certificates)}</span>
+                                class="badge text-bg-secondary">${python:"1" if context.card_image else "0"}</span>
                         </a>
                     </li>
                 </ul>
@@ -141,12 +141,13 @@
                 </div>
 
                 <div class="tab-pane fade" id="tab-certificates" role="tabpabel" aria-labelledby="certificates-tab">
-                    <ul class="list-group">
-                        <li class="list-group-item" tal:repeat="certificate certificates">
-                            <a href="${certificate/absolute_url}" tal:content="certificate/title">Certificatetitle</a>
-                        </li>
-                    </ul>
-                    <span class="text-muted fs-sm" tal:condition="not:certificates" i18n:translate="">
+                    <a href="${context/absolute_url}/@@print"
+                       tal:condition="context/card_image|nothing"
+                       tal:define="scales context/@@images"
+                       tal:omit-tag="not:is_admin">
+                        <img tal:replace="structure python:scales.tag('card_image', scale='preview')" />
+                    </a>
+                    <span class="text-muted fs-sm" tal:condition="not:context/card_image|nothing" i18n:translate="">
                         No certificates found.
                     </span>
                 </div>
