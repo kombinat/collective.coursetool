@@ -31,7 +31,7 @@ class IRegistration(IRegisterSchema):
     last_name = schema.TextLine(title=_("Lastname"))
     email = schema.TextLine(title=_("Email"))
     customer_id = schema.TextLine(
-        title=_("Customer Nr"),
+        title=_("Registry Customer Nr"),
         description=_("Registration optional Customer Nr"),
         required=False,
     )

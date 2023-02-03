@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-03 08:25+0000\n"
-"PO-Revision-Date: 2023-02-03 09:25+0100\n"
+"POT-Creation-Date: 2023-02-03 09:07+0000\n"
+"PO-Revision-Date: 2023-02-03 10:09+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -191,7 +191,7 @@ msgstr "Bearbeiten"
 
 #: collective/coursetool/content/member.py
 msgid "Email"
-msgstr "EMail"
+msgstr "E-Mail Adresse"
 
 #: collective/coursetool/content/course.py
 msgid "Endtime"
@@ -486,6 +486,10 @@ msgstr "Eingelesen, qualifiziert"
 #: collective/coursetool/content/member.py
 msgid "Registration optional Customer Nr"
 msgstr "Optional: Wenn Sie bereits eine Fischerkarte besitzen, dann geben Sie hier die Nummer an, damit wir Ihren Benutzeraccount richtig zuordnen können."
+
+#: collective/coursetool/content/member.py
+msgid "Registry Customer Nr"
+msgstr "Nummer Fischerausweis (Zahl ohne Buchstaben angeben)"
 
 #: collective/coursetool/content/member.py
 msgid "Salutation"
