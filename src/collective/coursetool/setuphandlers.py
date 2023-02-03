@@ -152,6 +152,10 @@ def post_install(context):
         "portlets",
     )
 
+    # use lowercase usernames globally
+    pas = api.portal.get_tool("acl_users")
+    pas.login_transform = "lower"
+
 
 def uninstall(context):
     """Uninstall script"""
