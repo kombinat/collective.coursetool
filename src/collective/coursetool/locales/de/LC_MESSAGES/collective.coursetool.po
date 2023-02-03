@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-02 08:24+0000\n"
-"PO-Revision-Date: 2023-02-02 09:24+0100\n"
+"POT-Creation-Date: 2023-02-03 08:25+0000\n"
+"PO-Revision-Date: 2023-02-03 09:25+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -40,6 +40,10 @@ msgstr "Kursort hinzufügen"
 msgid "Add Member"
 msgstr "Mitglied hinzufügen"
 
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Add member"
+msgstr "Mitglied hinzufügen"
+
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "Address"
@@ -68,6 +72,10 @@ msgstr "Geburtstag"
 #: collective/coursetool/content/member.py
 msgid "Booking Nr"
 msgstr "Buchungsnr."
+
+#: collective/coursetool/content/member.py
+msgid "Card Image"
+msgstr "Kartenvoschau"
 
 #: collective/coursetool/content/certificate.py
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
@@ -249,8 +257,8 @@ msgid "Import Members"
 msgstr "Benutzer importieren"
 
 #: collective/coursetool/browser/import.py
-msgid "Imported members"
-msgstr "Importierte Mitglieder"
+msgid "Imported members: ${count}/${all}"
+msgstr "Importierte Mitglieder: ${count}/${all}"
 
 #: collective/coursetool/content/member.py
 msgid "Inactive"
@@ -383,9 +391,14 @@ msgstr "Keine Prüfungen vorhanden."
 
 #: collective/coursetool/browser/templates/listing_macros.pt
 #: collective/coursetool/browser/templates/view_certificate.pt
-#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_location.pt
 msgid "No items found."
 msgstr "Keine Artikel vorhanden."
+
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "No members found."
+msgstr "Keine Mitglieder gefunden."
 
 #: collective/coursetool/vocabularies.py
 msgid "Not read"

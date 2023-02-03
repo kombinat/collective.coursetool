@@ -91,8 +91,8 @@
                 </div>
 
                 <div class="tab-pane fade" id="tab-metadata" role="tabpabel" aria-labelledby="metadata-tab">
-                    <div tal:repeat="group view/groups">
-                        <div class="col mb-3" tal:repeat="widget group/widgets/values">
+                    <div tal:repeat="group view/groups" class="row">
+                        <div class="col-lg-6 mb-2 pb-1 border-bottom border-end" tal:repeat="widget group/widgets/values">
                             <label class="fw-bold" tal:content="widget/label" />
                             <br />
                             <span tal:condition="not:widget/value">

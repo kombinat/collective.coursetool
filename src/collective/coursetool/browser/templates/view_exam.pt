@@ -82,7 +82,7 @@
                     </tal:block>
                 </div>
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
-                    <form action="${context/absolute_url}" class="pat-inject" data-pat-inject="#tab-members #tab-members && #global_statusmessage #global_statusmessage && #members-tab #members-tab" method="POST">
+                    <form action="${context/absolute_url}" class="pat-inject" data-pat-inject="#tab-members #tab-members && #global_statusmessage #global_statusmessage && #members-tab #members-tab" method="POST" tal:condition="len_members">
                     <table class="table table-condensed table-striped table-sm pat-checklist">
                         <thead>
                             <tr>
@@ -136,10 +136,11 @@
                             <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
                         </div>
                     </div>
-                    <span class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
-                        No items found.
-                    </span>
                     </form>
+                    <div class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
+                        No members found.
+                    </div>
+                    <a href="${context/absolute_url}/edit#autotoc-item-autotoc-1" class="btn btn-primary pat-plone-modal mt-3" data-pat-plone-modal='modalSizeClass: modal-xl;' i18n:translate="">Add member</a>
                 </div>
             </div>
 

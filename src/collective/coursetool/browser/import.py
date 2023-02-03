@@ -87,6 +87,8 @@ class ImportMembers(BrowserView):
 
         alsoProvides(self.request, IImportingMembers)
 
+        count_import = 0
+        _all = 0
         _xlsx_file = self.request["import_data"]
 
         wb = load_workbook(_xlsx_file, read_only=True)
@@ -178,9 +180,11 @@ class ImportMembers(BrowserView):
                 obj = deserializer(validate_all=False, data=data)
                 obj.reindexObject()
                 log.info(msg.format(num, obj))
+                count_import += 1
             except Exception as msg:
                 log.warn(f"Could not set data {data} for {obj}: {msg}")
 
+            _all += 1
             transaction.commit()
 
         # reset original constraints
@@ -200,5 +204,8 @@ class ImportMembers(BrowserView):
             delattr(IMemberSchema[fld], "_orig_required")
             delattr(IMemberSchema[fld], "_orig_validate")
 
-        api.portal.show_message(_("Imported members"), request=self.request)
+        api.portal.show_message(
+            _("Imported members: ${count}/${all}",
+              mapping=dict(count=count_import, all=_all)),
+            request=self.request)
         return self.index()

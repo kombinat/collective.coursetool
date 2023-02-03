@@ -212,16 +212,12 @@ class ExamView(ViewBase):
 
     @protect(PostOnly)
     def action_delete(self, REQUEST):
-        _changes = False
         _members = self.context.members
 
         for uid in REQUEST.get("uids", []):
-            obj = api.content.get(UID=uid)
-            obj.aq_parent.manage_delObjects([obj.id, ])
-            _changes = True
             _members = [m for m in _members if m["member"] != uid]
 
-        if _changes:
+        if len(_members) < len(self.context.members):
             self.context.members = _members
             self.context.reindexObject()
             transaction.commit()
