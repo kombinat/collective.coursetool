@@ -274,7 +274,7 @@ class Member(Container):
         return ", ".join(self.get_address())
 
     def can_buy_certificate():
-        return False
+        return True
 
 
 
