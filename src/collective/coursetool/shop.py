@@ -41,6 +41,7 @@ CHECKOUT_FIELD_MAP = {
     "street": "address",
     "zip": "zip_code",
     "country": "cty_code",
+    "phone": ["mobile_phone", "phone"]
 }
 
 
@@ -64,5 +65,12 @@ class CheckoutFormCourseMemberPresets(object):
             name = parts[-1]
             if "delivery_address" in parts:
                 name = "delivery_%s" % name
-            default = getattr(self.member, CHECKOUT_FIELD_MAP.get(name, name), UNSET)
+            map_fld = CHECKOUT_FIELD_MAP.get(name, name)
+            if isinstance(map_fld, list):
+                for fld in map_fld:
+                    default = getattr(self.member, fld, UNSET)
+                    if default != UNSET:
+                        break
+            else:
+                default = getattr(self.member, map_fld, UNSET)
         return default
