@@ -386,8 +386,9 @@ class CertificateView(ViewBase):
         if api.user.get_permissions().get(CoursetoolAdmin):
             # no cart widget for admins
             return False
-        user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
-        return user and user.can_buy_certificate()
+        # user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
+        # return user and user.can_buy_certificate()
+        return True
 
 
 class Utils(BrowserView):
