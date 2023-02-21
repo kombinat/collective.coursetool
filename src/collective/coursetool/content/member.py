@@ -71,8 +71,8 @@ class IMemberSchema(model.Schema):
     fax = schema.TextLine(title=_("Fax"), required=False)
 
     birthday = schema.Date(title=_("Birthday"), required=True)
-    picture = namedfile.NamedBlobImage(title=_("User Image"))
-    passport_image = namedfile.NamedBlobImage(title=_("Passport Image"))
+    picture = namedfile.NamedBlobImage(title=_("User Image"), required=False)
+    passport_image = namedfile.NamedBlobImage(title=_("Passport Image"), required=False)
 
     # this gets set by the PrintView if printed
     card_image = namedfile.NamedBlobImage(title=_("Card Image"), required=False)
