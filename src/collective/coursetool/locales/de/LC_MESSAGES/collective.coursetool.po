@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-02-03 09:07+0000\n"
-"PO-Revision-Date: 2023-02-03 10:09+0100\n"
+"PO-Revision-Date: 2023-02-21 07:30+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr "Aktionen für ausgwählte Mitglieder"
 
 #: collective/coursetool/browser/templates/listing_certificates.pt
 msgid "Add Certificate"
-msgstr "Fischerkarte hinzufügen"
+msgstr "Fischerausweis hinzufügen"
 
 #: collective/coursetool/browser/templates/listing_courses.pt
 msgid "Add Course"
@@ -80,7 +80,7 @@ msgstr "Kartenvoschau"
 #: collective/coursetool/content/certificate.py
 #: collective/coursetool/profiles/default/types/coursetool.certificate.xml
 msgid "Certificate"
-msgstr "Fischerkarte"
+msgstr "Fischerausweis"
 
 #: collective/coursetool/content/certificate.py
 msgid "Certificate Members"
@@ -90,7 +90,7 @@ msgstr "Mitglieder"
 #: collective/coursetool/browser/templates/portal.pt
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "Certificates"
-msgstr "Fischerkarten"
+msgstr "Fischerausweise"
 
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
@@ -305,7 +305,7 @@ msgstr "Kursorte"
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Certificates"
-msgstr "Fischerkarten verwalten"
+msgstr "Fischerausweise verwalten"
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Courses"
@@ -313,7 +313,7 @@ msgstr "Kurse verwalten"
 
 #: collective/coursetool/configure.zcml
 msgid "Manage Courses, Lecturers, Students, Exams and Certificates."
-msgstr "Kurse, Trainer, Teilnehmer, Prüfungen und Fischerkarten."
+msgstr "Kurse, Trainer, Teilnehmer, Prüfungen und Fischerausweise."
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Manage Exams"
@@ -379,7 +379,7 @@ msgstr "Keine Aktion ausgeführt."
 
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "No certificates found."
-msgstr "Keine Fischerkarten vorhanden."
+msgstr "Keine Fischerausweise vorhanden."
 
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "No courses found."
@@ -485,7 +485,7 @@ msgstr "Eingelesen, qualifiziert"
 
 #: collective/coursetool/content/member.py
 msgid "Registration optional Customer Nr"
-msgstr "Optional: Wenn Sie bereits eine Fischerkarte besitzen, dann geben Sie hier die Nummer an, damit wir Ihren Benutzeraccount richtig zuordnen können."
+msgstr "Optional: Wenn Sie bereits einen Fischerausweis besitzen, dann geben Sie hier die Nummer an, damit wir Ihren Benutzeraccount richtig zuordnen können."
 
 #: collective/coursetool/content/member.py
 msgid "Registry Customer Nr"
@@ -611,7 +611,7 @@ msgstr "Kursort: ${title}"
 #: collective/coursetool/browser/templates/view_exam.pt
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "print card"
-msgstr "Fischerkarte drucken"
+msgstr "Fischerausweis drucken"
 
 #: collective/coursetool/vocabularies.py
 msgid "quali_a_label"
