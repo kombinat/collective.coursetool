@@ -6,6 +6,7 @@ from collective.coursetool.interfaces import IMember
 from collective.coursetool.utils import generate_customer_id
 from collective.coursetool.utils import generate_member_id
 from dexterity.membrane.behavior.user import MembraneUserProperties
+from dexterity.membrane.membrane_helpers import validate_unique_email
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity import textindexer
 from plone.app.users.schema import IRegisterSchema
@@ -24,6 +25,8 @@ from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.component import adapter
 from zope.interface import implementer
+from zope.interface import Invalid
+from zope.interface import invariant
 
 
 class IRegistration(IRegisterSchema):
@@ -230,6 +233,22 @@ class IMemberSchema(model.Schema):
     )
 
     model.fieldset("membership", label=_("Membership"), fields=["username"])
+
+    @invariant
+    def email_unique(data):
+        """The email must be unique, as it is the login name (user name).
+
+        The tricky thing is to make sure editing a user and keeping
+        his email the same actually works.
+        """
+        user = data.__context__
+        if user is not None:
+            if getattr(user, 'email', None) and user.email == data.email:
+                # No change, fine.
+                return
+        error = validate_unique_email(data.email)
+        if error:
+            raise Invalid(error)
 
 
 @implementer(IMember)
