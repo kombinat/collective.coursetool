@@ -209,3 +209,23 @@ class ImportMembers(BrowserView):
               mapping=dict(count=count_import, all=_all)),
             request=self.request)
         return self.index()
+
+class MemberStates(BrowserView):
+
+    def __call__(self):
+
+        items = self.context.portal_catalog(portal_type="coursetool.member", sort_on="getId")
+        _all = len(items)
+
+        for idx, m in enumerate(items, 1):
+            if m.review_state != "enabled":
+                obj = m.getObject()
+                api.content.transition(obj=obj, to_state="enabled")
+                obj.reindexObject()
+                transaction.commit()
+                log.info(f"{idx}/{_all}) fixed workflow state for {m.getPath()}")
+                continue
+
+            log.info(f"{idx}/{_all}) skipped {m.getPath()}")
+
+        return "done"

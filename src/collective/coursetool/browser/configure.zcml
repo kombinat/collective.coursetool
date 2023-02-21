@@ -114,6 +114,14 @@
       layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
       />
 
+  <browser:page
+      name="fix_member_states"
+      for="plone.dexterity.interfaces.IDexterityContainer"
+      class=".import.MemberStates"
+      permission="collective.coursetool.Administrator"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
   <!-- default content views -->
   <browser:page
       name="view"
