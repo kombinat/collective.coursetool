@@ -171,7 +171,7 @@ class CourseView(ViewBase):
 
 
     def all_members_mailaddress(self):
-        mails = [m.email for m in self.members()]
+        mails = [m.email for m in self.members() if m.email]
         return ";".join(mails)
 
 
