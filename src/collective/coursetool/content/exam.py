@@ -4,7 +4,7 @@ from collective.coursetool.interfaces import IExam
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
-from plone.app.z3cform.widget import DateFieldWidget
+from plone.app.z3cform.widget import DatetimeFieldWidget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.app.z3cform.widget import SelectFieldWidget
 from plone.autoform import directives
@@ -54,7 +54,7 @@ class IExamSchema(model.Schema):
     )
     directives.widget(
         "date",
-        DateFieldWidget,
+        DatetimeFieldWidget,
         _formater_length="long",
     )
 
