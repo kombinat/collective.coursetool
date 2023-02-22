@@ -107,7 +107,9 @@
                 <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item" tal:repeat="member members">
-                            <a href="${member/absolute_url}" tal:content="string:${member/title} (${member/id})">Member title</a>
+                            <a href="${member/absolute_url}">
+                                ${member/customer_id} - ${member/title} (${member/email|string:kein EMail!})
+                            </a>
                         </li>
                     </ol>
                     <div class="btn-group mt-2" tal:condition="members">
