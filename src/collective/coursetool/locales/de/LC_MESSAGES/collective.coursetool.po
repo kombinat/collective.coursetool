@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-02-03 09:07+0000\n"
-"PO-Revision-Date: 2023-02-21 07:30+0100\n"
+"POT-Creation-Date: 2023-03-10 06:45+0000\n"
+"PO-Revision-Date: 2023-03-10 07:47+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -15,6 +15,10 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 "X-Generator: Poedit 3.2.2\n"
+
+#: collective/coursetool/content/member.py
+msgid "Accept Terms and Conditions"
+msgstr "Allgemeine Geschäftsbedingungen akzeptieren"
 
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Actions for selected members"
@@ -453,6 +457,10 @@ msgstr "persönliche Anrede"
 #: collective/coursetool/content/member.py
 msgid "Phone"
 msgstr "Telefon"
+
+#: collective/coursetool/content/member.py
+msgid "Please read our <a href=\"/agb\">Terms and Conditions</a>"
+msgstr "Unsere allgemeinen Geschäftsbedingungen finden sie <a href=\"/agb\">hier</a>"
 
 #: collective/coursetool/content/member.py
 msgid "Please upload a foto of your passport to validate your identity."

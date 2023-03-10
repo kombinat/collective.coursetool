@@ -48,6 +48,11 @@ class IRegistration(IRegisterSchema):
             "Please upload a foto of your passport "
             "to validate your identity."),
     )
+    tac_agree = schema.Bool(
+        title=_("Accept Terms and Conditions"),
+        description=_("Please read our <a href=\"/agb\">Terms and Conditions</a>"),
+        required=True,
+    )
 
 
 class IMemberSchema(model.Schema):

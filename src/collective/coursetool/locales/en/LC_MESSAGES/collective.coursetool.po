@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-02-03 09:07+0000\n"
+"POT-Creation-Date: 2023-03-10 06:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: collective/coursetool/content/member.py
+msgid "Accept Terms and Conditions"
+msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Actions for selected members"
@@ -450,6 +454,10 @@ msgstr ""
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "Phone"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Please read our <a href=\"/agb\">Terms and Conditions</a>"
 msgstr ""
 
 #: collective/coursetool/content/member.py
