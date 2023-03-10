@@ -98,24 +98,26 @@
                         </thead>
                         <tbody>
                             <tr tal:repeat="m members">
+                                <tal:block define="member nocall:m/member">
                                 <td>
                                     <div class="form-check">
-                                        <input class="member form-check-input" name="uids:list" type="checkbox" value="${python:m['member'].UID()}" />
+                                        <input class="member form-check-input" name="uids:list" type="checkbox" value="${python:member.UID()}" />
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="${m/member/absolute_url}">
-                                        ${m/member/title}
+                                    <a href="${member/absolute_url}">
+                                        ${member/customer_id} - ${member/title} (${member/email|string:kein EMail!})
                                     </a>
                                 </td>
                                 <td class="text-center">
                                     <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
                                 </td>
                                 <td class="text-center">
-                                    <a href="${python:m['member'].absolute_url()}/@@print" tal:condition="m/success">
+                                    <a href="${python:member.absolute_url()}/@@print" tal:condition="m/success">
                                         <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
                                     </a>
                                 </td>
+                                </tal:block>
                             </tr>
                         </tbody>
                     </table>
