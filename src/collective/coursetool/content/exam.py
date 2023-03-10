@@ -55,7 +55,7 @@ class IExamSchema(model.Schema):
     directives.widget(
         "date",
         DatetimeFieldWidget,
-        _formater_length="long",
+        _formater_length="full",
     )
 
     location = RelationList(
