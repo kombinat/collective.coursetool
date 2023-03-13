@@ -10,8 +10,13 @@
     </value>
   </record>
 
+  <record name="plone.navigation_depth">
+    <value>1</value>
+  </record>
+
   <record name="dexterity.membrane.behavior.settings.IDexterityMembraneSettings.use_email_as_username">
     <value>True</value>
   </record>
+
 
 </registry>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-10 06:45+0000\n"
+"POT-Creation-Date: 2023-03-13 14:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,30 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. a: Vorarlberger Fischerprüfung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. b: Erfolgreich abgelegte Prüfung in anderen Bundesländern oder Staaten"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. c: Erfolgreicher Abschluss der Fischereifacharbeiterprüfung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. d: Gleichwertig zur Fischerprüfung anerkannte Ausbildung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. e: Erfolgreich abgelegte Eignungsprüfung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 2: Teilnahme an einer Unterweisung"
+msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Accept Terms and Conditions"
@@ -119,7 +143,6 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-#: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Course Description"
@@ -207,6 +230,10 @@ msgstr ""
 
 #: collective/coursetool/content/exam.py
 msgid "Exam Members"
+msgstr ""
+
+#: collective/coursetool/content/member.py
+msgid "Exam Types"
 msgstr ""
 
 #: collective/coursetool/browser/views.py collective/coursetool/content/exam.py
@@ -468,7 +495,6 @@ msgstr ""
 msgid "Practical experience"
 msgstr ""
 
-#: collective/coursetool/content/exam.py
 #: collective/coursetool/content/member.py
 msgid "Qualifications"
 msgstr ""
@@ -532,6 +558,10 @@ msgstr ""
 
 #: collective/coursetool/browser/views.py
 msgid "Successfully deleted users."
+msgstr ""
+
+#: collective/coursetool/content/exam.py
+msgid "Types"
 msgstr ""
 
 #: collective/coursetool/browser/templates/portal.pt

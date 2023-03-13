@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-10 06:45+0000\n"
-"PO-Revision-Date: 2023-03-10 07:47+0100\n"
+"POT-Creation-Date: 2023-03-13 14:54+0000\n"
+"PO-Revision-Date: 2023-03-13 15:54+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -15,6 +15,30 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 "X-Generator: Poedit 3.2.2\n"
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. a: Vorarlberger Fischerprüfung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. b: Erfolgreich abgelegte Prüfung in anderen Bundesländern oder Staaten"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. c: Erfolgreicher Abschluss der Fischereifacharbeiterprüfung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. d: Gleichwertig zur Fischerprüfung anerkannte Ausbildung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. e: Erfolgreich abgelegte Eignungsprüfung"
+msgstr ""
+
+#: collective/coursetool/vocabularies.py
+msgid "Abs. 2: Teilnahme an einer Unterweisung"
+msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Accept Terms and Conditions"
@@ -121,7 +145,6 @@ msgstr "Land"
 msgid "Course"
 msgstr "Kurs"
 
-#: collective/coursetool/browser/templates/view_certificate.pt
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Course Description"
@@ -210,6 +233,10 @@ msgstr "Prüfung"
 #: collective/coursetool/content/exam.py
 msgid "Exam Members"
 msgstr "Mitglieder"
+
+#: collective/coursetool/content/member.py
+msgid "Exam Types"
+msgstr "Befähigungen erhalten durch Prüfungen"
 
 #: collective/coursetool/browser/views.py collective/coursetool/content/exam.py
 msgid "Exam date"
@@ -470,7 +497,6 @@ msgstr "Bitte laden Sie hier ein Foto Ihres Reisepasses oder Personalausweises h
 msgid "Practical experience"
 msgstr "Praxis"
 
-#: collective/coursetool/content/exam.py
 #: collective/coursetool/content/member.py
 msgid "Qualifications"
 msgstr "Befähigungen"
@@ -535,6 +561,10 @@ msgstr "Mitgliederstatus erfolgreich geändert."
 #: collective/coursetool/browser/views.py
 msgid "Successfully deleted users."
 msgstr "Mitglied(er) erfolgreich gelöscht."
+
+#: collective/coursetool/content/exam.py
+msgid "Types"
+msgstr "Befähigungen"
 
 #: collective/coursetool/browser/templates/portal.pt
 msgid "Upload File"

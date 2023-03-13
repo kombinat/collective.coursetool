@@ -60,6 +60,10 @@
       name="coursetool.vocabulary.members"
       component=".vocabularies.members_vocabulary"
       />
+  <utility
+      name="coursetool.vocabulary.examtypes"
+      component=".vocabularies.ExamTypesVocabularyFactory"
+      />
 
   <include package=".browser" />
   <include package=".content" />

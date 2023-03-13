@@ -80,15 +80,15 @@ class IExamSchema(model.Schema):
         },
     )
 
-    qualification = schema.Tuple(
-        title=_("Qualifications"),
+    types = schema.Tuple(
+        title=_("Types"),
         value_type=schema.Choice(
-            vocabulary="coursetool.vocabulary.memberqualifications",
+            vocabulary="coursetool.vocabulary.examtypes",
         ),
         required=False,
     )
     directives.widget(
-        "qualification",
+        "types",
         SelectFieldWidget,
         pattern_options={
             "allowNewItems": "false",

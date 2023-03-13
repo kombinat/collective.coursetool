@@ -251,17 +251,17 @@ class ExamView(ViewBase):
     def _update_members(self, uids, success=False):
         _members = self.context.members
         _changes = False
-        qualifications = self.context.qualification
+        _types = self.context.types
         for m in _members:
             if m["member"] in uids:
                 m["success"] = ("selected") if success else ()
                 m_obj = api.content.get(UID=m["member"])
-                m_quali = m_obj.qualification or ()
+                m_exam_types = m_obj.exam_types or ()
                 if success:
-                    m_quali += qualifications
+                    m_exam_types += _types
                 else:
-                    m_quali = tuple([q for q in m_quali if q not in qualifications])
-                m_obj.qualification = m_quali
+                    m_exam_types = tuple([q for q in m_exam_types if q not in _types])
+                m_obj.exam_types = m_exam_types
                 _changes = True
                 transaction.commit()
         self.context.members = _members
@@ -328,7 +328,7 @@ class PrintView(BrowserView):
     filename = "card.pdf"
 
     def __call__(self, download=True):
-        if not self.context.qualification:
+        if not self.context.exam_types:
             api.portal.show_message(
                 _("Member has no certificates or external qualifiaction."),
                 type="error",

@@ -151,6 +151,22 @@ class IMemberSchema(model.Schema):
         },
     )
 
+    exam_types = schema.Tuple(
+        title=_("Exam Types"),
+        value_type=schema.Choice(
+            vocabulary="coursetool.vocabulary.examtypes",
+        ),
+        required=False,
+        default=(),
+    )
+    directives.widget(
+        "exam_types",
+        SelectFieldWidget,
+        pattern_options={
+            "allowNewItems": "false",
+        },
+    )
+
     partner_type = schema.Tuple(
         title=_("Partnertype"),
         value_type=schema.Choice(
@@ -188,6 +204,7 @@ class IMemberSchema(model.Schema):
         instructor="cmf.ManagePortal",
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
+        exam_types="cmf.ManagePortal",
         partner_type="cmf.ManagePortal",
         admin_comment="cmf.ManagePortal",
     )
@@ -206,6 +223,7 @@ class IMemberSchema(model.Schema):
         instructor="cmf.ManagePortal",
         state="cmf.ManagePortal",
         qualification="cmf.ManagePortal",
+        exam_types="cmf.ManagePortal",
         partner_type="cmf.ManagePortal",
         admin_comment="cmf.ManagePortal",
     )
@@ -232,6 +250,7 @@ class IMemberSchema(model.Schema):
             "inactive",
             "instructor",
             "qualification",
+            "exam_types",
             "partner_type",
             "admin_comment",
         ],

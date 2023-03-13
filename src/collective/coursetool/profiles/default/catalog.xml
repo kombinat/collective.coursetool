@@ -12,6 +12,11 @@
   </index>
   <index
     meta_type="KeywordIndex"
+    name="qualification">
+    <indexed_attr value="qualification" />
+  </index>
+  <index
+    meta_type="KeywordIndex"
     name="members_uuids">
     <indexed_attr value="members_uuids" />
   </index>
