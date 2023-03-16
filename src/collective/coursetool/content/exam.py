@@ -18,7 +18,7 @@ from zope.interface import implementer
 
 class IMembers(model.Schema):
 
-    member = schema.Choice(
+    member = RelationChoice(
         title=_("Member"),
         vocabulary="plone.app.vocabularies.Catalog",
         required=False,
@@ -39,6 +39,7 @@ class IMembers(model.Schema):
     success = schema.Bool(
         title=_("Exam successfully passed"),
         required=False,
+        default=False,
     )
 
 
@@ -133,4 +134,9 @@ class Exam(Container):
         ]
 
     def members_uuids(self):
-        return [m["member"] for m in self.members]
+        _uids = []
+        for m in self.members:
+            if isinstance(m["member"], str):
+                _uids.append(m["member"])
+            else:
+                _uids.append(m["member"].UID())

@@ -15,7 +15,7 @@
                 <element value="collective.coursetool: Register member"/>
             </property>
             <property name="visible">True</property>
-            <property name="modal">{"modalSizeClass": "modal-lg"}</property>
+            <property name="modal"></property>
         </object>
         <object name="coursetool-information" meta_type="CMF Action" i18n:domain="collective.coursetool" insert-before="logout">
             <property name="title" i18n:translate="">Personal Information</property>

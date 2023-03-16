@@ -16,7 +16,9 @@
 
         <metal:def define-macro="batch_table"
             tal:define="batch batch|nothing;
-                        row_count view/row_count|python:True">
+                        row_count view/row_count|python:True;
+                        sort_on request/sort_on|view/initial_sort_index;
+                        sort_order request/sort_order|view/initial_sort_order">
 
             <tal:block tal:condition="batch">
             <div class="table-responsive">
@@ -25,7 +27,7 @@
                     <tr>
                         <th i18n:translate="" tal:condition="row_count">Nr</th>
                         <th tal:repeat="col columns">
-                            <span tal:replace="col/label" />
+                            <a class="pat-inject" data-pat-inject="source:.table-responsive;target:.table-responsive" href="${context/absolute_url}?sort_on=${col/sort_on}&sort_order=${python:'reverse' if (sort_on == col.sort_on and sort_order == 'asc') else 'asc'}" tal:omit-tag="not:col/sort_on"><span tal:replace="col/label" /></a>
                         </th>
                         <th></th>
                     </tr>

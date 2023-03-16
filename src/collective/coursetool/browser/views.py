@@ -33,15 +33,16 @@ def pretty_datetime(val):
 
 
 class ColumnDefinition(object):
-    def __init__(self, label, f_attr, linked=False, formatter=None):
+    def __init__(self, label, f_attr, linked=False, formatter=None, sort_on=False):
         self.label = label
         self.f_attr = f_attr
         self.linked = linked
         self.formatter = formatter
+        self.sort_on = sort_on
 
     def factory(self, obj):
         attr = getattr(obj.aq_base, self.f_attr, "-")
-        if self.formatter:
+        if self.formatter and callable(self.formatter):
             attr = self.formatter(attr)
         if self.linked:
             return f"""<a href="{obj.absolute_url()}">{attr}</a>"""
@@ -51,6 +52,8 @@ class ColumnDefinition(object):
 class ListingBase(BrowserView):
     portal_type = " - "
     row_count = True
+    initial_sort_index = "sortable_title"
+    initial_sort_order = "asc"
 
     def __init__(self, *args):
         super().__init__(*args)
@@ -73,8 +76,8 @@ class ListingBase(BrowserView):
 
     def results(self, **kwargs):
         kwargs.setdefault("portal_type", self.portal_type)
-        kwargs.setdefault("sort_on", self.request.get("sort_on", "sortable_title"))
-        kwargs.setdefault("sort_order", self.request.get("sort_order", "asc"))
+        kwargs.setdefault("sort_on", self.request.get("sort_on", self.initial_sort_index))
+        kwargs.setdefault("sort_order", self.request.get("sort_order", self.initial_sort_order))
         kwargs.setdefault("batch", True)
         kwargs.setdefault("b_size", self.b_size)
         kwargs.setdefault("b_start", self.b_start)
@@ -103,9 +106,10 @@ class ListingBase(BrowserView):
 class MembersListing(ListingBase):
     portal_type = "coursetool.member"
     row_count = False
+    initial_sort_index = "customer_id"
     columns = [
-        ColumnDefinition(_("Customer Nr"), "customer_id", True),
-        ColumnDefinition(_("Name"), "title", True),
+        ColumnDefinition(_("Customer Nr"), "customer_id", True, sort_on="customer_id"),
+        ColumnDefinition(_("Name"), "title", True, sort_on="sortable_title"),
         ColumnDefinition(_("Address"), "address_inline"),
         ColumnDefinition(_("EMail"), "email"),
         ColumnDefinition(_("Phone"), "phone"),
@@ -116,8 +120,8 @@ class MembersListing(ListingBase):
 class CoursesListing(ListingBase):
     portal_type = "coursetool.course"
     columns = [
-        ColumnDefinition(_("Course-ID"), "id"),
-        ColumnDefinition(_("Name"), "title", True),
+        ColumnDefinition(_("Course-ID"), "id", sort_on="getId"),
+        ColumnDefinition(_("Name"), "title", True, sort_on="sortable_title"),
         ColumnDefinition(_("City"), "location"),
     ]
 
@@ -191,12 +195,9 @@ class ExamView(ViewBase):
 
     def members(self, mid=None):
         return [
-            dict(
-                member=api.content.get(UID=m["member"]),
-                success="selected" in m["success"],
-            ) for m
-            in self.context.members
-            if mid is None or mid==m["member"]
+            m for m
+            in (self.context.members or [])
+            if mid is None or mid==m["member"].UID()
         ]
 
     def can_add_to_cart(self):
@@ -207,7 +208,7 @@ class ExamView(ViewBase):
         return not user or user.UID() not in self.context.members_uuids()
 
     def all_members_mailaddress(self):
-        mails = [m["member"].email for m in self.members() if m["member"].email]
+        mails = [m["member"].email for m in self.members() if hasattr(m["member"], "email") and m["member"].email]
         return ";".join(mails)
 
     @protect(PostOnly)
@@ -251,11 +252,11 @@ class ExamView(ViewBase):
     def _update_members(self, uids, success=False):
         _members = self.context.members
         _changes = False
-        _types = self.context.types
+        _types = self.context.types or ()
         for m in _members:
-            if m["member"] in uids:
-                m["success"] = ("selected") if success else ()
-                m_obj = api.content.get(UID=m["member"])
+            if m["member"].UID() in uids:
+                m["success"] = success
+                m_obj = m["member"]
                 m_exam_types = m_obj.exam_types or ()
                 if success:
                     m_exam_types += _types

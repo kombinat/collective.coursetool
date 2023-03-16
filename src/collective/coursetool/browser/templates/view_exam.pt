@@ -12,7 +12,7 @@
     <div class="coursetool-wrapper" metal:fill-slot="main"
          tal:define="is_admin view/is_admin;
                      members view/members;
-                     len_members python:len(context.members);
+                     len_members python:len(context.members or []);
                      can_add_to_cart view/can_add_to_cart">
 
         <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
@@ -96,7 +96,7 @@
                                 <th width="5%">Fischerkarte</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody tal:on-error="nothing">
                             <tr tal:repeat="m members">
                                 <tal:block define="member nocall:m/member">
                                 <td>
