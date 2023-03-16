@@ -1,6 +1,5 @@
 from Acquisition import aq_base
 from collective.coursetool import _
-from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import IImportingMembers
 from collective.coursetool.interfaces import IMember
 from collective.coursetool.utils import generate_customer_id
@@ -13,12 +12,14 @@ from plone.app.users.schema import IRegisterSchema
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
 from plone.app.z3cform.widget import DateFieldWidget
 from plone.app.z3cform.widget import SelectFieldWidget
+from plone.app.z3cform.widget import SingleCheckBoxBoolFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.formwidget.namedfile import NamedImageFieldWidget
 from plone.indexer import indexer
 from plone.namedfile import field as namedfile
 from plone.schema.email import _isemail
+from plone.schema.email import InvalidEmail
 from plone.supermodel import model
 from z3c.form.browser.text import TextFieldWidget
 from z3c.form.interfaces import IEditForm
@@ -29,15 +30,23 @@ from zope.interface import Invalid
 from zope.interface import invariant
 
 
+def _validate_email(value):
+    if _isemail(value):
+        return True
+    raise InvalidEmail(value)
+
+
 class IRegistration(IRegisterSchema):
     first_name = schema.TextLine(title=_("Firstname"))
     last_name = schema.TextLine(title=_("Lastname"))
-    email = schema.TextLine(title=_("Email"))
-    customer_id = schema.TextLine(
-        title=_("Registry Customer Nr"),
-        description=_("Registration optional Customer Nr"),
-        required=False,
-    )
+    email = schema.TextLine(title=_("Email"), constraint=_validate_email)
+    birthday = schema.Date(title=_("Birthday"))
+
+    address = schema.TextLine(title=_("Address"))
+    zip_code = schema.TextLine(title=_("ZIP Code"))
+    city = schema.TextLine(title=_("City"))
+    cty_code = schema.TextLine(title=_("Country"))
+
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
         description=_("Upload your Passfoto (5MB max size)"),
@@ -53,6 +62,17 @@ class IRegistration(IRegisterSchema):
         description=_("Please read our <a href=\"/agb\">Terms and Conditions</a>"),
         required=True,
     )
+
+    directives.widget("first_name", TextFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("last_name", TextFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("email", TextFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("birthday", DateFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("zip_code", TextFieldWidget, wrapper_css_class="col-lg-2")
+    directives.widget("city", TextFieldWidget, wrapper_css_class="col-lg-5")
+    directives.widget("cty_code", TextFieldWidget, wrapper_css_class="col-lg-5")
+    directives.widget("picture", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget("tac_agree", SingleCheckBoxBoolFieldWidget, wrapper_css_class="mt-5")
 
 
 class IMemberSchema(model.Schema):
@@ -72,15 +92,25 @@ class IMemberSchema(model.Schema):
     city = schema.TextLine(title=_("City"), required=False)
     cty_code = schema.TextLine(title=_("Country"), required=False)
 
-    email = schema.ASCIILine(title=_("EMail"), required=False, constraint=_isemail)
+    email = schema.ASCIILine(title=_("EMail"), required=False, constraint=_validate_email)
     website = schema.TextLine(title=_("Internet Address"), required=False)
     phone = schema.TextLine(title=_("Phone"), required=False)
     mobile_phone = schema.TextLine(title=_("Mobile Phone"), required=False)
     fax = schema.TextLine(title=_("Fax"), required=False)
 
     birthday = schema.Date(title=_("Birthday"), required=True)
-    picture = namedfile.NamedBlobImage(title=_("User Image"), required=False)
-    passport_image = namedfile.NamedBlobImage(title=_("Passport Image"), required=False)
+    picture = namedfile.NamedBlobImage(
+        title=_("User Image"),
+        description=_("Upload your Passfoto (5MB max size)"),
+        required=False,
+    )
+    passport_image = namedfile.NamedBlobImage(
+        title=_("Passport Image"),
+        description=_(
+            "Please upload a foto of your passport "
+            "to validate your identity."),
+        required=False,
+    )
 
     # this gets set by the PrintView if printed
     card_image = namedfile.NamedBlobImage(title=_("Card Image"), required=False)
