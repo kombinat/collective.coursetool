@@ -6,6 +6,7 @@ from collective.coursetool.utils import generate_customer_id
 from collective.coursetool.utils import generate_member_id
 from dexterity.membrane.behavior.user import MembraneUserProperties
 from dexterity.membrane.membrane_helpers import validate_unique_email
+from plone import api
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity import textindexer
 from plone.app.users.schema import IRegisterSchema
@@ -383,12 +384,15 @@ def new_customer_id(obj, event):
 
     if (
         IImportingMembers.providedBy(obj.REQUEST)
-        or getattr(obj, "customer_id", None) is not None
+        or bool(getattr(obj, "customer_id", None))
     ):
         # customer_id is set during import
         return
 
     obj.customer_id = generate_customer_id()
+    obj.reindexObject()
+
+    api.content.transition(obj, "approve")
 
 
 @indexer(IMember)
