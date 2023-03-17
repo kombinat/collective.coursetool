@@ -22,37 +22,37 @@
 
             <tal:block tal:condition="batch">
             <div class="table-responsive">
-            <table class="table table-condensed table-striped">
-                <thead>
-                    <tr>
-                        <th i18n:translate="" tal:condition="row_count">Nr</th>
-                        <th tal:repeat="col columns">
-                            <a class="pat-inject" data-pat-inject="source:.table-responsive;target:.table-responsive" href="${context/absolute_url}?sort_on=${col/sort_on}&sort_order=${python:'reverse' if (sort_on == col.sort_on and sort_order == 'asc') else 'asc'}" tal:omit-tag="not:col/sort_on"><span tal:replace="col/label" /></a>
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr tal:repeat="item batch">
-                        <tal:def define="obj item/getObject;
-                                         obj_url obj/absolute_url">
-                        <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)" tal:condition="row_count"></td>
-                        <td tal:repeat="col columns">
-                            <span tal:replace="structure python: col.factory(obj)" />
-                        </td>
-                        <td class="text-end text-nowrap">
-                            <a href="${obj_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
-                                ><tal:block replace="structure python:icons.tag('pencil')"/></a>
-                            <a href="${obj_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger" data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
-                                ><tal:block replace="structure python:icons.tag('trash')" /></a>
-                        </td>
-                        </tal:def>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th i18n:translate="" tal:condition="row_count">Nr</th>
+                            <th tal:repeat="col columns">
+                                <a class="pat-inject" data-pat-inject="source:.table-responsive;target:.table-responsive;history:record" href="${context/absolute_url}?sort_on=${col/sort_on}&sort_order=${python:'reverse' if (sort_on == col.sort_on and sort_order == 'asc') else 'asc'}" tal:omit-tag="not:col/sort_on"><span tal:replace="col/label" /></a>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr tal:repeat="item batch">
+                            <tal:def define="obj item/getObject;
+                                            obj_url obj/absolute_url">
+                            <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)" tal:condition="row_count"></td>
+                            <td tal:repeat="col columns">
+                                <span tal:replace="structure python: col.factory(obj)" />
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <a href="${obj_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
+                                    ><tal:block replace="structure python:icons.tag('pencil')"/></a>
+                                <a href="${obj_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger" data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
+                                    ><tal:block replace="structure python:icons.tag('trash')" /></a>
+                            </td>
+                            </tal:def>
+                        </tr>
+                    </tbody>
+                </table>
+                <div metal:use-macro="context/batch_macros/macros/navigation" />
             </div>
 
-            <div metal:use-macro="context/batch_macros/macros/navigation" />
             </tal:block>
 
             <tal:block condition="not:batch">

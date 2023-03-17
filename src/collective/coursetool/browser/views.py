@@ -87,7 +87,7 @@ class ListingBase(BrowserView):
         if self.request.get("SearchableText") and self.request.get("search"):
             kwargs["SearchableText"] = munge_search_term(self.request["SearchableText"])
 
-        listing = aq_inner(self.context).restrictedTraverse("@@folderListing", None)
+        listing = aq_inner(self.context).restrictedTraverse("@@contentlisting", None)
         if listing is None:
             return []
 
