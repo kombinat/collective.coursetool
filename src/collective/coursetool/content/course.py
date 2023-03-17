@@ -241,4 +241,4 @@ class Course(Container):
         ])
 
     def members_uuids(self):
-        return [m.to_object.UID() for m in self.members]
+        return [m.UID() for m in self.members]
