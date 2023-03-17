@@ -140,3 +140,4 @@ class Exam(Container):
                 _uids.append(m["member"])
             else:
                 _uids.append(m["member"].UID())
+        return _uids
