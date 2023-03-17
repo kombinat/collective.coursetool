@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-17 10:09+0000\n"
-"PO-Revision-Date: 2023-03-17 11:17+0100\n"
+"PO-Revision-Date: 2023-03-17 11:25+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -584,7 +584,7 @@ msgstr "Bitte laden Sie hier ein möglichst aktuelles Passfoto für die Ausstell
 
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "Upload your documents"
-msgstr "Laden sie hier die Nachweise hoch um den Fischerausweis zu erwerben. Dies ist nur dann notwendig, wenn sie die Fischerprüfung <b>nicht</b> in Vorarlberg abgelegt haben. Mehr Informationen erhalten Sie hier: <a href=\"https://www.lfvbg.at/fischerausweis\">Voraussetzung für den Erwerb des Fischerausweises</a>"
+msgstr "Laden Sie hier die Nachweise hoch um den Fischerausweis zu erwerben. Dies ist nur dann notwendig, wenn Sie die Fischerprüfung <b>nicht</b> in Vorarlberg abgelegt haben. Mehr Informationen unter <a href=\"https://www.lfvbg.at/fischerausweis\">Voraussetzung für den Erwerb des Fischerausweises</a>"
 
 #: collective/coursetool/content/member.py
 msgid "User Image"
