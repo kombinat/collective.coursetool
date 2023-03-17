@@ -315,6 +315,10 @@ class MemberView(ViewBase):
     def certificates(self):
         return self.backrefs("coursetool.certificate")
 
+    def documents(self):
+        view = aq_inner(self.context).restrictedTraverse("@@contentlisting")
+        return view()
+
 
 class MemberEditForm(DefaultEditForm):
     css_class = "row"

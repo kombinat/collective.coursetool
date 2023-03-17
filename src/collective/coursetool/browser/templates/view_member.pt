@@ -15,6 +15,7 @@
              tal:define="courses view/courses;
                          exams view/exams;
                          certificates view/certificates;
+                         documents view/documents;
                          is_admin view/is_admin">
 
             <div class="card-header">
@@ -30,6 +31,12 @@
                     <li class="nav-item" tal:condition="view/is_admin">
                         <a class="nav-link" id="metadata-tab" data-bs-toggle="tab" data-bs-target="#tab-metadata"
                             aria-current="true" href="#" i18n:translate="">Metadata</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="documents-tab" data-bs-toggle="tab"
+                            data-bs-target="#tab-documents" aria-current="true" href="#">
+                            <span i18n:translate="">Documents</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses"
@@ -75,13 +82,14 @@
                             <a href="${context/absolute_url}/@@print" class="btn btn-outline-primary" i18n:translate="" tal:condition="is_admin">print card</a>
                         </div>
                         <div class="col-md-6 text-end">
+
                             <a tal:condition="view/can_edit" href="${python:context.absolute_url()}/edit"
-                                class="pat-plone-modal btn btn-primary" i18n:translate=""
+                                class="pat-plone-modal btn btn-sm btn-primary" i18n:translate=""
                                 data-pat-plone-modal='modalSizeClass: modal-xl;'>
                                 Edit
                             </a>
                             <a tal:condition="view/is_admin" href="${python:context.absolute_url()}/delete_confirmation"
-                                class="pat-plone-modal btn btn-danger"
+                                class="pat-plone-modal btn btn-sm btn-danger"
                                 data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
                                 i18n:translate="">
                                 Delete
@@ -101,6 +109,61 @@
                             <div tal:content="structure widget/render" />
                         </div>
                     </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-documents" role="tabpabel" aria-labelledby="documents-tab">
+                    <p class="lead" i18n:translate="">
+                        Upload your documents
+                    </p>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-sm" tal:condition="documents">
+                            <thead>
+                                <tr>
+                                    <th i18n:translate="">Filename</th>
+                                    <th i18n:translate="" class="text-end">Size</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr tal:repeat="doc documents">
+                                    <tal:block define="content_type python: doc.file.contentType if doc.portal_type == 'File' else doc.image.contentType;
+                                                        mimetype_icon python: 'mimetype-' + content_type;
+                                                        doc_url doc/getURL">
+                                    <td>
+                                        <a href="${doc_url}" target="_blank">
+                                            <tal:icon tal:replace="structure python:icons.tag(mimetype_icon, tag_class='icon-inline', tag_alt=content_type)" />
+                                            ${doc/Title}
+                                        </a>
+                                    </td>
+                                    <td class="text-end">
+                                        ${doc/getSize}
+                                    </td>
+                                    <td tal:condition="view/can_edit" class="text-end">
+                                        <a href="${doc_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger"
+                                            ><tal:block replace="structure python:icons.tag('trash')" /></a>
+                                    </td>
+                                    </tal:block>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <span class="text-muted fs-sm" tal:condition="not:documents" i18n:translate="">
+                            No documents found.
+                        </span>
+                    </div>
+
+                    <hr />
+
+                    <span tal:replace="structure context/@@authenticator/authenticator"/>
+                    <div class="pat-upload" data-pat-upload="url:${context/absolute_url}/@@fileUpload"></div>
+                    <script>
+                        $(function(){
+                            $(".pat-upload").on("uploadAllCompleted", function(response, path) {
+                                $("#tab-documents .table-responsive").load(document.URL + " #tab-documents .table-responsive > *");
+                            });
+                        });
+                    </script>
                 </div>
 
                 <div class="tab-pane fade" id="tab-courses" role="tabpabel" aria-labelledby="courses-tab">
@@ -151,6 +214,7 @@
                         No certificates found.
                     </span>
                 </div>
+
             </div>
 
             <div class="card-footer">

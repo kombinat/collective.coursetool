@@ -11,6 +11,12 @@
             i18n:translate=""
   />
 
+  <property name="allowed_content_types">
+    <element value="File" />
+    <element value="Image" />
+  </property>
+  <property name="filter_content_types">True</property>
+
   <property name="icon_expr">string:person</property>
   <property name="factory">coursetool.member</property>
   <property name="add_view_expr">string:${folder_url}/++add++coursetool.member</property>
@@ -28,6 +34,7 @@
   <property name="behaviors">
     <element value="dexterity.membrane.user" />
     <element value="dexterity.membrane.provide_password" />
+    <element value="plone.constraintypes" />
     <element value="plone.textindexer" />
   </property>
   <property name="schema">collective.coursetool.content.IMemberSchema</property>

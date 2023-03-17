@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-13 14:54+0000\n"
+"POT-Creation-Date: 2023-03-17 10:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -203,6 +203,10 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Documents"
+msgstr ""
+
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "EMail"
@@ -262,6 +266,10 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Fax"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Filename"
 msgstr ""
 
 #: collective/coursetool/content/member.py
@@ -415,6 +423,10 @@ msgid "No courses found."
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_member.pt
+msgid "No documents found."
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_member.pt
 msgid "No exams found."
 msgstr ""
 
@@ -516,14 +528,6 @@ msgid "Read - qualified"
 msgstr ""
 
 #: collective/coursetool/content/member.py
-msgid "Registration optional Customer Nr"
-msgstr ""
-
-#: collective/coursetool/content/member.py
-msgid "Registry Customer Nr"
-msgstr ""
-
-#: collective/coursetool/content/member.py
 msgid "Salutation"
 msgstr ""
 
@@ -534,6 +538,10 @@ msgstr ""
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Send Email to all members"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Size"
 msgstr ""
 
 #: collective/coursetool/browser/templates/widget_course_occurrences_display.pt
@@ -570,6 +578,10 @@ msgstr ""
 
 #: collective/coursetool/content/member.py
 msgid "Upload your Passfoto (5MB max size)"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Upload your documents"
 msgstr ""
 
 #: collective/coursetool/content/member.py

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-13 14:54+0000\n"
-"PO-Revision-Date: 2023-03-16 10:56+0100\n"
+"POT-Creation-Date: 2023-03-17 10:09+0000\n"
+"PO-Revision-Date: 2023-03-17 11:17+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -205,6 +205,10 @@ msgstr "Kundennr."
 msgid "Delete"
 msgstr "Löschen"
 
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Documents"
+msgstr "Befähigungsnachweise"
+
 #: collective/coursetool/browser/views.py
 #: collective/coursetool/content/member.py
 msgid "EMail"
@@ -265,6 +269,10 @@ msgstr "Prüfungen"
 #: collective/coursetool/content/member.py
 msgid "Fax"
 msgstr "Fax"
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Filename"
+msgstr "Dateiname"
 
 #: collective/coursetool/content/member.py
 msgid "Firstname"
@@ -417,6 +425,10 @@ msgid "No courses found."
 msgstr "Keine Kurse vorhanden"
 
 #: collective/coursetool/browser/templates/view_member.pt
+msgid "No documents found."
+msgstr "Keine Nachweise hochgeladen"
+
+#: collective/coursetool/browser/templates/view_member.pt
 msgid "No exams found."
 msgstr "Keine Prüfungen vorhanden."
 
@@ -518,14 +530,6 @@ msgid "Read - qualified"
 msgstr "Eingelesen, qualifiziert"
 
 #: collective/coursetool/content/member.py
-msgid "Registration optional Customer Nr"
-msgstr "Optional: Wenn Sie bereits einen Fischerausweis besitzen, dann geben Sie hier die Nummer an, damit wir Ihren Benutzeraccount richtig zuordnen können."
-
-#: collective/coursetool/content/member.py
-msgid "Registry Customer Nr"
-msgstr "Nummer Fischerausweis (Zahl ohne Buchstaben angeben)"
-
-#: collective/coursetool/content/member.py
 msgid "Salutation"
 msgstr "Anrede"
 
@@ -537,6 +541,10 @@ msgstr "Anrede Brief"
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Send Email to all members"
 msgstr "E-Mail an alle Teilnehmer"
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Size"
+msgstr "Größe"
 
 #: collective/coursetool/browser/templates/widget_course_occurrences_display.pt
 msgid "Start date day"
@@ -573,6 +581,10 @@ msgstr "Datei auswählen und hochladen"
 #: collective/coursetool/content/member.py
 msgid "Upload your Passfoto (5MB max size)"
 msgstr "Bitte laden Sie hier ein möglichst aktuelles Passfoto für die Ausstellung des Fischerausweises hoch (Bildformat JPG, maximale Größe: 15MB)"
+
+#: collective/coursetool/browser/templates/view_member.pt
+msgid "Upload your documents"
+msgstr "Laden sie hier die Nachweise hoch um den Fischerausweis zu erwerben. Dies ist nur dann notwendig, wenn sie die Fischerprüfung <b>nicht</b> in Vorarlberg abgelegt haben. Mehr Informationen erhalten Sie hier: <a href=\"https://www.lfvbg.at/fischerausweis\">Voraussetzung für den Erwerb des Fischerausweises</a>"
 
 #: collective/coursetool/content/member.py
 msgid "User Image"
