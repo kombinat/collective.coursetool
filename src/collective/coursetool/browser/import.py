@@ -2,6 +2,7 @@ from collective.coursetool import _
 from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.content.member import IMemberSchema
 from collective.coursetool.interfaces import IImportingMembers
+from collective.coursetool.utils import generate_customer_id
 from collective.coursetool.utils import generate_member_id
 from datetime import datetime
 from openpyxl import load_workbook
@@ -210,9 +211,9 @@ class ImportMembers(BrowserView):
             request=self.request)
         return self.index()
 
-class MemberStates(BrowserView):
+class MemberAdmin(BrowserView):
 
-    def __call__(self):
+    def member_states(self):
 
         items = self.context.portal_catalog(portal_type="coursetool.member", sort_on="getId")
         _all = len(items)
@@ -229,3 +230,35 @@ class MemberStates(BrowserView):
             log.info(f"{idx}/{_all}) skipped {m.getPath()}")
 
         return "done"
+
+    def customer_ids(self):
+        catalog = self.context.portal_catalog
+        items = catalog(portal_type="coursetool.member", sort_on="customer_id")
+        _all = len(items)
+        _log = ["Report:", ]
+
+        for idx, m in enumerate(items, 1):
+            cid = m.customer_id
+            is_unique = True
+
+            for non_unique in (
+                b for b in catalog(customer_id=cid) if b.getId != m.getId
+            ):
+                is_unique = False
+                new_cid = generate_customer_id()
+                obj = non_unique.getObject()
+                obj.customer_id = new_cid
+                obj.reindexObject()
+                transaction.commit()
+                msg = f"fixed non-unique customer_id for {non_unique.getURL()} {cid} -> {new_cid}"
+                _log.append(msg)
+                log.info(f"{idx}/{_all}) {msg}")
+
+            if is_unique:
+                log.info(f"{idx}/{_all}) skipped unique member {m.getPath()}")
+
+        if len(_log) == 1:
+            _log.append("nothing done ...")
+
+        self.request.response.setHeader("Content-type", "text/plain")
+        return "\n".join(_log)

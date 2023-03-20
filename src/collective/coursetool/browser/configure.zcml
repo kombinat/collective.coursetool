@@ -117,7 +117,17 @@
   <browser:page
       name="fix_member_states"
       for="plone.dexterity.interfaces.IDexterityContainer"
-      class=".import.MemberStates"
+      class=".import.MemberAdmin"
+      attribute="member_states"
+      permission="collective.coursetool.Administrator"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
+      name="fix_member_customer_ids"
+      for="plone.dexterity.interfaces.IDexterityContainer"
+      class=".import.MemberAdmin"
+      attribute="customer_ids"
       permission="collective.coursetool.Administrator"
       layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
       />
