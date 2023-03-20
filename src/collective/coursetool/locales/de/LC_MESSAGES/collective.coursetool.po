@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-17 10:09+0000\n"
-"PO-Revision-Date: 2023-03-20 08:24+0100\n"
+"PO-Revision-Date: 2023-03-20 09:38+0100\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -470,7 +470,7 @@ msgstr "Ausstelldatum"
 
 #: collective/coursetool/content/member.py
 msgid "Passport Image"
-msgstr "Kopie, Scan oder Foto eines persönlichen Ausweisdokumentes"
+msgstr "Scan oder Foto eines persönlichen Ausweisdokumentes als Bilddatei."
 
 #: collective/coursetool/content/member.py
 msgid "Payed"
@@ -503,7 +503,7 @@ msgstr "Unsere allgemeinen Geschäftsbedingungen finden sie <a href=\"/agb\">hie
 
 #: collective/coursetool/content/member.py
 msgid "Please upload a foto of your passport to validate your identity."
-msgstr "Bitte laden Sie hier ein persönliches Ausweisdokument hoch – Reisepass, Personalausweis oder Führerschein"
+msgstr "Bitte laden Sie hier ein persönliches Ausweisdokument hoch – Reisepass, Personalausweis oder Führerschein <b>(Bildformat JPG, maximale Größe: 15MB)</b>"
 
 #: collective/coursetool/content/course.py
 msgid "Practical experience"
@@ -580,7 +580,7 @@ msgstr "Datei auswählen und hochladen"
 
 #: collective/coursetool/content/member.py
 msgid "Upload your Passfoto (5MB max size)"
-msgstr "Bitte laden Sie hier ein möglichst aktuelles Passfoto für die Ausstellung des Fischerausweises hoch (Bildformat JPG, maximale Größe: 15MB)"
+msgstr "Bitte laden Sie hier ein möglichst aktuelles Passfoto für die Ausstellung des Fischerausweises hoch <b>(Bildformat JPG, maximale Größe: 15MB)</b>"
 
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "Upload your documents"
