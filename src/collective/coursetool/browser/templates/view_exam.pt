@@ -96,19 +96,24 @@
                                 <th width="5%">Fischerkarte</th>
                             </tr>
                         </thead>
-                        <tbody tal:on-error="nothing">
-                            <tr tal:repeat="m members">
-                                <tal:block define="member nocall:m/member;
-                                                   member_url string:$portal_url/resolveuid/${member/UID}">
+                        <tbody>
+                            <tal:block repeat="m members">
+                            <tr tal:define="member nocall:m/member;
+                                            member_uid member/UID|nothing;
+                                            member_url string:$portal_url/resolveuid/${member_uid}"
+                                class="${python:'table-danger' if is_admin and not member_uid else ''}">
                                 <td>
                                     <div class="form-check">
-                                        <input class="member form-check-input" name="uids:list" type="checkbox" value="${python:member.UID()}" />
+                                        <input tal:condition="member_uid" class="member form-check-input" name="uids:list" type="checkbox" value="${python:member_uid}" />
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="${member_url}">
+                                    <a href="${member_url}" tal:condition="member_uid">
                                         ${member/customer_id} - ${member/title} (${member/email|string:kein EMail!})
                                     </a>
+                                    <span tal:condition="python:is_admin and not member_uid">
+                                        Fehlender Mitgliedereintrag. Bitte löschen Sie diese Zeile unter "bearbeiten"
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
@@ -118,8 +123,8 @@
                                         <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
                                     </a>
                                 </td>
-                                </tal:block>
                             </tr>
+                            </tal:block>
                         </tbody>
                     </table>
                     <div class="row">

@@ -7,6 +7,7 @@ from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
 from plone.dexterity.browser.view import DefaultView
+from plone.memoize.instance import memoize
 from plone.namedfile.file import NamedBlobImage
 from plone.protect import PostOnly
 from plone.protect import protect
@@ -192,6 +193,7 @@ class ExamView(ViewBase):
                 factory(self.request)
         return super().__call__()
 
+    @memoize
     def members(self, mid=None):
         return [
             m for m
