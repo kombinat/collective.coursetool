@@ -98,14 +98,15 @@
                         </thead>
                         <tbody tal:on-error="nothing">
                             <tr tal:repeat="m members">
-                                <tal:block define="member nocall:m/member">
+                                <tal:block define="member nocall:m/member;
+                                                   member_url string:$portal_url/resolveuid/${member/UID}">
                                 <td>
                                     <div class="form-check">
                                         <input class="member form-check-input" name="uids:list" type="checkbox" value="${python:member.UID()}" />
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="${member/absolute_url}">
+                                    <a href="${member_url}">
                                         ${member/customer_id} - ${member/title} (${member/email|string:kein EMail!})
                                     </a>
                                 </td>
@@ -113,7 +114,7 @@
                                     <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
                                 </td>
                                 <td class="text-center">
-                                    <a href="${python:member.absolute_url()}/@@print" tal:condition="m/success">
+                                    <a href="${member_url}/@@print" tal:condition="m/success">
                                         <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
                                     </a>
                                 </td>
