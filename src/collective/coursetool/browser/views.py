@@ -91,7 +91,6 @@ class ListingBase(BrowserView):
         if listing is None:
             return []
 
-        print(kwargs)
         results = listing(**kwargs)
         return results
 
@@ -197,7 +196,10 @@ class ExamView(ViewBase):
         return [
             m for m
             in (self.context.members or [])
-            if mid is None or mid==m["member"].UID()
+            if (
+                mid is None
+                or mid==(m["member"] if isinstance(m["member"], str) else m["member"].UID())
+            )
         ]
 
     def can_add_to_cart(self):
