@@ -14,6 +14,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def add_member_to_exam(exam, member):
+    members = exam.members
+    members.append({"member": member, "success": ()})
+    exam.members = members
+    exam.reindexObject()
+
+
 def payment_success(data):
     order = get_order(data.context, data.order_uid)
     uids = order.attrs.get("buyable_uids")
@@ -26,13 +33,13 @@ def payment_success(data):
 
     if item.portal_type == "coursetool.course":
         for exam in item.get_exams():
-            members = exam.members
-            if len([m for m in members if m["member"].UID() == member.UID()]):
+            if member.UID() in exam.members_uuids():
                 # member is already in members
                 continue
-            members.append({"member": member, "success": ()})
-            exam.members = members
-            exam.reindexObject()
+            add_member_to_exam(exam, member)
+
+    if item.portal_type == "coursetool.exam" and member.UID() not in item.members_uuids():
+        add_member_to_exam(item, member)
 
 
 CHECKOUT_FIELD_MAP = {
