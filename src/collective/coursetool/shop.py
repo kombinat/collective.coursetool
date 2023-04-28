@@ -27,10 +27,10 @@ def payment_success(data):
     if item.portal_type == "coursetool.course":
         for exam in item.get_exams():
             members = exam.members
-            if len([m for m in members if m["member"] == member.UID()]):
+            if len([m for m in members if m["member"].UID() == member.UID()]):
                 # member is already in members
                 continue
-            members.append({"member": member.UID(), "success": ()})
+            members.append({"member": member, "success": ()})
             exam.members = members
             exam.reindexObject()
 
