@@ -142,6 +142,7 @@
                         </div>
                         <div class="col-md-6 text-end">
                             <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                            <a class="btn btn-secondary btn-sm" href="${context/absolute_url}/@@coursetool_utils/member_export" i18n:translate="">Export member data as XLSX</a>
                         </div>
                     </div>
                     </form>

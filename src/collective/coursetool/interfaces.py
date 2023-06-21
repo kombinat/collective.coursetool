@@ -39,6 +39,9 @@ class IUtils(Interface):
     def member_url(self):
         """get url of coursetool member for usermenu"""
 
+    def member_export(self):
+        """export memberdata as XLSX"""
+
 
 class IImportingMembers(Interface):
     """marker for events"""

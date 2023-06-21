@@ -1,9 +1,9 @@
 from Acquisition import aq_inner
 from collective.coursetool import _
-from collective.coursetool.content.member import IMemberSchema
 from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
 from io import BytesIO
+from openpyxl import Workbook
 from plone import api
 from plone.base.batch import Batch
 from plone.dexterity.browser.edit import DefaultEditForm
@@ -13,9 +13,11 @@ from plone.namedfile.file import NamedBlobImage
 from plone.protect import PostOnly
 from plone.protect import protect
 from plone.protect.interfaces import IDisableCSRFProtection
+from plone.restapi.interfaces import ISerializeToJson
 from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
+from zope.component import getMultiAdapter
 from zope.interface import alsoProvides
 
 import logging
@@ -167,18 +169,6 @@ class ViewBase(DefaultView):
     def is_admin(self):
         return api.user.has_permission("Manage portal", obj=self.context)
 
-    def export_memberdata(self):
-        """export memberdata as CSV"""
-        breakpoint()
-        _export_attrs = [
-            fld_name for fld_name, desc in IMemberSchema.namesAndDescriptions()
-        ]
-        _output = [
-            ";".join(_export_attrs),
-        ]
-        for idx, mobj in enumerate(self.member_objects()):
-            pass
-
 
 class CourseView(ViewBase):
     """ """
@@ -232,7 +222,9 @@ class ExamView(ViewBase):
         ]
 
     def member_objects(self):
-        return [m["member"] for m in self.members()]
+        return [
+            api.content.get(UID=m["member"].UID()) for m in self.members()
+        ]
 
     def can_add_to_cart(self):
         if api.user.get_permissions().get(CoursetoolAdmin):
@@ -437,6 +429,35 @@ class CertificateView(ViewBase):
         return True
 
 
+MEMBER_EXPORT_FIELDS = (
+    "id",
+    "customer_id",
+    "salutation",
+    "graduation",
+    "first_name",
+    "last_name",
+    "address",
+    "address2",
+    "zip_code",
+    "city",
+    "cty_code",
+    "email",
+    "mobile_phone",
+    "fax",
+    "birthday",
+    "salutation_personal",
+    "salutation_letter",
+    "pass_issue_date",
+    "pass_expiration_date",
+    "payed",
+    "payed_date",
+    "booking_nr",
+    "inactive",
+    "instructor",
+    "state",
+)
+
+
 class Utils(BrowserView):
     def member(self):
         user = api.user.get_current()
@@ -452,3 +473,51 @@ class Utils(BrowserView):
         if member:
             return member.absolute_url()
         return ""
+
+    def member_export(self):
+        """export memberdata as XLSX"""
+        try:
+            members = api.content.get_view(
+                name="view",
+                context=self.context,
+                request=self.request,
+            ).member_objects()
+        except Exception:
+            api.portal.show_message(_("Members not found"))
+            return self.request.response.redirect(self.context.absolute_url())
+
+        wb = Workbook()
+        ws = wb.active
+        ws.title = "Members"
+
+        ws.append(MEMBER_EXPORT_FIELDS)
+
+        for mobj in members:
+            serializer = getMultiAdapter((mobj, self.request), ISerializeToJson)
+            item = serializer(include_items=False)
+            __traceback_info__ = item
+            _export_csv = []
+
+            for _export_fld in MEMBER_EXPORT_FIELDS:
+                _val = item.get(_export_fld, None)
+                if _val is None:
+                    _export_csv.append("")
+                    continue
+                if isinstance(_val, (list, tuple)):
+                    _export_csv.append(f"{','.join(_val)}")
+                    continue
+                if isinstance(_val, dict):
+                    _export_csv.append(f"{_val.get('title', '')}")
+                    continue
+                _export_csv.append(_val)
+
+            ws.append(_export_csv)
+
+        _out = BytesIO()
+        wb.save(_out)
+
+        self.request.response.setHeader("Content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+        self.request.response.setHeader("Content-disposition", f"attachment; filename={self.context.id}-members.xlsx")
+        self.request.response.setHeader("Pragma", "no-cache")
+
+        return _out.getvalue()
