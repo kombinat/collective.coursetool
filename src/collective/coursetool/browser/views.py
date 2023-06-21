@@ -222,9 +222,7 @@ class ExamView(ViewBase):
         ]
 
     def member_objects(self):
-        return [
-            api.content.get(UID=m["member"].UID()) for m in self.members()
-        ]
+        return [api.content.get(UID=m["member"].UID()) for m in self.members()]
 
     def can_add_to_cart(self):
         if api.user.get_permissions().get(CoursetoolAdmin):
@@ -516,8 +514,14 @@ class Utils(BrowserView):
         _out = BytesIO()
         wb.save(_out)
 
-        self.request.response.setHeader("Content-type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-        self.request.response.setHeader("Content-disposition", f"attachment; filename={self.context.id}-members.xlsx")
+        self.request.response.setHeader(
+            "Content-type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        )
+        self.request.response.setHeader(
+            "Content-disposition",
+            f"attachment; filename={self.context.id}-members.xlsx",
+        )
         self.request.response.setHeader("Pragma", "no-cache")
 
         return _out.getvalue()
