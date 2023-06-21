@@ -106,6 +106,24 @@
 
 
   <browser:page
+      name="coursetool_export_members"
+      for="collective.coursetool.interfaces.ICourse"
+      class=".views.CourseView"
+      attribute="export_memberdata"
+      permission="collective.coursetool.Administrator"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
+      name="coursetool_export_members"
+      for="collective.coursetool.interfaces.IExam"
+      class=".views.ExamView"
+      attribute="export_memberdata"
+      permission="collective.coursetool.Administrator"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
       name="import_members"
       for="plone.dexterity.interfaces.IDexterityContainer"
       class=".import.ImportMembers"

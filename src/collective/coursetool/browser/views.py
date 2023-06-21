@@ -1,5 +1,6 @@
 from Acquisition import aq_inner
 from collective.coursetool import _
+from collective.coursetool.content.member import IMemberSchema
 from collective.coursetool.permissions import CoursetoolAdmin
 from DateTime import DateTime
 from io import BytesIO
@@ -77,8 +78,12 @@ class ListingBase(BrowserView):
 
     def results(self, **kwargs):
         kwargs.setdefault("portal_type", self.portal_type)
-        kwargs.setdefault("sort_on", self.request.get("sort_on", self.initial_sort_index))
-        kwargs.setdefault("sort_order", self.request.get("sort_order", self.initial_sort_order))
+        kwargs.setdefault(
+            "sort_on", self.request.get("sort_on", self.initial_sort_index)
+        )
+        kwargs.setdefault(
+            "sort_order", self.request.get("sort_order", self.initial_sort_order)
+        )
         kwargs.setdefault("batch", True)
         kwargs.setdefault("b_size", self.b_size)
         kwargs.setdefault("b_start", self.b_start)
@@ -150,29 +155,51 @@ class CertificatesListing(ListingBase):
 
 
 class ViewBase(DefaultView):
+    def render(self):
+        # do not raise Exception, when no template is defined.
+        if getattr(self, "index", None) is not None:
+            return self.index()
+        return "?"
+
     def can_edit(self):
         return api.user.has_permission("Modify portal content", obj=self.context)
 
     def is_admin(self):
         return api.user.has_permission("Manage portal", obj=self.context)
 
+    def export_memberdata(self):
+        """export memberdata as CSV"""
+        breakpoint()
+        _export_attrs = [
+            fld_name for fld_name, desc in IMemberSchema.namesAndDescriptions()
+        ]
+        _output = [
+            ";".join(_export_attrs),
+        ]
+        for idx, mobj in enumerate(self.member_objects()):
+            pass
+
 
 class CourseView(ViewBase):
     """ """
 
+    @memoize
     def members(self):
         return [
             r.to_object
             for r in api.relation.get(source=self.context, relationship="members")
         ]
 
+    member_objects = members
+
     def can_add_to_cart(self):
         if api.user.get_permissions().get(CoursetoolAdmin):
             # no cart widget for admins
             return False
-        user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
+        user = self.context.membrane_tool.getUserObject(
+            api.user.get_current().getUserName()
+        )
         return not user or user not in self.members()
-
 
     def all_members_mailaddress(self):
         mails = [m.email for m in self.members() if m.email]
@@ -183,10 +210,9 @@ class ExamView(ViewBase):
     """ """
 
     def __call__(self):
-        if (
-            self.request.get("REQUEST_METHOD", "GET").upper() == "POST"
-            and self.request.get("member_action")
-        ):
+        if self.request.get(
+            "REQUEST_METHOD", "GET"
+        ).upper() == "POST" and self.request.get("member_action"):
             action = self.request.get("member_action")
             factory = getattr(self, action, None)
             if factory and callable(factory):
@@ -196,23 +222,33 @@ class ExamView(ViewBase):
     @memoize
     def members(self, mid=None):
         return [
-            m for m
-            in (self.context.members or [])
+            m
+            for m in (self.context.members or [])
             if (
                 mid is None
-                or mid==(m["member"] if isinstance(m["member"], str) else m["member"].UID())
+                or mid
+                == (m["member"] if isinstance(m["member"], str) else m["member"].UID())
             )
         ]
+
+    def member_objects(self):
+        return [m["member"] for m in self.members()]
 
     def can_add_to_cart(self):
         if api.user.get_permissions().get(CoursetoolAdmin):
             # no cart widget for admins
             return False
-        user = self.context.membrane_tool.getUserObject(api.user.get_current().getUserName())
+        user = self.context.membrane_tool.getUserObject(
+            api.user.get_current().getUserName()
+        )
         return not user or user.UID() not in self.context.members_uuids()
 
     def all_members_mailaddress(self):
-        mails = [m["member"].email for m in self.members() if hasattr(m["member"], "email") and m["member"].email]
+        mails = [
+            m["member"].email
+            for m in self.members()
+            if hasattr(m["member"], "email") and m["member"].email
+        ]
         return ";".join(mails)
 
     @protect(PostOnly)
@@ -308,11 +344,13 @@ class MemberView(ViewBase):
 
             # filter for successful exams
             for e in ExamView(obj, self.request).members(mid=self.context.UID()):
-                _ret.append(dict(
-                    url=obj.absolute_url(),
-                    title=obj.title,
-                    success=e["success"],
-                ))
+                _ret.append(
+                    dict(
+                        url=obj.absolute_url(),
+                        title=obj.title,
+                        success=e["success"],
+                    )
+                )
 
         return _ret
 
@@ -332,7 +370,6 @@ MemberEditView = layout.wrap_form(MemberEditForm)
 
 
 class PrintView(BrowserView):
-
     pdf_data = None
     filename = "card.pdf"
 
@@ -350,9 +387,9 @@ class PrintView(BrowserView):
 
         if download:
             self.request.response.setHeader(
-                "Content-disposition", f"attachment; filename={self.filename}")
-            self.request.response.setHeader(
-                "Content-lengts", len(self.pdf_data))
+                "Content-disposition", f"attachment; filename={self.filename}"
+            )
+            self.request.response.setHeader("Content-lengts", len(self.pdf_data))
 
         return self.pdf_data
 
@@ -401,7 +438,6 @@ class CertificateView(ViewBase):
 
 
 class Utils(BrowserView):
-
     def member(self):
         user = api.user.get_current()
         mbtool = self.context.membrane_tool
@@ -411,7 +447,7 @@ class Utils(BrowserView):
         return uobj
 
     def member_url(self):
-        """ get url of logged in member """
+        """get url of logged in member"""
         member = self.member()
         if member:
             return member.absolute_url()

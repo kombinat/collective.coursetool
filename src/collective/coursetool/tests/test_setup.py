@@ -33,7 +33,6 @@ class TestSetup(unittest.TestCase):
 
 
 class TestUninstall(unittest.TestCase):
-
     layer = COLLECTIVE_COURSETOOL_INTEGRATION_TESTING
 
     def setUp(self):

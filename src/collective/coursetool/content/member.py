@@ -55,12 +55,12 @@ class IRegistration(IRegisterSchema):
     passport_image = namedfile.NamedBlobImage(
         title=_("Passport Image"),
         description=_(
-            "Please upload a foto of your passport "
-            "to validate your identity."),
+            "Please upload a foto of your passport " "to validate your identity."
+        ),
     )
     tac_agree = schema.Bool(
         title=_("Accept Terms and Conditions"),
-        description=_("Please read our <a href=\"/agb\">Terms and Conditions</a>"),
+        description=_('Please read our <a href="/agb">Terms and Conditions</a>'),
         required=True,
     )
 
@@ -72,8 +72,12 @@ class IRegistration(IRegisterSchema):
     directives.widget("city", TextFieldWidget, wrapper_css_class="col-lg-5")
     directives.widget("cty_code", TextFieldWidget, wrapper_css_class="col-lg-5")
     directives.widget("picture", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
-    directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
-    directives.widget("tac_agree", SingleCheckBoxBoolFieldWidget, wrapper_css_class="mt-5")
+    directives.widget(
+        "passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6"
+    )
+    directives.widget(
+        "tac_agree", SingleCheckBoxBoolFieldWidget, wrapper_css_class="mt-5"
+    )
 
 
 class IMemberSchema(model.Schema):
@@ -93,7 +97,9 @@ class IMemberSchema(model.Schema):
     city = schema.TextLine(title=_("City"), required=False)
     cty_code = schema.TextLine(title=_("Country"), required=False)
 
-    email = schema.ASCIILine(title=_("EMail"), required=False, constraint=_validate_email)
+    email = schema.ASCIILine(
+        title=_("EMail"), required=False, constraint=_validate_email
+    )
     website = schema.TextLine(title=_("Internet Address"), required=False)
     phone = schema.TextLine(title=_("Phone"), required=False)
     mobile_phone = schema.TextLine(title=_("Mobile Phone"), required=False)
@@ -108,8 +114,8 @@ class IMemberSchema(model.Schema):
     passport_image = namedfile.NamedBlobImage(
         title=_("Passport Image"),
         description=_(
-            "Please upload a foto of your passport "
-            "to validate your identity."),
+            "Please upload a foto of your passport " "to validate your identity."
+        ),
         required=False,
     )
 
@@ -130,9 +136,16 @@ class IMemberSchema(model.Schema):
     directives.widget("mobile_phone", TextFieldWidget, wrapper_css_class="col-lg-4")
     directives.widget("website", TextFieldWidget, wrapper_css_class="col-lg-4")
     directives.widget("fax", TextFieldWidget, wrapper_css_class="col-lg-6")
-    directives.widget("birthday", DateFieldWidget, wrapper_css_class="col-lg-6", _formater_length="long")
+    directives.widget(
+        "birthday",
+        DateFieldWidget,
+        wrapper_css_class="col-lg-6",
+        _formater_length="long",
+    )
     directives.widget("picture", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
-    directives.widget("passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
+    directives.widget(
+        "passport_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6"
+    )
     directives.widget("card_image", NamedImageFieldWidget, wrapper_css_class="col-lg-6")
 
     username = schema.TextLine(
@@ -261,7 +274,10 @@ class IMemberSchema(model.Schema):
 
     # mark searchable fields
     textindexer.searchable(
-        "customer_id", "first_name", "last_name", "email",
+        "customer_id",
+        "first_name",
+        "last_name",
+        "email",
     )
 
     model.fieldset(
@@ -298,7 +314,7 @@ class IMemberSchema(model.Schema):
         """
         user = data.__context__
         if user is not None:
-            if getattr(user, 'email', None) and user.email == data.email:
+            if getattr(user, "email", None) and user.email == data.email:
                 # No change, fine.
                 return
         error = validate_unique_email(data.email)
@@ -351,10 +367,8 @@ class Member(Container):
         return True
 
 
-
 @adapter(IMember)
 class UserProperties(MembraneUserProperties):
-
     property_map = dict(
         gender="salutation",
         email="email",
@@ -370,7 +384,6 @@ class UserProperties(MembraneUserProperties):
 @implementer(INameFromTitle)
 @adapter(IMember)
 class NameFromCreationDateEncrypted(object):
-
     def __new__(cls, context):
         instance = super().__new__(cls)
         instance.title = generate_member_id()
@@ -381,10 +394,8 @@ class NameFromCreationDateEncrypted(object):
 
 
 def new_customer_id(obj, event):
-
-    if (
-        IImportingMembers.providedBy(obj.REQUEST)
-        or bool(getattr(obj, "customer_id", None))
+    if IImportingMembers.providedBy(obj.REQUEST) or bool(
+        getattr(obj, "customer_id", None)
     ):
         # customer_id is set during import
         return

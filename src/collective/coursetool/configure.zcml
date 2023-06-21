@@ -81,10 +81,11 @@
 
   <!-- payment success event -->
   <subscriber
-    for="bda.plone.payment.interfaces.IPaymentSuccessEvent"
-    handler=".shop.payment_success" />
+      for="bda.plone.payment.interfaces.IPaymentSuccessEvent"
+      handler=".shop.payment_success"
+      />
 
   <!-- coursetool memberdata for checkout -->
-  <adapter factory=".shop.CheckoutFormCourseMemberPresets"/>
+  <adapter factory=".shop.CheckoutFormCourseMemberPresets" />
 
 </configure>

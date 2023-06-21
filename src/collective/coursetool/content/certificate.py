@@ -12,7 +12,6 @@ from zope.interface import implementer
 
 
 class ICertificateSchema(model.Schema):
-
     title = schema.TextLine(
         title=_("Certificate"),
         required=True,
@@ -49,6 +48,5 @@ class ICertificateSchema(model.Schema):
 
 @implementer(ICertificate)
 class Certificate(Container):
-
     def members_uuids(self):
         return [m.to_object.UID() for m in self.members]

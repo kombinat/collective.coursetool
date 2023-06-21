@@ -4,9 +4,9 @@ from collective.coursetool.config import BASE_FOLDER_ID
 from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
+from plone.app.vocabularies.catalog import CatalogSource
 from plone.app.z3cform.widget import DateFieldWidget
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
-from plone.app.vocabularies.catalog import CatalogSource
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
@@ -42,7 +42,6 @@ class ICourseOccurrences(model.Schema):
 
 
 class ICourseSchema(model.Schema):
-
     title = schema.TextLine(
         title=_("Course Title"),
         required=True,
@@ -115,7 +114,7 @@ class ICourseSchema(model.Schema):
         value_type=RelationChoice(
             title=_("Instructor"),
             source=CatalogSource(
-                portal_type='coursetool.member',
+                portal_type="coursetool.member",
                 instructor=True,
             ),
         ),
@@ -216,8 +215,7 @@ class Course(Container):
 
     def get_locations(self):
         return [
-            r.to_object
-            for r in api.relation.get(source=self, relationship="locations")
+            r.to_object for r in api.relation.get(source=self, relationship="locations")
         ]
 
     # indexer helpers for start/end date
@@ -236,9 +234,7 @@ class Course(Container):
 
     @property
     def location(self):
-        return " - ".join([
-            f"{l.title}, {l.city}" for l in self.get_locations()
-        ])
+        return " - ".join([f"{l.title}, {l.city}" for l in self.get_locations()])
 
     def members_uuids(self):
         return [m.UID() for m in self.members]

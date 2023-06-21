@@ -112,8 +112,9 @@
                             </a>
                         </li>
                     </ol>
-                    <div class="btn-group mt-2" tal:condition="members">
-                        <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                    <div class="mt-2" tal:condition="members">
+                        <a class="btn btn-secondary btn-sm me-3" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
+                        <a class="btn btn-secondary btn-sm" href="${context/absolute_url}/@@coursetool_export_members" i18n:translate="">Export member data as CSV</a>
                     </div>
                     <span class="text-muted fs-sm" tal:condition="not:members" i18n:translate="">
                         No members found.

@@ -10,9 +10,7 @@ from zope.interface import Interface
 
 class ILocationSchema(model.Schema):
     searchable("title")
-    title = schema.TextLine(
-        title=_("Location Title")
-    )
+    title = schema.TextLine(title=_("Location Title"))
 
 
 @implementer(ILocation)

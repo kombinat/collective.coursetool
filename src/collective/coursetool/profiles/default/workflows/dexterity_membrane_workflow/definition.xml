@@ -1,297 +1,297 @@
-<?xml version="1.0"?>
-<dc-workflow
-        workflow_id="dexterity_membrane_workflow"
-        title="Dexterity Membrane Workflow"
-        state_variable="review_state"
-        initial_state="pending">
+<?xml version="1.0" encoding="utf-8"?>
+<dc-workflow initial_state="pending"
+             state_variable="review_state"
+             title="Dexterity Membrane Workflow"
+             workflow_id="dexterity_membrane_workflow"
+>
 
-        <permission>View</permission>
-        <permission>Access contents information</permission>
-        <permission>Add portal content</permission>
-        <permission>Modify portal content</permission>
-        <permission>Change portal events</permission>
-        <permission>plone.app.contenttypes: Add File</permission>
-        <permission>plone.app.contenttypes: Add Image</permission>
-
-
-        <state
-                state_id="pending"
-                title="Pending">
-                <exit-transition transition_id="approve" />
-                <exit-transition transition_id="decline" />
-                <permission-map
-                        name="View"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Reader</permission-role>
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Access contents information"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Reader</permission-role>
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Modify portal content"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Change portal events"
-                        acquired="False">
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-        </state>
-
-        <state
-                state_id="enabled"
-                title="Enabled">
-                <exit-transition transition_id="disable" />
-                <permission-map
-                        name="View"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Access contents information"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Add portal content"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="plone.app.contenttypes: Add File"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="plone.app.contenttypes: Add Image"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Modify portal content"
-                        acquired="False">
-                        <permission-role>Owner</permission-role>
-                        <permission-role>Editor</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Change portal events"
-                        acquired="False">
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-        </state>
-
-        <state
-                state_id="disabled"
-                title="Disabled">
-                <exit-transition transition_id="enable" />
-                <permission-map
-                        name="View"
-                        acquired="False">
-                        <permission-role>Reader</permission-role>
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Access contents information"
-                        acquired="False">
-                        <permission-role>Reader</permission-role>
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Add portal content"
-                        acquired="False">
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="plone.app.contenttypes: Add File"
-                        acquired="False">
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="plone.app.contenttypes: Add Image"
-                        acquired="False">
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Modify portal content"
-                        acquired="False">
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-                <permission-map
-                        name="Change portal events"
-                        acquired="False">
-                        <permission-role>Reviewer</permission-role>
-                        <permission-role>Manager</permission-role>
-                        <permission-role>Site Administrator</permission-role>
-                </permission-map>
-        </state>
+  <permission>View</permission>
+  <permission>Access contents information</permission>
+  <permission>Add portal content</permission>
+  <permission>Modify portal content</permission>
+  <permission>Change portal events</permission>
+  <permission>plone.app.contenttypes: Add File</permission>
+  <permission>plone.app.contenttypes: Add Image</permission>
 
 
-        <transition
-                transition_id="approve"
-                new_state="enabled"
-                title="Approve this member"
-                trigger="USER"
-                before_script=""
-                after_script="">
-                <action
-                        url="%(content_url)s/content_status_modify?workflow_action=approve"
-                        category="workflow">Approve This Member</action>
-                <guard>
-                        <guard-permission>Review portal content</guard-permission>
-                </guard>
-        </transition>
+  <state state_id="pending"
+         title="Pending"
+  >
+    <exit-transition transition_id="approve" />
+    <exit-transition transition_id="decline" />
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Change portal events"
+    >
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+  </state>
 
-        <transition
-                transition_id="decline"
-                new_state="disabled"
-                title="Decline this member"
-                trigger="USER"
-                before_script=""
-                after_script="">
-                <action
-                        url="%(content_url)s/content_status_modify?workflow_action=decline"
-                        category="workflow">Decline This Member</action>
-                <guard>
-                        <guard-permission>Review portal content</guard-permission>
-                </guard>
-        </transition>
+  <state state_id="enabled"
+         title="Enabled"
+  >
+    <exit-transition transition_id="disable" />
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add File"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add Image"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Change portal events"
+    >
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+  </state>
 
-        <transition
-                transition_id="disable"
-                new_state="disabled"
-                title="Disable this member"
-                trigger="USER"
-                before_script=""
-                after_script="">
-                <action
-                        url="%(content_url)s/content_status_modify?workflow_action=disable"
-                        category="workflow">Disable This Member</action>
-                <guard>
-                        <guard-permission>Review portal content</guard-permission>
-                </guard>
-        </transition>
+  <state state_id="disabled"
+         title="Disabled"
+  >
+    <exit-transition transition_id="enable" />
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Reader</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Reader</permission-role>
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add File"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="plone.app.contenttypes: Add Image"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Change portal events"
+    >
+      <permission-role>Reviewer</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+  </state>
 
-        <transition
-                transition_id="enable"
-                new_state="enabled"
-                title="Enable this member"
-                trigger="USER"
-                before_script=""
-                after_script="">
-                <action
-                        url="%(content_url)s/content_status_modify?workflow_action=enable"
-                        category="workflow">Enable This Member</action>
-                <guard>
-                        <guard-permission>Review portal content</guard-permission>
-                </guard>
-        </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="enabled"
+              title="Approve this member"
+              transition_id="approve"
+              trigger="USER"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=approve"
+    >Approve This Member</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="disabled"
+              title="Decline this member"
+              transition_id="decline"
+              trigger="USER"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=decline"
+    >Decline This Member</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="disabled"
+              title="Disable this member"
+              transition_id="disable"
+              trigger="USER"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=disable"
+    >Disable This Member</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+
+  <transition after_script=""
+              before_script=""
+              new_state="enabled"
+              title="Enable this member"
+              transition_id="enable"
+              trigger="USER"
+  >
+    <action category="workflow"
+            url="%(content_url)s/content_status_modify?workflow_action=enable"
+    >Enable This Member</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
 
 
-        <variable
-                variable_id="action"
-                for_catalog="False"
-                for_status="True"
-                update_always="True">
-                <default>
-                        <expression>transition/getId|nothing</expression>
-                </default>
-                <guard>
-                </guard>
-        </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="action"
+  >
+    <default>
+      <expression>transition/getId|nothing</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
 
-        <variable
-                variable_id="actor"
-                for_catalog="False"
-                for_status="True"
-                update_always="True">
-                <default>
-                        <expression>user/getId</expression>
-                </default>
-                <guard>
-                </guard>
-        </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="actor"
+  >
+    <default>
+      <expression>user/getId</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
 
-        <variable
-                variable_id="comments"
-                for_catalog="False"
-                for_status="True"
-                update_always="True">
-                <default>
-                        <expression>python:state_change.kwargs.get('comment', '')</expression>
-                </default>
-                <guard>
-                </guard>
-        </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="comments"
+  >
+    <default>
+      <expression>python:state_change.kwargs.get('comment', '')</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
 
-        <variable
-                variable_id="review_history"
-                for_catalog="False"
-                for_status="False"
-                update_always="False">
-                <default>
-                        <expression>state_change/getHistory</expression>
-                </default>
-                <guard>
-                        <guard-permission>Request review</guard-permission>
-                        <guard-permission>Review portal content</guard-permission>
-                </guard>
-        </variable>
+  <variable for_catalog="False"
+            for_status="False"
+            update_always="False"
+            variable_id="review_history"
+  >
+    <default>
+      <expression>state_change/getHistory</expression>
+    </default>
+    <guard>
+      <guard-permission>Request review</guard-permission>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </variable>
 
-        <variable
-                variable_id="time"
-                for_catalog="False"
-                for_status="True"
-                update_always="True">
-                <default>
-                        <expression>state_change/getDateTime</expression>
-                </default>
-                <guard>
-                </guard>
-        </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="time"
+  >
+    <default>
+      <expression>state_change/getDateTime</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
 
 </dc-workflow>

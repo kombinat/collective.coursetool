@@ -2,9 +2,13 @@
   <adapter factory=".member.UserProperties" />
   <adapter factory=".member.NameFromCreationDateEncrypted" />
   <!-- catalog indexer -->
-  <adapter factory=".member.sortable_title" name="sortable_title" />
+  <adapter
+      factory=".member.sortable_title"
+      name="sortable_title"
+      />
   <subscriber
-    for=".member.IMember
-         zope.lifecycleevent.interfaces.IObjectAddedEvent"
-    handler=".member.new_customer_id" />
+      for=".member.IMember
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".member.new_customer_id"
+      />
 </configure>

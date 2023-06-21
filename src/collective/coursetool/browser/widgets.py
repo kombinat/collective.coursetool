@@ -9,7 +9,7 @@ from zope.schema.interfaces import IField
 
 
 class CourseOccurrencesWidget(DataGridFieldWidget):
-    """ override template for course.occurrences """
+    """override template for course.occurrences"""
 
     def createObjectWidget(self, idx):
         valueType = self.field.value_type
@@ -25,7 +25,7 @@ def CourseOccurrencesFieldWidget(field, request):
 
 
 class CourseOccurrencesObjectWidget(DataGridFieldObjectWidget):
-    """ override template for row in course.occurrence """
+    """override template for row in course.occurrence"""
 
 
 @adapter(IField, interfaces.IFormLayer)

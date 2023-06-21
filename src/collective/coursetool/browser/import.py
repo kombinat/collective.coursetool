@@ -9,10 +9,8 @@ from openpyxl import load_workbook
 from plone import api
 from plone.restapi.interfaces import IDeserializeFromJson
 from plone.schema.email import _isemail
-from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.interface import alsoProvides
-from zope.interface import Interface
 from zope.publisher.browser import BrowserView
 
 import logging
@@ -73,9 +71,8 @@ SALUTATION_MAPPING = {
     "Herr": "male",
     "Frau": "female",
 }
-DISABLE_VALIDATION = [
-    "email", "birthday", "first_name", "last_name"
-]
+DISABLE_VALIDATION = ["email", "birthday", "first_name", "last_name"]
+
 
 def no_validation(value):
     return
@@ -139,12 +136,11 @@ class ImportMembers(BrowserView):
 
                 # extra mappings
                 if fld == "salutation":
-                    data[fld] = SALUTATION_MAPPING.get(row[idx], None) if row[idx] else None
+                    data[fld] = (
+                        SALUTATION_MAPPING.get(row[idx], None) if row[idx] else None
+                    )
 
-                if (
-                    fld == "email"
-                    and data[fld] != ""
-                ):
+                if fld == "email" and data[fld] != "":
                     if not _isemail(data[fld]):
                         # handle broken mail addresses
                         log.warn("EMail not valid: %s", row[idx])
@@ -156,12 +152,14 @@ class ImportMembers(BrowserView):
                 data[fld] = row[idx].isoformat() if row[idx] else None
 
             for fld, idx in VOCAB_MAPPING.items():
-                if len(row) <= idx :
+                if len(row) <= idx:
                     continue
                 if fld == "state":
                     data[fld] = STATE_MAPPING.get(row[idx], None) if row[idx] else None
                     continue
-                data[fld] = [v.strip() for v in row[idx].split(",") if v] if row[idx] else None
+                data[fld] = (
+                    [v.strip() for v in row[idx].split(",") if v] if row[idx] else None
+                )
 
             __traceback_info__ = data
 
@@ -172,7 +170,7 @@ class ImportMembers(BrowserView):
                 obj = api.content.create(
                     container=member_base,
                     type="coursetool.member",
-                    id=generate_member_id()
+                    id=generate_member_id(),
                 )
                 msg = "{0} Generated new member {1}"
 
@@ -206,16 +204,20 @@ class ImportMembers(BrowserView):
             delattr(IMemberSchema[fld], "_orig_validate")
 
         api.portal.show_message(
-            _("Imported members: ${count}/${all}",
-              mapping=dict(count=count_import, all=_all)),
-            request=self.request)
+            _(
+                "Imported members: ${count}/${all}",
+                mapping=dict(count=count_import, all=_all),
+            ),
+            request=self.request,
+        )
         return self.index()
 
+
 class MemberAdmin(BrowserView):
-
     def member_states(self):
-
-        items = self.context.portal_catalog(portal_type="coursetool.member", sort_on="getId")
+        items = self.context.portal_catalog(
+            portal_type="coursetool.member", sort_on="getId"
+        )
         _all = len(items)
 
         for idx, m in enumerate(items, 1):
@@ -235,7 +237,9 @@ class MemberAdmin(BrowserView):
         catalog = self.context.portal_catalog
         items = catalog(portal_type="coursetool.member", sort_on="customer_id")
         _all = len(items)
-        _log = ["Report:", ]
+        _log = [
+            "Report:",
+        ]
 
         for idx, m in enumerate(items, 1):
             cid = m.customer_id

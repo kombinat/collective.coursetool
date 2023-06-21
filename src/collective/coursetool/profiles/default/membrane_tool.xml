@@ -4,9 +4,9 @@
 >
   <membrane-type name="coursetool.member" />
 
-  <index
-    meta_type="KeywordIndex"
-    name="email">
+  <index meta_type="KeywordIndex"
+         name="email"
+  >
     <indexed_attr value="email" />
   </index>
 

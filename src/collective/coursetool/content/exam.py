@@ -17,7 +17,6 @@ from zope.interface import implementer
 
 
 class IMembers(model.Schema):
-
     member = RelationChoice(
         title=_("Member"),
         vocabulary="plone.app.vocabularies.Catalog",
@@ -44,7 +43,6 @@ class IMembers(model.Schema):
 
 
 class IExamSchema(model.Schema):
-
     title = schema.TextLine(
         title=_("Exam"),
         required=True,
@@ -129,8 +127,7 @@ class Exam(Container):
 
     def get_locations(self):
         return [
-            r.to_object
-            for r in api.relation.get(source=self, relationship="location")
+            r.to_object for r in api.relation.get(source=self, relationship="location")
         ]
 
     def members_uuids(self):

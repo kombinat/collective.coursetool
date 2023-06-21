@@ -1,45 +1,71 @@
-<?xml version="1.0"?>
-<object name="portal_actions"
+<?xml version="1.0" encoding="utf-8"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         meta_type="Plone Actions Tool"
-        xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+        name="portal_actions"
+>
 
-    <object name="user" meta_type="CMF Action Category">
-        <object name="join" meta_type="CMF Action" i18n:domain="plone">
-            <property name="title" i18n:translate="">Register</property>
-            <property name="description" i18n:translate=""></property>
-            <property name="url_expr">string:${portal_url}/coursetool/@@register</property>
-            <property name="link_target"></property>
-            <property name="icon_expr">string:plone-register</property>
-            <property name="available_expr">python:member is None</property>
-            <property name="permissions">
-                <element value="collective.coursetool: Register member"/>
-            </property>
-            <property name="visible">True</property>
-            <property name="modal"></property>
-        </object>
-        <object name="coursetool-information" meta_type="CMF Action" i18n:domain="collective.coursetool" insert-before="logout">
-            <property name="title" i18n:translate="">Personal Information</property>
-            <property name="description" i18n:translate=""></property>
-            <property name="url_expr">portal/@@coursetool_utils/member_url</property>
-            <property name="link_target"></property>
-            <property name="icon_expr">string:</property>
-            <property name="available_expr">python:member is not None</property>
-            <property name="permissions">
-                <element value="bda.plone.orders: View Own Orders"/>
-            </property>
-            <property name="visible">True</property>
-        </object>
-        <object name="orders" meta_type="CMF Action" i18n:domain="bda.plone.shop" insert-before="logout">
-            <property name="title" i18n:translate="">my_orders</property>
-            <property name="description" i18n:translate=""></property>
-            <property name="url_expr">string:${portal_url}/@@myorders</property>
-            <property name="link_target"></property>
-            <property name="icon_expr">string:</property>
-            <property name="available_expr">python:member is not None</property>
-            <property name="permissions">
-                <element value="bda.plone.orders: View Own Orders"/>
-            </property>
-            <property name="visible">True</property>
-        </object>
+  <object meta_type="CMF Action Category"
+          name="user"
+  >
+    <object meta_type="CMF Action"
+            name="join"
+            i18n:domain="plone"
+    >
+      <property name="title"
+                i18n:translate=""
+      >Register</property>
+      <property name="description"
+                i18n:translate=""
+      />
+      <property name="url_expr">string:${portal_url}/coursetool/@@register</property>
+      <property name="link_target" />
+      <property name="icon_expr">string:plone-register</property>
+      <property name="available_expr">python:member is None</property>
+      <property name="permissions">
+        <element value="collective.coursetool: Register member" />
+      </property>
+      <property name="visible">True</property>
+      <property name="modal" />
     </object>
+    <object insert-before="logout"
+            meta_type="CMF Action"
+            name="coursetool-information"
+            i18n:domain="collective.coursetool"
+    >
+      <property name="title"
+                i18n:translate=""
+      >Personal Information</property>
+      <property name="description"
+                i18n:translate=""
+      />
+      <property name="url_expr">portal/@@coursetool_utils/member_url</property>
+      <property name="link_target" />
+      <property name="icon_expr">string:</property>
+      <property name="available_expr">python:member is not None</property>
+      <property name="permissions">
+        <element value="bda.plone.orders: View Own Orders" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+    <object insert-before="logout"
+            meta_type="CMF Action"
+            name="orders"
+            i18n:domain="bda.plone.shop"
+    >
+      <property name="title"
+                i18n:translate=""
+      >my_orders</property>
+      <property name="description"
+                i18n:translate=""
+      />
+      <property name="url_expr">string:${portal_url}/@@myorders</property>
+      <property name="link_target" />
+      <property name="icon_expr">string:</property>
+      <property name="available_expr">python:member is not None</property>
+      <property name="permissions">
+        <element value="bda.plone.orders: View Own Orders" />
+      </property>
+      <property name="visible">True</property>
+    </object>
+  </object>
 </object>

@@ -11,6 +11,7 @@ from zope.interface import Interface
 
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -38,7 +39,10 @@ def payment_success(data):
                 continue
             add_member_to_exam(exam, member)
 
-    if item.portal_type == "coursetool.exam" and member.UID() not in item.members_uuids():
+    if (
+        item.portal_type == "coursetool.exam"
+        and member.UID() not in item.members_uuids()
+    ):
         add_member_to_exam(item, member)
 
 
@@ -49,7 +53,7 @@ CHECKOUT_FIELD_MAP = {
     "street": "address",
     "zip": "zip_code",
     "country": "cty_code",
-    "phone": ["mobile_phone", "phone"]
+    "phone": ["mobile_phone", "phone"],
 }
 
 

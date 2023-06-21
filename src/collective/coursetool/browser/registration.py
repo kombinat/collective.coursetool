@@ -18,7 +18,6 @@ import transaction
 
 
 class Registration(RegistrationForm):
-
     schema = IRegistration
 
     def _get_security_settings(self):
@@ -137,7 +136,11 @@ class CourseToolMemberAdder(object):
     def addUser(self, login_name, password, **data):
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
 
-        with api.env.adopt_roles(["Manager", ]):
+        with api.env.adopt_roles(
+            [
+                "Manager",
+            ]
+        ):
             obj = api.content.create(
                 container=member_base,
                 type="coursetool.member",

@@ -5,8 +5,8 @@ from plone.app.vocabularies.catalog import StaticCatalogVocabulary
 from random import paretovariate
 from zope.globalrequest import getRequest
 from zope.i18n import translate
-from zope.interface import provider
 from zope.interface import implementer
+from zope.interface import provider
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -36,6 +36,7 @@ class MemberStatesVocabulary(StaticValuesVocabulary):
         ("not_read", _("Not read")),
     ]
 
+
 MemberStatesVocabularyFactory = MemberStatesVocabulary()
 
 
@@ -54,18 +55,33 @@ class MemberQualificationsVocabulary(StaticValuesVocabulary):
         ("i", _("quali_i_label")),
     ]
 
+
 MemberQualificationsVocabularyFactory = MemberQualificationsVocabulary()
 
 
 class ExamTypesVocabulary(StaticValuesVocabulary):
     values = [
         ("abs_1_lit_a", _("Abs. 1 lit. a: Vorarlberger Fischerprüfung")),
-        ("abs_1_lit_b", _("Abs. 1 lit. b: Erfolgreich abgelegte Prüfung in anderen Bundesländern oder Staaten")),
-        ("abs_1_lit_c", _("Abs. 1 lit. c: Erfolgreicher Abschluss der Fischereifacharbeiterprüfung")),
-        ("abs_1_lit_d", _("Abs. 1 lit. d: Gleichwertig zur Fischerprüfung anerkannte Ausbildung")),
+        (
+            "abs_1_lit_b",
+            _(
+                "Abs. 1 lit. b: Erfolgreich abgelegte Prüfung in anderen Bundesländern oder Staaten"
+            ),
+        ),
+        (
+            "abs_1_lit_c",
+            _(
+                "Abs. 1 lit. c: Erfolgreicher Abschluss der Fischereifacharbeiterprüfung"
+            ),
+        ),
+        (
+            "abs_1_lit_d",
+            _("Abs. 1 lit. d: Gleichwertig zur Fischerprüfung anerkannte Ausbildung"),
+        ),
         ("abs_1_lit_e", _("Abs. 1 lit. e: Erfolgreich abgelegte Eignungsprüfung")),
         ("abs_2", _("Abs. 2: Teilnahme an einer Unterweisung")),
     ]
+
 
 ExamTypesVocabularyFactory = ExamTypesVocabulary()
 
@@ -75,6 +91,7 @@ class CourseTypesVocabulary(StaticValuesVocabulary):
         ("offline", _("course_type_offline")),
         ("online", _("course_type_online")),
     ]
+
 
 CourseTypesVocabularyFactory = CourseTypesVocabulary()
 

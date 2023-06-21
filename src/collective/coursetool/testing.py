@@ -1,4 +1,3 @@
-from Products.membrane.testing import MEMBRANE_PROFILES_FIXTURE
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -6,12 +5,12 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
+from Products.membrane.testing import MEMBRANE_PROFILES_FIXTURE
 
 import collective.coursetool
 
 
 class CollectiveCoursetoolLayer(PloneSandboxLayer):
-
     defaultBases = (MEMBRANE_PROFILES_FIXTURE, PLONE_FIXTURE)
 
     def setUpZope(self, app, configurationContext):
