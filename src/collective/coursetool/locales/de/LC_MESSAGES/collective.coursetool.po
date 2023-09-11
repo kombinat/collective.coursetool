@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-03-17 10:09+0000\n"
-"PO-Revision-Date: 2023-03-20 09:38+0100\n"
+"POT-Creation-Date: 2023-09-11 06:53+0000\n"
+"PO-Revision-Date: 2023-09-11 08:54+0200\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: collective/coursetool/vocabularies.py
 msgid "Abs. 1 lit. a: Vorarlberger Fischerprüfung"
@@ -266,6 +266,11 @@ msgstr "Erfolgreich absolviert"
 msgid "Exams"
 msgstr "Prüfungen"
 
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Export member data as XLSX"
+msgstr "Teilnehmer exportieren (Excel)"
+
 #: collective/coursetool/content/member.py
 msgid "Fax"
 msgstr "Fax"
@@ -393,6 +398,10 @@ msgstr "Liste der Mitglieder als Exceldatei"
 #: collective/coursetool/browser/templates/view_certificate.pt
 msgid "Members"
 msgstr "Teilnehmer:innen"
+
+#: collective/coursetool/browser/views.py
+msgid "Members not found"
+msgstr "Mitglied nicht gefunden"
 
 #: collective/coursetool/content/member.py
 msgid "Membership"

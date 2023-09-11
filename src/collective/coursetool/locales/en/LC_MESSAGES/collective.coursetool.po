@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-03-17 10:09+0000\n"
+"POT-Creation-Date: 2023-09-11 06:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -264,6 +264,11 @@ msgstr ""
 msgid "Exams"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_course.pt
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Export member data as XLSX"
+msgstr ""
+
 #: collective/coursetool/content/member.py
 msgid "Fax"
 msgstr ""
@@ -390,6 +395,10 @@ msgstr ""
 #: collective/coursetool/browser/templates/portal.pt
 #: collective/coursetool/browser/templates/view_certificate.pt
 msgid "Members"
+msgstr ""
+
+#: collective/coursetool/browser/views.py
+msgid "Members not found"
 msgstr ""
 
 #: collective/coursetool/content/member.py
