@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-11 06:53+0000\n"
+"POT-Creation-Date: 2023-10-06 08:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,6 +454,10 @@ msgstr ""
 msgid "Not read"
 msgstr ""
 
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Notification/Export"
+msgstr ""
+
 #: collective/coursetool/browser/templates/listing_macros.pt
 msgid "Nr"
 msgstr ""
@@ -547,6 +551,14 @@ msgstr ""
 #: collective/coursetool/browser/templates/view_course.pt
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Send Email to all members"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to failed members"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to success members"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_member.pt

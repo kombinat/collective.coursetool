@@ -141,8 +141,18 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
-                            <a class="btn btn-secondary btn-sm" href="mailto:${view/all_members_mailaddress}" i18n:translate="">Send Email to all members</a>
-                            <a class="btn btn-secondary btn-sm" href="${context/absolute_url}/@@coursetool_utils/member_export" i18n:translate="">Export member data as XLSX</a>
+                            <div class="dropdown">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n:translate="">
+                                    Notification/Export
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${view/members_mailaddress}" i18n:translate="">Send Email to all members</a></li>
+                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(True)}" i18n:translate="">Send Email to success members</a></li>
+                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(False)}" i18n:translate="">Send Email to failed members</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="${context/absolute_url}/@@coursetool_utils/member_export" i18n:translate="">Export member data as XLSX</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     </form>

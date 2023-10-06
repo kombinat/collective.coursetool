@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-09-11 06:53+0000\n"
-"PO-Revision-Date: 2023-09-11 08:54+0200\n"
+"POT-Creation-Date: 2023-10-06 08:03+0000\n"
+"PO-Revision-Date: 2023-10-06 10:04+0200\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -456,6 +456,10 @@ msgstr "Keine Mitglieder gefunden."
 msgid "Not read"
 msgstr "nicht Eingelesen"
 
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Notification/Export"
+msgstr "Benachrichtigung und Export"
+
 #: collective/coursetool/browser/templates/listing_macros.pt
 msgid "Nr"
 msgstr "No."
@@ -550,6 +554,14 @@ msgstr "Anrede Brief"
 #: collective/coursetool/browser/templates/view_exam.pt
 msgid "Send Email to all members"
 msgstr "E-Mail an alle Teilnehmer"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to failed members"
+msgstr "E-Mail an nicht erfolgreiche Teilnehmer"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to success members"
+msgstr "E-Mail an erfolgreiche Teilnehmer"
 
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "Size"

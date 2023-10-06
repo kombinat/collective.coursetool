@@ -1,3 +1,4 @@
+from itertools import filterfalse
 from Acquisition import aq_inner
 from collective.coursetool import _
 from collective.coursetool.permissions import CoursetoolAdmin
@@ -192,8 +193,11 @@ class CourseView(ViewBase):
         return not user or user not in self.members()
 
     def all_members_mailaddress(self):
-        mails = [m.email for m in self.members() if m.email]
-        return ";".join(mails)
+        mails = [
+            m.email for m in self.members()
+            if m.email
+        ]
+        return ", ".join(mails)
 
 
 class ExamView(ViewBase):
@@ -233,13 +237,19 @@ class ExamView(ViewBase):
         )
         return not user or user.UID() not in self.context.members_uuids()
 
-    def all_members_mailaddress(self):
+    def members_mailaddress(self, success=None):
         mails = [
             m["member"].email
             for m in self.members()
-            if hasattr(m["member"], "email") and m["member"].email
+            if (
+                hasattr(m["member"], "email") and m["member"].email
+                and (
+                    success is None
+                    or m["success"] == success
+                )
+            )
         ]
-        return ";".join(mails)
+        return ", ".join(mails)
 
     @protect(PostOnly)
     def action_delete(self, REQUEST):

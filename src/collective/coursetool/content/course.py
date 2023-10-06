@@ -15,7 +15,6 @@ from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.interface import implementer
-from zope.interface import Interface
 
 import dateparser
 
