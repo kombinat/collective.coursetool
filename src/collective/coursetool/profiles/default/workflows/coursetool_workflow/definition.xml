@@ -1,151 +1,228 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<dc-workflow workflow_id="coursetool_workflow" title="Coursetool Workflow" description=" - Simple workflow with archiving state." state_variable="review_state" initial_state="private" manager_bypass="False">
- <permission>Access contents information</permission>
- <permission>Modify portal content</permission>
- <permission>View</permission>
+<?xml version="1.0" encoding="utf-8"?>
+<dc-workflow description=" - Simple workflow with archiving state."
+             initial_state="private"
+             manager_bypass="False"
+             state_variable="review_state"
+             title="Coursetool Workflow"
+             workflow_id="coursetool_workflow"
+>
+  <permission>Access contents information</permission>
+  <permission>Modify portal content</permission>
+  <permission>View</permission>
 
- <state state_id="private" title="Private">
-  <description>Can only be seen and edited by the owner.</description>
-  <exit-transition transition_id="publish"/>
-  <exit-transition transition_id="archive"/>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Reader</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
- </state>
+  <state state_id="private"
+         title="Private"
+  >
+    <description>Can only be seen and edited by the owner.</description>
+    <exit-transition transition_id="publish" />
+    <exit-transition transition_id="archive" />
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+  </state>
 
- <state state_id="published" title="Published">
-  <description>Visible to everyone, editable by the owner.</description>
-  <exit-transition transition_id="archive"/>
-  <exit-transition transition_id="reject"/>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Anonymous</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Site Administrator</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Anonymous</permission-role>
-  </permission-map>
- </state>
+  <state state_id="published"
+         title="Published"
+  >
+    <description>Visible to everyone, editable by the owner.</description>
+    <exit-transition transition_id="archive" />
+    <exit-transition transition_id="reject" />
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Anonymous</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Anonymous</permission-role>
+    </permission-map>
+  </state>
 
- <state state_id="archived" title="Archived">
-  <description>Archived.</description>
-  <exit-transition transition_id="publish"/>
-  <exit-transition transition_id="reject"/>
-  <permission-map name="Access contents information" acquired="False">
-    <permission-role>Manager</permission-role>
-    <permission-role>Owner</permission-role>
-    <permission-role>Editor</permission-role>
-    <permission-role>Reader</permission-role>
-    <permission-role>Contributor</permission-role>
-    <permission-role>Site Administrator</permission-role>
-   </permission-map>
-   <permission-map name="Modify portal content" acquired="False">
-    <permission-role>Manager</permission-role>
-    <permission-role>Owner</permission-role>
-    <permission-role>Editor</permission-role>
-    <permission-role>Site Administrator</permission-role>
-   </permission-map>
-   <permission-map name="View" acquired="False">
-    <permission-role>Manager</permission-role>
-    <permission-role>Owner</permission-role>
-    <permission-role>Editor</permission-role>
-    <permission-role>Reader</permission-role>
-    <permission-role>Contributor</permission-role>
-    <permission-role>Site Administrator</permission-role>
-   </permission-map>
- </state>
+  <state state_id="archived"
+         title="Archived"
+  >
+    <description>Archived.</description>
+    <exit-transition transition_id="publish" />
+    <exit-transition transition_id="reject" />
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Owner</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Reader</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Site Administrator</permission-role>
+    </permission-map>
+  </state>
 
- <transition transition_id="publish" title="Reviewer publishes content" new_state="published" trigger="USER" before_script="" after_script="">
-  <description>Publishing the item makes it visible to other users.</description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=publish" category="workflow" icon="">Publish</action>
-  <guard>
-   <guard-permission>Review portal content</guard-permission>
-  </guard>
- </transition>
- <transition transition_id="reject" title="Reviewer sends content back for re-drafting" new_state="private" trigger="USER" before_script="" after_script="">
-  <description>Sending the item back will return the item to the original author instead of publishing it. You should preferably include a reason for why it was not published.</description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=reject" category="workflow" icon="">Send back</action>
-  <guard>
-   <guard-permission>Review portal content</guard-permission>
-  </guard>
- </transition>
- <transition transition_id="archive" title="Item gets archived" new_state="archived" trigger="USER" before_script="" after_script="">
-  <description></description>
-  <action url="%(content_url)s/content_status_modify?workflow_action=archive" category="workflow" icon="">Archive</action>
-  <guard>
-   <guard-permission>Modify portal content</guard-permission>
-  </guard>
- </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="published"
+              title="Reviewer publishes content"
+              transition_id="publish"
+              trigger="USER"
+  >
+    <description>Publishing the item makes it visible to other users.</description>
+    <action category="workflow"
+            icon=""
+            url="%(content_url)s/content_status_modify?workflow_action=publish"
+    >Publish</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="private"
+              title="Reviewer sends content back for re-drafting"
+              transition_id="reject"
+              trigger="USER"
+  >
+    <description>Sending the item back will return the item to the original author instead of publishing it. You should preferably include a reason for why it was not published.</description>
+    <action category="workflow"
+            icon=""
+            url="%(content_url)s/content_status_modify?workflow_action=reject"
+    >Send back</action>
+    <guard>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="archived"
+              title="Item gets archived"
+              transition_id="archive"
+              trigger="USER"
+  >
+    <description />
+    <action category="workflow"
+            icon=""
+            url="%(content_url)s/content_status_modify?workflow_action=archive"
+    >Archive</action>
+    <guard>
+      <guard-permission>Modify portal content</guard-permission>
+    </guard>
+  </transition>
 
- <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
-  <description>Previous transition</description>
-  <default>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="action"
+  >
+    <description>Previous transition</description>
+    <default>
 
-   <expression>transition/getId|nothing</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
+      <expression>transition/getId|nothing</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
 
- <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
-  <description>The ID of the user who performed the previous transition</description>
-  <default>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="actor"
+  >
+    <description>The ID of the user who performed the previous transition</description>
+    <default>
 
-   <expression>user/getId</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
- <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
-  <description>Comment about the last transition</description>
-  <default>
+      <expression>user/getId</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="comments"
+  >
+    <description>Comment about the last transition</description>
+    <default>
 
-   <expression>python:state_change.kwargs.get('comment', '')</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
- <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
-  <description>Provides access to workflow history</description>
-  <default>
+      <expression>python:state_change.kwargs.get('comment', '')</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
+  <variable for_catalog="False"
+            for_status="False"
+            update_always="False"
+            variable_id="review_history"
+  >
+    <description>Provides access to workflow history</description>
+    <default>
 
-   <expression>state_change/getHistory</expression>
-  </default>
-  <guard>
-   <guard-permission>Request review</guard-permission>
-   <guard-permission>Review portal content</guard-permission>
-  </guard>
- </variable>
- <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
-  <description>When the previous transition was performed</description>
-  <default>
+      <expression>state_change/getHistory</expression>
+    </default>
+    <guard>
+      <guard-permission>Request review</guard-permission>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="time"
+  >
+    <description>When the previous transition was performed</description>
+    <default>
 
-   <expression>state_change/getDateTime</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
+      <expression>state_change/getDateTime</expression>
+    </default>
+    <guard>
+</guard>
+  </variable>
 </dc-workflow>

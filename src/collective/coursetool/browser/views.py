@@ -85,7 +85,11 @@ class ListingBase(BrowserView):
             "sort_on", self.request.get("sort_on", self.initial_sort_index)
         )
         kwargs.setdefault(
-            "sort_order", "reverse" if self.request.get("sort_order", self.initial_sort_order) in ("reverse", "desc") else "asc"
+            "sort_order",
+            "reverse"
+            if self.request.get("sort_order", self.initial_sort_order)
+            in ("reverse", "desc")
+            else "asc",
         )
         kwargs.setdefault("batch", True)
         kwargs.setdefault("b_size", self.b_size)
@@ -203,10 +207,7 @@ class CourseView(ViewBase):
         return not user or user not in self.members()
 
     def all_members_mailaddress(self):
-        mails = [
-            m.email for m in self.members()
-            if m.email
-        ]
+        mails = [m.email for m in self.members() if m.email]
         return ", ".join(mails)
 
 
@@ -252,11 +253,9 @@ class ExamView(ViewBase):
             m["member"].email
             for m in self.members()
             if (
-                hasattr(m["member"], "email") and m["member"].email
-                and (
-                    success is None
-                    or m["success"] == success
-                )
+                hasattr(m["member"], "email")
+                and m["member"].email
+                and (success is None or m["success"] == success)
             )
         ]
         return ", ".join(mails)
@@ -548,7 +547,6 @@ class Utils(BrowserView):
 
 
 class WorkflowState(BrowserView):
-
     def transition(self, trans):
         alsoProvides(self.request, IDisableCSRFProtection)
         try:

@@ -91,7 +91,7 @@ ${SENTINEL}:
 # PYTHON, VENV, PIP
 # venv and pybin
 PYTHON?=python3
-VENV?=off
+VENV?=on
 ifeq ("${VENV}", "on")
 	VENV_FOLDER?=./venv
 	PYBIN=${VENV_FOLDER}/bin/

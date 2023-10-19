@@ -4,6 +4,7 @@ from plone.app.upgrade.utils import loadMigrationProfile
 import logging
 import transaction
 
+
 logger = logging.getLogger(__name__)
 
 
