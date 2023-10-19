@@ -55,6 +55,7 @@ class ColumnDefinition(object):
 
 class ListingBase(BrowserView):
     portal_type = " - "
+    review_state = None
     row_count = True
     initial_sort_index = "created"
     initial_sort_order = "desc"
@@ -97,13 +98,14 @@ class ListingBase(BrowserView):
 
         if self.request.get("show-archived"):
             kwargs["review_state"] = "archived"
-        else:
-            kwargs["review_state"] = ["private", "published"]
+        elif self.review_state:
+            kwargs["review_state"] = self.review_state
 
         listing = aq_inner(self.context).restrictedTraverse("@@contentlisting", None)
         if listing is None:
             return []
 
+        print(kwargs)
         results = listing(**kwargs)
         return results
 
@@ -131,6 +133,7 @@ class MembersListing(ListingBase):
 
 class CoursesListing(ListingBase):
     portal_type = "coursetool.course"
+    review_state = ["private", "published"]
     columns = [
         ColumnDefinition(_("Course-ID"), "id", sort_on="getId"),
         ColumnDefinition(_("Name"), "title", True, sort_on="sortable_title"),
@@ -148,6 +151,7 @@ class LocationsListing(ListingBase):
 
 class ExamsListing(ListingBase):
     portal_type = "coursetool.exam"
+    review_state = ["private", "published"]
     initial_sort_index = "start"
     initial_sort_order = "desc"
     columns = [
@@ -564,4 +568,8 @@ class WorkflowState(BrowserView):
 
     def unarchive(self):
         self.transition("reject")
+        return self.redirect()
+
+    def publish(self):
+        self.transition("publish")
         return self.redirect()

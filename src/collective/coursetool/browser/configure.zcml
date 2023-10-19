@@ -113,23 +113,15 @@
       layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
       />
 
-  <browser:page
-        name="coursetool_archive"
+  <browser:pages
         for="*"
         class=".views.WorkflowState"
-        attribute="archive"
         permission="cmf.ModifyPortalContent"
-        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-        />
-
-    <browser:page
-        name="coursetool_unarchive"
-        for="*"
-        class=".views.WorkflowState"
-        attribute="unarchive"
-        permission="cmf.ModifyPortalContent"
-        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
-        />
+        layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer">
+        <browser:page name="coursetool_publish" attribute="publish" />
+        <browser:page name="coursetool_archive" attribute="archive" />
+        <browser:page name="coursetool_unarchive" attribute="unarchive" />
+    </browser:pages>
 
   <browser:page
       name="fix_member_states"

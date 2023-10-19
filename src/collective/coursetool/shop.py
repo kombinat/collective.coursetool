@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 def add_member_to_exam(exam, member):
     members = exam.members
-    members.append({"member": member, "success": ()})
+    members.append({"member": member, "success": False})
     exam.members = members
     exam.reindexObject()
 

@@ -47,6 +47,8 @@
                             <td class="text-end text-nowrap">
                                 <a href="${item_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
                                    title="edit"><tal:block replace="structure python:icons.tag('pencil')"/></a>
+                                <a tal:condition="python:item_state == 'private' and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_publish?${query_string}" class="btn btn-sm btn-outline-success pat-inject"
+                                    title="publish"><tal:block replace="structure python:icons.tag('box-arrow-up')"/></a>
                                 <a tal:condition="python:item_state in ['private', 'published'] and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_archive?${query_string}" class="btn btn-sm btn-outline-secondary pat-inject"
                                     title="archive"><tal:block replace="structure python:icons.tag('archive')"/></a>
                                 <a tal:condition="python:item_state == 'archived' and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_unarchive?${query_string}" class="btn btn-sm btn-outline-secondary pat-inject"
