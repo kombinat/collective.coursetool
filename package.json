@@ -19,11 +19,12 @@
     "css"
   ],
   "devDependencies": {
-    "@patternslib/dev": "^3.1.8",
-    "@patternslib/patternslib": "Patternslib/Patterns.git#pat-checklist-toggle",
-    "@plone/plonetheme-barceloneta-base": "^3.0.0",
+    "@patternslib/dev": "^3.5.2",
+    "@patternslib/patternslib": "9.9.5",
+    "@plone/plonetheme-barceloneta-base": "^3.1.3",
     "autoprefixer": "^10.4.8",
-    "bootstrap": "5.2.3",
+    "babel-loader": "^9.1.3",
+    "bootstrap": "5.3.2",
     "clean-css-cli": "^5.6.1",
     "copy-webpack-plugin": "^11.0.0",
     "nodemon": "^2.0.15",
