@@ -28,3 +28,7 @@ div.quantity-group {
         display:none;
     }
 }
+
+.reviewstate-private {
+    @extend .table-secondary
+}

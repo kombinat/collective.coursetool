@@ -1,4 +1,3 @@
-from itertools import filterfalse
 from Acquisition import aq_inner
 from collective.coursetool import _
 from collective.coursetool.permissions import CoursetoolAdmin
@@ -57,8 +56,8 @@ class ColumnDefinition(object):
 class ListingBase(BrowserView):
     portal_type = " - "
     row_count = True
-    initial_sort_index = "sortable_title"
-    initial_sort_order = "asc"
+    initial_sort_index = "created"
+    initial_sort_order = "desc"
 
     def __init__(self, *args):
         super().__init__(*args)
@@ -85,7 +84,7 @@ class ListingBase(BrowserView):
             "sort_on", self.request.get("sort_on", self.initial_sort_index)
         )
         kwargs.setdefault(
-            "sort_order", self.request.get("sort_order", self.initial_sort_order)
+            "sort_order", "reverse" if self.request.get("sort_order", self.initial_sort_order) in ("reverse", "desc") else "asc"
         )
         kwargs.setdefault("batch", True)
         kwargs.setdefault("b_size", self.b_size)
@@ -95,6 +94,11 @@ class ListingBase(BrowserView):
         # filtering
         if self.request.get("SearchableText") and self.request.get("search"):
             kwargs["SearchableText"] = munge_search_term(self.request["SearchableText"])
+
+        if self.request.get("show-archived"):
+            kwargs["review_state"] = "archived"
+        else:
+            kwargs["review_state"] = ["private", "published"]
 
         listing = aq_inner(self.context).restrictedTraverse("@@contentlisting", None)
         if listing is None:
@@ -144,6 +148,8 @@ class LocationsListing(ListingBase):
 
 class ExamsListing(ListingBase):
     portal_type = "coursetool.exam"
+    initial_sort_index = "start"
+    initial_sort_order = "desc"
     columns = [
         ColumnDefinition(_("Name"), "title", True),
         ColumnDefinition(_("Exam date"), "date", formatter=pretty_datetime),
@@ -535,3 +541,27 @@ class Utils(BrowserView):
         self.request.response.setHeader("Pragma", "no-cache")
 
         return _out.getvalue()
+
+
+class WorkflowState(BrowserView):
+
+    def transition(self, trans):
+        alsoProvides(self.request, IDisableCSRFProtection)
+        try:
+            api.content.transition(self.context, trans)
+        except Exception as msg:
+            logger.error(f"Could not run transition '{trans}': {msg}")
+
+    def redirect(self):
+        base_url = self.context.aq_parent.absolute_url()
+        qparam = f"SearchableText={self.request.get('SearchableText', '')}"
+        qparam += f"&show-archived={self.request.get('show-archived', '')}"
+        return self.request.response.redirect(f"{base_url}?{qparam}")
+
+    def archive(self):
+        self.transition("archive")
+        return self.redirect()
+
+    def unarchive(self):
+        self.transition("reject")
+        return self.redirect()

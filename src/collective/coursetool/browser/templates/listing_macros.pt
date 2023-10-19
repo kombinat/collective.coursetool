@@ -11,6 +11,7 @@
                     <input class="btn btn-primary" type="submit" name="clear" value="Clear" i18n:attributes="value label_filter_clear" tal:condition="request/SearchableText|nothing">
                     <metal:addbutton define-slot="add-button"></metal:addbutton>
                 </div>
+                <metal:archivecheck define-slot="archive-checkbox"></metal:archivecheck>
             </form>
         </metal:def>
 
@@ -18,11 +19,12 @@
             tal:define="batch batch|nothing;
                         row_count view/row_count|python:True;
                         sort_on request/sort_on|view/initial_sort_index;
-                        sort_order request/sort_order|view/initial_sort_order">
+                        sort_order request/sort_order|view/initial_sort_order;
+                        query_string request/QUERY_STRING|string:">
 
             <tal:block tal:condition="batch">
-            <div class="table-responsive">
-                <table class="table table-condensed table-striped">
+            <div class="table-responsive" data-pat-inject="source:#content > .table-responsive, #content > .alert::element; target:#content > .table-responsive">
+                <table class="table table-condensed">
                     <thead>
                         <tr>
                             <th i18n:translate="" tal:condition="row_count">Nr</th>
@@ -33,18 +35,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr tal:repeat="item batch">
-                            <tal:def define="obj item/getObject;
-                                            obj_url obj/absolute_url">
+                        <tr tal:repeat="item batch" class="reviewstate-${item/review_state}">
+                            <tal:def define="item_url item/getURL;
+                                             item_type item/portal_type;
+                                             item_state item/review_state;
+                                             obj item/getObject;">
                             <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)" tal:condition="row_count"></td>
                             <td tal:repeat="col columns">
                                 <span tal:replace="structure python: col.factory(obj)" />
                             </td>
                             <td class="text-end text-nowrap">
-                                <a href="${obj_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
-                                    ><tal:block replace="structure python:icons.tag('pencil')"/></a>
-                                <a href="${obj_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger" data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
-                                    ><tal:block replace="structure python:icons.tag('trash')" /></a>
+                                <a href="${item_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
+                                   title="edit"><tal:block replace="structure python:icons.tag('pencil')"/></a>
+                                <a tal:condition="python:item_state in ['private', 'published'] and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_archive?${query_string}" class="btn btn-sm btn-outline-secondary pat-inject"
+                                    title="archive"><tal:block replace="structure python:icons.tag('archive')"/></a>
+                                <a tal:condition="python:item_state == 'archived' and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_unarchive?${query_string}" class="btn btn-sm btn-outline-secondary pat-inject"
+                                    title="restore"><tal:block replace="structure python:icons.tag('box-arrow-up')"/></a>
+                                <a href="${item_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger" data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
+                                    title="remove"><tal:block replace="structure python:icons.tag('trash')" /></a>
                             </td>
                             </tal:def>
                         </tr>

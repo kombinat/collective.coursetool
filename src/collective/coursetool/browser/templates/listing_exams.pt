@@ -21,6 +21,12 @@
         <h1 class="mb-3" i18n:translate="">Exams</h1>
 
         <metal:filter use-macro="context/@@coursetool_listing_macros/macros/filter">
+            <div class="col-12" metal:fill-slot="archive-checkbox">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="show-archived" id="checkbox-show-archived" value="archived" onclick="form.submit()" checked="${python:'checked' if request.get('show-archived') else None}"/>
+                    <label class="form-check-label" for="checkbox-show-archived" i18n:translate="">Show archived exams</label>
+                </div>
+            </div>
             <a metal:fill-slot="add-button" class="btn btn-success" href="${context/absolute_url}/++add++coursetool.exam" i18n:translate="">Add Exam</a>
         </metal:filter>
 

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <object name="portal_workflow">
+  <object name="coursetool_workflow" meta_type="Workflow"/>
   <bindings>
     <type type_id="coursetool.member">
       <bound-workflow workflow_id="dexterity_membrane_workflow" />
+    </type>
+    <type type_id="coursetool.course">
+      <bound-workflow workflow_id="coursetool_workflow" />
+    </type>
+    <type type_id="coursetool.exam">
+      <bound-workflow workflow_id="coursetool_workflow" />
     </type>
   </bindings>
 </object>
