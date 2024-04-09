@@ -134,7 +134,6 @@
                                     <option value="" i18n:translate="">Actions for selected members</option>
                                     <option value="action_exam_success" i18n:translate="">Exam passed</option>
                                     <option value="action_exam_failed" i18n:translate="">Exam failed</option>
-                                    <option value="action_print" i18n:translate="">print card</option>
                                     <option value="action_delete" i18n:translate="">delete</option>
                                 </select>
                                 <button type="submit" class="btn btn-primary btn-sm" i18n:translate="">Perform Action</button>
@@ -143,14 +142,31 @@
                         <div class="col-md-6 text-end">
                             <div class="dropdown">
                                 <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n:translate="">
-                                    Notification/Export
+                                    Notification/Print/Export
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${view/members_mailaddress}" i18n:translate="">Send Email to all members</a></li>
-                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(True)}" i18n:translate="">Send Email to success members</a></li>
-                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(False)}" i18n:translate="">Send Email to failed members</a></li>
+                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${view/members_mailaddress}">
+                                        <tal:icon replace="structure python:icons.tag('envelope', tag_class='plone-icon')" />
+                                        <span i18n:translate="">Send Email to all members</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(True)}">
+                                        <tal:icon replace="structure python:icons.tag('envelope-check', tag_class='plone-icon')" />
+                                        <span i18n:translate="">Send Email to success members</span></a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(False)}">
+                                        <tal:icon replace="structure python:icons.tag('envelope-exclamation', tag_class='plone-icon')" />
+                                        <span i18n:translate="">Send Email to failed members</span></a>
+                                    </li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="${context/absolute_url}/@@coursetool_utils/member_export" i18n:translate="">Export member data as XLSX</a></li>
+                                    <li><a class="dropdown-item" href="${context/absolute_url}/@@print">
+                                        <tal:icon replace="structure python:icons.tag('printer', tag_class='plone-icon')" />
+                                        <span i18n:translate="">Print all passes</span></a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="${context/absolute_url}/@@coursetool_utils/member_export">
+                                        <tal:icon replace="structure python:icons.tag('box-arrow-down', tag_class='plone-icon')" />
+                                        <span i18n:translate="">Export member data as XLSX</span></a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

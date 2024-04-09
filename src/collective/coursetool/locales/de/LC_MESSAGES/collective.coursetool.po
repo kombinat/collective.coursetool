@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-10-19 08:53+0000\n"
-"PO-Revision-Date: 2023-10-19 10:53+0200\n"
+"POT-Creation-Date: 2024-04-09 11:15+0000\n"
+"PO-Revision-Date: 2024-04-09 13:16+0200\n"
 "Last-Translator: Peter Mathis <peter.mathis@kombinat.at>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Language-Name: Detusch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: collective/coursetool/vocabularies.py
 msgid "Abs. 1 lit. a: Vorarlberger Fischerprüfung"
@@ -457,8 +457,8 @@ msgid "Not read"
 msgstr "nicht Eingelesen"
 
 #: collective/coursetool/browser/templates/view_exam.pt
-msgid "Notification/Export"
-msgstr "Benachrichtigung und Export"
+msgid "Notification/Print/Export"
+msgstr "Benachrichtigung/Druck/Export"
 
 #: collective/coursetool/browser/templates/listing_macros.pt
 msgid "Nr"
@@ -521,6 +521,10 @@ msgstr "Bitte laden Sie hier ein persönliches Ausweisdokument hoch – Reisepas
 #: collective/coursetool/content/course.py
 msgid "Practical experience"
 msgstr "Praxis"
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Print all passes"
+msgstr "Alle Ausweise drucken"
 
 #: collective/coursetool/content/member.py
 msgid "Qualifications"
@@ -687,7 +691,6 @@ msgstr "Stichwortsuche"
 msgid "location_title"
 msgstr "Kursort: ${title}"
 
-#: collective/coursetool/browser/templates/view_exam.pt
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "print card"
 msgstr "Fischerausweis drucken"

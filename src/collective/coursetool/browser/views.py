@@ -17,6 +17,7 @@ from plone.restapi.interfaces import ISerializeToJson
 from plone.z3cform import layout
 from Products.CMFPlone.browser.search import munge_search_term
 from Products.Five import BrowserView
+from pypdf import PdfWriter
 from zope.component import getMultiAdapter
 from zope.interface import alsoProvides
 
@@ -176,6 +177,15 @@ class ViewBase(DefaultView):
         # do not raise Exception, when no template is defined.
         if getattr(self, "index", None) is not None:
             return self.index()
+        if (
+            getattr(self, "__page_attribute__", None) is not None
+            and hasattr(self, self.__page_attribute__)
+        ):
+            attr = getattr(self, self.__page_attribute__)
+            if callable(attr):
+                return attr()
+            else:
+                return attr
         return "?"
 
     def can_edit(self):
@@ -222,6 +232,7 @@ class ExamView(ViewBase):
             factory = getattr(self, action, None)
             if factory and callable(factory):
                 factory(self.request)
+
         return super().__call__()
 
     @memoize
@@ -289,14 +300,28 @@ class ExamView(ViewBase):
         else:
             api.portal.show_message(_("No action performed."))
 
-    @protect(PostOnly)
-    def action_print(self, REQUEST):
-        pdfs = []
-        for uid in REQUEST.get("uids", []):
-            member = api.content.get(UID=uid)
-            view = PrintView(member, REQUEST)
-            pdfs.append(view(download=False))
-        return pdfs
+    def print_all_cards(self):
+        """ print all cards """
+        merger = PdfWriter()
+
+        for m in self.members():
+            if not m["success"]:
+                continue
+            member = api.content.get(UID=m["member"].UID())
+            view = api.content.get_view(name="print", context=member, request=self.request)
+            _data = view(download=False)
+            if _data:
+                merger.append(fileobj=BytesIO(_data))
+
+        out = BytesIO()
+        merger.write(out)
+        _all_data = out.getvalue()
+
+        self.request.response.setHeader(
+            "Content-disposition", "attachment; filename=all_cards.pdf"
+        )
+        self.request.response.setHeader("Content-length", len(_all_data))
+        return _all_data
 
     def _update_members(self, uids, success=False):
         _members = self.context.members
@@ -384,11 +409,14 @@ class PrintView(BrowserView):
 
     def __call__(self, download=True):
         if not self.context.exam_types:
-            api.portal.show_message(
-                _("Member has no certificates or external qualifiaction."),
-                type="error",
-            )
-            return self.request.response.redirect(self.context.absolute_url())
+            if download:
+                api.portal.show_message(
+                    _("Member has no certificates or external qualifiaction."),
+                    type="error",
+                )
+                return self.request.response.redirect(self.context.absolute_url())
+            # simply return when calling as API
+            return
 
         # generate PDF content in your custom view
         self.update()
@@ -398,7 +426,7 @@ class PrintView(BrowserView):
             self.request.response.setHeader(
                 "Content-disposition", f"attachment; filename={self.filename}"
             )
-            self.request.response.setHeader("Content-lengts", len(self.pdf_data))
+            self.request.response.setHeader("Content-length", len(self.pdf_data))
 
         return self.pdf_data
 

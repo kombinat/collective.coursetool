@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-10-19 08:53+0000\n"
+"POT-Creation-Date: 2024-04-09 11:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -455,7 +455,7 @@ msgid "Not read"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt
-msgid "Notification/Export"
+msgid "Notification/Print/Export"
 msgstr ""
 
 #: collective/coursetool/browser/templates/listing_macros.pt
@@ -518,6 +518,10 @@ msgstr ""
 
 #: collective/coursetool/content/course.py
 msgid "Practical experience"
+msgstr ""
+
+#: collective/coursetool/browser/templates/view_exam.pt
+msgid "Print all passes"
 msgstr ""
 
 #: collective/coursetool/content/member.py
@@ -685,7 +689,6 @@ msgstr ""
 msgid "location_title"
 msgstr ""
 
-#: collective/coursetool/browser/templates/view_exam.pt
 #: collective/coursetool/browser/templates/view_member.pt
 msgid "print card"
 msgstr ""

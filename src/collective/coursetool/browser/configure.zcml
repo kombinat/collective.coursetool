@@ -188,6 +188,15 @@
       />
 
   <browser:page
+      name="print"
+      for="collective.coursetool.interfaces.IExam"
+      class=".views.ExamView"
+      attribute="print_all_cards"
+      permission="collective.coursetool.Administrator"
+      layer="collective.coursetool.interfaces.ICollectiveCoursetoolLayer"
+      />
+
+  <browser:page
       name="edit"
       for="collective.coursetool.interfaces.IMember"
       class=".views.MemberEditView"
