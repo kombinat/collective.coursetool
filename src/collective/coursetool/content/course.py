@@ -57,6 +57,7 @@ class ICourseSchema(model.Schema):
     directives.widget(
         "occurrences",
         CourseOccurrencesFieldWidget,
+        allow_reorder=True,
         auto_append=False,
         input_table_css_class="table table-sm",
         display_table_css_class="table table-sm",
