@@ -177,9 +177,8 @@ class ViewBase(DefaultView):
         # do not raise Exception, when no template is defined.
         if getattr(self, "index", None) is not None:
             return self.index()
-        if (
-            getattr(self, "__page_attribute__", None) is not None
-            and hasattr(self, self.__page_attribute__)
+        if getattr(self, "__page_attribute__", None) is not None and hasattr(
+            self, self.__page_attribute__
         ):
             attr = getattr(self, self.__page_attribute__)
             if callable(attr):
@@ -301,14 +300,16 @@ class ExamView(ViewBase):
             api.portal.show_message(_("No action performed."))
 
     def print_all_cards(self):
-        """ print all cards """
+        """print all cards"""
         merger = PdfWriter()
 
         for m in self.members():
             if not m["success"]:
                 continue
             member = api.content.get(UID=m["member"].UID())
-            view = api.content.get_view(name="print", context=member, request=self.request)
+            view = api.content.get_view(
+                name="print", context=member, request=self.request
+            )
             _data = view(download=False)
             if _data:
                 merger.append(fileobj=BytesIO(_data))
