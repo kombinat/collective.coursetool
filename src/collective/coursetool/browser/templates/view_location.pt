@@ -1,82 +1,143 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    metal:use-macro="context/@@main_template/macros/master"
-    lang="en"
-    xml:lang="en"
-    i18n:domain="collective.coursetool">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+      i18n:domain="collective.coursetool"
+>
 
-<body>
-    <div class="coursetool-wrapper" metal:fill-slot="main"
-         tal:define="is_admin view/is_admin; courses view/courses">
+  <body>
+    <div class="coursetool-wrapper"
+         metal:fill-slot="main"
+         tal:define="
+           is_admin view/is_admin;
+           courses view/courses;
+         "
+    >
 
-        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
-            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
-            <span i18n:translate="">Back to overview</span>
-        </a>
+      <a class="btn btn-sm btn-outline-primary mb-3"
+         href="${python:context.aq_parent.absolute_url()}"
+         tal:condition="is_admin"
+      >
+        <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+        <span i18n:translate="">Back to overview</span>
+      </a>
 
-        <div class="card">
+      <div class="card">
 
-            <div class="card-header">
-                <h1 i18n:translate="location_title">
-                    Location: <tal:block i18n:name="title" replace="context/Title" />
-                </h1>
+        <div class="card-header">
+          <h1 i18n:translate="location_title">
+                    Location:
+            <tal:block replace="context/Title"
+                       i18n:name="title"
+            />
+          </h1>
 
-                <ul class="nav nav-tabs card-header-tabs" tal:condition="is_admin">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default" aria-current="true" href="#" i18n:translate="">Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses" aria-current="true" href="#">
-                            <span i18n:translate="">Courses</span> <span class="badge text-bg-secondary">${python:len(courses)}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card-body tab-content">
-                <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
-                    <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
-                        <tal:block repeat="info_fld python:['IAddress.street', 'IAddress.zip_code', 'IAddress.city', 'IAddress.country']">
-                        <div class="col"
-                             tal:define="wdgt python:view.w.get(info_fld)"
-                             tal:condition="python:wdgt and wdgt.value">
-                            <div class="text-bg-light py-1 px-2">
-                                <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure wdgt/render" />
-                            </div>
-                        </div>
-                        </tal:block>
-                    </div>
-                    <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
-                </div>
-                <div class="tab-pane fade" id="tab-courses" role="tabpabel" aria-labelledby="courses-tab" tal:condition="is_admin">
-                    <ol class="list-group list-group-numbered">
-                        <li class="list-group-item" tal:repeat="course courses">
-                            <a href="${course/absolute_url}" tal:content="course/title">Coursetitle</a>
-                        </li>
-                    </ol>
-                    <span class="text-muted fs-sm" tal:condition="not:courses" i18n:translate="">
-                        No items found.
-                    </span>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:is_admin" />
-                <tal:block condition="is_admin">
-                    <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
-                       data-pat-plone-modal='modalSizeClass: modal-xl;'>
-                        Edit
-                    </a>
-                    <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}' i18n:translate="">
-                        Delete
-                    </a>
-                </tal:block>
-            </div>
-
+          <ul class="nav nav-tabs card-header-tabs"
+              tal:condition="is_admin"
+          >
+            <li class="nav-item">
+              <a class="nav-link active"
+                 id="default-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-default"
+                 data-bs-toggle="tab"
+                 i18n:translate=""
+              >Information</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="courses-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-courses"
+                 data-bs-toggle="tab"
+              >
+                <span i18n:translate="">Courses</span>
+                <span class="badge text-bg-secondary">${python:len(courses)}</span>
+              </a>
+            </li>
+          </ul>
         </div>
 
+        <div class="card-body tab-content">
+          <div class="tab-pane fade show active"
+               id="tab-default"
+               aria-labelledby="default-tab"
+               role="tabpabel"
+          >
+            <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
+              <tal:block repeat="info_fld python:['IAddress.street', 'IAddress.zip_code', 'IAddress.city', 'IAddress.country']">
+                <div class="col"
+                     tal:define="
+                       wdgt python:view.w.get(info_fld);
+                     "
+                     tal:condition="python:wdgt and wdgt.value"
+                >
+                  <div class="text-bg-light py-1 px-2">
+                    <span class="fw-bold"
+                          tal:content="structure wdgt/label"
+                    ></span>:
+                    <span tal:replace="structure wdgt/render"></span>
+                  </div>
+                </div>
+              </tal:block>
+            </div>
+            <div id="viewlet-below-content-description"
+                 tal:content="structure provider:plone.belowcontentdescription"
+            ></div>
+          </div>
+          <div class="tab-pane fade"
+               id="tab-courses"
+               aria-labelledby="courses-tab"
+               role="tabpabel"
+               tal:condition="is_admin"
+          >
+            <ol class="list-group list-group-numbered">
+              <li class="list-group-item"
+                  tal:repeat="course courses"
+              >
+                <a href="${course/absolute_url}"
+                   tal:content="course/title"
+                >Coursetitle</a>
+              </li>
+            </ol>
+            <span class="text-muted fs-sm"
+                  tal:condition="not:courses"
+                  i18n:translate=""
+            >
+                        No items found.
+            </span>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div id="viewlet-above-content-body"
+               tal:condition="not:is_admin"
+               tal:content="structure provider:plone.abovecontentbody"
+          ></div>
+          <tal:block condition="is_admin">
+            <a class="pat-plone-modal btn btn-primary"
+               href="${python:context.absolute_url()}/edit"
+               data-pat-plone-modal="modalSizeClass: modal-xl;"
+               i18n:translate=""
+            >
+                        Edit
+            </a>
+            <a class="pat-plone-modal btn btn-danger"
+               href="${python:context.absolute_url()}/delete_confirmation"
+               data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
+               i18n:translate=""
+            >
+                        Delete
+            </a>
+          </tal:block>
+        </div>
+
+      </div>
+
     </div>
-</html>
+  </body></html>

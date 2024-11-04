@@ -1,192 +1,316 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    metal:use-macro="context/@@main_template/macros/master"
-    lang="en"
-    xml:lang="en"
-    i18n:domain="collective.coursetool">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+      i18n:domain="collective.coursetool"
+>
 
-<body>
-    <div class="coursetool-wrapper" metal:fill-slot="main"
-         tal:define="is_admin view/is_admin;
-                     members view/members;
-                     len_members python:len(context.members or []);
-                     can_add_to_cart view/can_add_to_cart">
+  <body>
+    <div class="coursetool-wrapper"
+         metal:fill-slot="main"
+         tal:define="
+           is_admin view/is_admin;
+           members view/members;
+           len_members python:len(context.members or []);
+           can_add_to_cart view/can_add_to_cart;
+         "
+    >
 
-        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}" tal:condition="is_admin">
-            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
-            <span i18n:translate="">Back to overview</span>
-        </a>
+      <a class="btn btn-sm btn-outline-primary mb-3"
+         href="${python:context.aq_parent.absolute_url()}"
+         tal:condition="is_admin"
+      >
+        <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+        <span i18n:translate="">Back to overview</span>
+      </a>
 
-        <div class="card">
+      <div class="card">
 
-            <div class="card-header">
-                <h1 i18n:translate="exam_title">
-                    Exam: <tal:block i18n:name="title" replace="context/Title" />
-                </h1>
+        <div class="card-header">
+          <h1 i18n:translate="exam_title">
+                    Exam:
+            <tal:block replace="context/Title"
+                       i18n:name="title"
+            />
+          </h1>
 
-                <ul class="nav nav-tabs card-header-tabs" tal:condition="is_admin">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default" aria-current="true" href="#" i18n:translate="">Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="members-tab" data-bs-toggle="tab" data-bs-target="#tab-members" aria-current="true" href="#">
-                            <span i18n:translate="">Members</span> <span class="badge text-bg-secondary">${len_members}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card-body tab-content">
-                <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
-                    <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
-                        <tal:block repeat="info_fld python:['date', 'types']">
-                        <div class="col"
-                             tal:define="wdgt python:view.w.get(info_fld)"
-                             tal:condition="python:wdgt.value and wdgt">
-                            <div class="text-bg-light py-1 px-2">
-                                <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure wdgt/render" />
-                            </div>
-                        </div>
-                        </tal:block>
-                        <div class="col"
-                                tal:define="locations context/get_locations"
-                                tal:condition="locations">
-                            <div class="text-bg-light py-1 px-2"
-                                    tal:define="wdgt python:view.w.get('location')">
-                                    <span class="fw-bold" tal:content="structure wdgt/label" />: <span tal:replace="structure python:', '.join(['%s, %s' % (e.title, e.city) for e in locations])" />
-                            </div>
-                        </div>
-                    </div>
-                    <div id="viewlet-below-content-description" tal:content="structure provider:plone.belowcontentdescription" />
-
-                    <section id="section-text"
-                             tal:condition="python:getattr(context.aq_base, 'text', None)">
-                        <strong i18n:translate="">Course Description</strong>:
-                        <div id="parent-fieldname-text"
-                             tal:content="structure python:context.text.output_relative_to(view.context)">
-                          Text
-                        </div>
-                    </section>
-
-                    <tal:block condition="is_admin">
-                        <a href="${python:context.absolute_url()}/edit" class="pat-plone-modal btn btn-primary" i18n:translate=""
-                        data-pat-plone-modal='modalSizeClass: modal-xl;'>
-                            Edit
-                        </a>
-                        <a href="${python:context.absolute_url()}/delete_confirmation" class="pat-plone-modal btn btn-danger" data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}' i18n:translate="">
-                            Delete
-                        </a>
-                    </tal:block>
-                </div>
-                <div class="tab-pane fade" id="tab-members" role="tabpabel" aria-labelledby="members-tab" tal:condition="is_admin">
-                    <form action="${context/absolute_url}" class="pat-inject" data-pat-inject="#tab-members #tab-members && #global_statusmessage #global_statusmessage && #members-tab #members-tab" method="POST" tal:condition="len_members">
-                    <table class="table table-condensed table-striped table-sm pat-checklist">
-                        <thead>
-                            <tr>
-                                <th width="1%">
-                                    <input type="checkbox" class="form-check-input toggle-all" />
-                                </th>
-                                <th>Name</th>
-                                <th width="5%" class="text-nowrap">
-                                    <span i18n:translate="">Exam successfully passed</span>
-                                </th>
-                                <th width="5%">Fischerkarte</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tal:block repeat="m members">
-                            <tr tal:define="member nocall:m/member;
-                                            member_uid member/UID|nothing;
-                                            member_url string:$portal_url/resolveuid/${member_uid}"
-                                class="${python:'table-danger' if is_admin and not member_uid else ''}">
-                                <td>
-                                    <div class="form-check">
-                                        <input tal:condition="member_uid" class="member form-check-input" name="uids:list" type="checkbox" value="${python:member_uid}" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href="${member_url}" tal:condition="member_uid">
-                                        ${member/customer_id} - ${member/title} (${member/email|string:kein EMail!})
-                                    </a>
-                                    <span tal:condition="python:is_admin and not member_uid">
-                                        Fehlender Mitgliedereintrag. Bitte löschen Sie diese Zeile unter "bearbeiten"
-                                    </span>
-                                </td>
-                                <td class="text-center">
-                                    <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
-                                </td>
-                                <td class="text-center">
-                                    <a href="${member_url}/@@print" tal:condition="m/success">
-                                        <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
-                                    </a>
-                                </td>
-                            </tr>
-                            </tal:block>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="input-group">
-                                <select name="member_action" class="form-select form-select-sm">
-                                    <option value="" i18n:translate="">Actions for selected members</option>
-                                    <option value="action_exam_success" i18n:translate="">Exam passed</option>
-                                    <option value="action_exam_failed" i18n:translate="">Exam failed</option>
-                                    <option value="action_delete" i18n:translate="">delete</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary btn-sm" i18n:translate="">Perform Action</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-end">
-                            <div class="dropdown">
-                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" i18n:translate="">
-                                    Notification/Print/Export
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${view/members_mailaddress}">
-                                        <tal:icon replace="structure python:icons.tag('envelope', tag_class='plone-icon')" />
-                                        <span i18n:translate="">Send Email to all members</span></a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(True)}">
-                                        <tal:icon replace="structure python:icons.tag('envelope-check', tag_class='plone-icon')" />
-                                        <span i18n:translate="">Send Email to success members</span></a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(False)}">
-                                        <tal:icon replace="structure python:icons.tag('envelope-exclamation', tag_class='plone-icon')" />
-                                        <span i18n:translate="">Send Email to failed members</span></a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="${context/absolute_url}/@@print">
-                                        <tal:icon replace="structure python:icons.tag('printer', tag_class='plone-icon')" />
-                                        <span i18n:translate="">Print all passes</span></a>
-                                    </li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="${context/absolute_url}/@@coursetool_utils/member_export">
-                                        <tal:icon replace="structure python:icons.tag('box-arrow-down', tag_class='plone-icon')" />
-                                        <span i18n:translate="">Export member data as XLSX</span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                    <div class="text-muted fs-sm" tal:condition="not:len_members" i18n:translate="">
-                        No members found.
-                    </div>
-                    <a href="${context/absolute_url}/edit#autotoc-item-autotoc-1" class="btn btn-primary pat-plone-modal mt-3" data-pat-plone-modal='modalSizeClass: modal-xl;' i18n:translate="">Add member</a>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="can_add_to_cart" />
-                <div class="alert alert-primary mb-0" i18n:translate="" tal:condition="python:not can_add_to_cart and not is_admin">
-                    You're already registered for this exam
-                </div>
-            </div>
-
+          <ul class="nav nav-tabs card-header-tabs"
+              tal:condition="is_admin"
+          >
+            <li class="nav-item">
+              <a class="nav-link active"
+                 id="default-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-default"
+                 data-bs-toggle="tab"
+                 i18n:translate=""
+              >Information</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="members-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-members"
+                 data-bs-toggle="tab"
+              >
+                <span i18n:translate="">Members</span>
+                <span class="badge text-bg-secondary">${len_members}</span>
+              </a>
+            </li>
+          </ul>
         </div>
 
+        <div class="card-body tab-content">
+          <div class="tab-pane fade show active"
+               id="tab-default"
+               aria-labelledby="default-tab"
+               role="tabpabel"
+          >
+            <div class="factbox my-3 row row-cols-1 row-cols-lg-2">
+              <tal:block repeat="info_fld python:['date', 'types']">
+                <div class="col"
+                     tal:define="
+                       wdgt python:view.w.get(info_fld);
+                     "
+                     tal:condition="python:wdgt.value and wdgt"
+                >
+                  <div class="text-bg-light py-1 px-2">
+                    <span class="fw-bold"
+                          tal:content="structure wdgt/label"
+                    ></span>:
+                    <span tal:replace="structure wdgt/render"></span>
+                  </div>
+                </div>
+              </tal:block>
+              <div class="col"
+                   tal:define="
+                     locations context/get_locations;
+                   "
+                   tal:condition="locations"
+              >
+                <div class="text-bg-light py-1 px-2"
+                     tal:define="
+                       wdgt python:view.w.get('location');
+                     "
+                >
+                  <span class="fw-bold"
+                        tal:content="structure wdgt/label"
+                  ></span>:
+                  <span tal:replace="structure python:', '.join(['%s, %s' % (e.title, e.city) for e in locations])"></span>
+                </div>
+              </div>
+            </div>
+            <div id="viewlet-below-content-description"
+                 tal:content="structure provider:plone.belowcontentdescription"
+            ></div>
+
+            <section id="section-text"
+                     tal:condition="python:getattr(context.aq_base, 'text', None)"
+            >
+              <strong i18n:translate="">Course Description</strong>:
+              <div id="parent-fieldname-text"
+                   tal:content="structure python:context.text.output_relative_to(view.context)"
+              >
+                          Text
+              </div>
+            </section>
+
+            <tal:block condition="is_admin">
+              <a class="pat-plone-modal btn btn-primary"
+                 href="${python:context.absolute_url()}/edit"
+                 data-pat-plone-modal="modalSizeClass: modal-xl;"
+                 i18n:translate=""
+              >
+                            Edit
+              </a>
+              <a class="pat-plone-modal btn btn-danger"
+                 href="${python:context.absolute_url()}/delete_confirmation"
+                 data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
+                 i18n:translate=""
+              >
+                            Delete
+              </a>
+            </tal:block>
+          </div>
+          <div class="tab-pane fade"
+               id="tab-members"
+               aria-labelledby="members-tab"
+               role="tabpabel"
+               tal:condition="is_admin"
+          >
+            <form class="pat-inject"
+                  action="${context/absolute_url}"
+                  method="POST"
+                  data-pat-inject="#tab-members #tab-members &amp;&amp; #global_statusmessage #global_statusmessage &amp;&amp; #members-tab #members-tab"
+                  tal:condition="len_members"
+            >
+              <table class="table table-condensed table-striped table-sm pat-checklist">
+                <thead>
+                  <tr>
+                    <th width="1%">
+                      <input class="form-check-input toggle-all"
+                             type="checkbox"
+                      />
+                    </th>
+                    <th>Name</th>
+                    <th class="text-nowrap"
+                        width="5%"
+                    >
+                      <span i18n:translate="">Exam successfully passed</span>
+                    </th>
+                    <th width="5%">Fischerkarte</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tal:block repeat="m members">
+                    <tr class="${python:'table-danger' if is_admin and not member_uid else ''}"
+                        tal:define="
+                          member nocall:m/member;
+                          member_uid member/UID|nothing;
+                          member_url string:$portal_url/resolveuid/${member_uid};
+                        "
+                    >
+                      <td>
+                        <div class="form-check">
+                          <input class="member form-check-input"
+                                 name="uids:list"
+                                 type="checkbox"
+                                 value="${python:member_uid}"
+                                 tal:condition="member_uid"
+                          />
+                        </div>
+                      </td>
+                      <td>
+                        <a href="${member_url}"
+                           tal:condition="member_uid"
+                        >
+                                        ${member/customer_id} - ${member/title} (${member/email|string:kein EMail!})
+                        </a>
+                        <span tal:condition="python:is_admin and not member_uid">
+                                        Fehlender Mitgliedereintrag. Bitte l&ouml;schen Sie diese Zeile unter "bearbeiten"
+                        </span>
+                      </td>
+                      <td class="text-center">
+                        <tal:icon replace="structure python:icons.tag('check-circle' if m['success'] else 'slash-circle', tag_class='text-' + ('success' if m['success'] else 'danger'))" />
+                      </td>
+                      <td class="text-center">
+                        <a href="${member_url}/@@print"
+                           tal:condition="m/success"
+                        >
+                          <tal:icon replace="structure python:icons.tag('file-earmark-pdf')" />
+                        </a>
+                      </td>
+                    </tr>
+                  </tal:block>
+                </tbody>
+              </table>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <select class="form-select form-select-sm"
+                            name="member_action"
+                    >
+                      <option value=""
+                              i18n:translate=""
+                      >Actions for selected members</option>
+                      <option value="action_exam_success"
+                              i18n:translate=""
+                      >Exam passed</option>
+                      <option value="action_exam_failed"
+                              i18n:translate=""
+                      >Exam failed</option>
+                      <option value="action_delete"
+                              i18n:translate=""
+                      >delete</option>
+                    </select>
+                    <button class="btn btn-primary btn-sm"
+                            type="submit"
+                            i18n:translate=""
+                    >Perform Action</button>
+                  </div>
+                </div>
+                <div class="col-md-6 text-end">
+                  <div class="dropdown">
+                    <a class="btn btn-secondary btn-sm dropdown-toggle"
+                       aria-expanded="false"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       i18n:translate=""
+                    >
+                                    Notification/Print/Export
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item"
+                           href="mailto:office@lfvbg.at?bcc=${view/members_mailaddress}"
+                        >
+                          <tal:icon replace="structure python:icons.tag('envelope', tag_class='plone-icon')" />
+                          <span i18n:translate="">Send Email to all members</span></a>
+                      </li>
+                      <li><a class="dropdown-item"
+                           href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(True)}"
+                        >
+                          <tal:icon replace="structure python:icons.tag('envelope-check', tag_class='plone-icon')" />
+                          <span i18n:translate="">Send Email to success members</span></a>
+                      </li>
+                      <li><a class="dropdown-item"
+                           href="mailto:office@lfvbg.at?bcc=${python:view.members_mailaddress(False)}"
+                        >
+                          <tal:icon replace="structure python:icons.tag('envelope-exclamation', tag_class='plone-icon')" />
+                          <span i18n:translate="">Send Email to failed members</span></a>
+                      </li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li><a class="dropdown-item"
+                           href="${context/absolute_url}/@@print"
+                        >
+                          <tal:icon replace="structure python:icons.tag('printer', tag_class='plone-icon')" />
+                          <span i18n:translate="">Print all passes</span></a>
+                      </li>
+                      <li><hr class="dropdown-divider" /></li>
+                      <li><a class="dropdown-item"
+                           href="${context/absolute_url}/@@coursetool_utils/member_export"
+                        >
+                          <tal:icon replace="structure python:icons.tag('box-arrow-down', tag_class='plone-icon')" />
+                          <span i18n:translate="">Export member data as XLSX</span></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="text-muted fs-sm"
+                 tal:condition="not:len_members"
+                 i18n:translate=""
+            >
+                        No members found.
+            </div>
+            <a class="btn btn-primary pat-plone-modal mt-3"
+               href="${context/absolute_url}/edit#autotoc-item-autotoc-1"
+               data-pat-plone-modal="modalSizeClass: modal-xl;"
+               i18n:translate=""
+            >Add member</a>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div id="viewlet-above-content-body"
+               tal:condition="can_add_to_cart"
+               tal:content="structure provider:plone.abovecontentbody"
+          ></div>
+          <div class="alert alert-primary mb-0"
+               tal:condition="python:not can_add_to_cart and not is_admin"
+               i18n:translate=""
+          >
+                    You're already registered for this exam
+          </div>
+        </div>
+
+      </div>
+
     </div>
-</html>
+  </body></html>

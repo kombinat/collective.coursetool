@@ -1,38 +1,61 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    metal:use-macro="context/@@main_template/macros/master"
-    lang="en"
-    xml:lang="en"
-    i18n:domain="collective.coursetool">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+      i18n:domain="collective.coursetool"
+>
 
-<body>
+  <body>
     <metal:main fill-slot="main"
-        tal:define="batch view/batch;
-                    columns view/columns">
+                tal:define="
+                  batch view/batch;
+                  columns view/columns;
+                "
+    >
 
-        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}">
-            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
-            <span i18n:translate="">Back to course portal</span>
-        </a>
+      <a class="btn btn-sm btn-outline-primary mb-3"
+         href="${python:context.aq_parent.absolute_url()}"
+      >
+        <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+        <span i18n:translate="">Back to course portal</span>
+      </a>
 
-        <h1 class="mb-3" i18n:translate="">Courses</h1>
+      <h1 class="mb-3"
+          i18n:translate=""
+      >Courses</h1>
 
-        <metal:filter use-macro="context/@@coursetool_listing_macros/macros/filter">
-            <div class="col-12" metal:fill-slot="archive-checkbox">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="show-archived" id="input-show-archived" value="archived" onclick="form.submit()" checked="${python:'checked' if request.get('show-archived') else None}"/>
-                    <label class="form-check-label" for="input-show-archived" i18n:translate="">Show archived courses</label>
-                </div>
-            </div>
-            <a metal:fill-slot="add-button" class="btn btn-success" href="${context/absolute_url}/++add++coursetool.course" i18n:translate="">Add Course</a>
-        </metal:filter>
+      <metal:filter use-macro="context/@@coursetool_listing_macros/macros/filter">
+        <div class="col-12"
+             metal:fill-slot="archive-checkbox"
+        >
+          <div class="form-check">
+            <input class="form-check-input"
+                   id="input-show-archived"
+                   checked="${python:'checked' if request.get('show-archived') else None}"
+                   name="show-archived"
+                   onclick="form.submit()"
+                   type="checkbox"
+                   value="archived"
+            />
+            <label class="form-check-label"
+                   for="input-show-archived"
+                   i18n:translate=""
+            >Show archived courses</label>
+          </div>
+        </div>
+        <a class="btn btn-success"
+           href="${context/absolute_url}/++add++coursetool.course"
+           metal:fill-slot="add-button"
+           i18n:translate=""
+        >Add Course</a>
+      </metal:filter>
 
-        <metal:table use-macro="context/@@coursetool_listing_macros/macros/batch_table" />
+      <metal:table use-macro="context/@@coursetool_listing_macros/macros/batch_table" />
 
     </metal:main>
-</body>
+  </body>
 
 </html>

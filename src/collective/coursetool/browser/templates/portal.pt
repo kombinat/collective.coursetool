@@ -1,86 +1,121 @@
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    metal:use-macro="context/@@main_template/macros/master"
-    lang="en"
-    xml:lang="en"
-    i18n:domain="collective.coursetool">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+      i18n:domain="collective.coursetool"
+>
 
-<metal:top fill-slot="top_slot">
-    <tal:def define="dummy python:request.set('disable_plone.leftcolumn', True);
-                    dummy python:request.set('disable_plone.rightcolumn', True)" />
-</metal:top>
+  <metal:top fill-slot="top_slot">
+    <tal:def define="
+               dummy python:request.set('disable_plone.leftcolumn', True);
+               dummy python:request.set('disable_plone.rightcolumn', True);
+             " />
+  </metal:top>
 
-<body>
+  <body>
     <metal:main fill-slot="main">
-        <h1 class="text-center" i18n:translate="">Course Tool </h1>
+      <h1 class="text-center"
+          i18n:translate=""
+      >Course Tool
+      </h1>
 
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
 
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('person', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Members</h5>
-                        <a href="${context/absolute_url}/members/" class="btn btn-primary" i18n:translate="">Manage Members</a>
-                    </div>
-                </div>
+        <div class="col">
+          <div class="card">
+            <img tal:replace="structure python:icons.tag('person', tag_class='card-img-top fs-1 mt-3')" />
+            <div class="card-body text-center">
+              <h5 class="card-title"
+                  i18n:translate=""
+              >Members</h5>
+              <a class="btn btn-primary"
+                 href="${context/absolute_url}/members/"
+                 i18n:translate=""
+              >Manage Members</a>
             </div>
-
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('clipboard2-check', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Courses</h5>
-                        <a href="${context/absolute_url}/courses/" class="btn btn-primary" i18n:translate="">Manage Courses</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('geo-alt', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Locations</h5>
-                        <a href="${context/absolute_url}/locations/" class="btn btn-primary" i18n:translate="">Manage Locations</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('pencil-square', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Exams</h5>
-                        <a href="${context/absolute_url}/exams/" class="btn btn-primary" i18n:translate="">Manage Exams</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('award', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Certificates</h5>
-                        <a href="${context/absolute_url}/certificates/" class="btn btn-primary" i18n:translate="">Manage Certificates</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card">
-                    <img tal:replace="structure python:icons.tag('box-arrow-in-down', tag_class='card-img-top fs-1 mt-3')" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title" i18n:translate="">Import Members</h5>
-                        <a href="${context/absolute_url}/@@import_members" class="btn btn-primary" i18n:translate="">Upload File</a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
 
+        <div class="col">
+          <div class="card">
+            <img tal:replace="structure python:icons.tag('clipboard2-check', tag_class='card-img-top fs-1 mt-3')" />
+            <div class="card-body text-center">
+              <h5 class="card-title"
+                  i18n:translate=""
+              >Courses</h5>
+              <a class="btn btn-primary"
+                 href="${context/absolute_url}/courses/"
+                 i18n:translate=""
+              >Manage Courses</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <img tal:replace="structure python:icons.tag('geo-alt', tag_class='card-img-top fs-1 mt-3')" />
+            <div class="card-body text-center">
+              <h5 class="card-title"
+                  i18n:translate=""
+              >Locations</h5>
+              <a class="btn btn-primary"
+                 href="${context/absolute_url}/locations/"
+                 i18n:translate=""
+              >Manage Locations</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <img tal:replace="structure python:icons.tag('pencil-square', tag_class='card-img-top fs-1 mt-3')" />
+            <div class="card-body text-center">
+              <h5 class="card-title"
+                  i18n:translate=""
+              >Exams</h5>
+              <a class="btn btn-primary"
+                 href="${context/absolute_url}/exams/"
+                 i18n:translate=""
+              >Manage Exams</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <img tal:replace="structure python:icons.tag('award', tag_class='card-img-top fs-1 mt-3')" />
+            <div class="card-body text-center">
+              <h5 class="card-title"
+                  i18n:translate=""
+              >Certificates</h5>
+              <a class="btn btn-primary"
+                 href="${context/absolute_url}/certificates/"
+                 i18n:translate=""
+              >Manage Certificates</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card">
+            <img tal:replace="structure python:icons.tag('box-arrow-in-down', tag_class='card-img-top fs-1 mt-3')" />
+            <div class="card-body text-center">
+              <h5 class="card-title"
+                  i18n:translate=""
+              >Import Members</h5>
+              <a class="btn btn-primary"
+                 href="${context/absolute_url}/@@import_members"
+                 i18n:translate=""
+              >Upload File</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </metal:main>
-</body>
+  </body>
 
 </html>

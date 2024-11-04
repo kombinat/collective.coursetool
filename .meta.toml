@@ -1,0 +1,28 @@
+# Generated from:
+# https://github.com/plone/meta/tree/main/config/default
+# See the inline comments on how to expand/tweak this configuration file
+[meta]
+template = "default"
+commit-id = "d03b196d"
+
+
+[pyproject]
+codespell_skip = "*.css.map,*.map,*.min.js,yarn.lock"
+
+[pre_commit]
+zpretty_extra_lines = """
+        args: ['--extend-exclude', 'relatedimages_selection.xml']
+"""
+
+[gitignore]
+extra_lines = """
+test_*
+robot_*
+"""
+
+[gitlab]
+jobs = [
+    "lint",
+    "release-ready",
+    "testing",
+    ]

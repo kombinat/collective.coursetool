@@ -162,8 +162,8 @@ class IMemberSchema(model.Schema):
     salutation_letter = schema.TextLine(title=_("Salutation Letter"), required=False)
     pass_issue_date = schema.Date(title=_("Pass issued on"), required=False)
     pass_expiration_date = schema.Date(title=_("Pass expires on"), required=False)
-    payed = schema.Bool(title=_("Payed"), required=False, default=False)
-    payed_date = schema.Date(title=_("Payed on"), required=False)
+    payed = schema.Bool(title=_("Paid"), required=False, default=False)
+    payed_date = schema.Date(title=_("Paid on"), required=False)
     booking_nr = schema.TextLine(title=_("Booking Nr"), required=False)
     inactive = schema.Bool(title=_("Inactive"), required=False, default=False)
 
@@ -383,7 +383,7 @@ class UserProperties(MembraneUserProperties):
 
 @implementer(INameFromTitle)
 @adapter(IMember)
-class NameFromCreationDateEncrypted(object):
+class NameFromCreationDateEncrypted:
     def __new__(cls, context):
         instance = super().__new__(cls)
         instance.title = generate_member_id()

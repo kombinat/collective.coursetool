@@ -1,6 +1,5 @@
 from bda.plone.checkout.interfaces import ICheckoutFormPresets
 from bda.plone.orders.common import get_order
-from bda.plone.shop.interfaces import IShopExtensionLayer
 from collective.coursetool.browser.views import Utils
 from collective.coursetool.interfaces import ICollectiveCoursetoolLayer
 from node.utils import UNSET
@@ -59,7 +58,7 @@ CHECKOUT_FIELD_MAP = {
 
 @implementer(ICheckoutFormPresets)
 @adapter(Interface, ICollectiveCoursetoolLayer)
-class CheckoutFormCourseMemberPresets(object):
+class CheckoutFormCourseMemberPresets:
     """Adapter to retrieve member presets for checkout form."""
 
     def __init__(self, context, request):

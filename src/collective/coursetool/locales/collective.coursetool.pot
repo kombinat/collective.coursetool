@@ -1,0 +1,752 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2024-04-09 11:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.coursetool\n"
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. a: Vorarlberger Fischerprüfung"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. b: Erfolgreich abgelegte Prüfung in anderen Bundesländern oder Staaten"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. c: Erfolgreicher Abschluss der Fischereifacharbeiterprüfung"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. d: Gleichwertig zur Fischerprüfung anerkannte Ausbildung"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Abs. 1 lit. e: Erfolgreich abgelegte Eignungsprüfung"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Abs. 2: Teilnahme an einer Unterweisung"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Accept Terms and Conditions"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Actions for selected members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_certificates.pt
+msgid "Add Certificate"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_courses.pt
+msgid "Add Course"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_exams.pt
+msgid "Add Exam"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_locations.pt
+msgid "Add Location"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_members.pt
+msgid "Add Member"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Add member"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Address"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Address2"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/import_members.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_certificates.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_courses.pt
+msgid "Back to course portal"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Back to overview"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Birthday"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Booking Nr"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Card Image"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/certificate.py
+#: collective.coursetool/src/collective/coursetool/profiles/default/types/coursetool.certificate.xml
+msgid "Certificate"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/certificate.py
+msgid "Certificate Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_certificates.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "Certificates"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "City"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Comment"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Complete - not printed"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Complete - printed"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Country"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/profiles/default/types/coursetool.course.xml
+msgid "Course"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Course Description"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Course Location"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Course Locations"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/configure.zcml
+msgid "Course Management Tool"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/configure.zcml
+msgid "Course Management Tool (uninstall)"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/certificate.py
+#: collective.coursetool/src/collective/coursetool/content/course.py
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Course Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Course Title"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Course Tool"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "Course-ID"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_courses.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_location.pt
+msgid "Courses"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/configure.zcml
+msgid "Coursetool menu for the toolbar"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Customer Nr"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Delete"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "Documents"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "EMail"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Edit"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Email"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Endtime"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+#: collective.coursetool/src/collective/coursetool/profiles/default/types/coursetool.exam.xml
+msgid "Exam"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Exam Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Exam Types"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Exam date"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Exam failed"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Exam passed"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Exam successfully passed"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_exams.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "Exams"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Export member data as XLSX"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Fax"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "Filename"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Firstname"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Graduation"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/import_members.pt
+msgid "Import"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/import_members.pt
+msgid "Import Memberdata via Excel file."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/import_members.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Import Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/import.py
+msgid "Imported members: ${count}/${all}"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Inactive"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Information"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Instructor"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Instructors"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Internet Address"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Lastname"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+#: collective.coursetool/src/collective/coursetool/profiles/default/types/coursetool.location.xml
+msgid "Location"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/location.py
+msgid "Location Title"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_locations.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+#: collective.coursetool/src/collective/coursetool/setuphandlers.py
+msgid "Locations"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Manage Certificates"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Manage Courses"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/configure.zcml
+msgid "Manage Courses, Lecturers, Students, Exams and Certificates."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Manage Exams"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Manage Locations"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Manage Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Mandatory attendance"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Maximum member count"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/certificate.py
+#: collective.coursetool/src/collective/coursetool/content/course.py
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Member"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "Member has no certificates or external qualifiaction."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/import_members.pt
+msgid "Memberlist as Excel"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_members.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+msgid "Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "Members not found"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Membership"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Metadata"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Mobile Phone"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "Name"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "No action performed."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "No certificates found."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "No courses found."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "No documents found."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "No exams found."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_macros.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_location.pt
+msgid "No items found."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "No members found."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Not read"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Notification/Print/Export"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_macros.pt
+msgid "Nr"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Occurrences"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Partnertype"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Pass expires on"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Pass issued on"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Passport Image"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Paid"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Paid on"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Perform Action"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/profiles/default/actions.xml
+msgid "Personal Information"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Personal Saluation"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Phone"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Please read our <a href=\"/agb\">Terms and Conditions</a>"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Please upload a foto of your passport to validate your identity."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Practical experience"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Print all passes"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Qualifications"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/patches.py
+msgid "Quantity Members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Read - no birthday"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Read - no qualification"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "Read - qualified"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Salutation"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Salutation Letter"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to all members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to failed members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "Send Email to success members"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_courses.pt
+msgid "Show archived courses"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_exams.pt
+msgid "Show archived exams"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "Size"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/widget_course_occurrences_display.pt
+msgid "Start date day"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Startdate"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "Starttime"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "State"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "Successfully changed users state."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/views.py
+msgid "Successfully deleted users."
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/exam.py
+msgid "Types"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/portal.pt
+msgid "Upload File"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Upload your Passfoto (5MB max size)"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "Upload your documents"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "User Image"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "Username"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+msgid "You're already registered for this course"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "You're already registered for this exam"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/content/member.py
+msgid "ZIP Code"
+msgstr ""
+
+#. Default: "Certificate: ${title}"
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_certificate.pt
+msgid "certificate_title"
+msgstr ""
+
+#. Default: "Course: ${title}"
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_course.pt
+msgid "course_title"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "course_type_offline"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "course_type_online"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "delete"
+msgstr ""
+
+#. Default: "Exam: ${title}"
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_exam.pt
+msgid "exam_title"
+msgstr ""
+
+#. Default: "Type"
+#: collective.coursetool/src/collective/coursetool/content/course.py
+msgid "label_course_type"
+msgstr ""
+
+#. Default: "Clear"
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_macros.pt
+msgid "label_filter_clear"
+msgstr ""
+
+#. Default: "Search"
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_macros.pt
+msgid "label_filter_search"
+msgstr ""
+
+#. Default: "Suche"
+#: collective.coursetool/src/collective/coursetool/browser/templates/listing_macros.pt
+msgid "label_filter_textsearch"
+msgstr ""
+
+#. Default: "Location: ${title}"
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_location.pt
+msgid "location_title"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/browser/templates/view_member.pt
+msgid "print card"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_a_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_b1_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_b2_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_c_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_d_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_e_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_f1_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_f2_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_g_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_h_label"
+msgstr ""
+
+#: collective.coursetool/src/collective/coursetool/vocabularies.py
+msgid "quali_i_label"
+msgstr ""
+
+#. Default: "Failed to create your account: we were unable to send instructions for setting a password to your email address: ${address}"
+#: collective.coursetool/src/collective/coursetool/browser/registration.py
+msgid "status_fatal_password_mail"
+msgstr ""
+
+#. Default: "This account has been created, but we were unable to send instructions for setting a password to this email address: ${address}"
+#: collective.coursetool/src/collective/coursetool/browser/registration.py
+msgid "status_nonfatal_password_mail"
+msgstr ""

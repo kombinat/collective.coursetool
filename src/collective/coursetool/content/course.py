@@ -104,7 +104,7 @@ class ICourseSchema(model.Schema):
             "selectableTypes": "coursetool.location",
             "mode": "search",
             "favorites": [],
-            "browseable": False,
+            "browsable": False,
         },
     )
 
@@ -128,7 +128,7 @@ class ICourseSchema(model.Schema):
             "selectableTypes": "coursetool.member",
             "mode": "search",
             "favorites": [],
-            "browseable": False,
+            "browsable": False,
         },
     )
 
@@ -234,7 +234,7 @@ class Course(Container):
 
     @property
     def location(self):
-        return " - ".join([f"{l.title}, {l.city}" for l in self.get_locations()])
+        return " - ".join([f"{it.title}, {it.city}" for it in self.get_locations()])
 
     def members_uuids(self):
         return [m.UID() for m in self.members]

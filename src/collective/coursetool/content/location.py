@@ -5,7 +5,6 @@ from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope import schema
 from zope.interface import implementer
-from zope.interface import Interface
 
 
 class ILocationSchema(model.Schema):

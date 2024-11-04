@@ -486,11 +486,11 @@ msgid "Passport Image"
 msgstr "Scan oder Foto eines persönlichen Ausweisdokumentes als Bilddatei."
 
 #: collective/coursetool/content/member.py
-msgid "Payed"
+msgid "Paid"
 msgstr "bezahlt"
 
 #: collective/coursetool/content/member.py
-msgid "Payed on"
+msgid "Paid on"
 msgstr "bezahlt am"
 
 #: collective/coursetool/browser/templates/view_exam.pt

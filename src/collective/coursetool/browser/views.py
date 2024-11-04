@@ -37,7 +37,7 @@ def pretty_datetime(val):
     return DateTime(val).strftime("%d.%m.%Y, %H:%M Uhr")
 
 
-class ColumnDefinition(object):
+class ColumnDefinition:
     def __init__(self, label, f_attr, linked=False, formatter=None, sort_on=False):
         self.label = label
         self.f_attr = f_attr
@@ -87,10 +87,12 @@ class ListingBase(BrowserView):
         )
         kwargs.setdefault(
             "sort_order",
-            "reverse"
-            if self.request.get("sort_order", self.initial_sort_order)
-            in ("reverse", "desc")
-            else "asc",
+            (
+                "reverse"
+                if self.request.get("sort_order", self.initial_sort_order)
+                in ("reverse", "desc")
+                else "asc"
+            ),
         )
         kwargs.setdefault("batch", True)
         kwargs.setdefault("b_size", self.b_size)
