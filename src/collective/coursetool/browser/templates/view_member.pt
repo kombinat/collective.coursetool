@@ -1,228 +1,360 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    xmlns:metal="http://xml.zope.org/namespaces/metal" xmlns:tal="http://xml.zope.org/namespaces/tal"
-    metal:use-macro="context/@@main_template/macros/master" lang="en" xml:lang="en" i18n:domain="collective.coursetool">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      metal:use-macro="context/@@main_template/macros/master"
+      xml:lang="en"
+      i18n:domain="collective.coursetool"
+>
 
-<body>
-    <div class="coursetool-wrapper" metal:fill-slot="main">
+  <body>
+    <div class="coursetool-wrapper"
+         metal:fill-slot="main"
+    >
 
-        <a class="btn btn-sm btn-outline-primary mb-3" href="${python:context.aq_parent.absolute_url()}"
-            tal:condition="view/is_admin">
-            <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
-            <span i18n:translate="">Back to overview</span>
-        </a>
+      <a class="btn btn-sm btn-outline-primary mb-3"
+         href="${python:context.aq_parent.absolute_url()}"
+         tal:condition="view/is_admin"
+      >
+        <tal:icon replace="structure python:icons.tag('arrow-left-circle', tag_class='plone-icon')" />
+        <span i18n:translate="">Back to overview</span>
+      </a>
 
-        <div class="card"
-             tal:define="courses view/courses;
-                         exams view/exams;
-                         certificates view/certificates;
-                         documents view/documents;
-                         is_admin view/is_admin">
+      <div class="card"
+           tal:define="
+             courses view/courses;
+             exams view/exams;
+             certificates view/certificates;
+             documents view/documents;
+             is_admin view/is_admin;
+           "
+      >
 
-            <div class="card-header">
-                <h1>
-                    <tal:block replace="context/Title" />
-                </h1>
+        <div class="card-header">
+          <h1>
+            <tal:block replace="context/Title" />
+          </h1>
 
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="default-tab" data-bs-toggle="tab" data-bs-target="#tab-default"
-                            aria-current="true" href="#" i18n:translate="">Information</a>
-                    </li>
-                    <li class="nav-item" tal:condition="view/is_admin">
-                        <a class="nav-link" id="metadata-tab" data-bs-toggle="tab" data-bs-target="#tab-metadata"
-                            aria-current="true" href="#" i18n:translate="">Metadata</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="documents-tab" data-bs-toggle="tab"
-                            data-bs-target="#tab-documents" aria-current="true" href="#">
-                            <span i18n:translate="">Documents</span>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active"
+                 id="default-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-default"
+                 data-bs-toggle="tab"
+                 i18n:translate=""
+              >Information</a>
+            </li>
+            <li class="nav-item"
+                tal:condition="view/is_admin"
+            >
+              <a class="nav-link"
+                 id="metadata-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-metadata"
+                 data-bs-toggle="tab"
+                 i18n:translate=""
+              >Metadata</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="documents-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-documents"
+                 data-bs-toggle="tab"
+              >
+                <span i18n:translate="">Documents</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="courses-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-courses"
+                 data-bs-toggle="tab"
+              >
+                <span i18n:translate="">Courses</span>
+                <span class="badge text-bg-secondary">${python:len(courses)}</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="exams-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-exams"
+                 data-bs-toggle="tab"
+              >
+                <span i18n:translate="">Exams</span>
+                <span class="badge text-bg-secondary">${python:len(exams)}</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"
+                 id="certificates-tab"
+                 aria-current="true"
+                 href="#"
+                 data-bs-target="#tab-certificates"
+                 data-bs-toggle="tab"
+              >
+                <span i18n:translate="">Certificates</span>
+                <span class="badge text-bg-secondary">${python:"1" if context.card_image else "0"}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-body tab-content">
+          <div class="tab-pane fade show active"
+               id="tab-default"
+               aria-labelledby="default-tab"
+               role="tabpabel"
+          >
+            <div class="factbox my-3 row">
+              <tal:block repeat="widget view/widgets/values">
+                <div class="${widget/wrapper_css_class|string:col-lg-12} mb-2 pb-1 border-bottom border-end">
+                  <label class="fw-bold"
+                         tal:content="widget/label"
+                  ></label>
+                  <br />
+                  <span tal:condition="not:widget/value">
+                    <tal:icon replace="structure python:icons.tag('dash')" />
+                  </span>
+                  <div tal:condition="widget/value"
+                       tal:content="structure widget/render"
+                  ></div>
+                </div>
+              </tal:block>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <a class="btn btn-outline-primary"
+                   href="${context/absolute_url}/@@print"
+                   tal:condition="is_admin"
+                   i18n:translate=""
+                >print card</a>
+              </div>
+              <div class="col-md-6 text-end">
+
+                <a class="pat-plone-modal btn btn-sm btn-primary"
+                   href="${python:context.absolute_url()}/edit"
+                   data-pat-plone-modal="modalSizeClass: modal-xl;"
+                   tal:condition="view/can_edit"
+                   i18n:translate=""
+                >
+                                Edit
+                </a>
+                <a class="pat-plone-modal btn btn-sm btn-danger"
+                   href="${python:context.absolute_url()}/delete_confirmation"
+                   data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
+                   tal:condition="view/is_admin"
+                   i18n:translate=""
+                >
+                                Delete
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade"
+               id="tab-metadata"
+               aria-labelledby="metadata-tab"
+               role="tabpabel"
+          >
+            <div class="row"
+                 tal:repeat="group view/groups"
+            >
+              <div class="col-lg-6 mb-2 pb-1 border-bottom border-end"
+                   tal:repeat="widget group/widgets/values"
+              >
+                <label class="fw-bold"
+                       tal:content="widget/label"
+                ></label>
+                <br />
+                <span tal:condition="not:widget/value">
+                  <tal:icon replace="structure python:icons.tag('dash')" />
+                </span>
+                <div tal:content="structure widget/render"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane fade"
+               id="tab-documents"
+               aria-labelledby="documents-tab"
+               role="tabpabel"
+          >
+            <p class="lead"
+               i18n:translate=""
+            >
+                        Upload your documents
+            </p>
+
+
+            <div class="table-responsive">
+              <table class="table table-sm"
+                     tal:condition="documents"
+              >
+                <thead>
+                  <tr>
+                    <th i18n:translate="">Filename</th>
+                    <th class="text-end"
+                        i18n:translate=""
+                    >Size</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr tal:repeat="doc documents">
+                    <tal:block define="
+                                 content_type python: doc.file.contentType if doc.portal_type == 'File' else doc.image.contentType;
+                                 mimetype_icon python: 'mimetype-' + content_type;
+                                 doc_url doc/getURL;
+                               ">
+                      <td>
+                        <a href="${doc_url}"
+                           target="_blank"
+                        >
+                          <tal:icon tal:replace="structure python:icons.tag(mimetype_icon, tag_class='icon-inline', tag_alt=content_type)" />
+                                            ${doc/Title}
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="courses-tab" data-bs-toggle="tab" data-bs-target="#tab-courses"
-                            aria-current="true" href="#">
-                            <span i18n:translate="">Courses</span> <span
-                                class="badge text-bg-secondary">${python:len(courses)}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="exams-tab" data-bs-toggle="tab" data-bs-target="#tab-exams"
-                            aria-current="true" href="#">
-                            <span i18n:translate="">Exams</span> <span
-                                class="badge text-bg-secondary">${python:len(exams)}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="certificates-tab" data-bs-toggle="tab"
-                            data-bs-target="#tab-certificates" aria-current="true" href="#">
-                            <span i18n:translate="">Certificates</span> <span
-                                class="badge text-bg-secondary">${python:"1" if context.card_image else "0"}</span>
-                        </a>
-                    </li>
-                </ul>
+                      </td>
+                      <td class="text-end">
+                                        ${doc/getSize}
+                      </td>
+                      <td class="text-end"
+                          tal:condition="view/can_edit"
+                      >
+                        <a class="pat-plone-modal btn btn-sm btn-outline-danger"
+                           href="${doc_url}/delete_confirmation"
+                        ><tal:block replace="structure python:icons.tag('trash')" /></a>
+                      </td>
+                    </tal:block>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="text-muted fs-sm"
+                    tal:condition="not:documents"
+                    i18n:translate=""
+              >
+                            No documents found.
+              </span>
             </div>
 
-            <div class="card-body tab-content">
-                <div class="tab-pane fade show active" id="tab-default" role="tabpabel" aria-labelledby="default-tab">
-                    <div class="factbox my-3 row">
-                        <tal:block repeat="widget view/widgets/values">
-                            <div
-                                class="${widget/wrapper_css_class|string:col-lg-12} mb-2 pb-1 border-bottom border-end">
-                                <label class="fw-bold" tal:content="widget/label" />
-                                <br />
-                                <span tal:condition="not:widget/value">
-                                    <tal:icon replace="structure python:icons.tag('dash')" />
-                                </span>
-                                <div tal:condition="widget/value" tal:content="structure widget/render" />
-                            </div>
-                        </tal:block>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <a href="${context/absolute_url}/@@print" class="btn btn-outline-primary" i18n:translate="" tal:condition="is_admin">print card</a>
-                        </div>
-                        <div class="col-md-6 text-end">
+            <hr />
 
-                            <a tal:condition="view/can_edit" href="${python:context.absolute_url()}/edit"
-                                class="pat-plone-modal btn btn-sm btn-primary" i18n:translate=""
-                                data-pat-plone-modal='modalSizeClass: modal-xl;'>
-                                Edit
-                            </a>
-                            <a tal:condition="view/is_admin" href="${python:context.absolute_url()}/delete_confirmation"
-                                class="pat-plone-modal btn btn-sm btn-danger"
-                                data-pat-plone-modal='{"actionOptions": {"redirectOnResponse": true, "redirectToUrl": "${context/aq_parent/absolute_url}"}}'
-                                i18n:translate="">
-                                Delete
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="tab-metadata" role="tabpabel" aria-labelledby="metadata-tab">
-                    <div tal:repeat="group view/groups" class="row">
-                        <div class="col-lg-6 mb-2 pb-1 border-bottom border-end" tal:repeat="widget group/widgets/values">
-                            <label class="fw-bold" tal:content="widget/label" />
-                            <br />
-                            <span tal:condition="not:widget/value">
-                                <tal:icon replace="structure python:icons.tag('dash')" />
-                            </span>
-                            <div tal:content="structure widget/render" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="tab-documents" role="tabpabel" aria-labelledby="documents-tab">
-                    <p class="lead" i18n:translate="">
-                        Upload your documents
-                    </p>
-
-
-                    <div class="table-responsive">
-                        <table class="table table-sm" tal:condition="documents">
-                            <thead>
-                                <tr>
-                                    <th i18n:translate="">Filename</th>
-                                    <th i18n:translate="" class="text-end">Size</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr tal:repeat="doc documents">
-                                    <tal:block define="content_type python: doc.file.contentType if doc.portal_type == 'File' else doc.image.contentType;
-                                                        mimetype_icon python: 'mimetype-' + content_type;
-                                                        doc_url doc/getURL">
-                                    <td>
-                                        <a href="${doc_url}" target="_blank">
-                                            <tal:icon tal:replace="structure python:icons.tag(mimetype_icon, tag_class='icon-inline', tag_alt=content_type)" />
-                                            ${doc/Title}
-                                        </a>
-                                    </td>
-                                    <td class="text-end">
-                                        ${doc/getSize}
-                                    </td>
-                                    <td tal:condition="view/can_edit" class="text-end">
-                                        <a href="${doc_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger"
-                                            ><tal:block replace="structure python:icons.tag('trash')" /></a>
-                                    </td>
-                                    </tal:block>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <span class="text-muted fs-sm" tal:condition="not:documents" i18n:translate="">
-                            No documents found.
-                        </span>
-                    </div>
-
-                    <hr />
-
-                    <span tal:replace="structure context/@@authenticator/authenticator"/>
-                    <div class="pat-upload" data-pat-upload="url:${context/absolute_url}/@@fileUpload"></div>
-                    <script>
+            <span tal:replace="structure context/@@authenticator/authenticator"></span>
+            <div class="pat-upload"
+                 data-pat-upload="url:${context/absolute_url}/@@fileUpload"
+            ></div>
+            <script>
                         $(function(){
                             $(".pat-upload").on("uploadAllCompleted", function(response, path) {
                                 $("#tab-documents .table-responsive").load(document.URL + " #tab-documents .table-responsive > *");
                             });
                         });
-                    </script>
-                </div>
+            </script>
+          </div>
 
-                <div class="tab-pane fade" id="tab-courses" role="tabpabel" aria-labelledby="courses-tab">
-                    <ul class="list-group">
-                        <li class="list-group-item" tal:repeat="course courses">
-                            <a href="${course/absolute_url}" tal:content="course/title">Coursetitle</a>
-                        </li>
-                    </ul>
-                    <span class="text-muted fs-sm" tal:condition="not:courses" i18n:translate="">
+          <div class="tab-pane fade"
+               id="tab-courses"
+               aria-labelledby="courses-tab"
+               role="tabpabel"
+          >
+            <ul class="list-group">
+              <li class="list-group-item"
+                  tal:repeat="course courses"
+              >
+                <a href="${course/absolute_url}"
+                   tal:content="course/title"
+                >Coursetitle</a>
+              </li>
+            </ul>
+            <span class="text-muted fs-sm"
+                  tal:condition="not:courses"
+                  i18n:translate=""
+            >
                         No courses found.
-                    </span>
-                </div>
+            </span>
+          </div>
 
-                <div class="tab-pane fade" id="tab-exams" role="tabpabel" aria-labelledby="exams-tab">
-                    <table class="table table-sm" tal:condition="exams">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th width="5%" class="text-nowrap">
-                                    <span i18n:translate="">Exam successfully passed</span>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr tal:repeat="exam exams">
-                                <td>
-                                    <a href="${exam/url}" tal:content="exam/title" tal:omit-tag="not:view/is_admin">Examtitle</a>
-                                </td>
-                                <td class="text-center">
-                                    <tal:icon replace="structure python:icons.tag('check-circle' if exam['success'] else 'slash-circle', tag_class='text-' + ('success' if exam['success'] else 'danger'))" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <span class="text-muted fs-sm" tal:condition="not:exams" i18n:translate="">
+          <div class="tab-pane fade"
+               id="tab-exams"
+               aria-labelledby="exams-tab"
+               role="tabpabel"
+          >
+            <table class="table table-sm"
+                   tal:condition="exams"
+            >
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th class="text-nowrap"
+                      width="5%"
+                  >
+                    <span i18n:translate="">Exam successfully passed</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr tal:repeat="exam exams">
+                  <td>
+                    <a href="${exam/url}"
+                       tal:content="exam/title"
+                       tal:omit-tag="not:view/is_admin"
+                    >Examtitle</a>
+                  </td>
+                  <td class="text-center">
+                    <tal:icon replace="structure python:icons.tag('check-circle' if exam['success'] else 'slash-circle', tag_class='text-' + ('success' if exam['success'] else 'danger'))" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <span class="text-muted fs-sm"
+                  tal:condition="not:exams"
+                  i18n:translate=""
+            >
                         No exams found.
-                    </span>
-                </div>
+            </span>
+          </div>
 
-                <div class="tab-pane fade" id="tab-certificates" role="tabpabel" aria-labelledby="certificates-tab">
-                    <a href="${context/absolute_url}/@@print"
-                       tal:condition="context/card_image|nothing"
-                       tal:define="scales context/@@images"
-                       tal:omit-tag="not:is_admin">
-                        <img tal:replace="structure python:scales.tag('card_image', scale='preview')" />
-                    </a>
-                    <span class="text-muted fs-sm" tal:condition="not:context/card_image|nothing" i18n:translate="">
+          <div class="tab-pane fade"
+               id="tab-certificates"
+               aria-labelledby="certificates-tab"
+               role="tabpabel"
+          >
+            <a href="${context/absolute_url}/@@print"
+               tal:define="
+                 scales context/@@images;
+               "
+               tal:condition="context/card_image|nothing"
+               tal:omit-tag="not:is_admin"
+            >
+              <img tal:replace="structure python:scales.tag('card_image', scale='preview')" />
+            </a>
+            <span class="text-muted fs-sm"
+                  tal:condition="not:context/card_image|nothing"
+                  i18n:translate=""
+            >
                         No certificates found.
-                    </span>
-                </div>
-
-            </div>
-
-            <div class="card-footer">
-                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" />
-            </div>
+            </span>
+          </div>
 
         </div>
 
+        <div class="card-footer">
+          <div id="viewlet-above-content-body"
+               tal:content="structure provider:plone.abovecontentbody"
+          ></div>
+        </div>
+
+      </div>
+
     </div>
 
-</html>
+  </body></html>

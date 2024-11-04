@@ -7,9 +7,7 @@ from zope.browsermenu.interfaces import IBrowserMenu
 from zope.browsermenu.interfaces import IBrowserSubMenuItem
 from zope.browsermenu.menu import BrowserMenu
 from zope.browsermenu.menu import BrowserSubMenuItem
-from zope.component import getAdapters
 from zope.interface import implementer
-from zope.interface import Interface
 
 
 class ICoursetoolSubMenuItem(IBrowserSubMenuItem):

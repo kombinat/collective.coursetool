@@ -31,7 +31,7 @@ class IMembers(model.Schema):
             "selectableTypes": "coursetool.member",
             "mode": "search",
             "favorites": [],
-            "browseable": False,
+            "browsable": False,
         },
     )
 
@@ -75,7 +75,7 @@ class IExamSchema(model.Schema):
             "selectableTypes": "coursetool.location",
             "mode": "search",
             "favorites": [],
-            "browseable": False,
+            "browsable": False,
         },
     )
 

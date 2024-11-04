@@ -1,4 +1,5 @@
 """Setup tests for this package."""
+
 from collective.coursetool.testing import (  # noqa: E501,
     COLLECTIVE_COURSETOOL_INTEGRATION_TESTING,
 )

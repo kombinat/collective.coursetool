@@ -484,11 +484,11 @@ msgid "Passport Image"
 msgstr ""
 
 #: collective/coursetool/content/member.py
-msgid "Payed"
+msgid "Paid"
 msgstr ""
 
 #: collective/coursetool/content/member.py
-msgid "Payed on"
+msgid "Paid on"
 msgstr ""
 
 #: collective/coursetool/browser/templates/view_exam.pt

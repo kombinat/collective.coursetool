@@ -1,8 +1,6 @@
 from collective.coursetool import _
-from plone import api
 from plone.app.vocabularies.catalog import KeywordsVocabulary
 from plone.app.vocabularies.catalog import StaticCatalogVocabulary
-from random import paretovariate
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import implementer
@@ -13,7 +11,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IVocabularyFactory)
-class StaticValuesVocabulary(object):
+class StaticValuesVocabulary:
     values = []
 
     def __call__(self, context=None):

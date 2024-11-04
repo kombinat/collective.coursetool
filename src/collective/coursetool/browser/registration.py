@@ -24,7 +24,7 @@ class Registration(RegistrationForm):
         """override plone settings with dexterity.membrane settings"""
         settings = super()._get_security_settings()
 
-        class RegistrationSettingsProxy(object):
+        class RegistrationSettingsProxy:
             # proxy class for overridden settings from membrane
             use_email_as_login = api.portal.get_registry_record(
                 "use_email_as_username",
@@ -132,7 +132,7 @@ class Registration(RegistrationForm):
 
 
 @implementer(IUserAdder)
-class CourseToolMemberAdder(object):
+class CourseToolMemberAdder:
     def addUser(self, login_name, password, **data):
         member_base = api.portal.get()[BASE_FOLDER_ID]["members"]
 

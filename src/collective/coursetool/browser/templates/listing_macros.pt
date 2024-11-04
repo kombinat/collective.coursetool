@@ -1,73 +1,132 @@
 <html i18n:domain="collective.coursetool">
-    <body>
-        <metal:def define-macro="filter">
-            <form action="${python:context.absolute_url()}" class="row g-3 mb-3 align-items-end pat-inject" data-pat-inject="source:#content;target:#content;history:record">
-                <div class="col">
-                    <label class="form-label" for="floatingSearchableText" i18n:translate="label_filter_textsearch">Suche</label>
-                    <input class="form-control" id="floatingSearchableText" name="SearchableText" type="text" value="" tal:attributes="value request/SearchableText|nothing">
-                </div>
-                <div class="col">
-                    <input class="btn btn-primary" type="submit" name="search" value="Search" i18n:attributes="value label_filter_search">
-                    <input class="btn btn-primary" type="submit" name="clear" value="Clear" i18n:attributes="value label_filter_clear" tal:condition="request/SearchableText|nothing">
-                    <metal:addbutton define-slot="add-button"></metal:addbutton>
-                </div>
-                <metal:archivecheck define-slot="archive-checkbox"></metal:archivecheck>
-            </form>
-        </metal:def>
+  <body>
+    <metal:def define-macro="filter">
+      <form class="row g-3 mb-3 align-items-end pat-inject"
+            action="${python:context.absolute_url()}"
+            data-pat-inject="source:#content;target:#content;history:record"
+      >
+        <div class="col">
+          <label class="form-label"
+                 for="floatingSearchableText"
+                 i18n:translate="label_filter_textsearch"
+          >Suche</label>
+          <input class="form-control"
+                 id="floatingSearchableText"
+                 name="SearchableText"
+                 type="text"
+                 value=""
+                 tal:attributes="
+                   value request/SearchableText|nothing;
+                 "
+          />
+        </div>
+        <div class="col">
+          <input class="btn btn-primary"
+                 name="search"
+                 type="submit"
+                 value="Search"
+                 i18n:attributes="value label_filter_search"
+          />
+          <input class="btn btn-primary"
+                 name="clear"
+                 type="submit"
+                 value="Clear"
+                 tal:condition="request/SearchableText|nothing"
+                 i18n:attributes="value label_filter_clear"
+          />
+          <metal:addbutton define-slot="add-button" />
+        </div>
+        <metal:archivecheck define-slot="archive-checkbox" />
+      </form>
+    </metal:def>
 
-        <metal:def define-macro="batch_table"
-            tal:define="batch batch|nothing;
-                        row_count view/row_count|python:True;
-                        sort_on request/sort_on|view/initial_sort_index;
-                        sort_order request/sort_order|view/initial_sort_order;
-                        query_string request/QUERY_STRING|string:">
+    <metal:def define-macro="batch_table"
+               tal:define="
+                 batch batch|nothing;
+                 row_count view/row_count|python:True;
+                 sort_on request/sort_on|view/initial_sort_index;
+                 sort_order request/sort_order|view/initial_sort_order;
+                 query_string request/QUERY_STRING|string:;
+               "
+    >
 
-            <tal:block tal:condition="batch">
-            <div class="table-responsive" data-pat-inject="source:#content > .table-responsive, #content > .alert::element; target:#content > .table-responsive">
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th i18n:translate="" tal:condition="row_count">Nr</th>
-                            <th tal:repeat="col columns">
-                                <a class="pat-inject" data-pat-inject="source:.table-responsive;target:.table-responsive;history:record" href="${context/absolute_url}?sort_on=${col/sort_on}&sort_order=${python:'reverse' if (sort_on == col.sort_on and sort_order == 'asc') else 'asc'}" tal:omit-tag="not:col/sort_on"><span tal:replace="col/label" /></a>
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr tal:repeat="item batch" class="reviewstate-${item/review_state}">
-                            <tal:def define="item_url item/getURL;
-                                             item_type item/portal_type;
-                                             item_state item/review_state;
-                                             obj item/getObject;">
-                            <td tal:content="python:repeat['item'].number() + request.get('b_start', 0)" tal:condition="row_count"></td>
-                            <td tal:repeat="col columns">
-                                <span tal:replace="structure python: col.factory(obj)" />
-                            </td>
-                            <td class="text-end text-nowrap">
-                                <a href="${item_url}/@@edit" class="pat-plone-modal btn btn-sm btn-outline-primary" data-pat-plone-modal="modalSizeClass: modal-xl;"
-                                   title="edit"><tal:block replace="structure python:icons.tag('pencil')"/></a>
-                                <a tal:condition="python:item_state == 'private' and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_publish?${query_string}" class="btn btn-sm btn-outline-success pat-inject"
-                                    title="publish"><tal:block replace="structure python:icons.tag('box-arrow-up')"/></a>
-                                <a tal:condition="python:item_state in ['private', 'published'] and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_archive?${query_string}" class="btn btn-sm btn-outline-secondary pat-inject"
-                                    title="archive"><tal:block replace="structure python:icons.tag('archive')"/></a>
-                                <a tal:condition="python:item_state == 'archived' and item_type in ['coursetool.course', 'coursetool.exam']" href="${item_url}/coursetool_unarchive?${query_string}" class="btn btn-sm btn-outline-secondary pat-inject"
-                                    title="restore"><tal:block replace="structure python:icons.tag('box-arrow-up')"/></a>
-                                <a href="${item_url}/delete_confirmation" class="pat-plone-modal btn btn-sm btn-outline-danger" data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
-                                    title="remove"><tal:block replace="structure python:icons.tag('trash')" /></a>
-                            </td>
-                            </tal:def>
-                        </tr>
-                    </tbody>
-                </table>
-                <div metal:use-macro="context/batch_macros/macros/navigation" />
-            </div>
+      <tal:block tal:condition="batch">
+        <div class="table-responsive"
+             data-pat-inject="source:#content &gt; .table-responsive, #content &gt; .alert::element; target:#content &gt; .table-responsive"
+        >
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th tal:condition="row_count"
+                    i18n:translate=""
+                >Nr</th>
+                <th tal:repeat="col columns">
+                  <a class="pat-inject"
+                     href="${context/absolute_url}?sort_on=${col/sort_on}&amp;sort_order=${python:'reverse' if (sort_on == col.sort_on and sort_order == 'asc') else 'asc'}"
+                     data-pat-inject="source:.table-responsive;target:.table-responsive;history:record"
+                     tal:omit-tag="not:col/sort_on"
+                  ><span tal:replace="col/label"></span></a>
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="reviewstate-${item/review_state}"
+                  tal:repeat="item batch"
+              >
+                <tal:def define="
+                           item_url item/getURL;
+                           item_type item/portal_type;
+                           item_state item/review_state;
+                           obj item/getObject;
+                         ">
+                  <td tal:condition="row_count"
+                      tal:content="python:repeat['item'].number() + request.get('b_start', 0)"
+                  ></td>
+                  <td tal:repeat="col columns">
+                    <span tal:replace="structure python: col.factory(obj)"></span>
+                  </td>
+                  <td class="text-end text-nowrap">
+                    <a class="pat-plone-modal btn btn-sm btn-outline-primary"
+                       href="${item_url}/@@edit"
+                       title="edit"
+                       data-pat-plone-modal="modalSizeClass: modal-xl;"
+                    ><tal:block replace="structure python:icons.tag('pencil')" /></a>
+                    <a class="btn btn-sm btn-outline-success pat-inject"
+                       href="${item_url}/coursetool_publish?${query_string}"
+                       title="publish"
+                       tal:condition="python:item_state == 'private' and item_type in ['coursetool.course', 'coursetool.exam']"
+                    ><tal:block replace="structure python:icons.tag('box-arrow-up')" /></a>
+                    <a class="btn btn-sm btn-outline-secondary pat-inject"
+                       href="${item_url}/coursetool_archive?${query_string}"
+                       title="archive"
+                       tal:condition="python:item_state in ['private', 'published'] and item_type in ['coursetool.course', 'coursetool.exam']"
+                    ><tal:block replace="structure python:icons.tag('archive')" /></a>
+                    <a class="btn btn-sm btn-outline-secondary pat-inject"
+                       href="${item_url}/coursetool_unarchive?${query_string}"
+                       title="restore"
+                       tal:condition="python:item_state == 'archived' and item_type in ['coursetool.course', 'coursetool.exam']"
+                    ><tal:block replace="structure python:icons.tag('box-arrow-up')" /></a>
+                    <a class="pat-plone-modal btn btn-sm btn-outline-danger"
+                       href="${item_url}/delete_confirmation"
+                       title="remove"
+                       data-pat-plone-modal='{"actionOptions": {"reloadWindowOnClose": true}}'
+                    ><tal:block replace="structure python:icons.tag('trash')" /></a>
+                  </td>
+                </tal:def>
+              </tr>
+            </tbody>
+          </table>
+          <div metal:use-macro="context/batch_macros/macros/navigation"></div>
+        </div>
 
-            </tal:block>
+      </tal:block>
 
-            <tal:block condition="not:batch">
-                <div class="alert alert-warning" i18n:translate="">No items found.</div>
-            </tal:block>
-        </metal:def>
-    </body>
+      <tal:block condition="not:batch">
+        <div class="alert alert-warning"
+             i18n:translate=""
+        >No items found.</div>
+      </tal:block>
+    </metal:def>
+  </body>
 </html>
