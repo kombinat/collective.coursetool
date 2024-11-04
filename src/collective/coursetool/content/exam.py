@@ -100,6 +100,7 @@ class IExamSchema(model.Schema):
             title="Member",
             schema=IMembers,
         ),
+        default=[],
         required=False,
     )
     directives.widget(
@@ -132,6 +133,8 @@ class Exam(Container):
 
     def members_uuids(self):
         _uids = []
+        if self.members is None:
+            return _uids
         for m in self.members:
             if isinstance(m["member"], str):
                 _uids.append(m["member"])
