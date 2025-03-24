@@ -5,8 +5,8 @@ from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
 from plone.app.vocabularies.catalog import CatalogSource
-from plone.app.z3cform.widget import DateFieldWidget
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.app.z3cform.widgets.datetime import DateFieldWidget
+from plone.app.z3cform.widgets.relateditems import RelatedItemsFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model

@@ -111,6 +111,7 @@ class IMemberSchema(model.Schema):
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
         description=_("Upload your Passfoto (5MB max size)"),
+        accept=('image/jpeg', 'image/png'),
         required=False,
     )
     passport_image = namedfile.NamedBlobImage(
@@ -118,6 +119,7 @@ class IMemberSchema(model.Schema):
         description=_(
             "Please upload a foto of your passport " "to validate your identity."
         ),
+        accept=('image/jpeg', 'image/png'),
         required=False,
     )
 

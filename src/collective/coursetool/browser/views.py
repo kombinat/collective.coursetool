@@ -315,6 +315,8 @@ class ExamView(ViewBase):
             _data = view(download=False)
             if _data:
                 merger.append(fileobj=BytesIO(_data))
+            else:
+                logger.warning(f"{member.absolute_url_path()} -> could not render PDF! Maybe wrong image format uploaded.")
 
         out = BytesIO()
         merger.write(out)
