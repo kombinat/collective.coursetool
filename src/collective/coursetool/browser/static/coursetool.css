@@ -460,8 +460,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .spinner-border,
-.spinner-grow,
-.injecting::before {
+  .spinner-grow,
+  .injecting::before {
     --bs-spinner-animation-speed: 1.5s;
   }
 }
