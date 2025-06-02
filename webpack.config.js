@@ -37,7 +37,6 @@ module.exports = () => {
 
     if (process.env.NODE_ENV === "development") {
         config.devServer.port = "8011";
-        config.devtool = "source-map";
         config.devServer.static.directory = __dirname;
     }
 
