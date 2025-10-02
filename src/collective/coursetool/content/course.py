@@ -5,6 +5,7 @@ from collective.coursetool.interfaces import ICourse
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
 from plone.app.vocabularies.catalog import CatalogSource
+from plone.app.z3cform.widgets.contentbrowser import ContentBrowserFieldWidget
 from plone.app.z3cform.widgets.datetime import DateFieldWidget
 from plone.app.z3cform.widgets.relateditems import RelatedItemsFieldWidget
 from plone.autoform import directives
@@ -163,7 +164,7 @@ class ICourseSchema(model.Schema):
     )
     directives.widget(
         "members",
-        RelatedItemsFieldWidget,
+        ContentBrowserFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "basePath": f"/Plone/{BASE_FOLDER_ID}/members",
