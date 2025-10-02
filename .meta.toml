@@ -10,6 +10,7 @@ test_matrix = {"6.2" = ["3.13"], "6.1" = ["3.11"]}
 
 [pyproject]
 codespell_skip = "*.css.map,*.map,*.min.js,yarn.lock"
+codespell_ignores = "payed,foto,oder,Sie,unter"
 
 [pre_commit]
 zpretty_extra_lines = """
@@ -22,9 +23,8 @@ test_*
 robot_*
 """
 
-[gitlab]
+[github]
 jobs = [
-    "lint",
-    "release-ready",
-    "testing",
-    ]
+   "qa",
+   "release_ready",
+]

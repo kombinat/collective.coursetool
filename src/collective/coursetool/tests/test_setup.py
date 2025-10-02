@@ -1,7 +1,8 @@
 """Setup tests for this package."""
 
-from collective.coursetool.testing import \
-    COLLECTIVE_COURSETOOL_INTEGRATION_TESTING  # noqa: E501,
+from collective.coursetool.testing import (  # noqa: E501,
+    COLLECTIVE_COURSETOOL_INTEGRATION_TESTING,
+)
 from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID

@@ -1,4 +1,9 @@
-<html i18n:domain="collective.coursetool">
+<html i18n:domain="collective.coursetool" i18n:ignore=""
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en">
   <body>
     <metal:def define-macro="filter">
       <form class="row g-3 mb-3 align-items-end pat-inject"
