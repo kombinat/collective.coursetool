@@ -4,9 +4,9 @@ from collective.coursetool.interfaces import IExam
 from collective.z3cform.datagridfield.datagridfield import DataGridFieldWidgetFactory
 from collective.z3cform.datagridfield.row import DictRow
 from plone import api
-from plone.app.z3cform.widget import DatetimeFieldWidget
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
-from plone.app.z3cform.widget import SelectFieldWidget
+from plone.app.z3cform.widgets.datetime import DatetimeFieldWidget
+from plone.app.z3cform.widgets.relateditems import RelatedItemsFieldWidget
+from plone.app.z3cform.widgets.select import Select2FieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.supermodel import model
@@ -88,7 +88,7 @@ class IExamSchema(model.Schema):
     )
     directives.widget(
         "types",
-        SelectFieldWidget,
+        Select2FieldWidget,
         pattern_options={
             "allowNewItems": "false",
         },

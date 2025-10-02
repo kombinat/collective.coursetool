@@ -6,6 +6,7 @@
       metal:use-macro="context/@@main_template/macros/master"
       xml:lang="en"
       i18n:domain="collective.coursetool"
+      i18n:ignore=""
 >
 
   <body>

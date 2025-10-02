@@ -10,10 +10,11 @@ from plone import api
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.dexterity import textindexer
 from plone.app.users.schema import IRegisterSchema
-from plone.app.z3cform.widget import AjaxSelectFieldWidget
-from plone.app.z3cform.widget import DateFieldWidget
-from plone.app.z3cform.widget import SelectFieldWidget
-from plone.app.z3cform.widget import SingleCheckBoxBoolFieldWidget
+from plone.app.z3cform.widgets.datetime import DateFieldWidget
+from plone.app.z3cform.widgets.select import AjaxSelectFieldWidget
+from plone.app.z3cform.widgets.select import Select2FieldWidget
+from plone.app.z3cform.widgets.singlecheckbox import SingleCheckBoxBoolFieldWidget
+from plone.app.z3cform.widgets.text import TextFieldWidget
 from plone.autoform import directives
 from plone.dexterity.content import Container
 from plone.formwidget.namedfile import NamedImageFieldWidget
@@ -22,7 +23,6 @@ from plone.namedfile import field as namedfile
 from plone.schema.email import _isemail
 from plone.schema.email import InvalidEmail
 from plone.supermodel import model
-from z3c.form.browser.text import TextFieldWidget
 from z3c.form.interfaces import IEditForm
 from zope import schema
 from zope.component import adapter
@@ -50,12 +50,14 @@ class IRegistration(IRegisterSchema):
 
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
-        description=_("Upload your Passfoto (5MB max size)"),
+        description=_("Upload your Passfoto (5MB max size, JPEG format)"),
+        accept=("image/jpeg", "image/png"),
     )
     passport_image = namedfile.NamedBlobImage(
         title=_("Passport Image"),
+        accept=("image/jpeg", "image/png"),
         description=_(
-            "Please upload a foto of your passport " "to validate your identity."
+            "Please upload a foto (JPEG) of your passport to validate your identity."
         ),
     )
     tac_agree = schema.Bool(
@@ -109,6 +111,7 @@ class IMemberSchema(model.Schema):
     picture = namedfile.NamedBlobImage(
         title=_("User Image"),
         description=_("Upload your Passfoto (5MB max size)"),
+        accept=("image/jpeg", "image/png"),
         required=False,
     )
     passport_image = namedfile.NamedBlobImage(
@@ -116,6 +119,7 @@ class IMemberSchema(model.Schema):
         description=_(
             "Please upload a foto of your passport " "to validate your identity."
         ),
+        accept=("image/jpeg", "image/png"),
         required=False,
     )
 
@@ -123,7 +127,7 @@ class IMemberSchema(model.Schema):
     card_image = namedfile.NamedBlobImage(title=_("Card Image"), required=False)
 
     # layout wrapper CSS classes
-    directives.widget("salutation", SelectFieldWidget, wrapper_css_class="col-lg-1")
+    directives.widget("salutation", Select2FieldWidget, wrapper_css_class="col-lg-1")
     directives.widget("graduation", TextFieldWidget, wrapper_css_class="col-lg-1")
     directives.widget("first_name", TextFieldWidget, wrapper_css_class="col-lg-5")
     directives.widget("last_name", TextFieldWidget, wrapper_css_class="col-lg-5")
@@ -177,7 +181,7 @@ class IMemberSchema(model.Schema):
         vocabulary="coursetool.vocabulary.memberstates",
         required=False,
     )
-    directives.widget("state", SelectFieldWidget)
+    directives.widget("state", Select2FieldWidget)
 
     qualification = schema.Tuple(
         title=_("Qualifications"),
@@ -189,7 +193,7 @@ class IMemberSchema(model.Schema):
     )
     directives.widget(
         "qualification",
-        SelectFieldWidget,
+        Select2FieldWidget,
         pattern_options={
             "allowNewItems": "false",
         },
@@ -205,7 +209,7 @@ class IMemberSchema(model.Schema):
     )
     directives.widget(
         "exam_types",
-        SelectFieldWidget,
+        Select2FieldWidget,
         pattern_options={
             "allowNewItems": "false",
         },
